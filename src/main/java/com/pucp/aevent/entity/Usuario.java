@@ -21,7 +21,7 @@ public class Usuario extends Persona implements Serializable {
 	@Column(unique = true, length = 20, name="VUSERNAME")
 	private String username;
 
-	@Column(length = 30, name="VPASSWORD")
+	@Column(length = 60, name="VPASSWORD")
 	private String password;
 	
 	@Column(length = 30,name="NUSUARIO_ACTIVO")
