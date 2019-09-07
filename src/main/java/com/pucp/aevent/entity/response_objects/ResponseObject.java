@@ -1,4 +1,4 @@
-package com.aevent.model.response_objects;
+package com.pucp.aevent.entity.response_objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;

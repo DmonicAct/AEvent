@@ -1,4 +1,4 @@
-package com.aevent.model.response_objects;
+package com.pucp.aevent.entity.response_objects;
 
 public class Paginacion {
 
