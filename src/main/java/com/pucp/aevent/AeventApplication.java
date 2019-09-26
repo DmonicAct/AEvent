@@ -27,11 +27,11 @@ public class AeventApplication extends SpringBootServletInitializer  implements 
 	
 	@Override
 	public void run(String... args) throws Exception {
-		String password = "User$1";
-		for (int i = 0; i < 4; i++) {
-			String passwordBcrypt = passwordEncoder.encode(password);
-			System.out.println(passwordBcrypt);
-		}
+//		String password = "User$1";
+//		for (int i = 0; i < 4; i++) {
+//			String passwordBcrypt = passwordEncoder.encode(password);
+//			System.out.println(passwordBcrypt);
+//		}
 		
 	}
 

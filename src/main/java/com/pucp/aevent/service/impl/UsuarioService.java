@@ -14,16 +14,22 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
-import com.pucp.aevent.dao.IUsuarioDAO;
+import com.pucp.aevent.dao.IUsuarioDao;
 import com.pucp.aevent.entity.Usuario;
+import com.pucp.aevent.entity.response_objects.Nivel;
+import com.pucp.aevent.entity.response_objects.Paginacion;
+import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.service.IUsuarioService;
 
 @Service
 public class UsuarioService implements IUsuarioService,UserDetailsService{
 	
 	@Autowired
-	IUsuarioDAO dao;
+	IUsuarioDao dao;
 	
 	private Logger logger = LoggerFactory.getLogger(UsuarioService.class);
 	
@@ -32,7 +38,18 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 	public Usuario findByUsername(String username) {
 		return dao.findByUsername(username);
 	}
-
+	
+	
+	private Paginacion paginacion;
+	public Paginacion getPaginacion() {
+		return this.paginacion;
+	}
+	
+	private Error error;
+	public Error getError() {
+		return this.error;
+	}
+	
 	@Override
 	@Transactional(readOnly=true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -52,4 +69,56 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 		return new User(usuario.getUsername(), usuario.getPassword(), usuario.getEnabled(), true,true, true, authorities);
 	}
 
+	@Override
+	public Usuario findById(Integer id) {
+		Usuario user = dao.findByIdUsuario(id);
+		user.setPassword(null);
+		return  user;
+	}
+	
+	@Override
+	public List<Usuario> findAll(Pageable page) {
+		//List<Object[]> lista2 = dao.findAll3("","",0,"","","",0);
+		//List<Object[]> lista = dao.findAll2();
+		Page<Usuario> lista = null;
+		
+		try {
+			lista = dao.findAll(page); 
+		
+			
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+			
+		}catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
+		
+		return lista.getContent();
+	}
+
+	@Override
+	public void save(Usuario usuario) {
+		Integer success = 1;
+		try {
+			dao.save(usuario);
+		}catch(Exception ex) {
+			logger.error("Error en el sistema: " + ex.getMessage());
+			success = 0;
+			this.error = new Error(success,ex.getCause().toString(),ex.getMessage(),Nivel.SERVICE);
+			return;
+		}
+	}
+
+	@Override
+	public void delete(Usuario usuario) {
+		Integer success = 1;
+		try {
+			usuario.setEnabled(false);
+			dao.save(usuario);
+		}catch(Exception ex) {
+			logger.error("Error en el sistema: " + ex.getMessage());
+			success = 0;
+			this.error = new Error(success,ex.getCause().toString(),ex.getMessage(),Nivel.SERVICE);
+			return;
+		}
+	}
 }

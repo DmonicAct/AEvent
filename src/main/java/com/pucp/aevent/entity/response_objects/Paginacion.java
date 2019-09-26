@@ -5,7 +5,7 @@ public class Paginacion {
 	private Integer pagina;
 	private Integer registros;
 	private Integer totalPaginas;
-	private Integer totalRegistros;
+	private Long totalRegistros;
 	
 	public Integer getPagina() {
 		return pagina;
@@ -25,10 +25,10 @@ public class Paginacion {
 	public void setTotalPaginas(Integer totalPaginas) {
 		this.totalPaginas = totalPaginas;
 	}
-	public Integer getTotalRegistros() {
+	public Long getTotalRegistros() {
 		return totalRegistros;
 	}
-	public void setTotalRegistros(Integer totalRegistros) {
+	public void setTotalRegistros(Long totalRegistros) {
 		this.totalRegistros = totalRegistros;
 		if (this.registros > 0) {
 			this.totalPaginas = (int)Math.ceil(this.totalRegistros / (float)this.registros);

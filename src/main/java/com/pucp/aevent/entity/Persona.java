@@ -4,21 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "PERSONA")
-public class Persona implements Serializable{
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="NPERSONAID")
-	private int id;
+@Table(name = "PERSONAS")
+public class Persona extends Usuario implements Serializable{
 	
 	@Column(length = 30, name="VNOMBRE")
 	private String nombre;
@@ -28,16 +18,10 @@ public class Persona implements Serializable{
 	private String apmaterno;
 	@Column(unique=true,length = 10, name="VDNI")
 	private String dni;
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public String getNombre() {
 		return nombre;
-	}
+	}	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}

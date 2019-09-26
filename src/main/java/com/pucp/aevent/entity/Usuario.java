@@ -7,26 +7,47 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "USUARIOS")
-public class Usuario extends Persona implements Serializable {
-
+public class Usuario implements Serializable {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="NUSUARIOID")
+	private int idUsuario;
+	
+	@NotEmpty(message ="no puede estar vacio")
+	@Size(min=6, max=20, message="el tamaño tiene que estar entre 6 y 20")
 	@Column(unique = true, length = 20, name="VUSERNAME")
 	private String username;
-
+	
 	@Column(length = 60, name="VPASSWORD")
+	@JsonIgnore
 	private String password;
 	
 	@Column(length = 30,name="NUSUARIO_ACTIVO")
 	private Boolean enabled;
 	
+	@NotEmpty(message ="no puede estar vacio")
+	@Email(message="no es una dirección de correo bien formada")
 	@Column(length = 30,name="VEMAIL")
 	private String email;
 
@@ -35,6 +56,15 @@ public class Usuario extends Persona implements Serializable {
 	inverseJoinColumns=@JoinColumn(name="NID_ROL"),
 	uniqueConstraints= {@UniqueConstraint(columnNames= {"NID_USUARIO", "NID_ROL"})})
 	private List<Role> roles;
+	
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+	
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 
 
 	public String getUsername() {
@@ -86,6 +116,15 @@ public class Usuario extends Persona implements Serializable {
 		this.roles = roles;
 	}
 
+
+//	public Persona getPersona() {
+//		return persona;
+//	}
+//
+//
+//	public void setPersona(Persona persona) {
+//		this.persona = persona;
+//	}
 
 	/**
 	 * 
