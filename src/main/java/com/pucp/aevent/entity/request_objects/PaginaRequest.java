@@ -7,7 +7,7 @@ public class PaginaRequest {
 	private String orden;
 	
 	public Integer getPagina() {
-		return pagina;
+		return pagina-1;
 	}
 	public void setPagina(Integer pagina) {
 		this.pagina = pagina;
