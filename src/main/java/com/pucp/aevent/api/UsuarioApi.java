@@ -112,7 +112,7 @@ public class UsuarioApi {
 	
 	
 	@Secured({"ROLE_ADMIN"})
-	@DeleteMapping(path = "/usuarios/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@DeleteMapping(path = "/usuarios/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> eliminarUsuario(@PathVariable("id") Integer id) {
 		ResponseObject response = new ResponseObject();
 		try {
