@@ -7,7 +7,7 @@ public class PaginaRequest {
 	private String orden;
 	
 	public Integer getPagina() {
-		return pagina-1;
+		return pagina;
 	}
 	public void setPagina(Integer pagina) {
 		this.pagina = pagina;
@@ -35,5 +35,8 @@ public class PaginaRequest {
 	}
 	public void setOrden(String orden) {
 		this.orden = orden;
+	}
+	public Integer getPaginaFront() {
+		return pagina -1;
 	}
 }

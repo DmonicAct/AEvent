@@ -15,6 +15,8 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import com.pucp.aevent.util.UtilConstanst;
+
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
@@ -24,7 +26,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 		/*
 		 * RUTAS DE ACCESSO ACORDE A ROL
 		 * */
-		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/**").permitAll() 
+		http.authorizeRequests()
+		//.antMatchers(HttpMethod.GET,"/api/**").permitAll() 
 		.anyRequest().authenticated()
 		.and().cors().configurationSource(corsConfigurationSource());
 	}
@@ -32,10 +35,14 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource(){
 		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-		config.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE","OPTIONS"));
+		config.setAllowedOrigins(Arrays.asList(UtilConstanst.APP_ORIGIN_ROUTE_LOCAL));
+		config.setAllowedMethods(Arrays.asList(	HttpMethod.GET.name(),
+												HttpMethod.POST.name(),
+												HttpMethod.PUT.name(),
+												HttpMethod.DELETE.name(),
+												HttpMethod.OPTIONS.name()));
 		config.setAllowCredentials(true);
-		config.setAllowedHeaders(Arrays.asList("Content-Type","Authorization"));
+		config.setAllowedHeaders(Arrays.asList(UtilConstanst.APP_ORIGIN_HEADERS,UtilConstanst.APP_ORIGIN_HEADERS_TYPE));
 
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**",config);

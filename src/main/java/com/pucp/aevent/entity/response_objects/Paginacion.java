@@ -1,5 +1,7 @@
 package com.pucp.aevent.entity.response_objects;
 
+import org.springframework.data.domain.Pageable;
+
 public class Paginacion {
 
 	private Integer pagina;
@@ -27,6 +29,10 @@ public class Paginacion {
 	}
 	public Long getTotalRegistros() {
 		return totalRegistros;
+	}
+	public void setPageable(Pageable page) {
+		this.pagina = page.getPageNumber()+1;
+		this.registros = page.getPageSize();
 	}
 	public void setTotalRegistros(Long totalRegistros) {
 		this.totalRegistros = totalRegistros;

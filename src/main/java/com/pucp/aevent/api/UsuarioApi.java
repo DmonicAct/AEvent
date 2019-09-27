@@ -65,9 +65,7 @@ public class UsuarioApi {
 	public ResponseEntity<ResponseObject> consultarAllUsuario(PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {
-			List<Usuario> lista = this.service.findAll(PageRequest.of(page.getPagina(), page.getRegistros()));
-			//List<Usuario> lista = this.service.findAll(PageRequest.of(page.getPagina(), page.getRegistros()));
-			response.setPaginacion(service.getPaginacion());
+			List<Usuario> lista = this.service.findAll(PageRequest.of(page.getPaginaFront(), page.getRegistros()));
 			response.setResultado(lista);
 			response.setPaginacion(service.getPaginacion());
 			response.setEstado(Estado.OK);
@@ -89,7 +87,7 @@ public class UsuarioApi {
 	
 	
 	@Secured({"ROLE_ADMIN"})
-	@PostMapping(path = "/usuarios/{id}",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/usuarios",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> guardarUsuario( @Valid @RequestBody Usuario usuario) {
 		ResponseObject response = new ResponseObject();
 		try {
@@ -115,13 +113,13 @@ public class UsuarioApi {
 	
 	@Secured({"ROLE_ADMIN"})
 	@DeleteMapping(path = "/usuarios/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> eliminarUsuario(@RequestBody Usuario usuario) {
+	public ResponseEntity<ResponseObject> eliminarUsuario(@PathVariable("id") Integer id) {
 		ResponseObject response = new ResponseObject();
 		try {
+			Usuario usuario = service.findById(id);
 			usuario.setEnabled(false);
 			this.service.save(usuario);
 			
-			//response.setResultado(lista);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {

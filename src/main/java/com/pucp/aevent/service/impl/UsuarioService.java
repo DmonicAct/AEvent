@@ -12,10 +12,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import com.pucp.aevent.dao.IUsuarioDao;
@@ -30,6 +30,9 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 	
 	@Autowired
 	IUsuarioDao dao;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	private Logger logger = LoggerFactory.getLogger(UsuarioService.class);
 	
@@ -81,11 +84,10 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 		//List<Object[]> lista2 = dao.findAll3("","",0,"","","",0);
 		//List<Object[]> lista = dao.findAll2();
 		Page<Usuario> lista = null;
-		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
 		try {
 			lista = dao.findAll(page); 
-		
-			
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 			
 		}catch(Exception e) {
@@ -96,23 +98,14 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 	}
 
 	@Override
+	@Transactional
 	public void save(Usuario usuario) {
 		Integer success = 1;
 		try {
-			dao.save(usuario);
-		}catch(Exception ex) {
-			logger.error("Error en el sistema: " + ex.getMessage());
-			success = 0;
-			this.error = new Error(success,ex.getCause().toString(),ex.getMessage(),Nivel.SERVICE);
-			return;
-		}
-	}
-
-	@Override
-	public void delete(Usuario usuario) {
-		Integer success = 1;
-		try {
-			usuario.setEnabled(false);
+			if(usuario.getPassword()!=null  && usuario.getPassword()!="") {
+				String passwordBcrypt = passwordEncoder.encode(usuario.getPassword());
+				usuario.setPassword(passwordBcrypt);
+			}
 			dao.save(usuario);
 		}catch(Exception ex) {
 			logger.error("Error en el sistema: " + ex.getMessage());
