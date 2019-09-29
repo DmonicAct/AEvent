@@ -1,6 +1,7 @@
 package com.pucp.aevent.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -21,7 +22,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 
@@ -51,7 +51,13 @@ public class Usuario implements Serializable {
 	@Email(message="no es una dirección de correo bien formada")
 	@Column(length = 30,name="VEMAIL")
 	private String email;
-
+	
+	@Column(name="DFECHACREA")
+	private Date fechaCreacion;
+	
+	@Column(name="DFECHAMODI")
+	private Date fechaModificacion;
+	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name="USUARIOS_ROLES", joinColumns= @JoinColumn(name="NID_USUARIO"),
 	inverseJoinColumns=@JoinColumn(name="NID_ROL"),
@@ -117,7 +123,7 @@ public class Usuario implements Serializable {
 		this.roles = roles;
 	}
 
-
+	
 //	public Persona getPersona() {
 //		return persona;
 //	}
@@ -126,6 +132,26 @@ public class Usuario implements Serializable {
 //	public void setPersona(Persona persona) {
 //		this.persona = persona;
 //	}
+
+	public Date getFechaCreacion() {
+		return fechaCreacion;
+	}
+
+
+	public void setFechaCreacion(Date fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
+
+	public Date getFechaModificacion() {
+		return fechaModificacion;
+	}
+
+
+	public void setFechaModificacion(Date fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
+	}
+
 
 	/**
 	 * 

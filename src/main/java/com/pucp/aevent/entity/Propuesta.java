@@ -1,5 +1,12 @@
 package com.pucp.aevent.entity;
 
-public class Propuesta {
+import java.io.Serializable;
+
+public class Propuesta implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 }
