@@ -22,9 +22,9 @@ import org.springframework.web.client.HttpServerErrorException.InternalServerErr
 
 import com.pucp.aevent.entity.response_objects.Estado;
 import com.pucp.aevent.entity.response_objects.ResponseObject;
+import com.pucp.aevent.service.IPersonaService;
 import com.pucp.aevent.service.IUsuarioService;
-
-
+import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.request_objects.PaginaRequest;
 
@@ -34,14 +34,17 @@ import com.pucp.aevent.entity.request_objects.PaginaRequest;
 public class UsuarioApi {
 	
 	@Autowired
-	private IUsuarioService service;
+	private IUsuarioService usuarioService;
+	
+	@Autowired
+	private IPersonaService perosnaService;
 	
 	@Secured({"ROLE_ADMIN"})
 	@GetMapping(path = "/usuarios/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> consultarUsuario(@PathVariable("id") Integer id) {
 		ResponseObject response = new ResponseObject();
 		try {
-			Usuario lista = this.service.findById(id);
+			Usuario lista = this.usuarioService.findById(id);
 			response.setResultado(lista);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
@@ -65,9 +68,9 @@ public class UsuarioApi {
 	public ResponseEntity<ResponseObject> consultarAllUsuario(PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {
-			List<Usuario> lista = this.service.findAll(PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			List<Usuario> lista = this.usuarioService.findAll(PageRequest.of(page.getPaginaFront(), page.getRegistros()));
 			response.setResultado(lista);
-			response.setPaginacion(service.getPaginacion());
+			response.setPaginacion(usuarioService.getPaginacion());
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
@@ -88,10 +91,10 @@ public class UsuarioApi {
 	
 	@Secured({"ROLE_ADMIN"})
 	@PostMapping(path = "/usuarios",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> guardarUsuario( @Valid @RequestBody Usuario usuario) {
+	public ResponseEntity<ResponseObject> guardarUsuario( @Valid @RequestBody Persona persona) {
 		ResponseObject response = new ResponseObject();
 		try {
-			this.service.save(usuario);
+			this.usuarioService.save(persona);
 			//response.setResultado(lista);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
@@ -116,9 +119,9 @@ public class UsuarioApi {
 	public ResponseEntity<ResponseObject> eliminarUsuario(@PathVariable("id") Integer id) {
 		ResponseObject response = new ResponseObject();
 		try {
-			Usuario usuario = service.findById(id);
+			Usuario usuario = usuarioService.findById(id);
 			usuario.setEnabled(false);
-			this.service.save(usuario);
+			this.usuarioService.cambioUsuario(usuario);
 			
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);

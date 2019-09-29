@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;
+import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.Usuario;
 
 public interface IUsuarioService {
@@ -15,8 +16,9 @@ public interface IUsuarioService {
 	
 	public List<Usuario> findAll(Pageable pageable);
 	
-	public void save(Usuario usuario);
+	public Usuario save(Persona persona);
 	
+	public void cambioUsuario(Usuario usuario);
 	
 	Paginacion getPaginacion();
 	Error getError();

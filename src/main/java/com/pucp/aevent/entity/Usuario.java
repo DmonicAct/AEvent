@@ -20,8 +20,9 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 
 @Entity
@@ -40,7 +41,7 @@ public class Usuario implements Serializable {
 	private String username;
 	
 	@Column(length = 60, name="VPASSWORD")
-	@JsonIgnore
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	
 	@Column(length = 30,name="NUSUARIO_ACTIVO")

@@ -1,5 +1,6 @@
 package com.pucp.aevent.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.pucp.aevent.dao.IPersonaDao;
+import com.pucp.aevent.dao.IRolDao;
 import com.pucp.aevent.dao.IUsuarioDao;
+import com.pucp.aevent.entity.Persona;
+import com.pucp.aevent.entity.Role;
 import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.response_objects.Nivel;
 import com.pucp.aevent.entity.response_objects.Paginacion;
@@ -30,6 +35,12 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 	
 	@Autowired
 	IUsuarioDao dao;
+	
+	@Autowired
+	IRolDao role_dao;
+	
+	@Autowired
+	IPersonaDao persona_dao;
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -99,7 +110,39 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 
 	@Override
 	@Transactional
-	public void save(Usuario usuario) {
+	public Usuario save(Persona persona) {
+		Usuario usuario = (Usuario)persona;
+		Integer success = 1;
+		Usuario returnedUser = null;
+		try {
+			if(usuario.getPassword()!=null  && usuario.getPassword()!="") {
+				String passwordBcrypt = passwordEncoder.encode(usuario.getPassword());
+				usuario.setPassword(passwordBcrypt);
+			}else {
+				usuario.setPassword(null);
+			}
+			List<Role> roles = new ArrayList<Role>();
+			 for(Role entry :usuario.getRoles()) 
+				    roles.add(role_dao.findById(entry.getId()).get());
+			 
+			usuario.setRoles( roles );
+			returnedUser = dao.save(usuario);
+			if(usuario.getIdUsuario()==0) {
+				persona.setIdUsuario(returnedUser.getIdUsuario());
+			}
+			this.persona_dao.save(persona);
+		}catch(Exception ex) {
+			logger.error("Error en el sistema: " + ex.getMessage());
+			success = 0;
+			this.error = new Error(success,ex.getCause().toString(),ex.getMessage(),Nivel.SERVICE);
+			return returnedUser;
+		}
+		return returnedUser;
+	}
+	
+	@Override
+	@Transactional
+	public void cambioUsuario(Usuario usuario) {
 		Integer success = 1;
 		try {
 			if(usuario.getPassword()!=null  && usuario.getPassword()!="") {

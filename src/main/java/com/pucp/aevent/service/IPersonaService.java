@@ -7,5 +7,7 @@ import com.pucp.aevent.entity.response_objects.Error;
 
 public interface IPersonaService {
 	Error getError();
-	List<Persona> findAll();
+	public List<Persona> findAll();
+	
+	public void save(Persona persona);
 }

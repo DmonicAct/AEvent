@@ -29,4 +29,9 @@ public class PersonaService implements IPersonaService{
 		return dao.findAll();
 	}
 
+	@Override
+	public void save(Persona persona) {
+		this.dao.save(persona);
+	}
+
 }
