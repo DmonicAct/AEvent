@@ -157,4 +157,12 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 			return;
 		}
 	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public Boolean existsByEmail(String email) {
+		return dao.existsByEmail(email);
+	}
+	
+	
 }

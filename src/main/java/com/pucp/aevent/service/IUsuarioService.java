@@ -20,6 +20,8 @@ public interface IUsuarioService {
 	
 	public void cambioUsuario(Usuario usuario);
 	
+	public Boolean existsByEmail(String email);
+	
 	Paginacion getPaginacion();
 	Error getError();
 }

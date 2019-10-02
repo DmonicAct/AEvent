@@ -15,7 +15,8 @@ public interface IUsuarioDao extends JpaRepository <Usuario, Long>{
 	
 	
 	public Usuario getUsernameAndEmailByIdUsuario(Integer id);
-
+	
+	public Boolean existsByEmail(String email);
 	/*
 	 * Query Sample
 	 * */
