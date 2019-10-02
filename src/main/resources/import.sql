@@ -39,3 +39,13 @@ INSERT INTO `usuarios_roles` (nid_usuario, nid_rol) VALUES (8, 5);
 INSERT INTO `usuarios_roles` (nid_usuario, nid_rol) VALUES (9, 5);
 INSERT INTO `usuarios_roles` (nid_usuario, nid_rol) VALUES (10, 5);
 INSERT INTO `usuarios_roles` (nid_usuario, nid_rol) VALUES (11, 5);
+
+INSERT INTO `categoria` (`vcodcategoria`, `vdescripcion`) VALUES ('00000001', 'INTELIGENCIA ARTIFICIAL');
+INSERT INTO `categoria` (`vcodcategoria`, `vdescripcion`) VALUES ('00000002', 'VIDEOJUEGOS');
+INSERT INTO `categoria` (`vcodcategoria`, `vdescripcion`) VALUES ('00000003', 'TRANSFORMACION DIGITAL');
+INSERT INTO `categoria` (`vcodcategoria`, `vdescripcion`) VALUES ('00000004', 'INTERNET DE LAS COSAS');
+INSERT INTO `categoria` (`vcodcategoria`, `vdescripcion`) VALUES ('00000005', 'DESIGN THINKING');
+INSERT INTO `categoria` (`vcodcategoria`, `vdescripcion`) VALUES ('00000006', 'CONSTRUCCION CIVIL');
+INSERT INTO `categoria` (`vcodcategoria`, `vdescripcion`) VALUES ('00000007', 'EDUCACION');
+
+
