@@ -22,7 +22,6 @@ import org.springframework.web.client.HttpServerErrorException.InternalServerErr
 
 import com.pucp.aevent.entity.response_objects.Estado;
 import com.pucp.aevent.entity.response_objects.ResponseObject;
-import com.pucp.aevent.service.IPersonaService;
 import com.pucp.aevent.service.IUsuarioService;
 import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.Usuario;
@@ -35,9 +34,6 @@ public class UsuarioApi {
 	
 	@Autowired
 	private IUsuarioService usuarioService;
-	
-	@Autowired
-	private IPersonaService perosnaService;
 	
 	@Secured({"ROLE_ADMIN"})
 	@GetMapping(path = "/usuarios/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
