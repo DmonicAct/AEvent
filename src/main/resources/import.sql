@@ -22,11 +22,11 @@ INSERT INTO `personas` (apellido_mat, apellido_pat, dni, nombre, id_usuario) VAL
 INSERT INTO `personas` (apellido_mat, apellido_pat, dni, nombre, id_usuario) VALUES ( 'Gtew','Blen', 45667843, 'Esperanza', 10);
 INSERT INTO `personas` (apellido_mat, apellido_pat, dni, nombre, id_usuario) VALUES ( 'Opress','Qwerty', 23441234, 'Trevor', 11);
 
-INSERT INTO `roles` (id_rol,descripcion) VALUES (1,'ROLE_ADMIN');
-INSERT INTO `roles` (id_rol,descripcion) VALUES (1,'ROLE_PRESIDENT');
-INSERT INTO `roles` (id_rol,descripcion) VALUES (1,'ROLE_ORGANIZER');
-INSERT INTO `roles` (id_rol,descripcion) VALUES (1,'ROLE_EVALUATOR');
-INSERT INTO `roles` (id_rol,descripcion) VALUES (1,'ROLE_USER');
+INSERT INTO `roles` (rol_activo,descripcion) VALUES (1,'ROLE_ADMIN');
+INSERT INTO `roles` (rol_activo,descripcion) VALUES (1,'ROLE_PRESIDENT');
+INSERT INTO `roles` (rol_activo,descripcion) VALUES (1,'ROLE_ORGANIZER');
+INSERT INTO `roles` (rol_activo,descripcion) VALUES (1,'ROLE_EVALUATOR');
+INSERT INTO `roles` (rol_activo,descripcion) VALUES (1,'ROLE_USER');
 
 INSERT INTO `usuarios_roles` (id_usuario, id_rol) VALUES (1, 1);
 INSERT INTO `usuarios_roles` (id_usuario, id_rol) VALUES (2, 2);
@@ -48,6 +48,6 @@ INSERT INTO `categoria` (cod_categoria, descripcion) VALUES ('00000005', 'DESIGN
 INSERT INTO `categoria` (cod_categoria, descripcion) VALUES ('00000006', 'CONSTRUCCION CIVIL');
 INSERT INTO `categoria` (cod_categoria, descripcion) VALUES ('00000007', 'EDUCACION');
 
-INSERT INTO `parametro` (NOMBRE, ACTIVO) VALUES ('Pregunta abierta' , TRUE);
-INSERT INTO `parametro` (NOMBRE, ACTIVO) VALUES ('Pregunta de opcion multiple' , TRUE);
-INSERT INTO `parametro` (NOMBRE, ACTIVO) VALUES ('Pregunta de formulario' , TRUE);
+INSERT INTO `parametro` (DESCRIPCION, ACTIVO) VALUES ('Pregunta abierta' , TRUE);
+INSERT INTO `parametro` (DESCRIPCION, ACTIVO) VALUES ('Pregunta de opcion multiple' , TRUE);
+INSERT INTO `parametro` (DESCRIPCION, ACTIVO) VALUES ('Pregunta de formulario' , TRUE);

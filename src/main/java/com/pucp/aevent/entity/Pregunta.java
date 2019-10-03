@@ -1,6 +1,7 @@
 package com.pucp.aevent.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,10 +15,10 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import com.pucp.aevent.entity.Pregunta;
-import com.pucp.aevent.entity.Parametro;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "PREGUNTA")
+@Table(name = "Pregunta")
 public class Pregunta implements Serializable{
 	
 	@Id
@@ -27,36 +28,57 @@ public class Pregunta implements Serializable{
 	
 	@NotEmpty(message ="no puede estar vacio")
 	@Size(min=0, max=50, message="el tamaño tiene que estar entre 0 y 20")
-	@Column(length = 50, name="nombre")
-	private String nombre;
+	@Column(length = 50, name="descripcion")
+	private String descripcion;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "IDPARAMETRO", nullable = false)
-	private Parametro tipoPreg;
+	@Column(name="tipoPregunta")
+	private String tipoPregunta;
+	
 
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_division")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Division division;
+	
+	
 	public int getIdPregunta() {
 		return idPregunta;
 	}
+
+
 
 	public void setIdPregunta(int idPregunta) {
 		this.idPregunta = idPregunta;
 	}
 
-	public String getNombre() {
-		return nombre;
+
+
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
-	public Parametro getTipoPreg() {
-		return tipoPreg;
+
+
+	public String getTipoPregunta() {
+		return tipoPregunta;
 	}
 
-	public void setTipoPreg(Parametro tipoPreg) {
-		this.tipoPreg = tipoPreg;
+
+
+	public void setTipoPregunta(String tipoPregunta) {
+		this.tipoPregunta = tipoPregunta;
 	}
-	
+
+	/*
+	 * 
+	 * 
+	 * */
+
 	private static final long serialVersionUID = 1L;
 }

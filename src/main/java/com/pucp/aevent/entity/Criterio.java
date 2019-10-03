@@ -10,46 +10,40 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Categoria")
-public class Categoria implements Serializable{
-
+@Table(name = "Criterio")
+public class Criterio implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idCategoria")
-	private int id;
+	@Column(name="idCriterio")
+	private Integer id;
 	
 	@Column(name="descripcion")
 	private String descripcion;
 	
-	@Column(name="codCategoria")
-	private String codigo;
-
-	public int getId() {
+	
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
+
 
 	public String getDescripcion() {
 		return descripcion;
 	}
 
+
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 
-	public String getCodigo() {
-		return codigo;
-	}
 
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;	
+	private static final long serialVersionUID = 1L;
+
 }

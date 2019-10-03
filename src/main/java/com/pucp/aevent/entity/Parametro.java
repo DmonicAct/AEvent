@@ -23,8 +23,8 @@ public class Parametro implements Serializable{
 	
 	@NotEmpty(message ="no puede estar vacio")
 	@Size(min=0, max=60, message="el tamaño tiene que estar entre 0 y 60")
-	@Column(unique = true, length = 60, name="nombre")
-	private String nombre;
+	@Column(unique = true, length = 60, name="descripcion")
+	private String descripcion;
 	
 	@Column(name="activo")
 	private Boolean activo;
@@ -37,12 +37,12 @@ public class Parametro implements Serializable{
 		this.idParametro = idParametro;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public Boolean getActivo() {
