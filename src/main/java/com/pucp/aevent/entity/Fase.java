@@ -1,16 +1,21 @@
 package com.pucp.aevent.entity;
 
+import com.pucp.aevent.entity.Evento;
+
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "Fase")
@@ -19,7 +24,7 @@ public class Fase implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idFase")
-	private Integer id;
+	private Integer idFase;
 	
 	@Column(name="descripcion")
 	private String descripcion;
@@ -30,17 +35,28 @@ public class Fase implements Serializable {
 	@Column(name="fechaFin")
 	private Date fechaFin;
 	
-	@OneToMany
-	private List<Criterio> criterios;
-	
-	
-	public Integer getId() {
-		return id;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_evento")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Evento eventos;
+
+	public Integer getIdFase() {
+		return idFase;
 	}
 
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdFase(Integer idFase) {
+		this.idFase = idFase;
+	}
+
+
+	public Evento getEventos() {
+		return eventos;
+	}
+
+
+	public void setEventos(Evento eventos) {
+		this.eventos = eventos;
 	}
 
 
@@ -71,16 +87,6 @@ public class Fase implements Serializable {
 
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
-	}
-
-
-	public List<Criterio> getCriterios() {
-		return criterios;
-	}
-
-
-	public void setCriterios(List<Criterio> criterios) {
-		this.criterios = criterios;
 	}
 
 

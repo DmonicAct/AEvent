@@ -4,10 +4,15 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "Criterio")
@@ -15,19 +20,24 @@ public class Criterio implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idCriterio")
-	private Integer id;
+	private Integer idCriterio;
 	
 	@Column(name="descripcion")
 	private String descripcion;
 	
-	
-	public Integer getId() {
-		return id;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_fase")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Fase fase;
+
+
+	public Integer getIdCriterio() {
+		return idCriterio;
 	}
 
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdCriterio(Integer idCriterio) {
+		this.idCriterio = idCriterio;
 	}
 
 

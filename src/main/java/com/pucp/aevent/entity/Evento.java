@@ -43,9 +43,9 @@ public class Evento implements Serializable{
 	private Integer capacidad;
 
 	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name="idUsuario")
+	@JoinColumn(name="id_organizador")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private Persona evaluador;
+	private Persona organizador;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name="PERSONA_COMITE", joinColumns= @JoinColumn(name="idUsuario"),
@@ -66,7 +66,7 @@ public class Evento implements Serializable{
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private FormularioCFP formulario;
 	
-
+	
 
 
 	public int getIdEvento() {
@@ -130,13 +130,15 @@ public class Evento implements Serializable{
 	}
 
 
-	public Persona getEvaluador() {
-		return evaluador;
+	
+
+	public Persona getOrganizador() {
+		return organizador;
 	}
 
 
-	public void setEvaluador(Persona evaluador) {
-		this.evaluador = evaluador;
+	public void setOrganizador(Persona organizador) {
+		this.organizador = organizador;
 	}
 
 
