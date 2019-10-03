@@ -11,25 +11,25 @@ import javax.persistence.Table;
 @Table(name = "PERSONAS")
 public class Persona extends Usuario implements Serializable{
 	
-	@Column(length = 30, name="VNOMBRE")
+	@Column(length = 30, name="nombre")
 	private String nombre;
-	@Column(length = 30, name="VAPELLIDOPAT")
+	@Column(length = 30, name="apellidoPat")
 	private String appaterno;
-	@Column(length = 30, name="VAPELLIDOMAT")
+	@Column(length = 30, name="apellidoMat")
 	private String apmaterno;
-	@Column(unique=true,length = 10, name="VDNI")
+	@Column(unique=true,length = 10, name="dni")
 	private String dni;
 	
-	@Column(name="VDIRECCION")
+	@Column(name="direccion")
 	private String direccion;
 	
-	@Column(name="VSEXO")
+	@Column(name="sexo")
 	private String sexo;
 	
-	@Column(name="NEDAD")
+	@Column(name="edad")
 	private Integer eddad;
 	
-	@Column(name="DFECHANAC")
+	@Column(name="fechaNacimiento")
 	private Date fechaNacimiento;
 
 	public String getNombre() {

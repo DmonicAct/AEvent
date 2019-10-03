@@ -15,13 +15,13 @@ public class Role implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="NROLID")
+	@Column(name="idRol")
 	private Long idRol;
 	
-	@Column(unique=true, length=20,name="VDESCRIPCION")
+	@Column(unique=true, length=20,name="descripcion")
 	private String nombre;
 	
-	@Column(name="NROL_ACTIVO")
+	@Column(name="rolActivo")
 	private Boolean enabled;
 	
 	public Boolean getEnabled() {

@@ -32,36 +32,36 @@ public class Usuario implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="NUSUARIOID")
+	@Column(name="idUsuario")
 	private int idUsuario;
 	
 	@NotEmpty(message ="no puede estar vacio")
 	@Size(min=6, max=20, message="el tamaño tiene que estar entre 6 y 20")
-	@Column(unique = true, length = 20, name="VUSERNAME")
+	@Column(unique = true, length = 20, name="usuario")
 	private String username;
 	
-	@Column(length = 60, name="VPASSWORD")
+	@Column(length = 60, name="contrasena")
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	
-	@Column(length = 30,name="NUSUARIO_ACTIVO")
+	@Column(length = 30,name="usuarioActivo")
 	private Boolean enabled;
 	
 	@NotEmpty(message ="no puede estar vacio")
 	@Email(message="no es una dirección de correo bien formada")
-	@Column(length = 30,name="VEMAIL")
+	@Column(length = 30,name="correo")
 	private String email;
 	
-	@Column(name="DFECHACREA")
+	@Column(name="fechaCreacion")
 	private Date fechaCreacion;
 	
-	@Column(name="DFECHAMODI")
+	@Column(name="fechaModificacion")
 	private Date fechaModificacion;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name="USUARIOS_ROLES", joinColumns= @JoinColumn(name="NID_USUARIO"),
-	inverseJoinColumns=@JoinColumn(name="NID_ROL"),
-	uniqueConstraints= {@UniqueConstraint(columnNames= {"NID_USUARIO", "NID_ROL"})})
+	@JoinTable(name="USUARIOS_ROLES", joinColumns= @JoinColumn(name="idUsuario"),
+	inverseJoinColumns=@JoinColumn(name="idRol"),
+	uniqueConstraints= {@UniqueConstraint(columnNames= {"idUsuario", "idRol"})})
 	private List<Role> roles;
 	
 	public int getIdUsuario() {

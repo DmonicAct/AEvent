@@ -15,11 +15,11 @@ public class Parametro implements Serializable  {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "NCORRELATIVO")
+	@Column(name = "correlativo")
 	private Integer correlativo;
-	@Column(name = "VCODIGO")
+	@Column(name = "codigo")
 	private String codigo;
-	@Column(name = "VDESCRIPCION")
+	@Column(name = "descripcion")
 	private String descripcion;
 	public Integer getCorrelativo() {
 		return correlativo;
