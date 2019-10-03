@@ -48,4 +48,6 @@ INSERT INTO `categoria` (`codCategoria`, `descripcion`) VALUES ('00000005', 'DES
 INSERT INTO `categoria` (`codCategoria`, `descripcion`) VALUES ('00000006', 'CONSTRUCCION CIVIL');
 INSERT INTO `categoria` (`codCategoria`, `descripcion`) VALUES ('00000007', 'EDUCACION');
 
-
+INSERT INTO `parametro` (NOMBRE, ACTIVO) VALUES ('Pregunta abierta' , TRUE);
+INSERT INTO `parametro` (NOMBRE, ACTIVO) VALUES ('Pregunta de opcion multiple' , TRUE);
+INSERT INTO `parametro` (NOMBRE, ACTIVO) VALUES ('Pregunta de formulario' , TRUE);
