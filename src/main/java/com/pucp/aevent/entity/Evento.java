@@ -28,7 +28,7 @@ public class Evento implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idEvento")
-	private int id;
+	private int idEvento;
 	
 	@Column(name="descripcion")
 	private String descripcion;
@@ -66,13 +66,26 @@ public class Evento implements Serializable{
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private FormularioCFP formulario;
 	
-	public int getId() {
-		return id;
+
+
+
+	public int getIdEvento() {
+		return idEvento;
 	}
 
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdEvento(int idEvento) {
+		this.idEvento = idEvento;
+	}
+
+
+	public String getTipoEvento() {
+		return tipoEvento;
+	}
+
+
+	public void setTipoEvento(String tipoEvento) {
+		this.tipoEvento = tipoEvento;
 	}
 
 
