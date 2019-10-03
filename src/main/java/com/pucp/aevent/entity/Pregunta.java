@@ -22,12 +22,12 @@ public class Pregunta implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="IDpregunta")
+	@Column(name="id_pregunta")
 	private int idPregunta;
 	
 	@NotEmpty(message ="no puede estar vacio")
 	@Size(min=0, max=50, message="el tamaño tiene que estar entre 0 y 20")
-	@Column(length = 50, name="NOMBRE")
+	@Column(length = 50, name="nombre")
 	private String nombre;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)

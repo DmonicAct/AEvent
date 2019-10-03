@@ -24,12 +24,12 @@ public class FormularioCFP implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="NFORMULARIOCFPID")
+	@Column(name="id_formulario")
 	private int idFormularioCFP;
 	
 	@NotEmpty(message ="no puede estar vacio")
 	@Size(min=0, max=100, message="el tamaño tiene que estar entre 6 y 20")
-	@Column(unique = true, length = 100, name="TITULO")
+	@Column(unique = true, length = 100, name="titulo")
 	private String titulo;
 	
 	/**
