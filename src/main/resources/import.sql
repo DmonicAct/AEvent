@@ -56,3 +56,12 @@ INSERT INTO `tipoevento` ( descripcion) VALUES("CHARLA");
 INSERT INTO `tipoevento` ( descripcion) VALUES("TALLER");
 INSERT INTO `tipoevento` ( descripcion) VALUES("WORKSHOP");
 INSERT INTO `tipoevento` ( descripcion) VALUES("SEMINARIO");
+
+INSERT INTO `lugar` (descripcion) VALUES("AUDITORIO DE CIENCIAS E INGENIERIA - PUCP");
+INSERT INTO `lugar` (descripcion) VALUES("AUDITORIO DE DERECHO - PUCP");
+INSERT INTO `lugar` (descripcion) VALUES("CENTRO DE CONVENCIONES AEVENT");
+INSERT INTO `lugar` (descripcion) VALUES("CENTRO DE CONVENCIONES SAN MARCOS SE DEFIENDE");
+
+
+
+
