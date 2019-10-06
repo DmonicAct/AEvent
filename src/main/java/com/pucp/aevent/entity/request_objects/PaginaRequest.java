@@ -1,6 +1,5 @@
 package com.pucp.aevent.entity.request_objects;
 
-
 public class PaginaRequest {
 	private Integer pagina;
 	private Integer registros;

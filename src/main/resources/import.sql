@@ -51,3 +51,9 @@ INSERT INTO `categoria` (cod_categoria, descripcion) VALUES ('00000007', 'EDUCAC
 INSERT INTO `parametro` (DESCRIPCION, ACTIVO) VALUES ('Pregunta abierta' , TRUE);
 INSERT INTO `parametro` (DESCRIPCION, ACTIVO) VALUES ('Pregunta de opcion multiple' , TRUE);
 INSERT INTO `parametro` (DESCRIPCION, ACTIVO) VALUES ('Pregunta de formulario' , TRUE);
+
+I
+INSERT INTO 'tipoevento' (idTipoEvento, nombre) VALUES(1,"CHARLA");
+INSERT INTO 'tipoevento' (idTipoEvento, nombre) VALUES(1,"TALLER");
+INSERT INTO 'tipoevento' (idTipoEvento, nombre) VALUES(1,"WORKSHOP");
+INSERT INTO 'tipoevento' (idTipoEvento, nombre) VALUES(1,"SEMINARIO");
