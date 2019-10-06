@@ -3,6 +3,7 @@ package com.pucp.aevent.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,8 @@ import org.springframework.web.client.HttpClientErrorException.BadRequest;
 import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
 import com.pucp.aevent.entity.Categoria;
+import com.pucp.aevent.entity.Usuario;
+import com.pucp.aevent.entity.request_objects.PaginaRequest;
 import com.pucp.aevent.entity.response_objects.Estado;
 import com.pucp.aevent.entity.response_objects.ResponseObject;
 import com.pucp.aevent.service.ICategoriaService;
@@ -46,5 +49,31 @@ public class CategoriaApi {
 			response.setEstado(Estado.ERROR);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-	} 
+	}
+	
+	@Secured({"ROLE_ADMIN"})
+	@GetMapping(path = "/categoriasPaginadas", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarAllCategorias(PaginaRequest page) {
+		ResponseObject response = new ResponseObject();
+		try {
+			List<Categoria> lista = this.service.findAll(PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			response.setResultado(lista);
+			response.setPaginacion(service.getPaginacion());
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 }
