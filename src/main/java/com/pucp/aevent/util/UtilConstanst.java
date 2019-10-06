@@ -9,4 +9,7 @@ public class UtilConstanst {
 	public static final String  APP_ORIGIN_ROUTE_DEPLOY = ""; 
 	public static final String  APP_ORIGIN_HEADERS = "Content-Type";
 	public static final String  APP_ORIGIN_HEADERS_TYPE = "Authorization";
+	
+	//Routes Common All
+	public static final String APP_ROUTE_FULL_ACCESS_EMAIL = "/api/usuarios/email/**";
 }

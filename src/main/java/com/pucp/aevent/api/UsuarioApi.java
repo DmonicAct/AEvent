@@ -59,7 +59,7 @@ public class UsuarioApi {
 		}
 	}
 	
-	@Secured({"ROLE_ADMIN"})
+	//@Secured({"ROLE_ADMIN"})
 	@GetMapping(path = "/usuarios/email/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> consultarEmail(@PathVariable("email") String email) {
 		ResponseObject response = new ResponseObject();
