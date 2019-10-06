@@ -12,7 +12,7 @@ import com.pucp.aevent.entity.Categoria;
 
 public interface ICategoriaDao extends JpaRepository <Categoria, Long>{
 	public List<Categoria> findAll();
-	//NO ESTOY SEGURO SI ESTO ESTA BIEN
-	public Page<Categoria> findAll(Pageable pageable);
 
+	public Page<Categoria> findAll(Pageable pageable);
+	
 }
