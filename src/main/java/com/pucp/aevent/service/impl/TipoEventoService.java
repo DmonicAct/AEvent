@@ -34,7 +34,19 @@ public class TipoEventoService implements ITipoEventoService{
 		return lista.getContent();
 		
 	}
-
+	
+	@Override
+	public List<TipoEvento> findAll() {
+		List<TipoEvento> lista =null;
+		try {
+			lista = dao.findAll();
+		}catch(Exception ex) {
+			System.out.print(ex.getMessage());
+		}
+		return lista;
+		
+	}
+	
 	private Paginacion paginacion;
 	@Override
 	public Paginacion getPaginacion() {

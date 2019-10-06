@@ -28,11 +28,36 @@ public class TipoEventoApi {
 	private ITipoEventoService tipoEventoService;
 	
 	@Secured({"ROLE_ADMIN"})
-	@GetMapping(path = "/tipoEvento", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/tipoEvento/paginacion", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> consultarAllTipoEvento(PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {
 			List<TipoEvento> lista = this.tipoEventoService.findAll(PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			response.setResultado(lista);
+			response.setPaginacion(tipoEventoService.getPaginacion());
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@Secured({"ROLE_ADMIN"})
+	@GetMapping(path = "/tipoEvento", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarTipoEventos() {
+		ResponseObject response = new ResponseObject();
+		try {
+			List<TipoEvento> lista = this.tipoEventoService.findAll();
 			response.setResultado(lista);
 			response.setPaginacion(tipoEventoService.getPaginacion());
 			response.setEstado(Estado.OK);

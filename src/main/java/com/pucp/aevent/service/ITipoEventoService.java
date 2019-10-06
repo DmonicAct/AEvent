@@ -10,6 +10,7 @@ import com.pucp.aevent.entity.response_objects.Paginacion;
 
 public interface ITipoEventoService {
 	public List<TipoEvento> findAll(Pageable pageable);
+	public List<TipoEvento> findAll();
 	Paginacion getPaginacion();
 	Error getError();
 	public TipoEvento guardarTipoEvento(TipoEvento tipoEvento);
