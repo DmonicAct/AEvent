@@ -107,8 +107,7 @@ public class UsuarioApi {
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	
+
 	@Secured({"ROLE_ADMIN"})
 	@PostMapping(path = "/usuarios",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> guardarUsuario( @Valid @RequestBody Persona persona) {
@@ -132,7 +131,6 @@ public class UsuarioApi {
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
 	
 	@Secured({"ROLE_ADMIN"})
 	@DeleteMapping(path = "/usuarios/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

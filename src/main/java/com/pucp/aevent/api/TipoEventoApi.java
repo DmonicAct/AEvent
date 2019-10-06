@@ -2,6 +2,7 @@ package com.pucp.aevent.api;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,7 +23,8 @@ import com.pucp.aevent.service.ITipoEventoService;
 @RestController
 @RequestMapping("/api")
 public class TipoEventoApi {
-
+	
+	@Autowired
 	private ITipoEventoService tipoEventoService;
 	
 	@Secured({"ROLE_ADMIN"})

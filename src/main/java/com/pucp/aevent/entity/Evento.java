@@ -58,16 +58,16 @@ public class Evento implements Serializable{
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<Categoria> categorias;
 	
-	@Column(name="tipoEvento")
-	private String tipoEvento;
+//	@ManyToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JoinColumn(name="idTipoEvento")
+//	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//	@Column(name="tipoEvento")
+//	private String tipoEvento;
 	
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idFormularioCFP")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private FormularioCFP formulario;
-	
-	
-
 
 	public int getIdEvento() {
 		return idEvento;
@@ -79,14 +79,14 @@ public class Evento implements Serializable{
 	}
 
 
-	public String getTipoEvento() {
-		return tipoEvento;
-	}
-
-
-	public void setTipoEvento(String tipoEvento) {
-		this.tipoEvento = tipoEvento;
-	}
+//	public String getTipoEvento() {
+//		return tipoEvento;
+//	}
+//
+//
+//	public void setTipoEvento(String tipoEvento) {
+//		this.tipoEvento = tipoEvento;
+//	}
 
 
 	public String getDescripcion() {

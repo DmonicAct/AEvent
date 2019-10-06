@@ -52,8 +52,7 @@ INSERT INTO `parametro` (DESCRIPCION, ACTIVO) VALUES ('Pregunta abierta' , TRUE)
 INSERT INTO `parametro` (DESCRIPCION, ACTIVO) VALUES ('Pregunta de opcion multiple' , TRUE);
 INSERT INTO `parametro` (DESCRIPCION, ACTIVO) VALUES ('Pregunta de formulario' , TRUE);
 
-I
-INSERT INTO 'tipoevento' (idTipoEvento, nombre) VALUES(1,"CHARLA");
-INSERT INTO 'tipoevento' (idTipoEvento, nombre) VALUES(1,"TALLER");
-INSERT INTO 'tipoevento' (idTipoEvento, nombre) VALUES(1,"WORKSHOP");
-INSERT INTO 'tipoevento' (idTipoEvento, nombre) VALUES(1,"SEMINARIO");
+INSERT INTO `tipoevento` ( descripcion) VALUES("CHARLA");
+INSERT INTO `tipoevento` ( descripcion) VALUES("TALLER");
+INSERT INTO `tipoevento` ( descripcion) VALUES("WORKSHOP");
+INSERT INTO `tipoevento` ( descripcion) VALUES("SEMINARIO");
