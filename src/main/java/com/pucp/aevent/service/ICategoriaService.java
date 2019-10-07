@@ -17,5 +17,7 @@ public interface ICategoriaService {
 	
 	Paginacion getPaginacion();
 	
-	public void save(Categoria categoria);  
+	public void save(Categoria categoria); 
+	
+	public void delete(Categoria categoria);
 }

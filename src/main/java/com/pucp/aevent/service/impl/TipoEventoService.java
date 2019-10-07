@@ -48,7 +48,6 @@ public class TipoEventoService implements ITipoEventoService{
 	}
 	
 	private Paginacion paginacion;
-	@Override
 	public Paginacion getPaginacion() {
 		return this.paginacion;
 	}
@@ -70,6 +69,11 @@ public class TipoEventoService implements ITipoEventoService{
 			return returnedObject;
 		}
 		return returnedObject;
+	}
+
+	@Override
+	public void delete(TipoEvento tipoEvento) {
+		this.dao.delete(tipoEvento);
 	}
 	
 }

@@ -14,4 +14,5 @@ public interface ITipoEventoService {
 	Paginacion getPaginacion();
 	Error getError();
 	public TipoEvento guardarTipoEvento(TipoEvento tipoEvento);
+	public void delete(TipoEvento tipoEvento);
 }
