@@ -56,3 +56,13 @@ INSERT INTO `tipoevento` ( descripcion) VALUES("CHARLA");
 INSERT INTO `tipoevento` ( descripcion) VALUES("TALLER");
 INSERT INTO `tipoevento` ( descripcion) VALUES("WORKSHOP");
 INSERT INTO `tipoevento` ( descripcion) VALUES("SEMINARIO");
+
+INSERT INTO `pregunta` (descripcion, tipo_pregunta, id_division) VALUES ('Explique su grado de estudios', 'PREGUNTA ABIERTA', 1);
+INSERT INTO `pregunta` (descripcion, tipo_pregunta, id_division) VALUES ('Detalle su labor como ponente', 'PREGUNTA ABIERTA', 2);
+
+INSERT INTO `division` (descripcion, id_formulario) VALUES ('Estudios',1);
+INSERT INTO `division` (descripcion, id_formulario) VALUES ('Experiencia Laboral',1);
+
+INSERT INTO `formulariocfp` (titulo) VALUES ("Formato de ponencia para charla magistral de software científico");
+
+INSERT INTO `evento` ( capacidad, descripcion, fecha_fin, fecha_inicio, id_formulariocfp, id_organizador, id_tipo_evento) VALUES (500, 'Charla magistral dirigida a desarrolladores de software de propósito científico, '2019-12-12', '2019-05-05', 1, 3, 1);
