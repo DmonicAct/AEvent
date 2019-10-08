@@ -31,6 +31,9 @@ public class Evento implements Serializable{
 	@Column(name="idEvento")
 	private int idEvento;
 	
+	@Column(name="titulo")
+	private String titulo;
+	
 	@Column(name="descripcion")
 	private String descripcion;
 	
@@ -201,6 +204,17 @@ public class Evento implements Serializable{
 
 	public void setLugar(Lugar lugar) {
 		this.lugar = lugar;
+	}
+
+
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 

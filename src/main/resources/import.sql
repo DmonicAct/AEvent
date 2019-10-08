@@ -52,15 +52,15 @@ INSERT INTO `parametro` (DESCRIPCION, ACTIVO) VALUES ('Pregunta abierta' , TRUE)
 INSERT INTO `parametro` (DESCRIPCION, ACTIVO) VALUES ('Pregunta de opcion multiple' , TRUE);
 INSERT INTO `parametro` (DESCRIPCION, ACTIVO) VALUES ('Pregunta de formulario' , TRUE);
 
-INSERT INTO `tipoevento` ( descripcion) VALUES("CHARLA");
-INSERT INTO `tipoevento` ( descripcion) VALUES("TALLER");
-INSERT INTO `tipoevento` ( descripcion) VALUES("WORKSHOP");
-INSERT INTO `tipoevento` ( descripcion) VALUES("SEMINARIO");
+INSERT INTO `tipoevento` ( descripcion, estado) VALUES("CHARLA",1);
+INSERT INTO `tipoevento` ( descripcion, estado) VALUES("TALLER",1);
+INSERT INTO `tipoevento` ( descripcion, estado) VALUES("WORKSHOP",1);
+INSERT INTO `tipoevento` ( descripcion, estado) VALUES("SEMINARIO",1);
 
-INSERT INTO `lugar` (descripcion) VALUES("AUDITORIO DE CIENCIAS E INGENIERIA - PUCP");
-INSERT INTO `lugar` (descripcion) VALUES("AUDITORIO DE DERECHO - PUCP");
-INSERT INTO `lugar` (descripcion) VALUES("CENTRO DE CONVENCIONES AEVENT");
-INSERT INTO `lugar` (descripcion) VALUES("CENTRO DE CONVENCIONES SAN MARCOS SE DEFIENDE");
+INSERT INTO `lugar` (descripcion, estado) VALUES("AUDITORIO DE CIENCIAS E INGENIERIA - PUCP", 1);
+INSERT INTO `lugar` (descripcion, estado) VALUES("AUDITORIO DE DERECHO - PUCP", 1);
+INSERT INTO `lugar` (descripcion, estado) VALUES("CENTRO DE CONVENCIONES AEVENT", 1);
+INSERT INTO `lugar` (descripcion, estado) VALUES("CENTRO DE CONVENCIONES SAN MARCOS SE DEFIENDE", 1);
 
 
 INSERT INTO `formulariocfp` (titulo) VALUES ("Formato de ponencia para charla magistral de software científico");

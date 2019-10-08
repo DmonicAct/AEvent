@@ -110,7 +110,9 @@ public class TipoEventoApi {
 	public ResponseEntity<ResponseObject> eliminarCategoria( @Valid @RequestBody TipoEvento tipoEvento) {
 		ResponseObject response = new ResponseObject();
 		try {
-			this.tipoEventoService.delete(tipoEvento);
+			TipoEvento tipo = this.tipoEventoService.findByIdTipoEvento(tipoEvento.getIdTipoEvento());
+			tipo.setEnabled(false);
+			this.tipoEventoService.guardarTipoEvento(tipo);
 			//response.setResultado(lista);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);

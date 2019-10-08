@@ -75,5 +75,10 @@ public class TipoEventoService implements ITipoEventoService{
 	public void delete(TipoEvento tipoEvento) {
 		this.dao.delete(tipoEvento);
 	}
+
+	@Override
+	public TipoEvento findByIdTipoEvento(Integer id) {
+		return this.dao.findByIdTipoEvento(id);
+	}
 	
 }
