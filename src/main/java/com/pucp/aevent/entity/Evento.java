@@ -48,6 +48,11 @@ public class Evento implements Serializable{
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Persona organizador;
 	
+	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="id_presidente")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Persona presidente;
+	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name="PERSONA_COMITE", joinColumns= @JoinColumn(name="idUsuario"),
 	inverseJoinColumns=@JoinColumn(name="idEvento"),
@@ -73,7 +78,7 @@ public class Evento implements Serializable{
 	@JoinColumn(name="idFormularioCFP")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private FormularioCFP formulario;
-
+	
 	
 	public int getIdEvento() {
 		return idEvento;
@@ -175,6 +180,27 @@ public class Evento implements Serializable{
 
 	public void setFormulario(FormularioCFP formulario) {
 		this.formulario = formulario;
+	}
+
+
+
+	public Persona getPresidente() {
+		return presidente;
+	}
+
+
+	public void setPresidente(Persona presidente) {
+		this.presidente = presidente;
+	}
+
+
+	public Lugar getLugar() {
+		return lugar;
+	}
+
+
+	public void setLugar(Lugar lugar) {
+		this.lugar = lugar;
 	}
 
 

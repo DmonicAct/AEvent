@@ -18,6 +18,8 @@ public interface IUsuarioService {
 	
 	public Usuario save(Persona persona);
 	
+	public Usuario saveOut(Persona persona);
+	
 	public void cambioUsuario(Usuario usuario);
 	
 	public Boolean existsByEmail(String email);

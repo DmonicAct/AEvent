@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException.BadRequest;
 import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
-import com.pucp.aevent.entity.Categoria;
 import com.pucp.aevent.entity.TipoEvento;
 import com.pucp.aevent.entity.request_objects.PaginaRequest;
 import com.pucp.aevent.entity.response_objects.Estado;

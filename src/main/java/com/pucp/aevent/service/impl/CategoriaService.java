@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pucp.aevent.dao.ICategoriaDao;
 import com.pucp.aevent.entity.Categoria;
-import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;
 import com.pucp.aevent.service.ICategoriaService;
