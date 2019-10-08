@@ -63,5 +63,13 @@ INSERT INTO `lugar` (descripcion) VALUES("CENTRO DE CONVENCIONES AEVENT");
 INSERT INTO `lugar` (descripcion) VALUES("CENTRO DE CONVENCIONES SAN MARCOS SE DEFIENDE");
 
 
+INSERT INTO `formulariocfp` (titulo) VALUES ("Formato de ponencia para charla magistral de software científico");
 
+INSERT INTO `division` (descripcion, id_formulario) VALUES ('Estudios',1);
+INSERT INTO `division` (descripcion, id_formulario) VALUES ('Experiencia Laboral',1);
+
+INSERT INTO `pregunta` (descripcion, tipo_pregunta, id_division) VALUES ('Explique su grado de estudios', 'PREGUNTA ABIERTA', 1);
+INSERT INTO `pregunta` (descripcion, tipo_pregunta, id_division) VALUES ('Detalle su labor como ponente', 'PREGUNTA ABIERTA', 2);
+
+INSERT INTO `evento` ( capacidad, descripcion, fecha_fin, fecha_inicio, id_formulariocfp, id_organizador, id_tipo_evento) VALUES (500, 'Charla magistral dirigida a desarrolladores de software de propósito científico', '2019-12-12', '2019-05-05', 1, 3, 1);
 

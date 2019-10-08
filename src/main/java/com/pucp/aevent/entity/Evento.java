@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -58,11 +59,10 @@ public class Evento implements Serializable{
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<Categoria> categorias;
 	
-//	@ManyToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
-//	@JoinColumn(name="idTipoEvento")
-//	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-//	@Column(name="tipoEvento")
-//	private String tipoEvento;
+	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="idTipoEvento")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private TipoEvento tipoEvento;
 	
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idFormularioCFP")

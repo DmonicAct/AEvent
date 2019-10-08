@@ -18,7 +18,7 @@ import com.pucp.aevent.entity.Pregunta;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "Pregunta")
+@Table(name = "pregunta")
 public class Pregunta implements Serializable{
 	
 	@Id
@@ -31,7 +31,7 @@ public class Pregunta implements Serializable{
 	@Column(length = 50, name="descripcion")
 	private String descripcion;
 	
-	@Column(name="tipoPregunta")
+	@Column(name="tipo_pregunta")
 	private String tipoPregunta;
 	
 
