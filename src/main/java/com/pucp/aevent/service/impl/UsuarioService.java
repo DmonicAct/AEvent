@@ -167,6 +167,12 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 	}
 
 	@Override
+	@Transactional(readOnly=true)
+	public Boolean existsByUsername(String username) {
+		return dao.existsByUsername(username);
+	}
+	
+	@Override
 	@Transactional
 	public Usuario saveOut(Persona persona) {
 		persona.setRoles(null);
