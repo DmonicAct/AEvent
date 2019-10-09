@@ -24,6 +24,8 @@ public interface IUsuarioService {
 	
 	public Boolean existsByEmail(String email);
 	
+	public Boolean existsByUsername(String username);
+	
 	Paginacion getPaginacion();
 	Error getError();
 }
