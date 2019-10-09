@@ -27,7 +27,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 		 * RUTAS DE ACCESSO ACORDE A ROL
 		 * */
 		http.authorizeRequests()
-		.antMatchers(HttpMethod.GET,UtilConstanst.APP_ROUTE_FULL_ACCESS_EMAIL).permitAll() 
+		.antMatchers(HttpMethod.GET,UtilConstanst.APP_ROUTE_OUT_ACCESS).permitAll() 
+		.antMatchers(HttpMethod.POST,UtilConstanst.APP_ROUTE_OUT_ACCESS).permitAll() 
 		.anyRequest().authenticated()
 		.and().cors().configurationSource(corsConfigurationSource());
 	}

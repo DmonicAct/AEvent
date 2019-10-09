@@ -23,7 +23,10 @@ public class Categoria implements Serializable{
 	
 	@Column(name="codCategoria")
 	private String codigo;
-
+	
+	@Column(name="estado")
+	private Boolean enabled;
+	
 	public int getId() {
 		return id;
 	}
@@ -48,6 +51,16 @@ public class Categoria implements Serializable{
 		this.codigo = codigo;
 	}
 	
+	
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+
 	/**
 	 * 
 	 */

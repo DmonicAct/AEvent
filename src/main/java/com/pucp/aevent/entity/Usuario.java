@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "USUARIOS")
+@Table(name = "USUARIO")
 public class Usuario implements Serializable {
 	
 	@Id
@@ -59,7 +59,7 @@ public class Usuario implements Serializable {
 	private Date fechaModificacion;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name="USUARIOS_ROLES", joinColumns= @JoinColumn(name="idUsuario"),
+	@JoinTable(name="USUARIO_ROLE", joinColumns= @JoinColumn(name="idUsuario"),
 	inverseJoinColumns=@JoinColumn(name="idRol"),
 	uniqueConstraints= {@UniqueConstraint(columnNames= {"idUsuario", "idRol"})})
 	private List<Role> roles;

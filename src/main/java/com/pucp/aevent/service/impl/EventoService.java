@@ -2,13 +2,22 @@ package com.pucp.aevent.service.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.pucp.aevent.dao.IDivisionDao;
 import com.pucp.aevent.dao.IEventoDao;
+import com.pucp.aevent.dao.IPersonaDao;
+import com.pucp.aevent.dao.IPreguntaDao;
+import com.pucp.aevent.dao.ISeccionDao;
+import com.pucp.aevent.dao.IFormularioCFPDao;
 import com.pucp.aevent.entity.Evento;
+import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;
 import com.pucp.aevent.service.IEventoService;
@@ -19,10 +28,27 @@ public class EventoService implements IEventoService{
 	@Autowired
 	IEventoDao dao;
 	
+	@Autowired
+	IPersonaDao daoPersona;
+	
+	@Autowired
+	IFormularioCFPDao daoFormaulario;
+	
+	@Autowired
+	IDivisionDao daoDivision;
+	
+	@Autowired
+	ISeccionDao daoSeccion;
+	
+	@Autowired
+	IPreguntaDao daoPregunta;
+	
 	private Paginacion paginacion;
 	public Paginacion getPaginacion() {
 		return this.paginacion;
 	}
+	
+	private Logger logger = LoggerFactory.getLogger(EventoService.class);
 	
 	private Error error;
 	public Error getError() {
@@ -30,11 +56,22 @@ public class EventoService implements IEventoService{
 	}
 	
 	@Override
+	@Transactional
 	public Evento save(Evento evento) {
-		return this.dao.save(evento);
+		Evento returnedEvento = null;
+		Persona organizador=null;
+		try {
+			organizador = this.daoPersona.findByUsername(evento.getOrganizador().getUsername());
+			evento.setOrganizador(organizador);
+			returnedEvento = this.dao.save(evento);
+		}catch(Exception ex) {
+			logger.error("Error en el sistema: " + ex.getCause());
+		}
+		return returnedEvento;
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public List<Evento> findAll(Pageable page) {
 		Page<Evento> lista = null;
 		this.paginacion = new Paginacion();
@@ -49,6 +86,7 @@ public class EventoService implements IEventoService{
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Evento findById(Integer id) {
 		return this.dao.findByIdEvento(id);
 	}

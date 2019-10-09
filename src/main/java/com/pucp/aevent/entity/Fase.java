@@ -36,7 +36,7 @@ public class Fase implements Serializable {
 	private Date fechaFin;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_evento")
+	@JoinColumn(name="idEvento")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Evento eventos;
 

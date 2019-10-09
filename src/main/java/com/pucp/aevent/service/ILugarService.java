@@ -9,9 +9,10 @@ import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;
 
 public interface ILugarService {
+	public List<Lugar> findAll(Pageable pageable);
+	public List<Lugar> findAll();
 	Paginacion getPaginacion();
 	Error getError();
-	public List<Lugar> findAll();
-	public Lugar guardarLugar(Lugar lugar);
-	
+	public void save(Lugar lugar);
+	public void delete(Lugar lugar);
 }

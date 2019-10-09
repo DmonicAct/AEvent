@@ -10,4 +10,6 @@ public interface IPersonaService {
 	public List<Persona> findAll();
 	
 	public void save(Persona persona);
+	
+	public Persona findByUsername(String username);
 }

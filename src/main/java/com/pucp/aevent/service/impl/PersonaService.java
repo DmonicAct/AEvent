@@ -30,8 +30,17 @@ public class PersonaService implements IPersonaService{
 	}
 
 	@Override
+	@Transactional
 	public void save(Persona persona) {
 		this.dao.save(persona);
 	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public Persona findByUsername(String username) {
+		return this.dao.findByUsername(username);
+	}
+	
+	
 
 }

@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pucp.aevent.dao.ICategoriaDao;
 import com.pucp.aevent.entity.Categoria;
-import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;
 import com.pucp.aevent.service.ICategoriaService;
@@ -45,8 +44,6 @@ public class CategoriaService implements ICategoriaService{
 	}
 	
 	public List<Categoria> findAll(Pageable page) {
-		//List<Object[]> lista2 = dao.findAll3("","",0,"","","",0);
-		//List<Object[]> lista = dao.findAll2();
 		Page<Categoria> lista = null;
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
@@ -59,6 +56,11 @@ public class CategoriaService implements ICategoriaService{
 		}
 		
 		return lista.getContent();
+	}
+
+	@Override
+	public void delete(Categoria categoria) {
+		this.dao.delete(categoria);
 	}
 	
 }

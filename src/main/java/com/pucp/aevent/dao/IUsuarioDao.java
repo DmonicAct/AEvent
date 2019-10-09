@@ -17,6 +17,8 @@ public interface IUsuarioDao extends JpaRepository <Usuario, Long>{
 	public Usuario getUsernameAndEmailByIdUsuario(Integer id);
 	
 	public Boolean existsByEmail(String email);
+	
+	public Boolean existsByUsername(String username);
 	/*
 	 * Query Sample
 	 * */
@@ -35,5 +37,7 @@ public interface IUsuarioDao extends JpaRepository <Usuario, Long>{
 	
 	@Query(value = "SELECT VUSERNAME,NUSUARIO_ACTIVO,VEMAIL FROM USUARIOS", nativeQuery = true)
 	public List<Object[]> findAll2();
+	
+	
 	
 }

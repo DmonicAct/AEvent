@@ -29,7 +29,7 @@ import com.pucp.aevent.entity.response_objects.Nivel;
 import com.pucp.aevent.entity.response_objects.Paginacion;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.service.IUsuarioService;
-
+import com.pucp.aevent.util.UtilConstanst;
 @Service
 public class UsuarioService implements IUsuarioService,UserDetailsService{
 	
@@ -84,6 +84,7 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Usuario findById(Integer id) {
 		Usuario user = dao.findByIdUsuario(id);
 		user.setPassword(null);
@@ -91,6 +92,7 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public List<Usuario> findAll(Pageable page) {
 		//List<Object[]> lista2 = dao.findAll3("","",0,"","","",0);
 		//List<Object[]> lista = dao.findAll2();
@@ -162,6 +164,40 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 	@Transactional(readOnly=true)
 	public Boolean existsByEmail(String email) {
 		return dao.existsByEmail(email);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public Boolean existsByUsername(String username) {
+		return dao.existsByUsername(username);
+	}
+	
+	@Override
+	@Transactional
+	public Usuario saveOut(Persona persona) {
+		persona.setRoles(null);
+		Usuario usuario = (Usuario)persona;
+		Usuario returnedUser = null;
+		try {
+			if(usuario.getPassword()!=null  && usuario.getPassword()!="") {
+				String passwordBcrypt = passwordEncoder.encode(usuario.getPassword());
+				usuario.setPassword(passwordBcrypt);
+			}else {
+				throw new Exception("Password vacio");
+			}
+			long id_role_basic = UtilConstanst.ROLE_USER;
+			List<Role> roles = new ArrayList<Role>();
+			roles.add(role_dao.findById(id_role_basic).get());
+			usuario.setRoles( roles );
+			returnedUser = dao.save(usuario);
+			if(usuario.getIdUsuario()==0) {
+				persona.setIdUsuario(returnedUser.getIdUsuario());
+			}
+			this.persona_dao.save(persona);
+		}catch(Exception ex) {
+			return null;
+		}
+		return returnedUser;
 	}
 	
 	

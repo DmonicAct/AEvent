@@ -7,4 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.pucp.aevent.entity.Persona;
 public interface IPersonaDao  extends JpaRepository <Persona, Long>{
 	public List<Persona> findAll();
+	
+	public Persona findByUsername(String username);
 }

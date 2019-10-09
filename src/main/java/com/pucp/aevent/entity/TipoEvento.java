@@ -18,6 +18,9 @@ public class TipoEvento implements Serializable {
 	@Column(name="idTipoEvento")
 	private Integer idTipoEvento;
 	
+	@Column(name="estado")
+	private Boolean enabled;
+	
 	@Column(name="descripcion")
 	private String nombre;
 	
@@ -39,6 +42,16 @@ public class TipoEvento implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 
 

@@ -10,32 +10,42 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="LUGAR")
-public class Lugar implements Serializable {
-	
+@Table(name="Lugar")
+public class Lugar {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="idLugar")
-	private Integer idLugar;
+	private Integer id;
 	
 	@Column(name="descripcion")
-	private String nombre;
+	private String descripcion;
 
-	public Integer getIdLugar() {
-		return idLugar;
+	@Column(name="estado")
+	private Boolean enabled;
+	
+	public Integer getId() {
+		return id;
 	}
 
-	public void setIdLugar(Integer idLugar) {
-		this.idLugar = idLugar;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 	
-	private static final long serialVersionUID = 1L;
+	
 }

@@ -5,6 +5,7 @@ import com.pucp.aevent.entity.TipoEvento;
 
 public interface ITipoEventoDao extends JpaRepository<TipoEvento, Long> {
 	//public Page List<TipoEvento> findAll(Pageable pageable);
+	public TipoEvento findByIdTipoEvento(Integer id);	
 }
 
 
