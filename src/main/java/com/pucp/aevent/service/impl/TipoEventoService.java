@@ -2,6 +2,8 @@ package com.pucp.aevent.service.impl;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +23,7 @@ public class TipoEventoService implements ITipoEventoService{
 	ITipoEventoDao dao;
 	
 	@Override
+	@Transactional
 	public List<TipoEvento> findAll(Pageable page) {
 		Page<TipoEvento> lista = null;
 		this.paginacion = new Paginacion();
@@ -36,6 +39,7 @@ public class TipoEventoService implements ITipoEventoService{
 	}
 	
 	@Override
+	@Transactional
 	public List<TipoEvento> findAll() {
 		List<TipoEvento> lista =null;
 		try {
@@ -58,6 +62,7 @@ public class TipoEventoService implements ITipoEventoService{
 		return this.error;
 	}
 	@Override
+	@Transactional
 	public TipoEvento guardarTipoEvento(TipoEvento tipoEvento) {
 		Integer success = 1;
 		TipoEvento returnedObject = null;
@@ -72,11 +77,13 @@ public class TipoEventoService implements ITipoEventoService{
 	}
 
 	@Override
+	@Transactional
 	public void delete(TipoEvento tipoEvento) {
 		this.dao.delete(tipoEvento);
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public TipoEvento findByIdTipoEvento(Integer id) {
 		return this.dao.findByIdTipoEvento(id);
 	}

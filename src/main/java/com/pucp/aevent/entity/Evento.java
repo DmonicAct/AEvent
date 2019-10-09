@@ -45,43 +45,57 @@ public class Evento implements Serializable{
 
 	@Column(name="capacidad")
 	private Integer capacidad;
-
-	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name="id_organizador")
+//
+//	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JoinColumn(name="id_organizador")
+//	private Persona organizador;
+//	
+//	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JoinColumn(name="id_presidente")
+//	private Persona presidente;
+	
+	@JoinColumn(name = "idPresidente", referencedColumnName = "idUsuario")
+    @ManyToOne(fetch=FetchType.LAZY)
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private Persona organizador;
-	
-	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name="id_presidente")
+    private Usuario presidente;
+    @JoinColumn(name = "idOrganizador", referencedColumnName = "idUsuario")
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Usuario organizador;
+    
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name="persona_comite", joinColumns=
+	@JoinColumn(name="idEvento", referencedColumnName = "idEvento"),inverseJoinColumns=
+	@JoinColumn(name="idUsuario", referencedColumnName = "idUsuario"),
+	uniqueConstraints= {@UniqueConstraint(columnNames= {"idEvento", "idUsuario"})})
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private Persona presidente;
+	private List<Usuario> comite;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name="PERSONA_COMITE", joinColumns= @JoinColumn(name="idUsuario"),
-	inverseJoinColumns=@JoinColumn(name="idEvento"),
-	uniqueConstraints= {@UniqueConstraint(columnNames= {"idUsuario", "idEvento"})})
-	private List<Persona> comite;
-	
-	@ManyToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name="idCategoria")
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name="evento_categoria", joinColumns= 
+	@JoinColumn(name="idEvento", referencedColumnName = "idEvento"), inverseJoinColumns=
+	@JoinColumn(name="idCategoria", referencedColumnName = "idCategoria"),
+	uniqueConstraints= {@UniqueConstraint(columnNames= {"idEvento", "idCategoria"})})
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<Categoria> categorias;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name="idLugar")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private Lugar lugar;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="idLugar")
+	private Lugar lugar;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="idTipoEvento")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private TipoEvento tipoEvento;
 	
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name="idFormularioCFP")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private FormularioCFP formulario;
 	
+	@Column(name="estado")
+	private String estado;
 	
 	public int getIdEvento() {
 		return idEvento;
@@ -146,7 +160,7 @@ public class Evento implements Serializable{
 
 	
 
-	public Persona getOrganizador() {
+	public Usuario getOrganizador() {
 		return organizador;
 	}
 
@@ -156,12 +170,12 @@ public class Evento implements Serializable{
 	}
 
 
-	public List<Persona> getComite() {
+	public List<Usuario> getComite() {
 		return comite;
 	}
 
 
-	public void setComite(List<Persona> comite) {
+	public void setComite(List<Usuario> comite) {
 		this.comite = comite;
 	}
 
@@ -187,7 +201,7 @@ public class Evento implements Serializable{
 
 
 
-	public Persona getPresidente() {
+	public Usuario getPresidente() {
 		return presidente;
 	}
 
@@ -215,6 +229,17 @@ public class Evento implements Serializable{
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+	}
+
+
+
+	public String getEstado() {
+		return estado;
+	}
+
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 

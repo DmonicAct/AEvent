@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PERSONAS")
+@Table(name = "persona")
 public class Persona extends Usuario implements Serializable{
 	
 	@Column(length = 30, name="nombre")
@@ -31,7 +31,7 @@ public class Persona extends Usuario implements Serializable{
 	
 	@Column(name="fechaNacimiento")
 	private Date fechaNacimiento;
-
+    
 	public String getNombre() {
 		return nombre;
 	}	
@@ -80,6 +80,7 @@ public class Persona extends Usuario implements Serializable{
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
+
 
 	/**
 	 * 

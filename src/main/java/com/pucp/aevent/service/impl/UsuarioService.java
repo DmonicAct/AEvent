@@ -84,6 +84,7 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Usuario findById(Integer id) {
 		Usuario user = dao.findByIdUsuario(id);
 		user.setPassword(null);
@@ -91,6 +92,7 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public List<Usuario> findAll(Pageable page) {
 		//List<Object[]> lista2 = dao.findAll3("","",0,"","","",0);
 		//List<Object[]> lista = dao.findAll2();
@@ -165,6 +167,7 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 	}
 
 	@Override
+	@Transactional
 	public Usuario saveOut(Persona persona) {
 		persona.setRoles(null);
 		Usuario usuario = (Usuario)persona;
