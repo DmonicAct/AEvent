@@ -79,9 +79,8 @@ public class Evento implements Serializable{
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<Categoria> categorias;
 	
-	
-	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name="idLugar")
+	@JoinColumn(name="idLugar", referencedColumnName = "idLugar")
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Lugar lugar;
 	
@@ -96,7 +95,7 @@ public class Evento implements Serializable{
 	private FormularioCFP formulario;
 	
 	@Column(name="estado")
-	private String estado;
+	private Boolean estado;
 	
 	public int getIdEvento() {
 		return idEvento;
@@ -234,12 +233,12 @@ public class Evento implements Serializable{
 
 
 
-	public String getEstado() {
+	public Boolean getEstado() {
 		return estado;
 	}
 
 
-	public void setEstado(String estado) {
+	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
 

@@ -26,7 +26,7 @@ public class PersonaService implements IPersonaService{
 	@Override
 	@Transactional(readOnly=true)
 	public List<Persona> findAll() {
-		return dao.findAll();
+		return dao.findByEnabled(true);
 	}
 
 	@Override

@@ -128,6 +128,9 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 				    roles.add(role_dao.findById(entry.getId()).get());
 			 
 			usuario.setRoles( roles );
+			if(usuario.getRoles().size()==0) {
+				usuario.setEnabled(false);
+			}
 			returnedUser = dao.save(usuario);
 			if(usuario.getIdUsuario()==0) {
 				persona.setIdUsuario(returnedUser.getIdUsuario());

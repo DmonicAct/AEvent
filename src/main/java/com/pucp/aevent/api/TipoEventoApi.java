@@ -63,7 +63,6 @@ public class TipoEventoApi {
 		try {
 			List<TipoEvento> lista = this.tipoEventoService.findAll();
 			response.setResultado(lista);
-			response.setPaginacion(tipoEventoService.getPaginacion());
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {

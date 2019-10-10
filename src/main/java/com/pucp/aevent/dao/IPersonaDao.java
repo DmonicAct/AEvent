@@ -9,4 +9,6 @@ public interface IPersonaDao  extends JpaRepository <Persona, Long>{
 	public List<Persona> findAll();
 	
 	public Persona findByUsername(String username);
+	
+	public List<Persona> findByEnabled(Boolean enabled);
 }

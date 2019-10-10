@@ -10,8 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -20,7 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -40,6 +37,9 @@ public class Division implements Serializable {
     @Size(max = 255)
     @Column(name = "descripcion")
     private String descripcion;
+    
+    @Column(name="indice")
+    private Integer indice;
     
     @JsonProperty(access = Access.WRITE_ONLY)
     @JoinColumn(name = "id_formulario", referencedColumnName = "id_formulariocfp")
@@ -100,7 +100,15 @@ public class Division implements Serializable {
         this.seccionList = seccionList;
     }
 
-    @Override
+    public Integer getIndice() {
+		return indice;
+	}
+
+	public void setIndice(Integer indice) {
+		this.indice = indice;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (idDivision != null ? idDivision.hashCode() : 0);

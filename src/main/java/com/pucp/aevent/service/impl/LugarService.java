@@ -30,7 +30,7 @@ public class LugarService implements ILugarService{
 	@Override
 	@Transactional(readOnly=true)
 	public List<Lugar> findAll() {
-		return dao.findAll();
+		return dao.findByEnabled(true);
 	}
 
 	@Override 

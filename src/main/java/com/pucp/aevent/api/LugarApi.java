@@ -63,7 +63,6 @@ public class LugarApi {
 		try {
 			List<Lugar> lista = this.lugarService.findAll();
 			response.setResultado(lista);
-			response.setPaginacion(lugarService.getPaginacion());
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
@@ -87,15 +86,12 @@ public class LugarApi {
 		ResponseObject response = new ResponseObject();
 		try {
 			this.lugarService.save(lugar);
-			//response.setResultado(lista);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
-			//response.setError(this.service.getError());
 			response.setEstado(Estado.ERROR);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
 		} catch(InternalServerError e) {
-			//response.setError(this.service.getError());
 			response.setEstado(Estado.ERROR);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch(Exception e) {

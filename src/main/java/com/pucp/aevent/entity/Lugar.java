@@ -11,7 +11,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Lugar")
-public class Lugar {
+public class Lugar implements Serializable{
+	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="idLugar")
@@ -46,6 +48,9 @@ public class Lugar {
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 }

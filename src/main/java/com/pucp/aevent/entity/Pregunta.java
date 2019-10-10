@@ -9,20 +9,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 
 @Entity
 @Table(name = "pregunta")
-@NamedQueries({
-    @NamedQuery(name = "Pregunta.findAll", query = "SELECT p FROM Pregunta p")})
 public class Pregunta implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,6 +26,10 @@ public class Pregunta implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_pregunta")
     private Integer idPregunta;
+    
+    @Column(name="indice")
+    private Integer indice;
+    
     @Size(max = 50)
     @Column(name = "descripcion")
     private String descripcion;

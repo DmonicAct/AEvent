@@ -21,6 +21,7 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -63,7 +64,7 @@ public class Usuario implements Serializable {
 	inverseJoinColumns=@JoinColumn(name="idRol"),
 	uniqueConstraints= {@UniqueConstraint(columnNames= {"idUsuario", "idRol"})})
 	private List<Role> roles;
-	
+
 	public int getIdUsuario() {
 		return idUsuario;
 	}

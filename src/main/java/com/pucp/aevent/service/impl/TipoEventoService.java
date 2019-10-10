@@ -43,7 +43,7 @@ public class TipoEventoService implements ITipoEventoService{
 	public List<TipoEvento> findAll() {
 		List<TipoEvento> lista =null;
 		try {
-			lista = dao.findAll();
+			lista = dao.findByEnabled(true);
 		}catch(Exception ex) {
 			System.out.print(ex.getMessage());
 		}
