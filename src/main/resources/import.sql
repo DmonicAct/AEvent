@@ -40,13 +40,13 @@ INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (9, 5);
 INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (10, 5);
 INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (11, 5);
 
-INSERT INTO `categoria` (cod_categoria, descripcion) VALUES ('00000001', 'INTELIGENCIA ARTIFICIAL');
-INSERT INTO `categoria` (cod_categoria, descripcion) VALUES ('00000002', 'VIDEOJUEGOS');
-INSERT INTO `categoria` (cod_categoria, descripcion) VALUES ('00000003', 'TRANSFORMACION DIGITAL');
-INSERT INTO `categoria` (cod_categoria, descripcion) VALUES ('00000004', 'INTERNET DE LAS COSAS');
-INSERT INTO `categoria` (cod_categoria, descripcion) VALUES ('00000005', 'DESIGN THINKING');
-INSERT INTO `categoria` (cod_categoria, descripcion) VALUES ('00000006', 'CONSTRUCCION CIVIL');
-INSERT INTO `categoria` (cod_categoria, descripcion) VALUES ('00000007', 'EDUCACION');
+INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000001', 'INTELIGENCIA ARTIFICIAL',1);
+INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000002', 'VIDEOJUEGOS',1);
+INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000003', 'TRANSFORMACION DIGITAL',1);
+INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000004', 'INTERNET DE LAS COSAS',1);
+INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000005', 'DESIGN THINKING',1);
+INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000006', 'CONSTRUCCION CIVIL',1);
+INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000007', 'EDUCACION',1);
 
 INSERT INTO `parametro` (DESCRIPCION, ACTIVO) VALUES ('Pregunta abierta' , TRUE);
 INSERT INTO `parametro` (DESCRIPCION, ACTIVO) VALUES ('Pregunta de opcion multiple' , TRUE);

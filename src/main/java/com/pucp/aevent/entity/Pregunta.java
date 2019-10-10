@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 
 @Entity
@@ -36,7 +38,7 @@ public class Pregunta implements Serializable {
     @Column(name = "tipo_pregunta")
     private String tipoPregunta;
     
-    @JsonIgnore
+    @JsonProperty(access = Access.WRITE_ONLY)
     @JoinColumn(name = "id_seccion", referencedColumnName = "id_seccion")
     @ManyToOne
     private Seccion idSeccion;

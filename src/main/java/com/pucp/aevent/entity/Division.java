@@ -1,6 +1,7 @@
 package com.pucp.aevent.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -9,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -19,6 +22,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 @Table(name = "division")
@@ -36,22 +41,33 @@ public class Division implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
     
-    @JsonIgnore
-    @JoinColumn(name = "id_formulario", referencedColumnName = "idFormularioCFP")
+    @JsonProperty(access = Access.WRITE_ONLY)
+    @JoinColumn(name = "id_formulario", referencedColumnName = "id_formulariocfp")
     @ManyToOne
     private FormularioCFP idFormulario;
-    
-    @OneToMany(mappedBy = "idDivision",cascade = CascadeType.ALL)
+    //mappedBy = "idDivision",
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name= "id_division")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private List<Seccion> seccionList;
+    private List<Seccion> seccionList = new ArrayList<>();;
 
     public Division() {
     }
-
+    
     public Division(Integer idDivision) {
         this.idDivision = idDivision;
     }
-
+    
+    public void addSeccion(Seccion seccion) {
+        if (seccion != null) {
+           if (this.seccionList == null) {
+        	   seccionList = new ArrayList<Seccion>();          
+           }
+           seccionList.add(seccion);
+           seccion.setIdDivision(this);
+        }
+     }
+    
     public Integer getIdDivision() {
         return idDivision;
     }
@@ -80,7 +96,7 @@ public class Division implements Serializable {
         return seccionList;
     }
 
-    public void setSeccionList(List<Seccion> seccionList) {
+	public void setSeccionList(List<Seccion> seccionList) {
         this.seccionList = seccionList;
     }
 

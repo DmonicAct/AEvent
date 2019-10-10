@@ -1,15 +1,22 @@
 package com.pucp.aevent.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -19,29 +26,49 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "formulariocfp")
+//@NamedQueries({
+//    @NamedQuery(name = "Formulariocfp.findAll", query = "SELECT f FROM Formulariocfp f")})
 public class FormularioCFP implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idFormularioCFP")
-	private int idFormularioCFP;
+	@Column(name="id_formulariocfp")
+	private Integer idFormulariocfp;
 	
 	@NotEmpty(message ="no puede estar vacio")
 	@Size(min=0, max=100, message="el tamaño tiene que estar entre 6 y 20")
 	@Column( length = 100, name="titulo")
 	private String titulo;
-
-	@OneToMany(mappedBy = "idFormulario",cascade = CascadeType.ALL)
+	
+	//mappedBy = "idFormulario", 
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+	@JoinColumn(name= "id_formulariocfp")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private List<Division> divisionList;
+	private List<Division> divisionList = new ArrayList<>();;
 	
-	
-	public int getIdFormularioCFP() {
-		return idFormularioCFP;
+	 public FormularioCFP() {
+    }
+
+    public FormularioCFP(Integer idFormulariocfp) {
+        this.idFormulariocfp = idFormulariocfp;
+    }
+    
+    public void addDivision(Division division) {
+        if (division != null) {
+           if (divisionList == null) {
+        	   divisionList = new ArrayList<Division>();          
+           }
+           divisionList.add(division);
+           division.setIdFormulario(this);
+        }
+     }
+	    
+	public Integer getIdFormulariocfp() {
+		return idFormulariocfp;
 	}
 
-	public void setIdFormularioCFP(int idFormularioCFP) {
-		this.idFormularioCFP = idFormularioCFP;
+	public void setIdFormulariocfp(Integer idFormulariocfp) {
+		this.idFormulariocfp = idFormulariocfp;
 	}
 
 	public String getTitulo() {
@@ -61,8 +88,6 @@ public class FormularioCFP implements Serializable{
 	public void setDivisionList(List<Division> divisionList) {
 		this.divisionList = divisionList;
 	}
-
-
 
 	private static final long serialVersionUID = 1L;
 }

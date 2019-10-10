@@ -15,4 +15,6 @@ public interface ICategoriaDao extends JpaRepository <Categoria, Long>{
 
 	public Page<Categoria> findAll(Pageable pageable);
 	
+	public List<Categoria> findByEnabled(Boolean enabled);
+	
 }

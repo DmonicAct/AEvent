@@ -30,7 +30,8 @@ public class CategoriaService implements ICategoriaService{
 	@Override
 	@Transactional(readOnly=true)
 	public List<Categoria> findAll() {
-		return dao.findAll();
+		//return dao.findAll();
+		return dao.findByEnabled(true);
 	}
 
 	@Override 

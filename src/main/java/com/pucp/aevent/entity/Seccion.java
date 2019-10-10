@@ -1,6 +1,7 @@
 package com.pucp.aevent.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -9,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -19,6 +22,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 
 @Entity
@@ -43,23 +48,35 @@ public class Seccion implements Serializable {
     @Size(max = 255)
     @Column(name = "tipo_seccion")
     private String tipoSeccion;
-    @OneToMany(mappedBy = "idSeccion",cascade = CascadeType.ALL)
+    //mappedBy = "idSeccion",
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private List<Pregunta> preguntaList;
+    @JoinColumn(name= "id_seccion")
+    private List<Pregunta> preguntaList = new ArrayList<>();;
     
-    @JsonIgnore
+    @JsonProperty(access = Access.WRITE_ONLY)
     @JoinColumn(name = "id_division", referencedColumnName = "id_division")
     @ManyToOne
     private Division idDivision;
-
+    
     public Seccion() {
     }
 
     public Seccion(Integer idSeccion) {
         this.idSeccion = idSeccion;
     }
-
-    public Integer getIdSeccion() {
+    
+    public void addPregunta(Pregunta pregunta){
+        if (pregunta != null) {
+           if (preguntaList == null) {
+        	   preguntaList = new ArrayList<Pregunta>();          
+           }
+           preguntaList.add(pregunta);
+           pregunta.setIdSeccion(this);
+        }
+     }
+    
+	public Integer getIdSeccion() {
         return idSeccion;
     }
 

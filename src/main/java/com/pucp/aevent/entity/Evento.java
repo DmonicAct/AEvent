@@ -82,9 +82,10 @@ public class Evento implements Serializable{
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name="idLugar")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Lugar lugar;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idTipoEvento")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private TipoEvento tipoEvento;
