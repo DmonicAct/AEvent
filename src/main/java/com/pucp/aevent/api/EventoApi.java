@@ -31,7 +31,7 @@ import com.pucp.aevent.service.IEventoService;
 public class EventoApi {
 	@Autowired IEventoService service;
 	
-	@Secured({"ROLE_ORGANIZER","ROLE_ADMIN"})
+	@Secured({"ROLE_ORGANIZER"})
 	@GetMapping(path = "/evento/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> consultarEvento(@PathVariable("id")Integer id) {
 		ResponseObject response = new ResponseObject();
@@ -82,7 +82,7 @@ public class EventoApi {
 	}
 	
 	
-	@Secured({"ROLE_ORGANIZER","ROLE_ADMIN"})
+	@Secured({"ROLE_ORGANIZER"})
 	@PostMapping(path = "/evento",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> guardarEvento( @Valid @RequestBody Evento evento) {
 		ResponseObject response = new ResponseObject();

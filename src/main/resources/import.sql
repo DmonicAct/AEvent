@@ -63,7 +63,7 @@ INSERT INTO `lugar` (descripcion, estado) VALUES("CENTRO DE CONVENCIONES AEVENT"
 INSERT INTO `lugar` (descripcion, estado) VALUES("CENTRO DE CONVENCIONES SAN MARCOS SE DEFIENDE", 1);
 
 
-INSERT INTO `formulariocfp` (titulo) VALUES ("Formato de ponencia para charla magistral de software cient√≠fico");
+INSERT INTO `formulariocfp` (titulo) VALUES ("Formato de ponencia para charla magistral de software cientÌfico");
 
 INSERT INTO `division` (descripcion, id_formulario) VALUES ('Estudios',1);
 INSERT INTO `division` (descripcion, id_formulario) VALUES ('Experiencia Laboral',1);
@@ -74,5 +74,5 @@ INSERT INTO `seccion`  (descripcion,cantidad_preguntas,indice,tipo_seccion, id_d
 INSERT INTO `pregunta` (descripcion, tipo_pregunta, id_seccion) VALUES ('Explique su grado de estudios', 'PREGUNTA ABIERTA', 1);
 INSERT INTO `pregunta` (descripcion, tipo_pregunta, id_seccion) VALUES ('Detalle su labor como ponente', 'PREGUNTA ABIERTA', 2);
 
-INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_formulariocfp, id_organizador, id_tipo_evento,estado) VALUES (500, 'Charla magistral dirigida a desarrolladores de software de prop√≥sito cient√≠fico','Charla magistral dirigida a desarrolladores de software de prop√≥sito cient√≠fico', '2019-12-12', '2019-05-05', 1, 3, 1,0);
+INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_formulariocfp, id_organizador, id_tipo_evento,estado) VALUES (500, 'Charla magistral dirigida a desarrolladores de software de propÛsito cient√Ìfico','Charla magistral dirigida a desarrolladores de software de propÛsito cientÌfico', '2019-12-12', '2019-05-05', 1, 3, 1,0);
 
