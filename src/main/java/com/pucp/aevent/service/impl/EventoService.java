@@ -60,10 +60,13 @@ public class EventoService implements IEventoService{
 	@Transactional
 	public Evento save(Evento evento) {
 		Evento returnedEvento = null;
-		Persona organizador=null;
+		Persona participante=null;
 		try {
-			organizador = this.daoPersona.findByUsername(evento.getOrganizador().getUsername());
-			evento.setOrganizador(organizador);
+			participante = this.daoPersona.findByUsername(evento.getOrganizador().getUsername());
+			evento.setOrganizador(participante);
+			
+			participante = this.daoPersona.findByIdUsuario(evento.getPresidente().getIdUsuario());
+			evento.setPresidente(participante);
 			
 			returnedEvento = this.dao.save(evento);
 		}catch(Exception ex) {
