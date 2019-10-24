@@ -21,6 +21,7 @@ import org.springframework.web.client.HttpClientErrorException.BadRequest;
 import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
 import com.pucp.aevent.entity.Evento;
+import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.request_objects.PaginaRequest;
 import com.pucp.aevent.entity.response_objects.Estado;
 import com.pucp.aevent.entity.response_objects.ResponseObject;
@@ -58,10 +59,10 @@ public class EventoApi {
 	
 	@Secured({"ROLE_ORGANIZER","ROLE_PRESIDENT"})
 	@GetMapping(path = "/evento", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> consultarAllEvento(PaginaRequest page) {
+	public ResponseEntity<ResponseObject> consultarAllEvento(Persona usuario, PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {
-			List<Evento> lista = this.service.findAll(PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			List<Evento> lista = this.service.findAll(usuario, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
 			response.setResultado(lista);
 			response.setPaginacion(service.getPaginacion());
 			response.setEstado(Estado.OK);

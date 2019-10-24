@@ -23,68 +23,91 @@ import com.pucp.aevent.entity.response_objects.Paginacion;
 import com.pucp.aevent.service.IEventoService;
 
 @Service
-public class EventoService implements IEventoService{
-	
+public class EventoService implements IEventoService {
+
 	@Autowired
 	IEventoDao dao;
-	
+
 	@Autowired
 	IPersonaDao daoPersona;
-	
+
 	@Autowired
 	IFormularioCFPDao daoFormaulario;
-	
+
 	@Autowired
 	IDivisionDao daoDivision;
-	
+
 	@Autowired
 	ISeccionDao daoSeccion;
-	
+
 	@Autowired
 	IPreguntaDao daoPregunta;
-	
+
 	private Paginacion paginacion;
+
 	public Paginacion getPaginacion() {
 		return this.paginacion;
 	}
-	
+
 	private Logger logger = LoggerFactory.getLogger(EventoService.class);
-	
+
 	private Error error;
+
 	public Error getError() {
 		return this.error;
 	}
-	
-	
+
 	@Override
 	@Transactional
 	public Evento save(Evento evento) {
 		Evento returnedEvento = null;
-		Persona participante=null;
+		Persona participante = null;
 		try {
 			participante = this.daoPersona.findByUsername(evento.getOrganizador().getUsername());
 			evento.setOrganizador(participante);
-			
+
 			participante = this.daoPersona.findByIdUsuario(evento.getPresidente().getIdUsuario());
 			evento.setPresidente(participante);
-			
+
 			returnedEvento = this.dao.save(evento);
-		}catch(Exception ex) {
+		} catch (Exception ex) {
 			logger.error("Error en el sistema: " + ex.getCause());
 		}
 		return returnedEvento;
 	}
 
+//	@Override
+//	@Transactional(readOnly=true)
+//	public List<Evento> findAll(Pageable page) {
+//		Page<Evento> lista = null;
+//		this.paginacion = new Paginacion();
+//		this.paginacion.setPageable(page);
+//		try {
+//			lista = this.dao.findAll(page); 
+//			this.paginacion.setTotalRegistros(lista.getTotalElements());
+//		}catch(Exception e) {
+//			System.out.print(e.getMessage());
+//		}
+//		return lista.getContent();
+//	}
+
 	@Override
-	@Transactional(readOnly=true)
-	public List<Evento> findAll(Pageable page) {
+	@Transactional(readOnly = true)
+	public List<Evento> findAll(Persona persona, Pageable page) {
 		Page<Evento> lista = null;
+		/*
+		 * Organizador
+		 * */
+		Persona organizador = null;
+		
+		organizador = this.daoPersona.findByUsername(persona.getUsername());
+		
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
 		try {
-			lista = this.dao.findAll(page); 
+			lista = this.dao.findByOrganizador(organizador, page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.print(e.getMessage());
 		}
 		return lista.getContent();
