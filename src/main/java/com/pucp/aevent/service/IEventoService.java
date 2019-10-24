@@ -12,6 +12,7 @@ public interface IEventoService {
 	public Evento save(Evento evento);
 	public List<Evento> findAll(Pageable page);
 	public Evento findById(Integer id);
+	public List<Evento> findAllByIdPresidente(String username);
 	
 	public Paginacion getPaginacion();
 	public Error getError();
