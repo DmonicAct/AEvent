@@ -14,6 +14,7 @@ public interface IEventoService {
 	//public List<Evento> findAll(Pageable page);
 	public List<Evento> findAll(Persona usuario, Pageable page);
 	public Evento findById(Integer id);
+	public List<Evento> findAllByIdPresidente(String username);
 	
 	public Paginacion getPaginacion();
 	public Error getError();

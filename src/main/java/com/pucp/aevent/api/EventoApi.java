@@ -107,4 +107,28 @@ public class EventoApi {
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@Secured({"ROLE_ADMIN","ROLE_PRESIDENT","ROLE_ORGANIZER","ROLE_EVALUATOR","ROLE_USER"})
+	@GetMapping(path = "/evento/eventos/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarEventoByIdPresidente(@PathVariable("username")String username) {
+		ResponseObject response = new ResponseObject();
+		try {
+			List<Evento> eventos = this.service.findAllByIdPresidente(username);
+			response.setResultado(eventos);
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

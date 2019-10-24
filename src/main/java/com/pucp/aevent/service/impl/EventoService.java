@@ -18,6 +18,7 @@ import com.pucp.aevent.dao.ISeccionDao;
 import com.pucp.aevent.dao.IFormularioCFPDao;
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Persona;
+import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;
 import com.pucp.aevent.service.IEventoService;
@@ -118,4 +119,18 @@ public class EventoService implements IEventoService {
 	public Evento findById(Integer id) {
 		return this.dao.findByIdEvento(id);
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Evento> findAllByIdPresidente(String username) {
+		List<Evento> lista = null;
+		try {
+			lista = this.dao.findAllByPresidente(username); 
+		}catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista;
+	}
+	
+	
 }
