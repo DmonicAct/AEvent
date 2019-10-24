@@ -65,8 +65,8 @@ INSERT INTO `lugar` (descripcion, estado) VALUES("CENTRO DE CONVENCIONES SAN MAR
 
 INSERT INTO `formulariocfp` (titulo) VALUES ("Formato de ponencia para charla magistral de software científico");
 
-INSERT INTO `division` (descripcion, id_formulario) VALUES ('Estudios',1);
-INSERT INTO `division` (descripcion, id_formulario) VALUES ('Experiencia Laboral',1);
+INSERT INTO `division` (descripcion, indice, id_formulariocfp) VALUES ('Estudios',1,1);
+INSERT INTO `division` (descripcion, indice, id_formulariocfp) VALUES ('Experiencia Laboral',1,1);
 
 INSERT INTO `seccion`  (descripcion,cantidad_preguntas,indice,tipo_seccion, id_division) VALUES ('FORMULARIO 1',1,1,'PREGUNTA ABIERTA',1);
 INSERT INTO `seccion`  (descripcion,cantidad_preguntas,indice,tipo_seccion, id_division) VALUES ('FORMULARIO 2',1,1,'PREGUNTA ABIERTA',2);
@@ -75,4 +75,7 @@ INSERT INTO `pregunta` (descripcion, tipo_pregunta, id_seccion) VALUES ('Expliqu
 INSERT INTO `pregunta` (descripcion, tipo_pregunta, id_seccion) VALUES ('Detalle su labor como ponente', 'PREGUNTA ABIERTA', 2);
 
 INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_formulariocfp, id_organizador, id_tipo_evento,estado) VALUES (500, 'Charla magistral dirigida a desarrolladores de software de propósito cientÃífico','Charla magistral dirigida a desarrolladores de software de propósito científico', '2019-12-12', '2019-05-05', 1, 3, 1,0);
+
+INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('Fase numero 1','2019-06-06', '2019-05-05',1);
+INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('Fase numero 2','2019-12-12', '2019-06-06',1);
 

@@ -42,11 +42,12 @@ public class Division implements Serializable {
     private Integer indice;
     
     @JsonProperty(access = Access.WRITE_ONLY)
-    @JoinColumn(name = "id_formulario", referencedColumnName = "id_formulariocfp")
+    @JoinColumn(name = "id_formulariocfp")
     @ManyToOne
     private FormularioCFP idFormulario;
+    
     //mappedBy = "idDivision",
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name= "id_division")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<Seccion> seccionList = new ArrayList<>();;
@@ -64,7 +65,7 @@ public class Division implements Serializable {
         	   seccionList = new ArrayList<Seccion>();          
            }
            seccionList.add(seccion);
-           seccion.setIdDivision(this);
+           seccion.setDivision(this);
         }
      }
     

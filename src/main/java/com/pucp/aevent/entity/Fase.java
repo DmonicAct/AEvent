@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 @Table(name = "Fase")
@@ -35,9 +37,9 @@ public class Fase implements Serializable {
 	@Column(name="fechaFin")
 	private Date fechaFin;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@JoinColumn(name="idEvento")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToOne
     private Evento eventos;
 
 	public Integer getIdFase() {

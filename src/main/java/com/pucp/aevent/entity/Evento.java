@@ -1,6 +1,7 @@
 package com.pucp.aevent.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,11 +20,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "Evento")
+@NamedQueries({
+    @NamedQuery(name = "Evento.findAll", query = "SELECT e FROM Evento e")})
 public class Evento implements Serializable{
 	
 	@Id
@@ -93,6 +99,11 @@ public class Evento implements Serializable{
 	@JoinColumn(name="idFormularioCFP")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private FormularioCFP formulario;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name= "idEvento")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private List<Fase> fases = new ArrayList<>();
 	
 	@Column(name="estado")
 	private Boolean estado;

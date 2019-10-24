@@ -26,31 +26,37 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 public class Seccion implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_seccion")
     private Integer idSeccion;
+    
     @Column(name = "cantidad_preguntas")
     private Integer cantidadPreguntas;
+    
     @Size(max = 255)
     @Column(name = "descripcion")
     private String descripcion;
+    
     @Column(name = "indice")
     private Integer indice;
+    
     @Size(max = 255)
     @Column(name = "tipo_seccion")
     private String tipoSeccion;
+    
     //mappedBy = "idSeccion",
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name= "id_seccion")
     private List<Pregunta> preguntaList = new ArrayList<>();;
     
     @JsonProperty(access = Access.WRITE_ONLY)
-    @JoinColumn(name = "id_division", referencedColumnName = "id_division")
+    @JoinColumn(name = "id_division")
     @ManyToOne
-    private Division idDivision;
+    private Division division;
     
     public Seccion() {
     }
@@ -117,12 +123,12 @@ public class Seccion implements Serializable {
         this.preguntaList = preguntaList;
     }
 
-    public Division getIdDivision() {
-        return idDivision;
+    public Division getDivision() {
+        return division;
     }
 
-    public void setIdDivision(Division idDivision) {
-        this.idDivision = idDivision;
+    public void setDivision(Division idDivision) {
+        this.division = idDivision;
     }
 
     @Override
