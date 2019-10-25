@@ -94,7 +94,7 @@ public class EventoService implements IEventoService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Evento> findAll(Persona persona, Pageable page) {
+	public List<Evento> findAllOrganizador(Persona persona, Pageable page) {
 		Page<Evento> lista = null;
 		/*
 		 * Organizador
@@ -113,24 +113,33 @@ public class EventoService implements IEventoService {
 		}
 		return lista.getContent();
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Evento> findAllByPresidente(Persona persona, Pageable page) {
+		Page<Evento> lista = null;
+		/*
+		 * Presidente
+		 * */
+		Persona presidente = null;
+		
+		presidente = this.daoPersona.findByUsername(persona.getUsername());
+		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = this.dao.findByPresidente(presidente, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Evento findById(Integer id) {
 		return this.dao.findByIdEvento(id);
 	}
-	
-	@Override
-	@Transactional(readOnly = true)
-	public List<Evento> findAllByIdPresidente(String username) {
-		List<Evento> lista = null;
-		try {
-			lista = this.dao.findAllByPresidente(username); 
-		}catch(Exception e) {
-			System.out.print(e.getMessage());
-		}
-		return lista;
-	}
-	
-	
+		
 }

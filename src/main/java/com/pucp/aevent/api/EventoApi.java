@@ -57,12 +57,12 @@ public class EventoApi {
 	}
 	
 	
-	@Secured({"ROLE_ORGANIZER","ROLE_PRESIDENT"})
-	@GetMapping(path = "/evento", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> consultarAllEvento(Persona usuario, PaginaRequest page) {
+	@Secured({"ROLE_ORGANIZER"})
+	@GetMapping(path = "/evento/organizador", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarAllEventoByOrganizador(Persona usuario, PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {
-			List<Evento> lista = this.service.findAll(usuario, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			List<Evento> lista = this.service.findAllOrganizador(usuario, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
 			response.setResultado(lista);
 			response.setPaginacion(service.getPaginacion());
 			response.setEstado(Estado.OK);
@@ -82,15 +82,14 @@ public class EventoApi {
 		}
 	}
 	
-	
-	@Secured({"ROLE_ORGANIZER"})
-	@PostMapping(path = "/evento",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> guardarEvento( @Valid @RequestBody Evento evento) {
+	@Secured({"ROLE_PRESIDENT"})
+	@GetMapping(path = "/evento/presidente", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarAllEventoByPresidente(Persona usuario, PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {
-			Evento eventoResult;
-			eventoResult = this.service.save(evento);
-			response.setResultado(eventoResult);
+			List<Evento> lista = this.service.findAllByPresidente(usuario, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			response.setResultado(lista);
+			response.setPaginacion(service.getPaginacion());
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
@@ -108,13 +107,14 @@ public class EventoApi {
 		}
 	}
 	
-	@Secured({"ROLE_ADMIN","ROLE_PRESIDENT","ROLE_ORGANIZER","ROLE_EVALUATOR","ROLE_USER"})
-	@GetMapping(path = "/evento/eventos/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> consultarEventoByIdPresidente(@PathVariable("username")String username) {
+	@Secured({"ROLE_ORGANIZER"})
+	@PostMapping(path = "/evento",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> guardarEvento( @Valid @RequestBody Evento evento) {
 		ResponseObject response = new ResponseObject();
 		try {
-			List<Evento> eventos = this.service.findAllByIdPresidente(username);
-			response.setResultado(eventos);
+			Evento eventoResult;
+			eventoResult = this.service.save(evento);
+			response.setResultado(eventoResult);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
