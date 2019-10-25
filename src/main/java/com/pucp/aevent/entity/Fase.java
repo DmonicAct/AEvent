@@ -7,7 +7,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -37,11 +35,11 @@ public class Fase implements Serializable {
 	@Column(name="fechaFin")
 	private Date fechaFin;
 	
-	@JsonProperty(access = Access.WRITE_ONLY)
-	@JoinColumn(name="idEvento")
 	@ManyToOne
-    private Evento eventos;
-
+    @JsonProperty(access = Access.WRITE_ONLY)
+    @JoinColumn(name = "idEvento", nullable = false, updatable = false)
+    private Evento evento;
+	
 	public Integer getIdFase() {
 		return idFase;
 	}
@@ -52,13 +50,15 @@ public class Fase implements Serializable {
 	}
 
 
-	public Evento getEventos() {
-		return eventos;
+	
+
+	public Evento getEvento() {
+		return evento;
 	}
 
 
-	public void setEventos(Evento eventos) {
-		this.eventos = eventos;
+	public void setEvento(Evento evento) {
+		this.evento = evento;
 	}
 
 

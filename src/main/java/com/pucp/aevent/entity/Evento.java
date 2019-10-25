@@ -100,10 +100,9 @@ public class Evento implements Serializable{
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private FormularioCFP formulario;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name= "idEvento")
+	@OneToMany(fetch=FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "evento")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private List<Fase> fases = new ArrayList<>();
+    private List<Fase> fases;
 	
 	@Column(name="estado")
 	private Boolean estado;
@@ -242,6 +241,16 @@ public class Evento implements Serializable{
 		this.titulo = titulo;
 	}
 
+
+
+	public List<Fase> getFases() {
+		return fases;
+	}
+
+
+	public void setFases(List<Fase> fases) {
+		this.fases = fases;
+	}
 
 
 	public Boolean getEstado() {
