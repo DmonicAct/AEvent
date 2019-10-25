@@ -74,11 +74,16 @@ INSERT INTO `seccion`  (descripcion,cantidad_preguntas,indice,tipo_seccion, id_d
 INSERT INTO `pregunta` (descripcion, tipo_pregunta, id_seccion) VALUES ('Explique su grado de estudios', 'PREGUNTA ABIERTA', 1);
 INSERT INTO `pregunta` (descripcion, tipo_pregunta, id_seccion) VALUES ('Detalle su labor como ponente', 'PREGUNTA ABIERTA', 2);
 
-INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_formulariocfp, id_organizador, id_tipo_evento,estado) VALUES (500, 'Charla magistral dirigida a desarrolladores de software de propósito cientÃífico','Charla magistral dirigida a desarrolladores de software de propósito científico', '2019-12-12', '2019-05-05', 1, 3, 1,0);
+INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_formulariocfp, id_organizador, id_tipo_evento,estado, id_presidente, id_lugar) VALUES (500, 'Charla magistral dirigida a desarrolladores de software de propósito cientÃífico','Charla magistral dirigida a desarrolladores de software de propósito científico', '2019-12-12', '2019-05-05', 1, 3, 1,0,2,1);
 
 INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('Fase numero 1','2019-06-06', '2019-05-05',1);
 INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('Fase numero 2','2019-12-12', '2019-06-06',1);
 
+INSERT INTO `criterio` (descripcion, id_fase) VALUES ('Criterio 1-1',1);
+INSERT INTO `criterio` (descripcion, id_fase) VALUES ('Criterio 1-2',1);
+INSERT INTO `criterio` (descripcion, id_fase) VALUES ('Criterio 2-1',2);
+INSERT INTO `criterio` (descripcion, id_fase) VALUES ('Criterio 2-2',2);
+INSERT INTO `criterio` (descripcion, id_fase) VALUES ('Criterio 2-3',2);
 
 
 ///////TRIGGERS

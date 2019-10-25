@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 @Table(name = "Criterio")
@@ -25,11 +27,15 @@ public class Criterio implements Serializable {
 	@Column(name="descripcion")
 	private String descripcion;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_fase")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	//@ManyToOne(fetch=FetchType.LAZY)
+	//@JoinColumn(name="id_fase")
+	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    //private Fase fase;
+	
+	@ManyToOne
+    @JsonProperty(access = Access.WRITE_ONLY)
+    @JoinColumn(name = "idFase", nullable = false, updatable = false)
     private Fase fase;
-
 
 	public Integer getIdCriterio() {
 		return idCriterio;
