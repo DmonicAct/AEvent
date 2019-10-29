@@ -41,6 +41,10 @@ public class PersonaService implements IPersonaService{
 		return this.dao.findByUsername(username);
 	}
 	
-	
+	@Override
+	@Transactional(readOnly=true)
+	public Boolean existsByDni(String dni) {
+		return this.dao.existsByDni(dni);
+	}
 
 }

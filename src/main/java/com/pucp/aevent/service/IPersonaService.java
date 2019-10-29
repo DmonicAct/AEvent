@@ -12,4 +12,6 @@ public interface IPersonaService {
 	public void save(Persona persona);
 	
 	public Persona findByUsername(String username);
+	
+	public Boolean existsByDni(String dni);
 }

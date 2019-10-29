@@ -22,6 +22,7 @@ import org.springframework.web.client.HttpServerErrorException.InternalServerErr
 
 import com.pucp.aevent.entity.response_objects.Estado;
 import com.pucp.aevent.entity.response_objects.ResponseObject;
+import com.pucp.aevent.service.IPersonaService;
 import com.pucp.aevent.service.IUsuarioService;
 import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.Usuario;
@@ -34,6 +35,9 @@ public class UsuarioApi {
 	
 	@Autowired
 	private IUsuarioService usuarioService;
+	
+	@Autowired
+	private IPersonaService personaService;
 	
 	@Secured({"ROLE_ADMIN"})
 	@GetMapping(path = "/usuarios/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -141,6 +145,29 @@ public class UsuarioApi {
 			ResponseObject response = new ResponseObject();
 			try {
 				Boolean resultado= this.usuarioService.existsByEmail(email);
+				response.setResultado(resultado);
+				response.setEstado(Estado.OK);
+				return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+			} catch(BadRequest e) {
+				//response.setError(this.service.getError());
+				response.setEstado(Estado.ERROR);
+				return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+			} catch(InternalServerError e) {
+				//response.setError(this.service.getError());
+				response.setEstado(Estado.ERROR);
+				return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+			} catch(Exception e) {
+				response.setError(1, "Error Interno", e.getMessage());
+				response.setEstado(Estado.ERROR);
+				return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		}
+		
+		@GetMapping(path = "/usuarios/out/dni/{dni}", produces = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<ResponseObject> consultarDni(@PathVariable("dni") String dni) {
+			ResponseObject response = new ResponseObject();
+			try {
+				Boolean resultado= this.personaService.existsByDni(dni);
 				response.setResultado(resultado);
 				response.setEstado(Estado.OK);
 				return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
