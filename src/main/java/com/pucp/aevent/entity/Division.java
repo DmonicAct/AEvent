@@ -7,6 +7,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -43,11 +45,10 @@ public class Division implements Serializable {
     
     @JsonProperty(access = Access.WRITE_ONLY)
     @JoinColumn(name = "id_formulariocfp")
-    @ManyToOne
     private FormularioCFP idFormulario;
     
     //mappedBy = "idDivision",
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name= "id_division")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<Seccion> seccionList = new ArrayList<>();;
@@ -108,7 +109,7 @@ public class Division implements Serializable {
 	public void setIndice(Integer indice) {
 		this.indice = indice;
 	}
-
+	
 	@Override
     public int hashCode() {
         int hash = 0;

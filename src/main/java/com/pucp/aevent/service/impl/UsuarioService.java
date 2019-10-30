@@ -188,7 +188,7 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 			}else {
 				throw new Exception("Password vacio");
 			}
-			long id_role_basic = UtilConstanst.ROLE_USER;
+			long id_role_basic = UtilConstanst.ROLE_DEFAULT;
 			List<Role> roles = new ArrayList<Role>();
 			roles.add(role_dao.findById(id_role_basic).get());
 			usuario.setRoles( roles );

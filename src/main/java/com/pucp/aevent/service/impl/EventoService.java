@@ -17,8 +17,8 @@ import com.pucp.aevent.dao.IPreguntaDao;
 import com.pucp.aevent.dao.ISeccionDao;
 import com.pucp.aevent.dao.IFormularioCFPDao;
 import com.pucp.aevent.entity.Evento;
+import com.pucp.aevent.entity.FormularioCFP;
 import com.pucp.aevent.entity.Persona;
-import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;
 import com.pucp.aevent.service.IEventoService;
@@ -69,7 +69,7 @@ public class EventoService implements IEventoService {
 
 			participante = this.daoPersona.findByIdUsuario(evento.getPresidente().getIdUsuario());
 			evento.setPresidente(participante);
-
+			
 			returnedEvento = this.dao.save(evento);
 		} catch (Exception ex) {
 			logger.error("Error en el sistema: " + ex.getCause());

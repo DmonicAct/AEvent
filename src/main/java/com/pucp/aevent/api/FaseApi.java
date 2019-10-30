@@ -32,7 +32,7 @@ import com.pucp.aevent.service.IFaseService;
 public class FaseApi {
 	@Autowired IFaseService service;
 	
-	@Secured({"ROLE_ORGANIZER","ROLE_PRESIDENT"}) //así se pone??
+	@Secured({"ROLE_ORGANIZER","ROLE_DEFAULT"}) //así se pone??
 	@GetMapping(path = "/fase", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> consultarAllFaseByEvento(Evento evento) {
 		ResponseObject response = new ResponseObject();

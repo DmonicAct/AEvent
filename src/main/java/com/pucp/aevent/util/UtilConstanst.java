@@ -16,15 +16,11 @@ public class UtilConstanst {
 	//Roles
 
 	public static final long ROLE_ADMIN = 1;
-	public static final long ROLE_PRESIDENT = 2;
-	public static final long ROLE_ORGANIZER = 3;
-	public static final long ROLE_EVALUATOR = 4;
-	public static final long ROLE_USER = 5;
+	public static final long ROLE_ORGANIZER = 2;
+	public static final long ROLE_DEFAULT= 2;
 	
 	public static final String NAME_ROLE_ADMIN = "ROLE_ADMIN";
-	public static final String NAME_ROLE_PRESIDENT = "ROLE_PRESIDENT";
 	public static final String NAME_ROLE_ORGANIZER = "ROLE_ORGANIZER";
-	public static final String NAME_ROLE_EVALUATOR = "ROLE_EVALUATOR";
-	public static final String NAME_ROLE_USER = "ROLE_USER";
+	public static final String NAME_ROLE_DAFAULT = "ROLE_DAFAULT";
 
 }

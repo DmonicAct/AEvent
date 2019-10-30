@@ -32,7 +32,7 @@ import com.pucp.aevent.service.ICriterioService;
 public class CriterioApi {
 	@Autowired ICriterioService service;
 	
-	@Secured({"ROLE_ORGANIZER","ROLE_PRESIDENT"})
+	@Secured({"ROLE_ORGANIZER","ROLE_DEFAULT"})
 	@GetMapping(path = "/criterio", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> consultarAllCriterioByFase(Fase fase) {
 		ResponseObject response = new ResponseObject();

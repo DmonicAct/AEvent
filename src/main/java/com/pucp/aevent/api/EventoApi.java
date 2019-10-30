@@ -82,7 +82,7 @@ public class EventoApi {
 		}
 	}
 	
-	@Secured({"ROLE_PRESIDENT"})
+	@Secured({"ROLE_DEFAULT"})
 	@GetMapping(path = "/evento/presidente", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> consultarAllEventoByPresidente(Persona usuario, PaginaRequest page) {
 		ResponseObject response = new ResponseObject();

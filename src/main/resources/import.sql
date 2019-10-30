@@ -23,22 +23,20 @@ INSERT INTO `persona` (apellido_mat, apellido_pat, dni, nombre, id_usuario) VALU
 INSERT INTO `persona` (apellido_mat, apellido_pat, dni, nombre, id_usuario) VALUES ( 'Opress','Qwerty', 23441234, 'Trevor', 11);
 
 INSERT INTO `role` (rol_activo,descripcion) VALUES (1,'ROLE_ADMIN');
-INSERT INTO `role` (rol_activo,descripcion) VALUES (1,'ROLE_PRESIDENT');
 INSERT INTO `role` (rol_activo,descripcion) VALUES (1,'ROLE_ORGANIZER');
-INSERT INTO `role` (rol_activo,descripcion) VALUES (1,'ROLE_EVALUATOR');
-INSERT INTO `role` (rol_activo,descripcion) VALUES (1,'ROLE_USER');
+INSERT INTO `role` (rol_activo,descripcion) VALUES (1,'ROLE_DEFAULT');
 
 INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (1, 1);
-INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (2, 2);
-INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (3, 3);
-INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (4, 4);
-INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (5, 5);
-INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (6, 5);
-INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (7, 5);
-INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (8, 5);
-INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (9, 5);
-INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (10, 5);
-INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (11, 5);
+INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (2, 3);
+INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (3, 2);
+INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (4, 3);
+INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (5, 3);
+INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (6, 3);
+INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (7, 3);
+INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (8, 3);
+INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (9, 3);
+INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (10, 3);
+INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (11, 3);
 
 INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000001', 'INTELIGENCIA ARTIFICIAL',1);
 INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000002', 'VIDEOJUEGOS',1);
