@@ -25,17 +25,17 @@ public class RespuestaFase implements Serializable{
 
 	@ManyToOne
     @JsonProperty(access = Access.WRITE_ONLY)
-    @JoinColumn(name = "idFase", nullable = false, updatable = false)
+    @JoinColumn(name = "idFase")
     private Fase fase;
 	
 	@ManyToOne
     @JsonProperty(access = Access.WRITE_ONLY)
-    @JoinColumn(name = "idCriterio", nullable = false, updatable = false)
+    @JoinColumn(name = "idCriterio")
     private Criterio criterio;
 	
 	@ManyToOne
     @JsonProperty(access = Access.WRITE_ONLY)
-    @JoinColumn(name = "idOpcionRespuestaCriterio", nullable = false, updatable = false)
+    @JoinColumn(name = "idOpcionRespuestaCriterio")
     private OpcionRespuestaCriterio opcionRespuesta;
 				
 	public Fase getFase() {

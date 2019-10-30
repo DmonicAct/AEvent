@@ -42,7 +42,7 @@ public class Criterio implements Serializable {
 	
 	@ManyToOne
     @JsonProperty(access = Access.WRITE_ONLY)
-    @JoinColumn(name = "idFase", nullable = false, updatable = false)
+    @JoinColumn(name = "id_fase")
     private Fase fase;
 
 	public TipoCriterio getTipoCriterio() {

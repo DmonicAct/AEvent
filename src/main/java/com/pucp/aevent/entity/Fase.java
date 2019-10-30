@@ -45,11 +45,11 @@ public class Fase implements Serializable {
 	
 	@ManyToOne
     @JsonProperty(access = Access.WRITE_ONLY)
-    @JoinColumn(name = "idEvento", nullable = false, updatable = false)
+    @JoinColumn(name = "id_evento")
     private Evento evento;
 	
 	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name="idCriterio")
+	@JoinColumn(name="id_fase")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<Criterio> criterios;
 	
