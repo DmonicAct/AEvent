@@ -13,4 +13,6 @@ public interface IFaseService {
 	public void save(Fase fase);
 	
 	public List<Fase> findByEvento(Evento evento);
+	
+	public void delete(Fase fase);
 }

@@ -41,7 +41,10 @@ public class CriterioService implements ICriterioService{
 	public List<Criterio> findByFase(Fase fase) {
 		return this.dao.findByFase(fase);
 	}
-	
-	
+
+	@Override
+	public void delete(Criterio criterio) {
+		this.dao.delete(criterio);		
+	}
 
 }
