@@ -38,7 +38,7 @@ public class FormularioCFP implements Serializable{
 	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinColumn(name= "id_formulariocfp")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private List<Division> divisionList = new ArrayList<>();;
+	private List<Division> divisionList = new ArrayList<>();
 	
 	public FormularioCFP() {
     }

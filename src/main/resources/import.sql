@@ -1,4 +1,4 @@
-INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo) VALUES ('admin','$2a$10$Fxm6q26fOKOQOh/GbXw03uL6XyiQd3157s9JhWlzQ6S911BUFLLCy',1,'admin@aevent.com');
+	INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo) VALUES ('admin','$2a$10$Fxm6q26fOKOQOh/GbXw03uL6XyiQd3157s9JhWlzQ6S911BUFLLCy',1,'admin@aevent.com');
 INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo) VALUES ('user_pres','$2a$10$eKmvl/ZziTfER4TDMY/QVe51oNvqNlDF7Olk3mDRJaSCVIy0u8fhG',1,'presidente@aevent.com');
 INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo) VALUES ('user_orga','$2a$10$wXn0WmXu5xkb18RsLpJF9uEv4Afk4EoBRGt2Vo4MToJ4lYx9XNJSW',1,'organizator@aevent.com');
 INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo) VALUES ('user_eval','$2a$10$Fy6bJZM3fyag2OVAQcuTwuQSM1tc74dr8om6LNKe5xtJIc.i46r5y',1,'evaluator@aevent.com');
@@ -80,12 +80,19 @@ INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('F
 INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('Fase EvaluaciÃ³n','2019-11-15', '2019-11-10',1);
 INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('Fase Mejora','2019-11-20', '2019-11-15',1);
 
-INSERT INTO `criterio` (descripcion, id_fase) VALUES ('Criterio 1-1',1);
-INSERT INTO `criterio` (descripcion, id_fase) VALUES ('Criterio 1-2',1);
+INSERT INTO `tipo_criterio` (descripcion) VALUES ('Respuesta numérica');
+INSERT INTO `tipo_criterio` (descripcion) VALUES ('Respuesta múltiple');
+INSERT INTO `tipo_criterio` (descripcion) VALUES ('Pregunta de selección');
+INSERT INTO `tipo_criterio` (descripcion) VALUES ('Pregunta cerrada');
 
-INSERT INTO `criterio` (descripcion, id_fase) VALUES ('Criterio 2-1',2);
-INSERT INTO `criterio` (descripcion, id_fase) VALUES ('Criterio 2-2',2);
-INSERT INTO `criterio` (descripcion, id_fase) VALUES ('Criterio 2-3',2);
+
+INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Nivel de detalle de la tematica",3,3);
+
+
+INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Alto",1);
+INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Medio",1);
+INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Bajo",1);
+
 
 
 ///////TRIGGERS

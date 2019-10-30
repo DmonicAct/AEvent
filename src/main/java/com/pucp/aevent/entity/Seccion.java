@@ -57,7 +57,7 @@ public class Seccion implements Serializable {
     @JoinColumn(name = "id_division")
     @ManyToOne
     private Division division;
-    
+        
     public Seccion() {
     }
 
