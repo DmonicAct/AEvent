@@ -81,7 +81,7 @@ public class CriterioApi {
 		}
 	}
 	
-	@Secured({"ROLE_ADMIN"})
+	@Secured({"ROLE_ORGANIZER"})
 	@PostMapping(path = "/criterio/eliminar",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> eliminarCriterio( @Valid @RequestBody Criterio criterio) {
 		ResponseObject response = new ResponseObject();
