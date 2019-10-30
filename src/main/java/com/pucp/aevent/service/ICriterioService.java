@@ -13,4 +13,6 @@ public interface ICriterioService {
 	public void save(Criterio criterio);
 	
 	public List<Criterio> findByFase(Fase fase);
+	
+	public void delete(Criterio criterio);
 }

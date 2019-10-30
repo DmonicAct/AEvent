@@ -41,7 +41,10 @@ public class FaseService implements IFaseService{
 	public List<Fase> findByEvento(Evento evento) {
 		return this.dao.findByEvento(evento);
 	}
-	
-	
 
+	@Override
+	public void delete(Fase fase) {
+		this.dao.delete(fase);
+	}
+	
 }
