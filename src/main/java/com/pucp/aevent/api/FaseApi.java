@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -81,12 +82,13 @@ public class FaseApi {
 	}
 	
 	@Secured({"ROLE_ORGANIZER"})
-	@PostMapping(path = "/fase/eliminar",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> eliminarFase( @Valid @RequestBody Fase fase) {
+	@DeleteMapping(path = "/fase/eliminar/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> eliminarFase( @PathVariable("id") Long id) {
 		ResponseObject response = new ResponseObject();
 		try {
-			this.service.delete(fase);
-			//response.setResultado();
+			//Fase fase = this.service.findByIdFase(id);
+			this.service.delete(id);	
+				//response.setResultado();
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {

@@ -12,4 +12,7 @@ public interface IFaseDao  extends JpaRepository <Fase, Long>{
 	
 	public List<Fase> findByIdEvento(Evento evento);
 	
+	public Fase findByIdFase(Integer idFase);
+	
+	public Fase deleteByIdFase(Integer idFase);
 }
