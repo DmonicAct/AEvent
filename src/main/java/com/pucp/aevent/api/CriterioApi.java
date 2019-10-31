@@ -31,7 +31,8 @@ import com.pucp.aevent.service.ICriterioService;
 @RestController
 @RequestMapping("/api")
 public class CriterioApi {
-	@Autowired ICriterioService service;
+	@Autowired 
+	ICriterioService service;
 	
 	@Secured({"ROLE_ORGANIZER","ROLE_DEFAULT"})
 	@GetMapping(path = "/criterio", produces = MediaType.APPLICATION_JSON_VALUE)

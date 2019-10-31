@@ -39,7 +39,7 @@ public class CriterioService implements ICriterioService{
 	@Override
 	@Transactional(readOnly=true)
 	public List<Criterio> findByFase(Fase fase) {
-		return this.dao.findByFase(fase);
+		return this.dao.findByIdFase(fase);
 	}
 
 	@Override
