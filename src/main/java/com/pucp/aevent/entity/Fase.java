@@ -29,7 +29,7 @@ public class Fase implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idFase")
-	private Integer idFase;
+	private Long idFase;
 	
 	@Column(name="descripcion")
 	private String descripcion;
@@ -49,12 +49,12 @@ public class Fase implements Serializable {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<Criterio> criterios;
 	
-	public Integer getIdFase() {
+	public Long getIdFase() {
 		return idFase;
 	}
 
 
-	public void setIdFase(Integer idFase) {
+	public void setIdFase(Long idFase) {
 		this.idFase = idFase;
 	}
 

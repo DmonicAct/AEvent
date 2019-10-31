@@ -43,8 +43,20 @@ public class FaseService implements IFaseService{
 	}
 
 	@Override
-	public void delete(Fase fase) {
-		this.dao.delete(fase);
+	@Transactional
+	public void delete(Long fase) {
+		try {
+			this.dao.deleteById(fase);
+		}catch(Exception e) {
+			System.out.println(e.getCause());
+			System.out.println(e.getMessage());
+		}
+		
+	}
+
+	@Override
+	public Fase findByIdFase(Integer id) {
+		return this.dao.findByIdFase(id);
 	}
 	
 }
