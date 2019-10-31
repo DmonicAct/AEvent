@@ -1,8 +1,6 @@
 package com.pucp.aevent.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -33,6 +30,7 @@ public class Criterio implements Serializable {
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idTipoCriterio", referencedColumnName = "idTipoCriterio")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private TipoCriterio tipoCriterio;
 	
 	//@ManyToOne(fetch=FetchType.LAZY)
@@ -40,10 +38,11 @@ public class Criterio implements Serializable {
 	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     //private Fase fase;
 	
-	@ManyToOne
+	
     @JsonProperty(access = Access.WRITE_ONLY)
     @JoinColumn(name = "id_fase")
-    private Fase fase;
+    @ManyToOne
+    private Fase idFase;
 
 	public TipoCriterio getTipoCriterio() {
 		return tipoCriterio;
@@ -71,6 +70,15 @@ public class Criterio implements Serializable {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public Fase getIdFase() {
+		return idFase;
+	}
+
+
+	public void setIdFase(Fase idFase) {
+		this.idFase = idFase;
 	}
 
 	/**

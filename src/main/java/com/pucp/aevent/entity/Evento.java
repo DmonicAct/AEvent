@@ -206,14 +206,14 @@ public class Evento implements Serializable {
 		this.titulo = titulo;
 	}
 
-//	public List<Fase> getFases() {
-//		return fases;
-//	}
-//
-//
-//	public void setFases(List<Fase> fases) {
-//		this.fases = fases;
-//	}
+	public List<Fase> getFases() {
+		return fases;
+	}
+
+
+	public void setFases(List<Fase> fases) {
+		this.fases = fases;
+	}
 
 	public Boolean getEstado() {
 		return estado;

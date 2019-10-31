@@ -3,6 +3,7 @@ package com.pucp.aevent.entity;
 import com.pucp.aevent.entity.Evento;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -43,15 +44,15 @@ public class Fase implements Serializable {
 	@Column(name="fechaFin")
 	private Date fechaFin;
 	
-	@ManyToOne
     @JsonProperty(access = Access.WRITE_ONLY)
     @JoinColumn(name = "id_evento")
-    private Evento evento;
+    @ManyToOne
+    private Evento idEvento;
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_fase")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private List<Criterio> criterios;
+    private List<Criterio> criterios  = new ArrayList<>();
 	
 	public Integer getIdFase() {
 		return idFase;
@@ -62,13 +63,16 @@ public class Fase implements Serializable {
 		this.idFase = idFase;
 	}
 
-	public Evento getEvento() {
-		return evento;
+
+
+
+	public Evento getIdEvento() {
+		return idEvento;
 	}
 
 
-	public void setEvento(Evento evento) {
-		this.evento = evento;
+	public void setIdEvento(Evento idEvento) {
+		this.idEvento = idEvento;
 	}
 
 
