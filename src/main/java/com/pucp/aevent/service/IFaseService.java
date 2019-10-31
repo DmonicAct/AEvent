@@ -14,7 +14,7 @@ public interface IFaseService {
 	
 	public List<Fase> findByEvento(Evento evento);
 	
-	public Fase findByIdFase(Integer id);
+	public Fase findByIdFase(Long id);
 	
 	public void delete(Long fase);
 }

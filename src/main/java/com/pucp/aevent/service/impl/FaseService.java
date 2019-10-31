@@ -55,7 +55,7 @@ public class FaseService implements IFaseService{
 	}
 
 	@Override
-	public Fase findByIdFase(Integer id) {
+	public Fase findByIdFase(Long id) {
 		return this.dao.findByIdFase(id);
 	}
 	
