@@ -91,6 +91,8 @@ INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Alto
 INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Medio",1);
 INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Bajo",1);
 
+INSERT INTO `persona_comite` (id_evento, id_usuario) values (1,1);
+INSERT INTO `persona_comite` (id_evento, id_usuario) values (1,2);
 
 
 ///////TRIGGERS
