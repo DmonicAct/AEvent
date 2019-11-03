@@ -46,7 +46,7 @@ public class Fase implements Serializable {
 	private Date fechaFin;
 	
     @JsonProperty(access = Access.WRITE_ONLY)
-    @JoinColumn(name = "id_evento")
+    @JoinColumn(name = "idEvento")
     @ManyToOne
     private Evento idEvento;
     
@@ -60,22 +60,21 @@ public class Fase implements Serializable {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<Criterio> criterios  = new ArrayList<>();
 	
+	
+	public Evento getIdEvento() {
+		return idEvento;
+	}
+
+	public void setIdEvento(Evento idEvento) {
+		this.idEvento = idEvento;
+	}
+
 	public Long getIdFase() {
 		return idFase;
 	}
 
 	public void setIdFase(Long idFase) {
 		this.idFase = idFase;
-	}
-
-
-	public Evento getIdEvento() {
-		return idEvento;
-	}
-
-
-	public void setIdEvento(Evento idEvento) {
-		this.idEvento = idEvento;
 	}
 
 
