@@ -63,7 +63,9 @@ public class CriterioApi {
 	public ResponseEntity<ResponseObject> guardarCriterio( @Valid @RequestBody Criterio criterio) {
 		ResponseObject response = new ResponseObject();
 		try {
+			
 			this.service.save(criterio);
+			
 			//response.setResultado();
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);

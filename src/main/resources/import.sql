@@ -72,7 +72,7 @@ INSERT INTO `seccion`  (descripcion,cantidad_preguntas,indice,tipo_seccion, id_d
 INSERT INTO `pregunta` (descripcion, tipo_pregunta, id_seccion) VALUES ('Explique su grado de estudios', 'PREGUNTA ABIERTA', 1);
 INSERT INTO `pregunta` (descripcion, tipo_pregunta, id_seccion) VALUES ('Detalle su labor como ponente', 'PREGUNTA ABIERTA', 2);
 
-INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_formulariocfp, id_organizador, id_tipo_evento,estado, id_presidente, id_lugar) VALUES (500, 'Charla magistral dirigida a desarrolladores de software de propï¿½sito cientï¿½ï¿½fico','Charla magistral dirigida a desarrolladores de software de propï¿½sito cientï¿½fico', '2019-12-12', '2019-05-05', 1, 3, 1,0,2,1);
+INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado, id_presidente, id_lugar) VALUES (500, 'Charla magistral dirigida a desarrolladores de software de propósito científico','Charla magistral dirigida a desarrolladores de software de propósito científico', '2019-12-12', '2019-05-05', 3, 1,0,2,1);
 
 INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('Fase RecepciÃ³n','2019-11-10', '2019-11-05',1);
 INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('Fase EvaluaciÃ³n','2019-11-15', '2019-11-10',1);

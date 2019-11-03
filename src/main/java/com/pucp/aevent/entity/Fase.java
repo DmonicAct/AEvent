@@ -33,7 +33,7 @@ public class Fase implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idFase")
+	@Column(name="id_fase")
 	private Long idFase;
 	
 	@Column(name="descripcion")
