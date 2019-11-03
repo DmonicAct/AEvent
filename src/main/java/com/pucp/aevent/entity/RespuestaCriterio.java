@@ -2,6 +2,7 @@ package com.pucp.aevent.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,8 +26,7 @@ public class RespuestaCriterio implements Serializable{
 	@Column(name="idRespuestaCriterio")
 	private Integer idRespuestaCriterio;
 	
-	@ManyToOne
-    @JsonProperty(access = Access.WRITE_ONLY)
+	@JsonProperty(access = Access.WRITE_ONLY)
     @JoinColumn(name = "idCriterio")
     private Criterio criterio;
 	
