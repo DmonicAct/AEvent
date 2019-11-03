@@ -63,7 +63,6 @@ public class FaseApi {
 	@PostMapping(path = "/fase",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> guardarFase( @Valid @RequestBody Fase fase) {
 		ResponseObject response = new ResponseObject();
-		System.out.println(fase.getIdEvento());
 		try {
 			
 			this.service.save(fase);
