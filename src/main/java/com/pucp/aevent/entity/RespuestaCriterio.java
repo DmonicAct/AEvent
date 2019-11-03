@@ -15,13 +15,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
-@Table(name = "RespuestaFase")
-public class RespuestaFase implements Serializable{
+@Table(name = "RespuestaCriterio")
+public class RespuestaCriterio implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idRespuestaFase")
-	private Integer idRespuestaFase;
+	@Column(name="idRespuestaCriterio")
+	private Integer idRespuestaCriterio;
 	
 	@ManyToOne
     @JsonProperty(access = Access.WRITE_ONLY)
@@ -31,20 +31,28 @@ public class RespuestaFase implements Serializable{
 	@Column(name="descRespuesta")
 	private String respuesta;
 
+	public Integer getIdRespuestaCriterio() {
+		return idRespuestaCriterio;
+	}
+
+	public void setIdRespuestaCriterio(Integer idRespuestaCriterio) {
+		this.idRespuestaCriterio = idRespuestaCriterio;
+	}
+
+	public String getRespuesta() {
+		return respuesta;
+	}
+
+	public void setRespuesta(String respuesta) {
+		this.respuesta = respuesta;
+	}
+
 	public Criterio getCriterio() {
 		return criterio;
 	}
 
 	public void setCriterio(Criterio criterio) {
 		this.criterio = criterio;
-	}
-
-	public Integer getIdRespuestaFase() {
-		return idRespuestaFase;
-	}
-
-	public void setIdRespuestaFase(Integer idRespuestaFase) {
-		this.idRespuestaFase = idRespuestaFase;
 	}
 	
 	/**
