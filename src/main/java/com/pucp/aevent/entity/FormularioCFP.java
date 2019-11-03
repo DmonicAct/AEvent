@@ -26,7 +26,7 @@ public class FormularioCFP implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_formulariocfp")
+	@Column(name="idFormularioCFP")
 	private Long idFormulariocfp;
 	
 	@NotEmpty(message ="no puede estar vacio")

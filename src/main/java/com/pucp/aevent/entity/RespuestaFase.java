@@ -22,29 +22,14 @@ public class RespuestaFase implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idRespuestaFase")
 	private Integer idRespuestaFase;
-
-	@ManyToOne
-    @JsonProperty(access = Access.WRITE_ONLY)
-    @JoinColumn(name = "idFase")
-    private Fase fase;
 	
 	@ManyToOne
     @JsonProperty(access = Access.WRITE_ONLY)
     @JoinColumn(name = "idCriterio")
     private Criterio criterio;
 	
-	@ManyToOne
-    @JsonProperty(access = Access.WRITE_ONLY)
-    @JoinColumn(name = "idOpcionRespuestaCriterio")
-    private OpcionRespuestaCriterio opcionRespuesta;
-				
-	public Fase getFase() {
-		return fase;
-	}
-
-	public void setFase(Fase fase) {
-		this.fase = fase;
-	}
+	@Column(name="descRespuesta")
+	private String respuesta;
 
 	public Criterio getCriterio() {
 		return criterio;
@@ -52,14 +37,6 @@ public class RespuestaFase implements Serializable{
 
 	public void setCriterio(Criterio criterio) {
 		this.criterio = criterio;
-	}
-
-	public OpcionRespuestaCriterio getOpcionRespuesta() {
-		return opcionRespuesta;
-	}
-
-	public void setOpcionRespuesta(OpcionRespuestaCriterio opcionRespuesta) {
-		this.opcionRespuesta = opcionRespuesta;
 	}
 
 	public Integer getIdRespuestaFase() {

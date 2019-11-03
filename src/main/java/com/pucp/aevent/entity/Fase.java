@@ -19,6 +19,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -48,7 +49,12 @@ public class Fase implements Serializable {
     @JoinColumn(name = "id_evento")
     @ManyToOne
     private Evento idEvento;
-	
+    
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_formulariocfp")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	private FormularioCFP formulario;
+    
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_fase")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -58,12 +64,9 @@ public class Fase implements Serializable {
 		return idFase;
 	}
 
-
 	public void setIdFase(Long idFase) {
 		this.idFase = idFase;
 	}
-
-
 
 
 	public Evento getIdEvento() {
