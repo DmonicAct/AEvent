@@ -32,7 +32,7 @@ public class Propuesta implements Serializable {
 	private int id_postulante;
 	
 	@Column(name = "fecha_postulacion")
-	private int fecha_postulacion;
+	private Date fecha_postulacion;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="idDocumento")
