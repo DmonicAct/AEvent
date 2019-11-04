@@ -39,6 +39,8 @@ public class Propuesta implements Serializable {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<Documento> documentos = new ArrayList<>();
 	
+	//private List<Preferencia> preferencias;
+	
 	private static final long serialVersionUID = 1L;
 
 	public int getIdPropuesta() {
@@ -56,7 +58,15 @@ public class Propuesta implements Serializable {
 	public void setIdEvento(int idEvento) {
 		this.idEvento = idEvento;
 	}
-
+	/*
+    @OneToMany(mappedBy = "propuesta")
+    public List<Preferencia> getPreferencias() {
+        return preferencias;
+    }
+    public void setPreferencias(List<Preferencia> pref) {
+    	this.preferencias=pref;
+    }*/
+ 
 	public int getIdPostulante() {
 		return idPostulante;
 	}

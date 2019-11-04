@@ -76,8 +76,17 @@ public class Usuario implements Serializable {
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private List<Propuesta> propuestasAsignadas;
 	
-
- 
+	//private List<Preferencia> preferencias;
+	/*
+    @OneToMany(mappedBy = "usuario")
+    public List<Preferencia> getPreferencias() {
+        return preferencias;
+    }
+    
+    public void setPreferencias(List<Preferencia> pref) {
+    	this.preferencias=pref;
+    }
+ */
 	public int getIdUsuario() {
 		return idUsuario;
 	}
