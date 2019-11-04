@@ -15,7 +15,7 @@ public interface IEventoService {
 	public List<Evento> findAllOrganizador(Persona usuario, Pageable page);
 	public Evento findById(Integer id);
 	public List<Evento> findAllByPresidente(Persona usuario, Pageable page);
-	
+	public List<Evento> findAllByComite(Persona usuario, Pageable page);
 	public Paginacion getPaginacion();
 	public Error getError();
 }

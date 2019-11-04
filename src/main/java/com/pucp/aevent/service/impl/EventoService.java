@@ -135,6 +135,28 @@ public class EventoService implements IEventoService {
 		}
 		return lista.getContent();
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Evento> findAllByComite(Persona persona, Pageable page) {
+		Page<Evento> lista = null;
+		/*
+		 * Evaluador
+		 * */
+		Persona evaluador = null;
+		
+		evaluador = this.daoPersona.findByUsername(persona.getUsername());
+		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = this.dao.findByComite(evaluador, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
 
 	@Override
 	@Transactional(readOnly = true)
