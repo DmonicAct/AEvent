@@ -100,6 +100,8 @@ INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion) VALUES (1,2,
 INSERT INTO `documento` (nombredoc,extensiondoc,contenido,id_propuesta) VALUES ('archivo1','pdf',10,1);
 INSERT INTO `documento` (nombredoc,extensiondoc,contenido,id_propuesta) VALUES ('archivo2','pdf',10,2);
 
+INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,opinion,veredicto,evaluado) VALUES (1,1,1,'','',FALSE);
+
 ///////TRIGGERS
 
 CREATE TRIGGER `UPDATE_PASSWORD` BEFORE UPDATE ON `usuario` FOR EACH ROW BEGIN DECLARE PASSWORD_OLD VARCHAR(60); SELECT CONTRASENA INTO PASSWORD_OLD  FROM usuario US WHERE NEW.ID_USUARIO=US.ID_USUARIO; IF NEW.CONTRASENA IS NULL OR NEW.CONTRASENA = "" THEN SET NEW.CONTRASENA = PASSWORD_OLD; END IF; END;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 
+import com.pucp.aevent.entity.Evaluacion;
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.Usuario;
@@ -18,6 +19,7 @@ public interface IEventoService {
 	public Evento findById(Integer id);
 	public List<Evento> findAllByPresidente(Persona usuario, Pageable page);
 	public List<Propuesta> findAllPropuesta(Integer idEvento, Pageable page);
+	public List<Evaluacion> findAllOfEvaluador(Integer idEvaluador, Pageable page);
 	
 	public Paginacion getPaginacion();
 	public Error getError();

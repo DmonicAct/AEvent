@@ -11,12 +11,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pucp.aevent.dao.IDivisionDao;
+import com.pucp.aevent.dao.IEvaluacionDao;
 import com.pucp.aevent.dao.IEventoDao;
 import com.pucp.aevent.dao.IPersonaDao;
 import com.pucp.aevent.dao.IPreguntaDao;
 import com.pucp.aevent.dao.ISeccionDao;
 import com.pucp.aevent.dao.IFormularioCFPDao;
 import com.pucp.aevent.dao.IPropuestaDao;
+import com.pucp.aevent.entity.Evaluacion;
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Propuesta;
 import com.pucp.aevent.entity.FormularioCFP;
@@ -48,7 +50,10 @@ public class EventoService implements IEventoService {
 	
 	@Autowired
 	IPropuestaDao daoPropuesta;
-
+	
+	@Autowired
+	IEvaluacionDao daoEvaluacion;
+	
 	private Paginacion paginacion;
 
 	public Paginacion getPaginacion() {
@@ -169,6 +174,29 @@ public class EventoService implements IEventoService {
 			
 			for (Propuesta prop : lista.getContent())
 				prop.setPostulante(daoPersona.findByIdUsuario(prop.getIdPostulante()));
+			
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Evaluacion> findAllOfEvaluador(Integer idEvaluador, Pageable page){
+		Page<Evaluacion> lista = null;
+		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			System.out.print(""+idEvaluador+"\n");
+			lista = this.daoEvaluacion.findByIdEvaluador(idEvaluador, page);
+			System.out.print(""+lista+"\n");
+			System.out.print(""+lista.getContent()+"\n");
+			
+			//for (Propuesta prop : lista.getContent())
+			//	prop.setPostulante(daoPersona.findByIdUsuario(prop.getIdPostulante()));
 			
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch (Exception e) {

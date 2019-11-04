@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException.BadRequest;
 import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
+import com.pucp.aevent.entity.Evaluacion;
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.Usuario;
@@ -141,6 +142,34 @@ public class EventoApi {
 		ResponseObject response = new ResponseObject();
 		try {
 			List<Propuesta> lista = this.service.findAllPropuesta(id,PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			//System.out.print(""+lista.get(0).getIdPropuesta()+"\n");
+			response.setResultado(lista);
+			response.setPaginacion(service.getPaginacion());
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	
+	@Secured({"ROLE_ORGANIZER"})
+	@GetMapping(path = "/evento/evaluaciones/evaluador/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarEvaluacionesAsigndas(@PathVariable("id")Integer id,PaginaRequest page) {
+		System.out.print("Evaluaciones asignadas e evaluador de id de : "+id+"\n");
+		ResponseObject response = new ResponseObject();
+		try {
+			List<Evaluacion> lista = this.service.findAllOfEvaluador(id,PageRequest.of(page.getPaginaFront(), page.getRegistros()));
 			//System.out.print(""+lista.get(0).getIdPropuesta()+"\n");
 			response.setResultado(lista);
 			response.setPaginacion(service.getPaginacion());
