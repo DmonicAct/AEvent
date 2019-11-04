@@ -2,6 +2,7 @@ package com.pucp.aevent.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,7 +25,7 @@ public class Criterio implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idCriterio")
-	private Integer idCriterio;
+	private Long idCriterio;
 	
 	@Column(name="descripcion")
 	private String descripcion;
@@ -37,7 +39,6 @@ public class Criterio implements Serializable {
 	//@JoinColumn(name="id_fase")
 	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     //private Fase fase;
-	
 	
     @JsonProperty(access = Access.WRITE_ONLY)
     @JoinColumn(name = "id_fase")
@@ -54,12 +55,12 @@ public class Criterio implements Serializable {
 	}
 
 
-	public Integer getIdCriterio() {
+	public Long getIdCriterio() {
 		return idCriterio;
 	}
 
 
-	public void setIdCriterio(Integer idCriterio) {
+	public void setIdCriterio(Long idCriterio) {
 		this.idCriterio = idCriterio;
 	}
 

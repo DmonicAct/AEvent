@@ -19,14 +19,13 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
 @Entity
 @Table(name = "formulariocfp")
 public class FormularioCFP implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_formulariocfp")
+	@Column(name="idFormularioCFP")
 	private Long idFormulariocfp;
 	
 	@NotEmpty(message ="no puede estar vacio")
