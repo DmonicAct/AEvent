@@ -34,10 +34,10 @@ public class Propuesta implements Serializable {
 	@Column(name = "fecha_postulacion")
 	private Date fecha_postulacion;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="idDocumento")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private List<Documento> documentos = new ArrayList<>();
+//	@OneToMany(cascade = CascadeType.ALL)
+//	@JoinColumn(name="idDocumento")
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//	private List<Documento> documentos = new ArrayList<>();
 	
 	private static final long serialVersionUID = 1L;
 
