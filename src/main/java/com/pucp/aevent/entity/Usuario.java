@@ -59,6 +59,9 @@ public class Usuario implements Serializable {
 	@Column(name="fechaModificacion")
 	private Date fechaModificacion;
 	
+	@Column(name="modoInicioSesion")
+	private Integer modoInicioSesion;
+	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name="usuario_role", joinColumns= @JoinColumn(name="idUsuario"),
 	inverseJoinColumns=@JoinColumn(name="idRol"),

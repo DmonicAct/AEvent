@@ -163,9 +163,13 @@ public class EventoService implements IEventoService {
 		this.paginacion.setPageable(page);
 		try {
 			System.out.print(""+idEvento+"\n");
-			lista = this.daoPropuesta.findAllByIdEvento(idEvento, page);
+			lista = this.daoPropuesta.findByIdEvento(idEvento, page);
 			System.out.print(""+lista+"\n");
 			System.out.print(""+lista.getContent()+"\n");
+			
+			for (Propuesta prop : lista.getContent())
+				prop.setPostulante(daoPersona.findByIdUsuario(prop.getIdPostulante()));
+			
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch (Exception e) {
 			System.out.print(e.getMessage());

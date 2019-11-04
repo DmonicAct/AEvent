@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.CascadeType;
 import javax.persistence.Table;
 
@@ -18,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "PROPUESTA")
+@NamedQueries({ @NamedQuery(name = "Propuesta.findAll", query = "SELECT p FROM Propuesta p") })
 public class Propuesta implements Serializable {
 	
 	@Id
@@ -38,6 +41,8 @@ public class Propuesta implements Serializable {
 	@JoinColumn(name="idDocumento")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<Documento> documentos = new ArrayList<>();
+	
+	private Persona postulante;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -71,6 +76,14 @@ public class Propuesta implements Serializable {
 
 	public void setFecha_postulacion(Date fecha_postulacion) {
 		this.fecha_postulacion = fecha_postulacion;
+	}
+
+	public Persona getPostulante() {
+		return postulante;
+	}
+
+	public void setPostulante(Persona postulante) {
+		this.postulante = postulante;
 	}
 
 }
