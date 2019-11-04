@@ -16,7 +16,9 @@ import com.pucp.aevent.dao.IPersonaDao;
 import com.pucp.aevent.dao.IPreguntaDao;
 import com.pucp.aevent.dao.ISeccionDao;
 import com.pucp.aevent.dao.IFormularioCFPDao;
+import com.pucp.aevent.dao.IPropuestaDao;
 import com.pucp.aevent.entity.Evento;
+import com.pucp.aevent.entity.Propuesta;
 import com.pucp.aevent.entity.FormularioCFP;
 import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.response_objects.Error;
@@ -43,6 +45,9 @@ public class EventoService implements IEventoService {
 
 	@Autowired
 	IPreguntaDao daoPregunta;
+	
+	@Autowired
+	IPropuestaDao daoPropuesta;
 
 	private Paginacion paginacion;
 
@@ -141,5 +146,30 @@ public class EventoService implements IEventoService {
 	public Evento findById(Integer id) {
 		return this.dao.findByIdEvento(id);
 	}
+	
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Propuesta> findAllPropuesta(Integer idEvento, Pageable page) {
+		Page<Propuesta> lista = null;
+		/*
+		 * Organizador
+		 * */
+		//Persona organizador = null;
 		
+		//Evento evento = this.dao.findByIdEvento(idEvento);
+		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			System.out.print(""+idEvento+"\n");
+			lista = this.daoPropuesta.findAllByIdEvento(idEvento, page);
+			System.out.print(""+lista+"\n");
+			System.out.print(""+lista.getContent()+"\n");
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
 }

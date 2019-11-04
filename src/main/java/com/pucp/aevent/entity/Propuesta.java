@@ -25,11 +25,11 @@ public class Propuesta implements Serializable {
 	@Column(name="idPropuesta")
 	private int idPropuesta;
 	
-	@Column(name = "id_evento")
-	private int id_evento;
+	@Column(name = "idEvento")
+	private int idEvento;
 	
-	@Column(name = "id_postulante")
-	private int id_postulante;
+	@Column(name = "idPostulante")
+	private int idPostulante;
 	
 	@Column(name = "fecha_postulacion")
 	private Date fecha_postulacion;
@@ -40,5 +40,37 @@ public class Propuesta implements Serializable {
 	private List<Documento> documentos = new ArrayList<>();
 	
 	private static final long serialVersionUID = 1L;
+
+	public int getIdPropuesta() {
+		return idPropuesta;
+	}
+
+	public void setIdPropuesta(int idPropuesta) {
+		this.idPropuesta = idPropuesta;
+	}
+
+	public int getIdEvento() {
+		return idEvento;
+	}
+
+	public void setIdEvento(int idEvento) {
+		this.idEvento = idEvento;
+	}
+
+	public int getIdPostulante() {
+		return idPostulante;
+	}
+
+	public void setIdPostulante(int idPostulante) {
+		this.idPostulante = idPostulante;
+	}
+
+	public Date getFecha_postulacion() {
+		return fecha_postulacion;
+	}
+
+	public void setFecha_postulacion(Date fecha_postulacion) {
+		this.fecha_postulacion = fecha_postulacion;
+	}
 
 }

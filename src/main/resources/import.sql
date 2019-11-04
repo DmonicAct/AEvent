@@ -91,9 +91,14 @@ INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Alto
 INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Medio",1);
 INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Bajo",1);
 
-INSERT INTO `persona_comite` (id_evento, id_usuario) values (1,1);
-INSERT INTO `persona_comite` (id_evento, id_usuario) values (1,2);
+INSERT INTO `persona_comite` (id_evento, id_usuario) VALUES (1,1);
+INSERT INTO `persona_comite` (id_evento, id_usuario) VALUES (1,2);
 
+INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion) VALUES (1,1,'2019-01-01');
+INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion) VALUES (1,2,'2019-01-01');
+
+INSERT INTO `documento` (nombredoc,extensiondoc,contenido,id_propuesta) VALUES ('archivo1','pdf',10,1);
+INSERT INTO `documento` (nombredoc,extensiondoc,contenido,id_propuesta) VALUES ('archivo2','pdf',10,2);
 
 ///////TRIGGERS
 
