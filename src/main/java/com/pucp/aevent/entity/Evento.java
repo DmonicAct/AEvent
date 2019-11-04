@@ -98,6 +98,11 @@ public class Evento implements Serializable {
 	@JoinColumn(name = "id_evento")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private List<Fase> fases = new ArrayList<>();
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_evento")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	private List<Propuesta> propuestas = new ArrayList<>();
 
 	@Column(name = "estado")
 	private Boolean estado;

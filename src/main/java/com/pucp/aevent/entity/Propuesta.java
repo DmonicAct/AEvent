@@ -25,7 +25,7 @@ public class Propuesta implements Serializable {
 	@Column(name="idPropuesta")
 	private int idPropuesta;
 	
-	@Column(name = "idEvento")
+	@Column(name = "id_evento")
 	private int idEvento;
 	
 	@Column(name = "idPostulante")
