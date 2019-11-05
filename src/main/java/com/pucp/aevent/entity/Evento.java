@@ -151,7 +151,7 @@ public class Evento implements Serializable {
 		return organizador;
 	}
 
-	public void setOrganizador(Persona organizador) {
+	public void setOrganizador(Usuario organizador) {
 		this.organizador = organizador;
 	}
 
@@ -175,7 +175,7 @@ public class Evento implements Serializable {
 		return presidente;
 	}
 
-	public void setPresidente(Persona presidente) {
+	public void setPresidente(Usuario presidente) {
 		this.presidente = presidente;
 	}
 

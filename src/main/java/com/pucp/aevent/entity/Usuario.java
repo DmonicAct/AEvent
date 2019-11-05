@@ -37,7 +37,7 @@ public class Usuario implements Serializable {
 	private int idUsuario;
 	
 	@NotEmpty(message ="no puede estar vacio")
-	@Size(min=6, max=20, message="el tamaÃ±o tiene que estar entre 6 y 20")
+	@Size(min=6, max=20, message="el tamaño tiene que estar entre 6 y 20")
 	@Column(unique = true, length = 20, name="usuario")
 	private String username;
 	
@@ -58,6 +58,9 @@ public class Usuario implements Serializable {
 	
 	@Column(name="fechaModificacion")
 	private Date fechaModificacion;
+	
+	@Column(length = 90, name="nombre_completo")
+	private String nombreCompleto;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name="usuario_role", joinColumns= @JoinColumn(name="idUsuario"),
@@ -124,6 +127,14 @@ public class Usuario implements Serializable {
 		this.roles = roles;
 	}
 
+	public String getNombreCompleto() {
+		return nombreCompleto;
+	}
+
+
+	public void setNombreCompleto(String nombreCompleto) {
+		this.nombreCompleto = nombreCompleto;
+	}
 	
 //	public Persona getPersona() {
 //		return persona;
