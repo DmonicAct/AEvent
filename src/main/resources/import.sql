@@ -84,11 +84,11 @@ INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('F
 INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('Fase Evaluación','2019-11-15', '2019-11-10',1);
 INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('Fase Mejora','2019-11-20', '2019-11-15',1);
 
-INSERT INTO `tipo_criterio` (descripcion) VALUES ('Respuesta numérica');
-INSERT INTO `tipo_criterio` (descripcion) VALUES ('Respuesta múltiple');
-INSERT INTO `tipo_criterio` (descripcion) VALUES ('Pregunta de selección');
-INSERT INTO `tipo_criterio` (descripcion) VALUES ('Pregunta cerrada');
-INSERT INTO `tipo_criterio` (descripcion) VALUES ('Pregunta abierta');
+INSERT INTO `tipo_criterio` (descripcion, estado) VALUES ('Respuesta numérica', 1);
+INSERT INTO `tipo_criterio` (descripcion, estado) VALUES ('Respuesta múltiple', 1);
+INSERT INTO `tipo_criterio` (descripcion, estado) VALUES ('Pregunta de selección', 1);
+INSERT INTO `tipo_criterio` (descripcion, estado) VALUES ('Pregunta cerrada', 1);
+INSERT INTO `tipo_criterio` (descripcion, estado) VALUES ('Pregunta abierta', 1);
 
 INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Nivel de detalle de la temática",3,1);
 INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Grado de experiencia del ponente",1,1);

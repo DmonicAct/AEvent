@@ -20,6 +20,9 @@ public class TipoCriterio implements Serializable {
 	@Column(name="descripcion")
 	private String descripcion;
 	
+	@Column(name="estado")
+	private Boolean enabled;
+	
 	public Integer getIdTipoCriterio() {
 		return idTipoCriterio;
 	}
@@ -35,6 +38,16 @@ public class TipoCriterio implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+
 
 	/**
 	 * 

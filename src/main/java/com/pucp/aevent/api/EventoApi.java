@@ -138,14 +138,8 @@ public class EventoApi {
 	public ResponseEntity<ResponseObject> consultarAllEventos(Persona usuario, PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {
-			List<Evento> listaByPres = this.service.findAllByPresidente(usuario, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
-			List<Evento> listaFinal = new ArrayList<Evento>();
-			listaFinal.addAll(listaByPres);
-			List<Evento> listaByOrga = this.service.findAllOrganizador(usuario, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
-			listaFinal.addAll(listaByOrga);
-			List<Evento> listaByEval = this.service.findAllByComite(usuario, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
-			listaFinal.addAll(listaByEval);
-			response.setResultado(listaFinal);
+			List<Evento> lista = this.service.findAllEventos(usuario, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			response.setResultado(lista);
 			response.setPaginacion(service.getPaginacion());
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);

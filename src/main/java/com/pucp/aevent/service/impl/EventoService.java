@@ -163,5 +163,24 @@ public class EventoService implements IEventoService {
 	public Evento findById(Integer id) {
 		return this.dao.findByIdEvento(id);
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Evento> findAllEventos(Persona persona, Pageable page) {
+		Page<Evento> lista = null;
+		Persona usuario = null;
+		
+		usuario = this.daoPersona.findByUsername(persona.getUsername());
+		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = this.dao.findAll(usuario, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
 		
 }
