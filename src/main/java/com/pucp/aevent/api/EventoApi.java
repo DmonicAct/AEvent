@@ -135,7 +135,7 @@ public class EventoApi {
 		}
 	}
 	
-	@Secured({"ROLE_ORGANIZER"})
+	@Secured({"ROLE_ORGANIZER","ROLE_ADMIN","ROLE_DEFAULT"})
 	@GetMapping(path = "/evento/propuestas/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> consultarAllPropuestas(@PathVariable("id")Integer id,PaginaRequest page) {
 		System.out.print("propuestas de : "+id+"\n");
@@ -163,7 +163,7 @@ public class EventoApi {
 	}
 	
 	
-	@Secured({"ROLE_ORGANIZER"})
+	@Secured({"ROLE_ORGANIZER","ROLE_ADMIN","ROLE_DEFAULT"})
 	@GetMapping(path = "/evento/evaluaciones/evaluador/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> consultarEvaluacionesAsigndas(@PathVariable("id")Integer id,PaginaRequest page) {
 		System.out.print("Evaluaciones asignadas e evaluador de id de : "+id+"\n");
@@ -189,4 +189,5 @@ public class EventoApi {
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
 }
