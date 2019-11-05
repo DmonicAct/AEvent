@@ -13,5 +13,5 @@ import com.pucp.aevent.entity.Propuesta;
 public interface IPropuestaDao extends JpaRepository<Propuesta, Long> {
 	//@Query("SELECT P FROM propuesta P WHERE P.id_evento = ?1")
 	public Page<Propuesta> findByIdEvento(Integer idevento, Pageable page);
-	
+	public Propuesta findByIdPropuesta(Integer id);
 }

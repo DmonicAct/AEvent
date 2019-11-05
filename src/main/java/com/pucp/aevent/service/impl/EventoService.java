@@ -1,6 +1,9 @@
 package com.pucp.aevent.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -172,9 +175,16 @@ public class EventoService implements IEventoService {
 			System.out.print(""+lista+"\n");
 			System.out.print(""+lista.getContent()+"\n");
 			
-			for (Propuesta prop : lista.getContent())
+			for (Propuesta prop : lista.getContent()) {
 				prop.setPostulante(daoPersona.findByIdUsuario(prop.getIdPostulante()));
-			
+				
+				List<Evaluacion> evaluaciones = daoEvaluacion.findByIdPropuesta(prop.getIdPropuesta());
+				Set<Persona> evaluadores = new HashSet<>();
+				for (Evaluacion e : evaluaciones) {
+					evaluadores.add(daoPersona.findByIdUsuario(e.getIdEvaluador()));
+				}
+				prop.setEvaluadoresAsignados(new ArrayList<>(evaluadores));
+			}
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
@@ -195,8 +205,8 @@ public class EventoService implements IEventoService {
 			System.out.print(""+lista+"\n");
 			System.out.print(""+lista.getContent()+"\n");
 			
-			//for (Propuesta prop : lista.getContent())
-			//	prop.setPostulante(daoPersona.findByIdUsuario(prop.getIdPostulante()));
+			for (Evaluacion e : lista.getContent())
+				e.setPropuesta(this.daoPropuesta.findByIdPropuesta(e.getIdPropuesta()));
 			
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch (Exception e) {

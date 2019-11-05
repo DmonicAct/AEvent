@@ -38,6 +38,8 @@ public class Evaluacion implements Serializable{
 	@Column(name = "abierto")
 	private Boolean abierto;
 	
+	private Propuesta propuesta;
+	
 	public Evaluacion() {
 	}
 
@@ -103,6 +105,14 @@ public class Evaluacion implements Serializable{
 
 	public void setAbierto(Boolean abierto) {
 		this.abierto = abierto;
+	}
+
+	public Propuesta getPropuesta() {
+		return propuesta;
+	}
+
+	public void setPropuesta(Propuesta propuesta) {
+		this.propuesta = propuesta;
 	}
 
 	private static final long serialVersionUID = 1L;
