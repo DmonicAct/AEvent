@@ -34,7 +34,6 @@ public class Persona extends Usuario implements Serializable{
     
 	public Persona() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public String getNombre() {
