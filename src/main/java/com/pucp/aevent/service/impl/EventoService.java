@@ -250,4 +250,10 @@ public class EventoService implements IEventoService {
 		}
 		return lista.getContent();
 	}
+
+	@Override
+	public List<Evento> findAllEventos(Persona usuario, Pageable page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
