@@ -43,8 +43,8 @@ public class CriterioService implements ICriterioService{
 	}
 
 	@Override
-	public void delete(Criterio criterio) {
-		this.dao.delete(criterio);		
+	public void delete(Long criterio) {
+		this.dao.deleteById(criterio);		
 	}
 
 }

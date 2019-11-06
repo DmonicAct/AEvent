@@ -1,5 +1,6 @@
 package com.pucp.aevent.api;
 
+import java.io.Console;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException.BadRequest;
 import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
+import com.pucp.aevent.entity.Criterio;
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Fase;
 import com.pucp.aevent.entity.request_objects.PaginaRequest;
@@ -62,7 +64,9 @@ public class FaseApi {
 	public ResponseEntity<ResponseObject> guardarFase( @Valid @RequestBody Fase fase) {
 		ResponseObject response = new ResponseObject();
 		try {
+			
 			this.service.save(fase);
+			
 			//response.setResultado();
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);

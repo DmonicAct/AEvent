@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.OneToMany;
 import javax.persistence.Entity;
@@ -15,6 +17,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.CascadeType;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -37,12 +40,15 @@ public class Propuesta implements Serializable {
 	@Column(name = "fecha_postulacion")
 	private Date fecha_postulacion;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="idDocumento")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private List<Documento> documentos = new ArrayList<>();
+//	@OneToMany(cascade = CascadeType.ALL)
+//	@JoinColumn(name="idDocumento")
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//	private List<Documento> documentos = new ArrayList<>();
 	
 	private Persona postulante;
+	
+	@Transient
+	private List<Persona> evaluadoresAsignados;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -84,6 +90,14 @@ public class Propuesta implements Serializable {
 
 	public void setPostulante(Persona postulante) {
 		this.postulante = postulante;
+	}
+
+	public List<Persona> getEvaluadoresAsignados() {
+		return evaluadoresAsignados;
+	}
+
+	public void setEvaluadoresAsignados(List<Persona> evaluadoresAsignados) {
+		this.evaluadoresAsignados = evaluadoresAsignados;
 	}
 
 }

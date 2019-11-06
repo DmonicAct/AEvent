@@ -1,6 +1,9 @@
 package com.pucp.aevent.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -145,11 +148,47 @@ public class EventoService implements IEventoService {
 		}
 		return lista.getContent();
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Evento> findAllByComite(Persona persona, Pageable page) {
+		Page<Evento> lista = null;
+		/*
+		 * Evaluador
+		 * */
+		Persona evaluador = null;
+		
+		evaluador = this.daoPersona.findByUsername(persona.getUsername());
+		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = this.dao.findByComite(evaluador, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Evento findById(Integer id) {
 		return this.dao.findByIdEvento(id);
+	}
+	@Override
+	@Transactional(readOnly = true)
+	public List<Evento> findEnabled(Pageable page) {
+		Page<Evento> lista = null;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = this.dao.findByEnabled(true, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
 	}
 	
 	
@@ -172,9 +211,16 @@ public class EventoService implements IEventoService {
 			System.out.print(""+lista+"\n");
 			System.out.print(""+lista.getContent()+"\n");
 			
-			for (Propuesta prop : lista.getContent())
+			for (Propuesta prop : lista.getContent()) {
 				prop.setPostulante(daoPersona.findByIdUsuario(prop.getIdPostulante()));
-			
+				
+				List<Evaluacion> evaluaciones = daoEvaluacion.findByIdPropuesta(prop.getIdPropuesta());
+				Set<Persona> evaluadores = new HashSet<>();
+				for (Evaluacion e : evaluaciones) {
+					evaluadores.add(daoPersona.findByIdUsuario(e.getIdEvaluador()));
+				}
+				prop.setEvaluadoresAsignados(new ArrayList<>(evaluadores));
+			}
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
@@ -195,8 +241,8 @@ public class EventoService implements IEventoService {
 			System.out.print(""+lista+"\n");
 			System.out.print(""+lista.getContent()+"\n");
 			
-			//for (Propuesta prop : lista.getContent())
-			//	prop.setPostulante(daoPersona.findByIdUsuario(prop.getIdPostulante()));
+			for (Evaluacion e : lista.getContent())
+				e.setPropuesta(this.daoPropuesta.findByIdPropuesta(e.getIdPropuesta()));
 			
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch (Exception e) {

@@ -62,6 +62,7 @@ public class Evento implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Usuario presidente;
+	
 	@JoinColumn(name = "idOrganizador", referencedColumnName = "idUsuario")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
@@ -88,20 +89,16 @@ public class Evento implements Serializable {
 	@JoinColumn(name = "idTipoEvento")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private TipoEvento tipoEvento;
-
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "idFormularioCFP")
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idEvento")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	private FormularioCFP formulario;
-
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_evento")
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	private List<Fase> fases = new ArrayList<>();
+	private List<Fase> fases=new ArrayList<>();
 
 	@Column(name = "estado")
-	private Boolean estado;
+	private Boolean enabled;
 
+	
 	public int getIdEvento() {
 		return idEvento;
 	}
@@ -113,7 +110,7 @@ public class Evento implements Serializable {
 	public TipoEvento getTipoEvento() {
 		return tipoEvento;
 	}
-
+	
 	public void setTipoEvento(TipoEvento tipoEvento) {
 		this.tipoEvento = tipoEvento;
 	}
@@ -154,7 +151,7 @@ public class Evento implements Serializable {
 		return organizador;
 	}
 
-	public void setOrganizador(Persona organizador) {
+	public void setOrganizador(Usuario organizador) {
 		this.organizador = organizador;
 	}
 
@@ -174,19 +171,11 @@ public class Evento implements Serializable {
 		this.categorias = categorias;
 	}
 
-	public FormularioCFP getFormulario() {
-		return formulario;
-	}
-
-	public void setFormulario(FormularioCFP formulario) {
-		this.formulario = formulario;
-	}
-
 	public Usuario getPresidente() {
 		return presidente;
 	}
 
-	public void setPresidente(Persona presidente) {
+	public void setPresidente(Usuario presidente) {
 		this.presidente = presidente;
 	}
 
@@ -214,14 +203,18 @@ public class Evento implements Serializable {
 	public void setFases(List<Fase> fases) {
 		this.fases = fases;
 	}
+	
 
-	public Boolean getEstado() {
-		return estado;
+
+	public Boolean getEnabled() {
+		return enabled;
 	}
 
-	public void setEstado(Boolean estado) {
-		this.estado = estado;
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
+
+
 
 	/**
 	 * 

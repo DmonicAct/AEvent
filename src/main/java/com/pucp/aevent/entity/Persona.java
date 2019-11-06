@@ -32,6 +32,11 @@ public class Persona extends Usuario implements Serializable{
 	@Column(name="fechaNacimiento")
 	private Date fechaNacimiento;
     
+	public Persona() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}	

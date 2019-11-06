@@ -2,6 +2,8 @@ package com.pucp.aevent.service.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +22,8 @@ public class ParametroService implements IParametroService{
 	@Autowired
 	IParametroDao dao;
 	
+	private Logger logger = LoggerFactory.getLogger(ParametroService.class);
+
 	@Override
 	@Transactional(readOnly=true)
 	public List<Parametro> findAll(Pageable page) {
@@ -37,6 +41,16 @@ public class ParametroService implements IParametroService{
 		return lista.getContent();
 	}
 	
+	@Override
+	public List<Parametro> findByDescripcion(String descripcion){
+		List<Parametro> lista = null;
+		try {
+			lista = dao.findByDescripcionCorta(descripcion);
+		}catch(Exception e) {
+			logger.error("Error en parametros :" + e.getMessage() + " en el sistema");
+		}
+		return lista;
+	}
 	private Paginacion paginacion;
 	public Paginacion getPaginacion() {
 		return this.paginacion;
