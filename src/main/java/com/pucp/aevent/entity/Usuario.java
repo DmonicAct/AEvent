@@ -65,6 +65,16 @@ public class Usuario implements Serializable {
 	@Column(name="modoInicioSesion")
 	private Integer modoInicioSesion;
 	
+	public Integer getModoInicioSesion() {
+		return modoInicioSesion;
+	}
+
+
+	public void setModoInicioSesion(Integer modoInicioSesion) {
+		this.modoInicioSesion = modoInicioSesion;
+	}
+
+
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name="usuario_role", joinColumns= @JoinColumn(name="idUsuario"),
 	inverseJoinColumns=@JoinColumn(name="idRol"),

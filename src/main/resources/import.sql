@@ -104,7 +104,9 @@ INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Buen
 INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Investigaci�n exhaustiva",3);
 INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Tema interesante",3);
 
-INSERT INTO `persona_comite` (id_evento, id_usuario) VALUES (1,1);
+INSERT INTO `persona_comite` (id_evento, id_usuario) VALUES (1,3);
+INSERT INTO `persona_comite` (id_evento, id_usuario) VALUES (1,5);
+INSERT INTO `persona_comite` (id_evento, id_usuario) VALUES (1,6);
 INSERT INTO `persona_comite` (id_evento, id_usuario) VALUES (1,2);
 
 INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion) VALUES (1,1,'2019-01-01');
@@ -113,14 +115,17 @@ INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion) VALUES (1,2,
 INSERT INTO `documento` (nombredoc,extensiondoc,contenido,id_propuesta) VALUES ('archivo1','pdf',10,1);
 INSERT INTO `documento` (nombredoc,extensiondoc,contenido,id_propuesta) VALUES ('archivo2','pdf',10,2);
 
-INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,opinion,veredicto,evaluado) VALUES (1,1,1,'','',FALSE);
+INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,opinion,veredicto,evaluado) VALUES (1,2,1,'','',FALSE);
+INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,opinion,veredicto,evaluado) VALUES (1,3,1,'','',FALSE);
+INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,opinion,veredicto,evaluado) VALUES (1,5,1,'','',FALSE);
+INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,opinion,veredicto,evaluado) VALUES (2,3,1,'','',FALSE);
 
-INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("2",1);
-INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("3",2);
-INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("Buen resumen",3);
-INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("Tema interesante",3);
-INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("5",4);
-INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("Se han realizado observaciones a la propuesta, enviar datos corregidos",5);
+INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("2",1);
+INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("3",2);
+INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("Buen resumen",3);
+INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("Tema interesante",3);
+INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("5",4);
+INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("Se han realizado observaciones a la propuesta, enviar datos corregidos",5);
 
 ///////TRIGGERS
 

@@ -23,12 +23,12 @@ public class Parametro implements Serializable{
 	
 	@NotEmpty(message ="no puede estar vacio")
 	@Size(min=0, max=60, message="el tamaño tiene que estar entre 0 y 60")
-	@Column(unique = true, length = 60, name="descripcion_corta")
+	@Column(unique = false, length = 60, name="descripcion_corta")
 	private String descripcionCorta;
 	
 	@NotEmpty(message ="no puede estar vacio")
 	@Size(min=0, max=60, message="el tamaño tiene que estar entre 0 y 60")
-	@Column(unique = true, length = 60, name="descripcion")
+	@Column(unique = false, length = 60, name="descripcion")
 	private String descripcion;
 	
 	@Column(name="activo")
