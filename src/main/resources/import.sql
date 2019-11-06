@@ -115,12 +115,12 @@ INSERT INTO `documento` (nombredoc,extensiondoc,contenido,id_propuesta) VALUES (
 
 INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,opinion,veredicto,evaluado) VALUES (1,1,1,'','',FALSE);
 
-INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("2",1);
-INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("3",2);
-INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("Buen resumen",3);
-INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("Tema interesante",3);
-INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("5",4);
-INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("Se han realizado observaciones a la propuesta, enviar datos corregidos",5);
+INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("2",1);
+INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("3",2);
+INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("Buen resumen",3);
+INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("Tema interesante",3);
+INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("5",4);
+INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("Se han realizado observaciones a la propuesta, enviar datos corregidos",5);
 
 ///////TRIGGERS
 

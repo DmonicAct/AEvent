@@ -4,4 +4,5 @@ import com.pucp.aevent.entity.Evaluacion;
 
 public interface IEvaluacionService {
 	public Evaluacion save(Integer idEvaluador,Integer idPropuesta,Integer idFase);
+	public Integer delete(Integer idEvaluaacion);
 }

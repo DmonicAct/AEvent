@@ -26,4 +26,13 @@ public class EvaluacionService implements IEvaluacionService{
 		}
 		return null;
 	}
+	
+	public Integer delete(Integer idEvaluacion) {
+		Integer e = dao.deleteByIdEvaluacion(idEvaluacion);
+		return e;
+		//if (e == null) {
+		//	return 0;
+		//}
+		//return 1;
+	}
 }
