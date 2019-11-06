@@ -31,8 +31,8 @@ public class EvaluacionApi {
 	@Autowired IEvaluacionService evservice;
 	
 	@Secured({"ROLE_ORGANIZER","ROLE_ADMIN","ROLE_DEFAULT"})
-	@PostMapping(path = "/evaluacion",produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> asignarEvaluadorAPropuesta(int idEvaluador,int idPropuesta,int idFase){
+	@PostMapping(path = "/evaluacion/{idE}/{idP}/{idF}",produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> asignarEvaluadorAPropuesta(@PathVariable("idE")int idEvaluador,@PathVariable("idP")int idPropuesta,@PathVariable("idF")int idFase){
 		ResponseObject response = new ResponseObject();
 		try {
 			Evaluacion e;
