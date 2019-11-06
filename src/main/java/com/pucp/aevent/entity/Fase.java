@@ -40,7 +40,7 @@ public class Fase implements Serializable {
 
     @JsonProperty(access = Access.WRITE_ONLY)
     @JoinColumn(name = "idEvento")
-    private int idEvento;
+    private Evento evento;
     
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_formulariocfp")
@@ -52,12 +52,12 @@ public class Fase implements Serializable {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<Criterio> criterios  = new ArrayList<>();
 	
-	public Integer getIdEvento() {
-		return idEvento;
+	public Evento getEvento() {
+		return evento;
 	}
 
-	public void setIdEvento(Integer idEvento) {
-		this.idEvento = idEvento;
+	public void setEvento(Evento evento) {
+		this.evento = evento;
 	}
 
 	public Long getIdFase() {
