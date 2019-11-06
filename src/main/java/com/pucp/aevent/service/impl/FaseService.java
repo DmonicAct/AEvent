@@ -39,7 +39,7 @@ public class FaseService implements IFaseService{
 	@Override
 	@Transactional(readOnly=true)
 	public List<Fase> findByEvento(Evento evento) {
-		return this.dao.findByIdEvento(evento);
+		return this.dao.findByEvento(evento);
 	}
 
 	@Override
