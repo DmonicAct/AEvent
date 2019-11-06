@@ -22,6 +22,7 @@ public interface IEventoService {
 	public List<Evento> findEnabled(Pageable page);
 	public List<Propuesta> findAllPropuesta(Integer idEvento, Pageable page);
 	public List<Evaluacion> findAllOfEvaluador(Integer idEvaluador, Pageable page);
+	public List<Evento> findAllEventos(Persona usuario, Pageable page);
 	public Paginacion getPaginacion();
 	public Error getError();
 }

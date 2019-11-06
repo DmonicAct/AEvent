@@ -40,7 +40,7 @@ INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (11, 3);
 
 INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000001', 'INTELIGENCIA ARTIFICIAL',1);
 INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000002', 'VIDEOJUEGOS',1);
-INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000003', 'TRANSFORMACIï¿½N DIGITAL',1);
+INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000003', 'TRANSFORMACIÓN DIGITAL',1);
 INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000004', 'INTERNET DE LAS COSAS',1);
 INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000005', 'DESIGN THINKING',1);
 INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000006', 'CONSTRUCCIï¿½N CIVIL',1);
@@ -88,13 +88,13 @@ INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('F
 INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('Fase Evaluaciï¿½n','2019-11-15', '2019-11-10',1);
 INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('Fase Mejora','2019-11-20', '2019-11-15',1);
 
-INSERT INTO `tipo_criterio` (descripcion) VALUES ('Respuesta numï¿½rica');
-INSERT INTO `tipo_criterio` (descripcion) VALUES ('Respuesta mï¿½ltiple');
-INSERT INTO `tipo_criterio` (descripcion) VALUES ('Pregunta de selecciï¿½n');
-INSERT INTO `tipo_criterio` (descripcion) VALUES ('Pregunta cerrada');
-INSERT INTO `tipo_criterio` (descripcion) VALUES ('Pregunta abierta');
+INSERT INTO `tipo_criterio` (descripcion, estado) VALUES ('Respuesta numérica', 1);
+INSERT INTO `tipo_criterio` (descripcion, estado) VALUES ('Respuesta múltiple', 1);
+INSERT INTO `tipo_criterio` (descripcion, estado) VALUES ('Pregunta de selección', 1);
+INSERT INTO `tipo_criterio` (descripcion, estado) VALUES ('Pregunta cerrada', 1);
+INSERT INTO `tipo_criterio` (descripcion, estado) VALUES ('Pregunta abierta', 1);
 
-INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Nivel de detalle de la temï¿½tica",3,1);
+INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Nivel de detalle de la temática",3,1);
 INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Grado de experiencia del ponente",1,1);
 INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Aspectos destacados de la propuesta",2,2);
 INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Cumple con los estï¿½ndares del evento",1,4);
