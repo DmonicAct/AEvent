@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.pucp.aevent.dao.IEvaluacionDao;
 import com.pucp.aevent.dao.IPropuestaDao;
 import com.pucp.aevent.entity.Evaluacion;
-import com.pucp.aevent.entity.request_objects.PaginaRequest;
 import com.pucp.aevent.entity.response_objects.Paginacion;
 import com.pucp.aevent.service.IEvaluacionService;
 

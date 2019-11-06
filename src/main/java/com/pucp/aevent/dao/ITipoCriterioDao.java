@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.pucp.aevent.entity.Categoria;
 import com.pucp.aevent.entity.TipoCriterio;
 
 public interface ITipoCriterioDao extends JpaRepository <TipoCriterio, Long>{

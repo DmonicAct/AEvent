@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import com.pucp.aevent.dao.IPersonaDao;
 import com.pucp.aevent.dao.IPreferenciaDao;
 import com.pucp.aevent.entity.Preferencia;
-import com.pucp.aevent.entity.Propuesta;
-import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.service.IPreferenciaService;
 
 @Service
