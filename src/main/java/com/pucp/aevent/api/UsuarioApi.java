@@ -217,6 +217,10 @@ public class UsuarioApi {
 		public ResponseEntity<ResponseObject> guardarUsuarioOut( @Valid @RequestBody Persona persona) {
 			ResponseObject response = new ResponseObject();
 			try {
+				String nombreCompleto = persona.getNombre() + ' ' + persona.getAppaterno();
+				if(persona.getApmaterno() != null)
+					nombreCompleto = nombreCompleto + ' ' + persona.getApmaterno();
+				persona.setNombreCompleto(nombreCompleto);
 				this.usuarioService.saveOut(persona);
 				//response.setResultado(lista);
 				response.setEstado(Estado.OK);
