@@ -17,11 +17,9 @@ import org.springframework.web.client.HttpClientErrorException.BadRequest;
 import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
 import com.pucp.aevent.entity.Evaluacion;
-import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.request_objects.PaginaRequest;
 import com.pucp.aevent.entity.response_objects.Estado;
 import com.pucp.aevent.entity.response_objects.ResponseObject;
-import com.pucp.aevent.service.IEventoService;
 import com.pucp.aevent.service.IEvaluacionService;
 
 @RestController

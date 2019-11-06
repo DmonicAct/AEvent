@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 import com.pucp.aevent.entity.Evaluacion;
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Persona;
-import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.Propuesta;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;

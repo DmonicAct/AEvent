@@ -24,7 +24,6 @@ import com.pucp.aevent.dao.IPropuestaDao;
 import com.pucp.aevent.entity.Evaluacion;
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Propuesta;
-import com.pucp.aevent.entity.FormularioCFP;
 import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;

@@ -1,6 +1,5 @@
 package com.pucp.aevent.api;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -24,7 +23,6 @@ import org.springframework.web.client.HttpServerErrorException.InternalServerErr
 import com.pucp.aevent.entity.Evaluacion;
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Persona;
-import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.Propuesta;
 import com.pucp.aevent.entity.request_objects.PaginaRequest;
 import com.pucp.aevent.entity.response_objects.Estado;
