@@ -23,11 +23,16 @@ public class Parametro implements Serializable{
 	
 	@NotEmpty(message ="no puede estar vacio")
 	@Size(min=0, max=60, message="el tamaño tiene que estar entre 0 y 60")
+	@Column(unique = true, length = 60, name="descripcion_corta")
+	private String descripcionCorta;
+	
+	@NotEmpty(message ="no puede estar vacio")
+	@Size(min=0, max=60, message="el tamaño tiene que estar entre 0 y 60")
 	@Column(unique = true, length = 60, name="descripcion")
 	private String descripcion;
 	
 	@Column(name="activo")
-	private Boolean activo;
+	private Boolean enabled;
 	
 	public int getIdParametro() {
 		return idParametro;
@@ -45,14 +50,29 @@ public class Parametro implements Serializable{
 		this.descripcion = descripcion;
 	}
 
-	public Boolean getActivo() {
-		return activo;
+	
+	
+	public Boolean getEnabled() {
+		return enabled;
 	}
 
-	public void setActivo(Boolean activo) {
-		this.activo = activo;
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
-	
-	
+
+
+
+
+	public String getDescripcionCorta() {
+		return descripcionCorta;
+	}
+
+	public void setDescripcionCorta(String descripcionCorta) {
+		this.descripcionCorta = descripcionCorta;
+	}
+
+
+
+
 	private static final long serialVersionUID = 1L;
 }

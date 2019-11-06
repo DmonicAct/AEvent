@@ -96,7 +96,7 @@ public class Evento implements Serializable {
 	private List<Fase> fases=new ArrayList<>();
 
 	@Column(name = "estado")
-	private Boolean estado;
+	private Boolean enabled;
 
 	
 	public int getIdEvento() {
@@ -204,13 +204,17 @@ public class Evento implements Serializable {
 		this.fases = fases;
 	}
 	
-	public Boolean getEstado() {
-		return estado;
+
+
+	public Boolean getEnabled() {
+		return enabled;
 	}
 
-	public void setEstado(Boolean estado) {
-		this.estado = estado;
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
+
+
 
 	/**
 	 * 

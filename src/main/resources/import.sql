@@ -40,28 +40,32 @@ INSERT INTO `usuario_role` (id_usuario, id_rol) VALUES (11, 3);
 
 INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000001', 'INTELIGENCIA ARTIFICIAL',1);
 INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000002', 'VIDEOJUEGOS',1);
-INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000003', 'TRANSFORMACIÓN DIGITAL',1);
+INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000003', 'TRANSFORMACIï¿½N DIGITAL',1);
 INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000004', 'INTERNET DE LAS COSAS',1);
 INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000005', 'DESIGN THINKING',1);
-INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000006', 'CONSTRUCCIÓN CIVIL',1);
-INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000007', 'EDUCACIÓN',1);
+INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000006', 'CONSTRUCCIï¿½N CIVIL',1);
+INSERT INTO `categoria` (cod_categoria, descripcion,estado) VALUES ('00000007', 'EDUCACIï¿½N',1);
 
-INSERT INTO `parametro` (DESCRIPCION, ACTIVO) VALUES ('Pregunta abierta' , TRUE);
-INSERT INTO `parametro` (DESCRIPCION, ACTIVO) VALUES ('Pregunta de opción múltiple' , TRUE);
-INSERT INTO `parametro` (DESCRIPCION, ACTIVO) VALUES ('Pregunta de formulario' , TRUE);
+INSERT INTO `parametro` (DESCRIPCION,DESCRIPCION_CORTA, ACTIVO) VALUES ('Pregunta abierta','TIPO_PREGUNTA' , TRUE);
+INSERT INTO `parametro` (DESCRIPCION,DESCRIPCION_CORTA, ACTIVO) VALUES ('Pregunta de opciï¿½n mï¿½ltiple','TIPO_PREGUNTA' , TRUE);
+INSERT INTO `parametro` (DESCRIPCION,DESCRIPCION_CORTA, ACTIVO) VALUES ('Pregunta de formulario','TIPO_PREGUNTA' , TRUE);
+INSERT INTO `parametro` (DESCRIPCION,DESCRIPCION_CORTA, ACTIVO) VALUES ('Abierto','ESTADO_EVENTO',TRUE);
+INSERT INTO `parametro` (DESCRIPCION,DESCRIPCION_CORTA, ACTIVO) VALUES ('Cancelado','ESTADO_EVENTO',TRUE);
+INSERT INTO `parametro` (DESCRIPCION,DESCRIPCION_CORTA, ACTIVO) VALUES ('En Curso','ESTADO_EVENTO',TRUE);
+INSERT INTO `parametro` (DESCRIPCION,DESCRIPCION_CORTA, ACTIVO) VALUES ('Borrador','ESTADO_EVENTO',TRUE);
 
 INSERT INTO `tipoevento` ( descripcion, estado) VALUES("CHARLA",1);
 INSERT INTO `tipoevento` ( descripcion, estado) VALUES("TALLER",1);
 INSERT INTO `tipoevento` ( descripcion, estado) VALUES("WORKSHOP",1);
 INSERT INTO `tipoevento` ( descripcion, estado) VALUES("SEMINARIO",1);
 
-INSERT INTO `lugar` (descripcion, estado) VALUES("AUDITORIO DE CIENCIAS E INGENIERÍA - PUCP", 1);
+INSERT INTO `lugar` (descripcion, estado) VALUES("AUDITORIO DE CIENCIAS E INGENIERï¿½A - PUCP", 1);
 INSERT INTO `lugar` (descripcion, estado) VALUES("AUDITORIO DE DERECHO - PUCP", 1);
 INSERT INTO `lugar` (descripcion, estado) VALUES("CENTRO DE CONVENCIONES AEVENT", 1);
 INSERT INTO `lugar` (descripcion, estado) VALUES("CENTRO DE CONVENCIONES SAN MARCOS SE DEFIENDE", 1);
 
 
-INSERT INTO `formulariocfp` (titulo) VALUES ("Formato de ponencia para charla magistral de software científico");
+INSERT INTO `formulariocfp` (titulo) VALUES ("Formato de ponencia para charla magistral de software cientï¿½fico");
 INSERT INTO `formulariocfp` (titulo) VALUES ("Formato de ponencia para charla de machine learning");
 INSERT INTO `formulariocfp` (titulo) VALUES ("Formato de ponencia para charla de usabilidad de software");
 
@@ -74,30 +78,30 @@ INSERT INTO `seccion`  (descripcion,cantidad_preguntas,indice,tipo_seccion, id_d
 INSERT INTO `pregunta` (descripcion, tipo_pregunta, id_seccion) VALUES ('Explique su grado de estudios', 'PREGUNTA ABIERTA', 1);
 INSERT INTO `pregunta` (descripcion, tipo_pregunta, id_seccion) VALUES ('Detalle su labor como ponente', 'PREGUNTA ABIERTA', 2);
 
-INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado, id_presidente, id_lugar) VALUES (500, 'Charla magistral dirigida a desarrolladores de software de propósito científico','Charla magistral dirigida a desarrolladores de software de propósito científico', '2019-12-12', '2019-05-05', 3, 1,0,2,1);
-INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado, id_presidente, id_lugar) VALUES (500, 'Mama, voy a ser dotero','Charla para jóvenes emprendedores +5k MMR', '2019-12-12', '2019-05-05', 3, 2,0,2,2);
+INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado, id_presidente, id_lugar) VALUES (500, 'Charla magistral dirigida a desarrolladores de software de propÃ³sito cientï¿½fico','Charla magistral dirigida a desarrolladores de software de propï¿½sito cientï¿½fico', '2019-12-12', '2019-05-05', 3, 1,1,2,1);
+INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado, id_presidente, id_lugar) VALUES (500, 'Mama, voy a ser dotero','Charla para jï¿½venes emprendedores +5k MMR', '2019-12-12', '2019-05-05', 3, 2,0,2,2);
 INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado, id_presidente, id_lugar) VALUES (500, 'Marcha para que abran un Tambo en el congreso','Gran marcha nacional', '2019-12-12', '2019-05-05', 3, 3,0,2,1);
-INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado, id_presidente, id_lugar) VALUES (500, 'IoT: Próximamente tu refrigeradora tendrá cerebro','La tecnología en 2k19', '2019-12-12', '2019-05-05', 3, 1,0,2,1);
+INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado, id_presidente, id_lugar) VALUES (500, 'IoT: Prï¿½ximamente tu refrigeradora tendrï¿½ cerebro','La tecnologï¿½a en 2k19', '2019-12-12', '2019-05-05', 3, 1,0,2,1);
 
 
-INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('Fase Recepción','2019-11-10', '2019-11-05',1);
-INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('Fase Evaluación','2019-11-15', '2019-11-10',1);
+INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('Fase Recepciï¿½n','2019-11-10', '2019-11-05',1);
+INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('Fase Evaluaciï¿½n','2019-11-15', '2019-11-10',1);
 INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('Fase Mejora','2019-11-20', '2019-11-15',1);
 
-INSERT INTO `tipo_criterio` (descripcion) VALUES ('Respuesta numérica');
-INSERT INTO `tipo_criterio` (descripcion) VALUES ('Respuesta múltiple');
-INSERT INTO `tipo_criterio` (descripcion) VALUES ('Pregunta de selección');
+INSERT INTO `tipo_criterio` (descripcion) VALUES ('Respuesta numï¿½rica');
+INSERT INTO `tipo_criterio` (descripcion) VALUES ('Respuesta mï¿½ltiple');
+INSERT INTO `tipo_criterio` (descripcion) VALUES ('Pregunta de selecciï¿½n');
 INSERT INTO `tipo_criterio` (descripcion) VALUES ('Pregunta cerrada');
 INSERT INTO `tipo_criterio` (descripcion) VALUES ('Pregunta abierta');
 
-INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Nivel de detalle de la temática",3,1);
+INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Nivel de detalle de la temï¿½tica",3,1);
 INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Grado de experiencia del ponente",1,1);
 INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Aspectos destacados de la propuesta",2,2);
-INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Cumple con los estándares del evento",1,4);
+INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Cumple con los estï¿½ndares del evento",1,4);
 INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Comentarios del evaluador",1,5);
 
 INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Buen resumen",3);
-INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Investigación exhaustiva",3);
+INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Investigaciï¿½n exhaustiva",3);
 INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Tema interesante",3);
 
 INSERT INTO `persona_comite` (id_evento, id_usuario) values (1,1);

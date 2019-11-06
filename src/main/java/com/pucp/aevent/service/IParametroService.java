@@ -10,6 +10,8 @@ import com.pucp.aevent.entity.response_objects.Paginacion;
 
 public interface IParametroService {
 	public List<Parametro> findAll(Pageable pageable);
+	
+	public List<Parametro> findByDescripcion(String descripcion);
 	Paginacion getPaginacion();
 	Error getError();
 }
