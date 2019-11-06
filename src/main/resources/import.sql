@@ -1,14 +1,14 @@
-INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo) VALUES ('admin','$2a$10$Fxm6q26fOKOQOh/GbXw03uL6XyiQd3157s9JhWlzQ6S911BUFLLCy',1,'admin@aevent.com', 'Doe Towers Luis');
-INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo) VALUES ('user_pres','$2a$10$eKmvl/ZziTfER4TDMY/QVe51oNvqNlDF7Olk3mDRJaSCVIy0u8fhG',1,'presidente@aevent.com', 'Jhon Diane Jean');
-INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo) VALUES ('user_orga','$2a$10$wXn0WmXu5xkb18RsLpJF9uEv4Afk4EoBRGt2Vo4MToJ4lYx9XNJSW',1,'organizator@aevent.com', 'Crux Ophelia Patrick');
-INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo) VALUES ('user_eval','$2a$10$Fy6bJZM3fyag2OVAQcuTwuQSM1tc74dr8om6LNKe5xtJIc.i46r5y',1,'evaluator@aevent.com', 'Thrown Rex Ray');
-INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo) VALUES ('user_basic1','$2a$10$Fy6bJZM3fyag2OVAQcuTwuQSM1tc74dr8om6LNKe5xtJIc.i46r5y',1,'userbasic1@aevent.com', 'Caryr Michael Tom');
-INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo) VALUES ('user_basic2','$2a$10$Fy6bJZM3fyag2OVAQcuTwuQSM1tc74dr8om6LNKe5xtJIc.i46r5y',1,'userbasic2@aevent.com', 'Mcketon Gen Grey');
-INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo) VALUES ('user_basic3','$2a$10$Fy6bJZM3fyag2OVAQcuTwuQSM1tc74dr8om6LNKe5xtJIc.i46r5y',1,'userbasic3@aevent.com', 'Tonic Ten Roxxana');
-INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo) VALUES ('user_basic4','$2a$10$Fy6bJZM3fyag2OVAQcuTwuQSM1tc74dr8om6LNKe5xtJIc.i46r5y',1,'userbasic4@aevent.com', 'Appleton Ren Tricia');
-INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo) VALUES ('user_basic5','$2a$10$Fy6bJZM3fyag2OVAQcuTwuQSM1tc74dr8om6LNKe5xtJIc.i46r5y',1,'userbasic5@aevent.com', 'Cartavio Reo Caroline');
-INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo) VALUES ('user_basic6','$2a$10$Fy6bJZM3fyag2OVAQcuTwuQSM1tc74dr8om6LNKe5xtJIc.i46r5y',1,'userbasic6@aevent.com', 'Gtew Blen Esperanza');
-INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo) VALUES ('user_basic7','$2a$10$Fy6bJZM3fyag2OVAQcuTwuQSM1tc74dr8om6LNKe5xtJIc.i46r5y',1,'userbasic7@aevent.com', 'Opress Qwerty Trevor');
+INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo,modo_inicio_sesion) VALUES ('admin','$2a$10$Fxm6q26fOKOQOh/GbXw03uL6XyiQd3157s9JhWlzQ6S911BUFLLCy',1,'admin@aevent.com', 'Doe Towers Luis',0);
+INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo,modo_inicio_sesion) VALUES ('user_pres','$2a$10$eKmvl/ZziTfER4TDMY/QVe51oNvqNlDF7Olk3mDRJaSCVIy0u8fhG',1,'presidente@aevent.com', 'Jhon Diane Jean',0);
+INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo,modo_inicio_sesion) VALUES ('user_orga','$2a$10$wXn0WmXu5xkb18RsLpJF9uEv4Afk4EoBRGt2Vo4MToJ4lYx9XNJSW',1,'organizator@aevent.com', 'Crux Ophelia Patrick',0);
+INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo,modo_inicio_sesion) VALUES ('user_eval','$2a$10$Fy6bJZM3fyag2OVAQcuTwuQSM1tc74dr8om6LNKe5xtJIc.i46r5y',1,'evaluator@aevent.com', 'Thrown Rex Ray',0);
+INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo,modo_inicio_sesion) VALUES ('user_basic1','$2a$10$Fy6bJZM3fyag2OVAQcuTwuQSM1tc74dr8om6LNKe5xtJIc.i46r5y',1,'userbasic1@aevent.com', 'Caryr Michael Tom',0);
+INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo,modo_inicio_sesion) VALUES ('user_basic2','$2a$10$Fy6bJZM3fyag2OVAQcuTwuQSM1tc74dr8om6LNKe5xtJIc.i46r5y',1,'userbasic2@aevent.com', 'Mcketon Gen Grey',0);
+INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo,modo_inicio_sesion) VALUES ('user_basic3','$2a$10$Fy6bJZM3fyag2OVAQcuTwuQSM1tc74dr8om6LNKe5xtJIc.i46r5y',1,'userbasic3@aevent.com', 'Tonic Ten Roxxana',0);
+INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo,modo_inicio_sesion) VALUES ('user_basic4','$2a$10$Fy6bJZM3fyag2OVAQcuTwuQSM1tc74dr8om6LNKe5xtJIc.i46r5y',1,'userbasic4@aevent.com', 'Appleton Ren Tricia',0);
+INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo,modo_inicio_sesion) VALUES ('user_basic5','$2a$10$Fy6bJZM3fyag2OVAQcuTwuQSM1tc74dr8om6LNKe5xtJIc.i46r5y',1,'userbasic5@aevent.com', 'Cartavio Reo Caroline',0);
+INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo,modo_inicio_sesion) VALUES ('user_basic6','$2a$10$Fy6bJZM3fyag2OVAQcuTwuQSM1tc74dr8om6LNKe5xtJIc.i46r5y',1,'userbasic6@aevent.com', 'Gtew Blen Esperanza',0);
+INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo,modo_inicio_sesion) VALUES ('user_basic7','$2a$10$Fy6bJZM3fyag2OVAQcuTwuQSM1tc74dr8om6LNKe5xtJIc.i46r5y',1,'userbasic7@aevent.com', 'Opress Qwerty Trevor',0);
 
 INSERT INTO `persona` (apellido_mat, apellido_pat, dni, nombre, id_usuario) VALUES ( 'Doe','Towers', 43110193, 'Luis', 1);
 INSERT INTO `persona` (apellido_mat, apellido_pat, dni, nombre, id_usuario) VALUES ( 'Jhon','Diane', 51231233, 'Jean', 2);
@@ -104,8 +104,16 @@ INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Buen
 INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Investigaci�n exhaustiva",3);
 INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Tema interesante",3);
 
-INSERT INTO `persona_comite` (id_evento, id_usuario) values (1,1);
-INSERT INTO `persona_comite` (id_evento, id_usuario) values (1,2);
+INSERT INTO `persona_comite` (id_evento, id_usuario) VALUES (1,1);
+INSERT INTO `persona_comite` (id_evento, id_usuario) VALUES (1,2);
+
+INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion) VALUES (1,1,'2019-01-01');
+INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion) VALUES (1,2,'2019-01-01');
+
+INSERT INTO `documento` (nombredoc,extensiondoc,contenido,id_propuesta) VALUES ('archivo1','pdf',10,1);
+INSERT INTO `documento` (nombredoc,extensiondoc,contenido,id_propuesta) VALUES ('archivo2','pdf',10,2);
+
+INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,opinion,veredicto,evaluado) VALUES (1,1,1,'','',FALSE);
 
 INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("2",1);
 INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("3",2);

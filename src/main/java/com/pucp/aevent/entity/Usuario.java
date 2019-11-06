@@ -61,6 +61,9 @@ public class Usuario implements Serializable {
 	
 	@Column(length = 90, name="nombre_completo")
 	private String nombreCompleto;
+
+	@Column(name="modoInicioSesion")
+	private Integer modoInicioSesion;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name="usuario_role", joinColumns= @JoinColumn(name="idUsuario"),
