@@ -2,22 +2,21 @@ package com.pucp.aevent.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Postulacion")
 public class Postulacion implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idPostulacion")
@@ -31,11 +30,18 @@ public class Postulacion implements Serializable{
 	@Column(unique = true, length = 60, name="idEvento")
 	private Long idEvento;
 	
-	private Long fase_actual;
+	@Column(name="idFase")
+	private Long idFase;
 	
-	private Date fecha_fin;
+	@Column(name="estado_postulacion")
+	private String estado;
 	
-	private boolean enabled;
+	@Column(name="estado")
+	private Boolean enabled;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "myDate", insertable=false)
+	private Date fechaActualizacion;
 
 	public Long getIdPostulacion() {
 		return idPostulacion;
@@ -61,20 +67,28 @@ public class Postulacion implements Serializable{
 		this.idEvento = idEvento;
 	}
 
-	public Long getFase_actual() {
-		return fase_actual;
+	public Long getIdFase() {
+		return idFase;
 	}
 
-	public void setFase_actual(Long fase_actual) {
-		this.fase_actual = fase_actual;
+	public void setIdFase(Long idFase) {
+		this.idFase = idFase;
 	}
 
-	public Date getFecha_fin() {
-		return fecha_fin;
+	public String getEstado() {
+		return estado;
 	}
 
-	public void setFecha_fin(Date fecha_fin) {
-		this.fecha_fin = fecha_fin;
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public boolean isEnabled() {
@@ -85,6 +99,19 @@ public class Postulacion implements Serializable{
 		this.enabled = enabled;
 	}
 	
-	
+	public Date getFechaActualizacion() {
+		return fechaActualizacion;
+	}
+
+	public void setFechaActualizacion(Date fechaActualizacion) {
+		this.fechaActualizacion = fechaActualizacion;
+	}
+
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 }

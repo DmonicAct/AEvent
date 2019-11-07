@@ -10,7 +10,7 @@ import com.pucp.aevent.entity.Evento;
 public interface IFaseDao  extends JpaRepository <Fase, Long>{
 	public List<Fase> findAll();
 	
-	public List<Fase> findByEvento(Evento evento);
+	public List<Fase> findByIdEvento(Evento evento);
 	
 	public Fase findByIdFase(Long idFase);
 	

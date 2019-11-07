@@ -17,7 +17,7 @@ public class UtilConstanst {
 
 	public static final long ROLE_ADMIN = 1;
 	public static final long ROLE_ORGANIZER = 2;
-	public static final long ROLE_DEFAULT= 2;
+	public static final long ROLE_DEFAULT= 3;
 	
 	public static final String NAME_ROLE_ADMIN = "ROLE_ADMIN";
 	public static final String NAME_ROLE_ORGANIZER = "ROLE_ORGANIZER";
