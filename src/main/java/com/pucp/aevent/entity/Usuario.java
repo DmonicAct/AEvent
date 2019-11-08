@@ -16,7 +16,10 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -37,7 +40,7 @@ public class Usuario implements Serializable {
 	private int idUsuario;
 	
 	@NotEmpty(message ="no puede estar vacio")
-	@Size(min=6, max=20, message="el tamaño tiene que estar entre 6 y 20")
+	@Size(min=6, max=20, message="el tamaï¿½o tiene que estar entre 6 y 20")
 	@Column(unique = true, length = 20, name="usuario")
 	private String username;
 	
@@ -53,11 +56,13 @@ public class Usuario implements Serializable {
 	@Column(length = 30,name="correo")
 	private String email;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="fechaCreacion")
-	private Date fechaCreacion;
+	private Date fechaCreacion= new Date();
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="fechaModificacion")
-	private Date fechaModificacion;
+	private Date fechaModificacion= new Date();
 	
 	@Column(length = 90, name="nombre_completo")
 	private String nombreCompleto;
@@ -149,35 +154,17 @@ public class Usuario implements Serializable {
 		this.nombreCompleto = nombreCompleto;
 	}
 	
-//	public Persona getPersona() {
-//		return persona;
-//	}
-//
-//
-//	public void setPersona(Persona persona) {
-//		this.persona = persona;
-//	}
-
+	//Fechas de creacion y modificacion
 	public Date getFechaCreacion() {
 		return fechaCreacion;
 	}
-
-
-	public void setFechaCreacion(Date fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
-	}
-
 
 	public Date getFechaModificacion() {
 		return fechaModificacion;
 	}
 
-
-	public void setFechaModificacion(Date fechaModificacion) {
-		this.fechaModificacion = fechaModificacion;
-	}
-
-
+	@PreUpdate
+	public void setLastUpdate() {  this.fechaModificacion = new Date(); }
 	/**
 	 * 
 	 */
