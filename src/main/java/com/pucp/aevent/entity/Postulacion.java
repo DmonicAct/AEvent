@@ -30,6 +30,10 @@ public class Postulacion implements Serializable{
 	@Column(unique = true, length = 60, name="idEvento")
 	private Long idEvento;
 	
+	@NotEmpty(message ="no puede estar vacio")
+	@Column(unique = true, length = 60, name="idPropuesta")
+	private Long idPropuesta;
+	
 	@Column(name="idFase")
 	private Long idFase;
 	
