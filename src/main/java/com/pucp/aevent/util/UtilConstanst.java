@@ -24,11 +24,12 @@ public class UtilConstanst {
 	public static final String NAME_ROLE_DAFAULT = "ROLE_DAFAULT";
 	
 	//Estado Evento
-	public static final String EVENTO_BORRADOR		= "EVENTO_BORRADOR";
-	public static final String EVENTO_CANCELADO		= "EVENTO_CANCELADO";
-	public static final String EVENTO_PRESIDENTE  	= "EVENTO_PRESIDENTE";
-	public static final String EVENTO_PONENCIA 		= "EVENTO_BORRADOR";
-	public static final String EVENTO_INICIO 		= "EVENTO_BORRADOR";
+	public static final String EVENTO_FASE_BORRADOR					= "EVENTO_BORRADOR";
+	public static final String EVENTO_FASE_PRESIDENTE  				= "EVENTO_PRESIDENTE";
+	public static final String EVENTO_FASE_SELECCION_PONENCIA 		= "EVENTO_SELECCION";
+	public static final String EVENTO_FASE_INICIO 					= "EVENTO_INICIO";
+	
+	public static final String EVENTO_CANCELADO						= "EVENTO_CANCELADO";
 	//Estado Propuesta
 	public static final String PROPUESTA_ESPERA    	=	"PROPUESTA_ESPERA";	
 	public static final String PROPUESTA_APROBADA  	=	"PROPUESTA_APROBADA";	
