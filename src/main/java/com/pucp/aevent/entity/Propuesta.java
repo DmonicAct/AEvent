@@ -34,6 +34,9 @@ public class Propuesta implements Serializable {
 	@Column(name = "fecha_postulacion")
 	private Date fecha_postulacion;
 	
+	@Column(name = "titulo")
+	private String titulo;
+	
 	@Transient
 	private List<Persona> evaluadoresAsignados;
 	
