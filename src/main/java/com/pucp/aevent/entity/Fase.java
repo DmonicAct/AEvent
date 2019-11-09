@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -37,9 +38,9 @@ public class Fase implements Serializable {
 	
 	@Column(name="fechaFin")
 	private Date fechaFin;
-
+	
 	@JsonProperty(access = Access.WRITE_ONLY)
-    @JoinColumn(name = "idEvento")
+    @JoinColumn(name = "idEvento",nullable=false)
     private int idEvento;
     
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -51,6 +52,18 @@ public class Fase implements Serializable {
 	@JoinColumn(name="id_fase")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<Criterio> criterios  = new ArrayList<>();
+	
+
+	
+
+	public int getIdEvento() {
+		return idEvento;
+	}
+
+	public void setIdEvento(int idEvento) {
+		this.idEvento = idEvento;
+	}
+
 	
 
 	public FormularioCFP getFormulario() {
