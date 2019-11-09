@@ -23,13 +23,13 @@ public class Propuesta implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idPropuesta")
-	private Long idPropuesta;
+	private int idPropuesta;
 	
 	@Column(name = "idEvento")
-	private Long idEvento;
+	private int idEvento;
 	
 	@Column(name = "idPostulante")
-	private Long idPostulante;
+	private int idPostulante;
 	
 	@Column(name = "fecha_postulacion")
 	private Date fecha_postulacion;
@@ -37,29 +37,41 @@ public class Propuesta implements Serializable {
 	@Transient
 	private List<Persona> evaluadoresAsignados;
 	
+	private Persona postulante;
+	
+	
 	private static final long serialVersionUID = 1L;
 
-	public Long getIdPropuesta() {
+	
+	public Persona getPostulante() {
+		return postulante;
+	}
+
+	public void setPostulante(Persona postulante) {
+		this.postulante = postulante;
+	}
+
+	public int getIdPropuesta() {
 		return idPropuesta;
 	}
 
-	public void setIdPropuesta(Long idPropuesta) {
+	public void setIdPropuesta(int idPropuesta) {
 		this.idPropuesta = idPropuesta;
 	}
 
-	public Long getIdEvento() {
+	public int getIdEvento() {
 		return idEvento;
 	}
 
-	public void setIdEvento(Long idEvento) {
+	public void setIdEvento(int idEvento) {
 		this.idEvento = idEvento;
 	}
 
-	public Long getIdPostulante() {
+	public int getIdPostulante() {
 		return idPostulante;
 	}
 
-	public void setIdPostulante(Long idPostulante) {
+	public void setIdPostulante(int idPostulante) {
 		this.idPostulante = idPostulante;
 	}
 
