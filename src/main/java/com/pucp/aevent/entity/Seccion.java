@@ -48,7 +48,7 @@ public class Seccion implements Serializable {
     private String tipoSeccion;
     
     //mappedBy = "idSeccion",
-    @OneToMany(cascade = CascadeType.MERGE,orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name= "id_seccion")
     private List<Pregunta> preguntaList = new ArrayList<>();;

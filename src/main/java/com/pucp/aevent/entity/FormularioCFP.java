@@ -17,6 +17,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 @Table(name = "formulariocfp")
@@ -24,7 +26,7 @@ public class FormularioCFP implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idFormularioCFP")
+	@Column(name="id_formulariocfp")
 	private Long idFormulariocfp;
 	
 	@NotEmpty(message ="no puede estar vacio")
@@ -36,6 +38,10 @@ public class FormularioCFP implements Serializable{
 	@JoinColumn(name= "id_formulariocfp")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<Division> divisionList = new ArrayList<>();
+	
+	@JsonProperty(access = Access.WRITE_ONLY)
+	@JoinColumn(name="id_fase")
+	private int idFase; 
 	
 	public FormularioCFP() {
     }
