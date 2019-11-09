@@ -94,4 +94,13 @@ public class Propuesta implements Serializable {
 		this.evaluadoresAsignados = evaluadoresAsignados;
 	}
 
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+	
+
 }
