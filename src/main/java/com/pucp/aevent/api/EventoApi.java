@@ -166,7 +166,6 @@ public class EventoApi {
 		ResponseObject response = new ResponseObject();
 		try {
 			List<Propuesta> lista = this.service.findAllPropuesta(evento,PageRequest.of(page.getPaginaFront(), page.getRegistros()));
-			//System.out.print(""+lista.get(0).getIdPropuesta()+"\n");
 			response.setResultado(lista);
 			response.setPaginacion(service.getPaginacion());
 			response.setEstado(Estado.OK);
