@@ -87,9 +87,9 @@ public class EvaluacionApi {
 		//id es el id del evaluador
 		ResponseObject response = new ResponseObject();
 		try {
-			List<Evaluacion> lista;
-			lista = this.evservice.findAllByEvaluador(evaluador,PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			List<Evaluacion> lista = this.evservice.findAllByEvaluador(evaluador,PageRequest.of(page.getPaginaFront(), page.getRegistros()));
 			response.setResultado(lista);
+			response.setPaginacion(evservice.getPaginacion());
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {

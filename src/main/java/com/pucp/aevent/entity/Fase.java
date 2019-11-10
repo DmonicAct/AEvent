@@ -39,8 +39,7 @@ public class Fase implements Serializable {
 	@Column(name="fechaFin")
 	private Date fechaFin;
 	
-	@JsonProperty(access = Access.WRITE_ONLY)
-    @JoinColumn(name = "idEvento",nullable=false)
+	@JoinColumn(name="idEvento",referencedColumnName = "idEvento")
     private int idEvento;
     
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
