@@ -2,14 +2,19 @@ package com.pucp.aevent.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "EVALUACION")
@@ -19,15 +24,18 @@ public class Evaluacion implements Serializable{
 	@Column(name="idEvaluacion")
 	private int idEvaluacion;
 	
-	@OneToOne
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@JoinColumn(name = "idEvaluador",referencedColumnName = "idUsuario")
 	private Usuario evaluador;
 	
-	@OneToOne
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@JoinColumn(name = "idFase")
 	private Fase fase;
 	
-	@OneToOne
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@JoinColumn(name = "idPropuesta")
 	private Propuesta propuesta;
 	
