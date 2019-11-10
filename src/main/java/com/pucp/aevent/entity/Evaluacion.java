@@ -2,12 +2,19 @@ package com.pucp.aevent.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "EVALUACION")
@@ -17,14 +24,20 @@ public class Evaluacion implements Serializable{
 	@Column(name="idEvaluacion")
 	private int idEvaluacion;
 	
-	@Column(name = "idPropuesta")
-	private int idPropuesta;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JoinColumn(name = "idEvaluador",referencedColumnName = "idUsuario")
+	private Usuario evaluador;
 	
-	@Column(name = "idEvaluador")
-	private int idEvaluador;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JoinColumn(name = "idFase")
+	private Fase fase;
 	
-	@Column(name = "idFase")
-	private int idFase;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JoinColumn(name = "idPropuesta")
+	private Propuesta propuesta;
 	
 	@Column(name = "opinion")
 	private String opinion;
@@ -38,10 +51,23 @@ public class Evaluacion implements Serializable{
 	@Column(name = "abierto")
 	private Boolean abierto;
 	
-	private Propuesta propuesta;
+	@Column(name = "sigueEvaluando")
+	private Boolean sigueEvaluando;
 	
 	public Evaluacion() {
 	}
+	
+	public Boolean getSigueEvaluando() {
+		return sigueEvaluando;
+	}
+
+
+
+	public void setSigueEvaluando(Boolean sigueEvaluando) {
+		this.sigueEvaluando = sigueEvaluando;
+	}
+
+
 
 	public int getIdEvaluacion() {
 		return idEvaluacion;
@@ -51,28 +77,20 @@ public class Evaluacion implements Serializable{
 		this.idEvaluacion = idEvaluacion;
 	}
 
-	public int getIdPropuesta() {
-		return idPropuesta;
+	public Usuario getEvaluador() {
+		return evaluador;
 	}
 
-	public void setIdPropuesta(int idPropuesta) {
-		this.idPropuesta = idPropuesta;
+	public void setEvaluador(Usuario evaluador) {
+		this.evaluador = evaluador;
 	}
 
-	public int getIdEvaluador() {
-		return idEvaluador;
+	public Fase getFase() {
+		return this.fase;
 	}
 
-	public void setIdEvaluador(int idEvaluador) {
-		this.idEvaluador = idEvaluador;
-	}
-
-	public int getIdFase() {
-		return idFase;
-	}
-
-	public void setIdFase(int idFase) {
-		this.idFase = idFase;
+	public void setFase(Fase fase) {
+		this.fase = fase;
 	}
 
 	public String getOpinion() {

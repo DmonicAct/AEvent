@@ -6,13 +6,22 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -25,11 +34,14 @@ public class Propuesta implements Serializable {
 	@Column(name="idPropuesta")
 	private int idPropuesta;
 	
-	@Column(name = "idEvento")
-	private int idEvento;
+	@OneToOne
+	@JoinColumn(name = "idEvento",referencedColumnName = "idEvento")
+	private Evento evento;
 	
-	@Column(name = "idPostulante")
-	private int idPostulante;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idPostulante",referencedColumnName = "idUsuario")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	private Usuario postulante;
 	
 	@Column(name = "fecha_postulacion")
 	private Date fecha_postulacion;
@@ -39,18 +51,38 @@ public class Propuesta implements Serializable {
 	
 	@Transient
 	private List<Persona> evaluadoresAsignados;
-	
-	private Persona postulante;
-	
-	
+		
 	private static final long serialVersionUID = 1L;
 
-	
-	public Persona getPostulante() {
-		return postulante;
+	public Evento getEvento() {
+		return evento;
 	}
 
-	public void setPostulante(Persona postulante) {
+	public void setEvento(Evento evento) {
+		this.evento = evento;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public List<Persona> getEvaluadoresAsignados() {
+		return evaluadoresAsignados;
+	}
+
+	public void setEvaluadoresAsignados(List<Persona> evaluadoresAsignados) {
+		this.evaluadoresAsignados = evaluadoresAsignados;
+	}
+
+	public Usuario getPostulante() {
+		return this.postulante;
+	}
+
+	public void setPostulante(Usuario postulante) {
 		this.postulante = postulante;
 	}
 
@@ -62,20 +94,12 @@ public class Propuesta implements Serializable {
 		this.idPropuesta = idPropuesta;
 	}
 
-	public int getIdEvento() {
-		return idEvento;
+	public Evento getIdEvento() {
+		return evento;
 	}
 
-	public void setIdEvento(int idEvento) {
-		this.idEvento = idEvento;
-	}
-
-	public int getIdPostulante() {
-		return idPostulante;
-	}
-
-	public void setIdPostulante(int idPostulante) {
-		this.idPostulante = idPostulante;
+	public void setIdEvento(Evento evento) {
+		this.evento = evento;
 	}
 
 	public Date getFecha_postulacion() {
@@ -86,12 +110,12 @@ public class Propuesta implements Serializable {
 		this.fecha_postulacion = fecha_postulacion;
 	}
 
-	public List<Persona> getEvaluadoresAsignados() {
-		return evaluadoresAsignados;
+	public String getTitulo() {
+		return titulo;
 	}
 
-	public void setEvaluadoresAsignados(List<Persona> evaluadoresAsignados) {
-		this.evaluadoresAsignados = evaluadoresAsignados;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 }

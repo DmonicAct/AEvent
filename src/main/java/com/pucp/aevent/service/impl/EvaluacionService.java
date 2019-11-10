@@ -8,16 +8,27 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.pucp.aevent.dao.IEvaluacionDao;
+import com.pucp.aevent.dao.IPreferenciaDao;
 import com.pucp.aevent.dao.IPropuestaDao;
 import com.pucp.aevent.entity.Evaluacion;
+import com.pucp.aevent.entity.Fase;
+import com.pucp.aevent.entity.Persona;
+import com.pucp.aevent.entity.Preferencia;
+import com.pucp.aevent.entity.Propuesta;
+import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.response_objects.Paginacion;
 import com.pucp.aevent.service.IEvaluacionService;
 
 @Service
 public class EvaluacionService implements IEvaluacionService{
-	@Autowired IEvaluacionDao dao;
+	@Autowired 
+	IEvaluacionDao daoEvaluacion;
 	
-	@Autowired IPropuestaDao daoPropuesta;
+	@Autowired 
+	IPropuestaDao daoPropuesta;
+	
+	@Autowired
+	IPreferenciaDao daoPreferencia;
 	
 	private Paginacion paginacion;
 
@@ -25,40 +36,43 @@ public class EvaluacionService implements IEvaluacionService{
 		return this.paginacion;
 	}
 	
-	public Evaluacion save(Integer idEvaluador,Integer idPropuesta,Integer idFase) {
-		Evaluacion e = dao.findByIdEvaluadorAndIdPropuestaAndIdFase(idEvaluador,idPropuesta,idFase);
-		if (e == null) {
-			e = new Evaluacion();
-			e.setEvaluado(false);
-			e.setIdEvaluador(idEvaluador);
-			e.setIdFase(idFase);
-			e.setIdPropuesta(idPropuesta);
-			e.setOpinion("");
-			e.setVeredicto("");
-			e = dao.save(e);
-			return e;
-		}
-		return null;
-	}
-	
-	public Integer delete(Integer idEvaluacion) {
-		Integer e = dao.deleteByIdEvaluacion(idEvaluacion);
+	public Evaluacion asignarPropuesta(Persona evaluador,Propuesta propuesta,Fase fase) {
+		Evaluacion e = new Evaluacion();
+		e.setEvaluado(false);
+		e.setAbierto(true);
+		e.setEvaluador(evaluador);
+		e.setFase(fase);
+		e.setPropuesta(propuesta);
+		e.setOpinion("");
+		e.setVeredicto("");
+		e.setSigueEvaluando(true);
+		e = daoEvaluacion.save(e);
+		
+		Preferencia p = new Preferencia();
+		p.setPropuesta(propuesta);
+		p.setUsuario(evaluador);
+		daoPreferencia.save(p);
+		
 		return e;
-		//if (e == null) {
-		//	return 0;
-		//}
-		//return 1;
 	}
 	
-	public List<Evaluacion> listarEvaluacionesDeEvaluador(Integer idEvaluador, Pageable page){
+	public void save(Evaluacion evaluacion) {
+		daoEvaluacion.save(evaluacion);
+	}
+	
+	public void delete(Evaluacion evaluacion) {
+		daoEvaluacion.delete(evaluacion);
+	}
+	
+	public List<Evaluacion> findAllByEvaluador(Persona evaluador, Pageable page){
 		Page<Evaluacion> lista = null;
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
 		try {
-			lista = this.dao.findByIdEvaluador(idEvaluador, page);
+			lista = this.daoEvaluacion.findByEvaluador(evaluador, page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 			for(Evaluacion e : lista.getContent()) {
-				e.setPropuesta(this.daoPropuesta.findByIdPropuesta(e.getIdPropuesta()));
+				e.setPropuesta(this.daoPropuesta.findByIdPropuesta(e.getPropuesta().getIdPropuesta()));
 			}
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
