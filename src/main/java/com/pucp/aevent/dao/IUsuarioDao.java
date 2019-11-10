@@ -1,8 +1,9 @@
 package com.pucp.aevent.dao;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
-
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -12,6 +13,10 @@ public interface IUsuarioDao extends JpaRepository <Usuario, Long>{
 	public Usuario findByUsername(String username);
 
 	public Usuario findByIdUsuario(Integer id);	
+	
+	public Page<Usuario> findByEnabledTrue(org.springframework.data.domain.Pageable pageable);
+	
+	public Page<Usuario> findByEnabledFalse(org.springframework.data.domain.Pageable pageable);
 	
 	public List<Usuario> findByEnabled(Boolean enabled);
 	

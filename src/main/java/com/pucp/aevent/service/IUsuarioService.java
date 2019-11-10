@@ -14,9 +14,13 @@ public interface IUsuarioService {
 
 	public Usuario findById(Integer id);
 	
-	public List<Usuario> findAll(Pageable pageable);
+	public List<Usuario> findAllInactive(Pageable pageable);
 	
-	public List<Usuario> findAll();
+	public List<Usuario> findAllActive(Pageable pageable);
+	
+	public List<Usuario> findAllActive();
+
+	public List<Usuario> findAllInactive();
 	
 	public Usuario save(Persona persona);
 	

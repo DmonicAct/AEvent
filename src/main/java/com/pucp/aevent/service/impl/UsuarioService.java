@@ -91,25 +91,6 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 		user.setPassword(null);
 		return  user;
 	}
-	
-	@Override
-	@Transactional(readOnly = true)
-	public List<Usuario> findAll(Pageable page) {
-		//List<Object[]> lista2 = dao.findAll3("","",0,"","","",0);
-		//List<Object[]> lista = dao.findAll2();
-		Page<Usuario> lista = null;
-		this.paginacion = new Paginacion();
-		this.paginacion.setPageable(page);
-		try {
-			lista = dao.findAll(page); 
-			this.paginacion.setTotalRegistros(lista.getTotalElements());
-			
-		}catch(Exception e) {
-			System.out.print(e.getMessage());
-		}
-		
-		return lista.getContent();
-	}
 
 	@Override
 	@Transactional
@@ -205,10 +186,54 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 	}
 
 	@Override
-	public List<Usuario> findAll() {
+	@Transactional(readOnly=true)
+	public List<Usuario> findAllInactive(Pageable pageable) {
+		Page<Usuario> lista = null;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(pageable);
+		try {
+			lista = dao.findByEnabledFalse(pageable);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+			
+		}catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
+		
+		return lista.getContent();
+	}
+
+	@Override
+	public List<Usuario> findAllActive(Pageable pageable) {
+		Page<Usuario> lista = null;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(pageable);
+		try {
+			lista = dao.findByEnabledTrue(pageable);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+			
+		}catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
+		
+		return lista.getContent();
+	}
+
+	@Override
+	public List<Usuario> findAllActive() {
 		List<Usuario> lista =null;
 		try {
 			lista = dao.findByEnabled(true);
+		}catch(Exception ex) {
+			System.out.print(ex.getMessage());
+		}
+		return lista;
+	}
+
+	@Override
+	public List<Usuario> findAllInactive() {
+		List<Usuario> lista =null;
+		try {
+			lista = dao.findByEnabled(false);
 		}catch(Exception ex) {
 			System.out.print(ex.getMessage());
 		}
