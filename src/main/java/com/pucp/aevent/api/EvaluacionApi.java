@@ -17,6 +17,9 @@ import org.springframework.web.client.HttpClientErrorException.BadRequest;
 import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
 import com.pucp.aevent.entity.Evaluacion;
+import com.pucp.aevent.entity.Fase;
+import com.pucp.aevent.entity.Propuesta;
+import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.request_objects.PaginaRequest;
 import com.pucp.aevent.entity.response_objects.Estado;
 import com.pucp.aevent.entity.response_objects.ResponseObject;
@@ -26,15 +29,15 @@ import com.pucp.aevent.service.IEvaluacionService;
 @RequestMapping("/api")
 public class EvaluacionApi {
 	
-	@Autowired IEvaluacionService evservice;
+	@Autowired 
+	IEvaluacionService evservice;
 	
 	@Secured({"ROLE_ORGANIZER","ROLE_ADMIN","ROLE_DEFAULT"})
-	@PostMapping(path = "/evaluacion/{idE}/{idP}/{idF}",produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> asignarEvaluadorAPropuesta(@PathVariable("idE")int idEvaluador,@PathVariable("idP")int idPropuesta,@PathVariable("idF")int idFase){
+	@PostMapping(path = "/evaluacion",produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> asignarEvaluadorAPropuesta(Persona evaluador,Propuesta propuesta,Fase fase){
 		ResponseObject response = new ResponseObject();
 		try {
-			Evaluacion e;
-			e = this.evservice.save(idEvaluador,idPropuesta,idFase);
+			Evaluacion e = this.evservice.asignarPropuesta(evaluador,propuesta,fase);
 			response.setResultado(e);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
@@ -55,12 +58,11 @@ public class EvaluacionApi {
 	
 	@Secured({"ROLE_ORGANIZER","ROLE_ADMIN","ROLE_DEFAULT"})
 	@PostMapping(path = "/evaluacion/desasignar",produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> desasignarPropuesta(int idEvaluacion){
+	public ResponseEntity<ResponseObject> desasignarPropuesta(Evaluacion evaluacion){
 		ResponseObject response = new ResponseObject();
 		try {
-			Integer r;
-			r = this.evservice.delete(idEvaluacion);
-			response.setResultado(r);
+			evaluacion.setSigueEvaluando(false);
+			this.evservice.save(evaluacion);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
@@ -80,14 +82,14 @@ public class EvaluacionApi {
 	
 	
 	@Secured({"ROLE_ORGANIZER","ROLE_ADMIN","ROLE_DEFAULT"})
-	@GetMapping(path = "/evaluaciones/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> recibirEvaluaciones(@PathVariable("id") int id, PaginaRequest page){
+	@GetMapping(path = "/evaluaciones",produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> recibirEvaluaciones(Persona evaluador, PaginaRequest page){
 		//id es el id del evaluador
 		ResponseObject response = new ResponseObject();
 		try {
-			List<Evaluacion> lista;
-			lista = this.evservice.listarEvaluacionesDeEvaluador(id,PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			List<Evaluacion> lista = this.evservice.findAllByEvaluador(evaluador,PageRequest.of(page.getPaginaFront(), page.getRegistros()));
 			response.setResultado(lista);
+			response.setPaginacion(evservice.getPaginacion());
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {

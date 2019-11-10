@@ -128,6 +128,9 @@ INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("Tema interes
 INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("5",4);
 INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("Se han realizado observaciones a la propuesta, enviar datos corregidos",5);
 
+INSERT INTO `aevent`.`preferencia` (`id_preferencia`, `descripcion`, `id_propuesta`, `id_usuario`) VALUES ('1', 'Quiero Evaluar', '1', '4');
+INSERT INTO `aevent`.`preferencia` (`id_preferencia`, `descripcion`, `id_propuesta`, `id_usuario`) VALUES ('2', 'Podria Evaluar', '2', '4');
+
 ///////TRIGGERS
 
 CREATE TRIGGER `UPDATE_PASSWORD` BEFORE UPDATE ON `usuario` FOR EACH ROW BEGIN DECLARE PASSWORD_OLD VARCHAR(60); SELECT CONTRASENA INTO PASSWORD_OLD  FROM usuario US WHERE NEW.ID_USUARIO=US.ID_USUARIO; IF NEW.CONTRASENA IS NULL OR NEW.CONTRASENA = "" THEN SET NEW.CONTRASENA = PASSWORD_OLD; END IF; END;

@@ -240,5 +240,4 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 		return lista;
 	}
 	
-	
 }
