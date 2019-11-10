@@ -9,12 +9,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.pucp.aevent.entity.Evaluacion;
+import com.pucp.aevent.entity.Fase;
+import com.pucp.aevent.entity.Persona;
+import com.pucp.aevent.entity.Propuesta;
 
 public interface IEvaluacionDao  extends JpaRepository <Evaluacion, Long>{
-	public Page<Evaluacion> findByIdEvaluador(Integer idEvaluador, Pageable page);
-	public Evaluacion findByIdEvaluadorAndIdPropuestaAndIdFase(Integer idEvaluador,Integer idPropuesta,Integer idFase);
-	public List<Evaluacion> findByIdPropuesta(Integer idpropuesta);
-	
-	@Transactional
-	public Integer deleteByIdEvaluacion(Integer idEvaluacion);
+	public Page<Evaluacion> findByEvaluador(Persona usuario, Pageable page);
+	public Evaluacion findByEvaluadorAndPropuestaAndFase(Persona usuario,Propuesta propuesta,Fase fase);
+	public List<Evaluacion> findByPropuesta(Propuesta propuesta);
+	public void delete(Evaluacion evaluacion);
 }

@@ -1,11 +1,14 @@
 package com.pucp.aevent.dao;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import com.pucp.aevent.entity.Preferencia;
+import com.pucp.aevent.entity.Usuario;
 
 public interface IPreferenciaDao extends JpaRepository <Preferencia, Long> {
-//	public List<Preferencia> findByUsuario(Usuario user);
-	public List<Preferencia> findByIdUsuario(int idUsuario);
+	public Page<Preferencia> findByUsuario(Usuario user,Pageable pageable);
+//	public List<Preferencia> findByIdUsuario(int idUsuario);
 //	public Preferencia findByUsuarioAndPropuesta(Usuario user,Propuesta prop);
 }
