@@ -79,7 +79,7 @@ public class EventoService implements IEventoService {
 			participante = this.daoPersona.findByUsername(evento.getOrganizador().getUsername());
 			evento.setOrganizador(participante);
 
-			participante = this.daoPersona.findByIdUsuario(evento.getPresidente().getIdUsuario());
+			participante = this.daoPersona.findByUsername(evento.getPresidente().getUsername());
 			evento.setPresidente(participante);
 			
 			returnedEvento = this.dao.save(evento);
@@ -193,7 +193,7 @@ public class EventoService implements IEventoService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<Propuesta> findAllPropuesta(Integer idEvento, Pageable page) {
+	public List<Propuesta> findAllPropuesta(Evento evento, Pageable page) {
 		Page<Propuesta> lista = null;
 		/*
 		 * Organizador
@@ -204,49 +204,45 @@ public class EventoService implements IEventoService {
 		
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
-		try {
-			System.out.print(""+idEvento+"\n");
-			lista = this.daoPropuesta.findByIdEvento(idEvento, page);
-			System.out.print(""+lista+"\n");
-			System.out.print(""+lista.getContent()+"\n");
-			
+		//try {
+			lista = this.daoPropuesta.findByEvento(evento, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+			/*
 			for (Propuesta prop : lista.getContent()) {
-				prop.setPostulante(daoPersona.findByIdUsuario(prop.getIdPostulante()));
+				prop.setPostulante(daoPersona.findByIdUsuario(prop.getPostulante().getIdUsuario()));
 				
-				List<Evaluacion> evaluaciones = daoEvaluacion.findByIdPropuesta(prop.getIdPropuesta());
+				List<Evaluacion> evaluaciones = daoEvaluacion.findByPropuesta(prop);
 				Set<Persona> evaluadores = new HashSet<>();
 				for (Evaluacion e : evaluaciones) {
-					evaluadores.add(daoPersona.findByIdUsuario(e.getIdEvaluador()));
+					evaluadores.add(daoPersona.findByIdUsuario(e.getEvaluador().getIdUsuario()));
 				}
 				prop.setEvaluadoresAsignados(new ArrayList<>(evaluadores));
 			}
-			this.paginacion.setTotalRegistros(lista.getTotalElements());
+			
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-		}
+		}*/
 		return lista.getContent();
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<Evaluacion> findAllOfEvaluador(Integer idEvaluador, Pageable page){
+	public List<Evaluacion> findAllOfEvaluador(Persona evaluador, Pageable page){
 		Page<Evaluacion> lista = null;
 		
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
-		try {
-			System.out.print(""+idEvaluador+"\n");
-			lista = this.daoEvaluacion.findByIdEvaluador(idEvaluador, page);
-			System.out.print(""+lista+"\n");
-			System.out.print(""+lista.getContent()+"\n");
-			
+		//try {
+			lista = this.daoEvaluacion.findByEvaluador(evaluador, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+			/*
 			for (Evaluacion e : lista.getContent())
-				e.setPropuesta(this.daoPropuesta.findByIdPropuesta(e.getIdPropuesta()));
+				e.setPropuesta(this.daoPropuesta.findByIdPropuesta(e.getPropuesta().getIdPropuesta()));
 			
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-		}
+		}*/
 		return lista.getContent();
 	}
 

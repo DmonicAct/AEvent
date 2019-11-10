@@ -70,6 +70,29 @@ public class Usuario implements Serializable {
 	@Column(name="modoInicioSesion")
 	private Integer modoInicioSesion;
 	
+	@Column(name="eval_sin_leer")
+	private Boolean evaluacionSinLeer;
+	
+	public Boolean getEvaluacionSinLeer() {
+		return evaluacionSinLeer;
+	}
+
+
+	public void setEvaluacionSinLeer(Boolean evaluacionSinLeer) {
+		this.evaluacionSinLeer = evaluacionSinLeer;
+	}
+
+
+	public void setFechaCreacion(Date fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
+
+	public void setFechaModificacion(Date fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
+	}
+
+
 	public Integer getModoInicioSesion() {
 		return modoInicioSesion;
 	}
