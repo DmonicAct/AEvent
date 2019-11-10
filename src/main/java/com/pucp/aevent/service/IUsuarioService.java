@@ -16,6 +16,8 @@ public interface IUsuarioService {
 	
 	public List<Usuario> findAll(Pageable pageable);
 	
+	public List<Usuario> findAll();
+	
 	public Usuario save(Persona persona);
 	
 	public Usuario saveOut(Persona persona);

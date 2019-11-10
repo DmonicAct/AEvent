@@ -13,6 +13,7 @@ public interface IUsuarioDao extends JpaRepository <Usuario, Long>{
 
 	public Usuario findByIdUsuario(Integer id);	
 	
+	public List<Usuario> findByEnabled(Boolean enabled);
 	
 	public Usuario getUsernameAndEmailByIdUsuario(Integer id);
 	

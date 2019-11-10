@@ -24,6 +24,7 @@ import com.pucp.aevent.dao.IRolDao;
 import com.pucp.aevent.dao.IUsuarioDao;
 import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.Role;
+import com.pucp.aevent.entity.TipoEvento;
 import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.response_objects.Nivel;
 import com.pucp.aevent.entity.response_objects.Paginacion;
@@ -201,6 +202,17 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 			return null;
 		}
 		return returnedUser;
+	}
+
+	@Override
+	public List<Usuario> findAll() {
+		List<Usuario> lista =null;
+		try {
+			lista = dao.findByEnabled(true);
+		}catch(Exception ex) {
+			System.out.print(ex.getMessage());
+		}
+		return lista;
 	}
 	
 	
