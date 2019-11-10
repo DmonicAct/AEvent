@@ -34,17 +34,25 @@ public class Propuesta implements Serializable {
 	@Column(name = "fecha_postulacion")
 	private Date fecha_postulacion;
 	
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@JoinColumn(name="idDocumento")
-//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-//	private List<Documento> documentos = new ArrayList<>();
-	
-	private Persona postulante;
+	@Column(name = "titulo")
+	private String titulo;
 	
 	@Transient
 	private List<Persona> evaluadoresAsignados;
 	
+	private Persona postulante;
+	
+	
 	private static final long serialVersionUID = 1L;
+
+	
+	public Persona getPostulante() {
+		return postulante;
+	}
+
+	public void setPostulante(Persona postulante) {
+		this.postulante = postulante;
+	}
 
 	public int getIdPropuesta() {
 		return idPropuesta;
@@ -76,14 +84,6 @@ public class Propuesta implements Serializable {
 
 	public void setFecha_postulacion(Date fecha_postulacion) {
 		this.fecha_postulacion = fecha_postulacion;
-	}
-
-	public Persona getPostulante() {
-		return postulante;
-	}
-
-	public void setPostulante(Persona postulante) {
-		this.postulante = postulante;
 	}
 
 	public List<Persona> getEvaluadoresAsignados() {

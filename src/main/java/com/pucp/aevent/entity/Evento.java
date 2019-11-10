@@ -94,6 +94,9 @@ public class Evento implements Serializable {
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private List<Fase> fases=new ArrayList<>();	
 
+	@Column(name="estado_evento")
+	private String estado_evento;
+	
 	@Column(name = "estado")
 	private Boolean enabled;
 
@@ -203,7 +206,13 @@ public class Evento implements Serializable {
 		this.fases = fases;
 	}
 	
+	public String getEstado_evento() {
+		return estado_evento;
+	}
 
+	public void setEstado_evento(String estado_evento) {
+		this.estado_evento = estado_evento;
+	}
 
 	public Boolean getEnabled() {
 		return enabled;
