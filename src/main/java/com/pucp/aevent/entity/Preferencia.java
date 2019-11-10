@@ -22,23 +22,17 @@ public class Preferencia implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idPreferencia")
 	private int id;
-	/*
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario",referencedColumnName = "idUsuario")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	private Usuario usuario;*/
-	@Column(name="idUsuario")
-	private int idUsuario;
-	
-
-
+	private Usuario usuario;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idPropuesta",referencedColumnName = "idPropuesta")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Propuesta propuesta;
 	
-
 	@Column(name="descripcion")
 	private String descripcion;
 	
@@ -51,7 +45,7 @@ public class Preferencia implements Serializable{
 		this.id = id;
 	}
 
-/*
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -59,16 +53,8 @@ public class Preferencia implements Serializable{
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}*/
-
-	public int getIdUsuario() {
-		return idUsuario;
 	}
 
-
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
-	}
 	public Propuesta getPropuesta() {
 		return propuesta;
 	}

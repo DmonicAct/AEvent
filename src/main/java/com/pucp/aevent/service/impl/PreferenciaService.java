@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.pucp.aevent.dao.IPersonaDao;
 import com.pucp.aevent.dao.IPreferenciaDao;
+import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.Preferencia;
+import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.service.IPreferenciaService;
 
 @Service
@@ -21,8 +23,8 @@ public class PreferenciaService implements IPreferenciaService {
 		return dao.findByUsuario(user);
 	}*/
 	@Override
-	public List<Preferencia> findByIdUsuario(int idUsuario) {
-		return dao.findByIdUsuario(idUsuario);
+	public List<Preferencia> findByUsuario(Persona usuario) {
+		return dao.findByUsuario(usuario);
 	}
 	
 	
