@@ -89,7 +89,7 @@ public class Evento implements Serializable {
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private TipoEvento tipoEvento;
 	
-	@OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE}, fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinColumn(name = "idEvento") 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private List<Fase> fases=new ArrayList<>();	
