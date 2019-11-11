@@ -10,7 +10,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.pucp.aevent.dao.IPostulacionDao;
+import com.pucp.aevent.dao.IPropuestaDao;
 import com.pucp.aevent.entity.Postulacion;
+import com.pucp.aevent.entity.Propuesta;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;
 import com.pucp.aevent.service.IPostulacionService;
@@ -20,6 +22,9 @@ public class PostulacionService implements IPostulacionService{
 	
 	@Autowired
 	IPostulacionDao dao;
+	
+	@Autowired
+	IPropuestaDao daoPropuesta;
 	
 	private Paginacion paginacion;
 	public Paginacion getPaginacion() {
@@ -76,6 +81,7 @@ public class PostulacionService implements IPostulacionService{
 		return lista.getContent();
 	}
 	
+	@Override
 	public Boolean existsPostulacion(Long idUsuario, Long idEvento) {
 		Boolean post= null;
 		try {
@@ -86,5 +92,18 @@ public class PostulacionService implements IPostulacionService{
 			this.error.setMensajeInterno(e.getCause().toString());
 		}
 		return post;
+	}
+	
+	@Override
+	public Propuesta savePropuesta(Propuesta propuesta) {
+		Propuesta prop= null;
+		try {
+			prop = this.daoPropuesta.save(propuesta);
+		}catch(Exception e) {
+			logger.error("Error en Postulacion Service(savePropuesta): " + e.getMessage());
+			this.error.setMensaje("Error en Postulacion Service(savePropuesta): " + e.getMessage());
+			this.error.setMensajeInterno(e.getCause().toString());
+		}
+		return prop;
 	}
 }
