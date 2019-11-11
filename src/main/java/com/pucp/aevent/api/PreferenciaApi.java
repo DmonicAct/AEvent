@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.client.HttpServerErrorException.InternalServerErr
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.Preferencia;
+import com.pucp.aevent.entity.Propuesta;
 import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.request_objects.PaginaRequest;
 import com.pucp.aevent.entity.response_objects.Estado;
@@ -60,7 +62,7 @@ public class PreferenciaApi {
 		}
 	}
 	
-	@Secured({"ROLE_ORGANIZER"})
+	//@Secured({"ROLE_ORGANIZER"})
 	@PostMapping(path = "/preferencia",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> guardarPreferencia( @Valid @RequestBody Preferencia preferencia) {
 		ResponseObject response = new ResponseObject();
@@ -85,4 +87,26 @@ public class PreferenciaApi {
 		}
 	}
 
+	@GetMapping(path = "/preferencia/exists", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarDni(Usuario usuario, Propuesta propuesta) {
+		ResponseObject response = new ResponseObject();
+		try {
+			Boolean resultado= this.service.existsByUsuarioAndByPropuesta(usuario, propuesta);
+			response.setResultado(resultado);
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }
