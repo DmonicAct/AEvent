@@ -61,7 +61,7 @@ public class EvaluacionApi {
 	public ResponseEntity<ResponseObject> desasignarPropuesta(Evaluacion evaluacion){
 		ResponseObject response = new ResponseObject();
 		try {
-			evaluacion.setSigueEvaluando(false);
+			//evaluacion.setSigueEvaluando(false);
 			this.evservice.save(evaluacion);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);

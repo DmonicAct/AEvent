@@ -38,14 +38,17 @@ public class EvaluacionService implements IEvaluacionService{
 	
 	public Evaluacion asignarPropuesta(Persona evaluador,Propuesta propuesta,Fase fase) {
 		Evaluacion e = new Evaluacion();
-		e.setEvaluado(false);
-		e.setAbierto(true);
+		//e.setEvaluado(false);
+		//e.setAbierto(true);
+		e.setComentarioParticipante("");
+		e.setComentarioPresidente("");
+		e.setEstado("ASIGNADO");
 		e.setEvaluador(evaluador);
 		e.setFase(fase);
 		e.setPropuesta(propuesta);
-		e.setOpinion("");
-		e.setVeredicto("");
-		e.setSigueEvaluando(true);
+		//e.setOpinion("");
+		//e.setVeredicto("");
+		//e.setSigueEvaluando(true);
 		e = daoEvaluacion.save(e);
 		
 		Preferencia p = new Preferencia();
