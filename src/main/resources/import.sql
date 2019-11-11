@@ -116,10 +116,10 @@ INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion,titulo) VALUE
 INSERT INTO `documento` (nombredoc,extensiondoc,contenido,id_propuesta) VALUES ('archivo1','pdf',10,1);
 INSERT INTO `documento` (nombredoc,extensiondoc,contenido,id_propuesta) VALUES ('archivo2','pdf',10,2);
 
-INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,opinion,veredicto,evaluado) VALUES (1,2,1,'','',FALSE);
-INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,opinion,veredicto,evaluado) VALUES (1,3,1,'','',FALSE);
-INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,opinion,veredicto,evaluado) VALUES (1,5,1,'','',FALSE);
-INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,opinion,veredicto,evaluado) VALUES (2,3,1,'','',FALSE);
+INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,estado,comentario_presidente,comentario_participante) VALUES (1,2,1,'ASIGNADO','','');
+INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,estado,comentario_presidente,comentario_participante) VALUES (1,3,1,'ASIGNADO','','');
+INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,estado,comentario_presidente,comentario_participante) VALUES (1,5,1,'ASIGNADO','','');
+INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,estado,comentario_presidente,comentario_participante) VALUES (2,3,1,'ASIGNADO','','');
 
 INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("2",1);
 INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("3",2);
