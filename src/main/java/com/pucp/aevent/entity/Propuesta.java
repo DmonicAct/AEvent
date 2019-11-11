@@ -61,7 +61,7 @@ public class Propuesta implements Serializable {
 	public void setEvento(Evento evento) {
 		this.evento = evento;
 	}
-/*
+
 	public String getTitulo() {
 		return titulo;
 	}
@@ -69,7 +69,7 @@ public class Propuesta implements Serializable {
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-*/
+
 	public List<Persona> getEvaluadoresAsignados() {
 		return evaluadoresAsignados;
 	}
