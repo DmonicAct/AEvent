@@ -49,10 +49,36 @@ public class Propuesta implements Serializable {
 	
 	@Column(name = "titulo")
 	private String titulo;
+	
+	@Transient
+	private List<Persona> evaluadoresAsignados;
 		
 	private static final long serialVersionUID = 1L;
 
-	
+	public Evento getEvento() {
+		return evento;
+	}
+
+	public void setEvento(Evento evento) {
+		this.evento = evento;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public List<Persona> getEvaluadoresAsignados() {
+		return evaluadoresAsignados;
+	}
+
+	public void setEvaluadoresAsignados(List<Persona> evaluadoresAsignados) {
+		this.evaluadoresAsignados = evaluadoresAsignados;
+	}
+
 	public Usuario getPostulante() {
 		return this.postulante;
 	}

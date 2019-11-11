@@ -204,13 +204,12 @@ public class EventoService implements IEventoService {
 		
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
-		//try {
+		try {
 			lista = this.daoPropuesta.findByEvento(evento, page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
-			/*
+			
 			for (Propuesta prop : lista.getContent()) {
-				prop.setPostulante(daoPersona.findByIdUsuario(prop.getPostulante().getIdUsuario()));
-				
+				//prop.setPostulante(daoPersona.findByIdUsuario(prop.getPostulante().getIdUsuario()));
 				List<Evaluacion> evaluaciones = daoEvaluacion.findByPropuesta(prop);
 				Set<Persona> evaluadores = new HashSet<>();
 				for (Evaluacion e : evaluaciones) {
@@ -221,7 +220,7 @@ public class EventoService implements IEventoService {
 			
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
-		}*/
+		}
 		return lista.getContent();
 	}
 	
