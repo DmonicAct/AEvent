@@ -56,7 +56,7 @@ public class FormularioCFP implements Serializable{
         	   divisionList = new ArrayList<Division>();          
            }
            divisionList.add(division);
-           division.setIdFormulario(this);
+           division.setFormulario(this);
         }
      }
 	    

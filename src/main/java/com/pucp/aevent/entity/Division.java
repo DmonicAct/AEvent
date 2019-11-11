@@ -97,6 +97,14 @@ public class Division implements Serializable {
         return seccionList;
     }
 
+	public FormularioCFP getFormulario() {
+		return formulario;
+	}
+
+	public void setFormulario(FormularioCFP formulario) {
+		this.formulario = formulario;
+	}
+
 	public void setSeccionList(List<Seccion> seccionList) {
         this.seccionList = seccionList;
     }
