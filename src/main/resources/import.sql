@@ -121,12 +121,12 @@ INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,estado,comentario_pr
 INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,estado,comentario_presidente,comentario_participante) VALUES (1,5,1,'ASIGNADO','','');
 INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,estado,comentario_presidente,comentario_participante) VALUES (2,3,1,'ASIGNADO','','');
 
-INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("2",1);
-INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("3",2);
-INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("Buen resumen",3);
-INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("Tema interesante",3);
-INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("5",4);
-INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("Se han realizado observaciones a la propuesta, enviar datos corregidos",5);
+INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("2",1);
+INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("3",2);
+INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("Buen resumen",3);
+INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("Tema interesante",3);
+INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("5",4);
+INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("Se han realizado observaciones a la propuesta, enviar datos corregidos",5);
 
 INSERT INTO `aevent`.`preferencia` (`id_preferencia`, `descripcion`, `id_propuesta`, `id_usuario`) VALUES ('1', 'Quiero Evaluar', '1', '4');
 INSERT INTO `aevent`.`preferencia` (`id_preferencia`, `descripcion`, `id_propuesta`, `id_usuario`) VALUES ('2', 'Podria Evaluar', '2', '4');
