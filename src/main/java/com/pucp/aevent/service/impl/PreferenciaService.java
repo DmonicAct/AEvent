@@ -91,8 +91,14 @@ public class PreferenciaService implements IPreferenciaService {
 	}
 
 	@Override
-	public boolean existsByUsuarioAndByPropuesta(Usuario usuario, Propuesta propuesta) {
-		return dao.existsByUsuarioAndPropuesta(usuario, propuesta);
+	public Preferencia findByUsuarioAndPropuesta(Usuario usuario, Propuesta propuesta) {
+		return dao.findByUsuarioAndPropuesta(usuario, propuesta);
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		dao.deleteById(id);
+		
 	}
 	
 /*

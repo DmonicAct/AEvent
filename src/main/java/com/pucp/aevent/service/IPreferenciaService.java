@@ -18,7 +18,8 @@ public interface IPreferenciaService {
 	Paginacion getPaginacion();
 	Error getError();
 	
-	public boolean existsByUsuarioAndByPropuesta(Usuario usuario, Propuesta propuesta);
+	public Preferencia findByUsuarioAndPropuesta(Usuario usuario, Propuesta propuesta);
+	public void deleteById(Long id);
 //	public List<Preferencia> findByIdUsuario(int idUsuario);
 //	public Preferencia findByUsuarioAndPropuesta(Usuario user,Propuesta prop);
 }
