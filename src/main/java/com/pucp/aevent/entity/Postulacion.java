@@ -46,7 +46,7 @@ public class Postulacion implements Serializable{
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "myDate", insertable=false)
 	private Date fechaActualizacion;
-
+	
 	public Long getIdPostulacion() {
 		return idPostulacion;
 	}
