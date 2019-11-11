@@ -39,33 +39,69 @@ public class Evaluacion implements Serializable{
 	@JoinColumn(name = "idPropuesta")
 	private Propuesta propuesta;
 	
-	@Column(name = "opinion")
-	private String opinion;
+	@Column(name="comentarioParticipante")
+	private String comentarioParticipante;
 	
-	@Column(name = "veredicto")
-	private String veredicto;
+	@Column(name="comentarioPresidente")
+	private String comentarioPresidente;
 	
-	@Column(name = "evaluado")
-	private Boolean evaluado;
+	@Column(name="estado")
+	private String estado;
 	
-	@Column(name = "abierto")
-	private Boolean abierto;
 	
-	@Column(name = "sigueEvaluando")
-	private Boolean sigueEvaluando;
 	
+	public String getComentarioParticipante() {
+		return comentarioParticipante;
+	}
+
+
+
+
+
+	public void setComentarioParticipante(String comentarioParticipante) {
+		this.comentarioParticipante = comentarioParticipante;
+	}
+
+
+
+
+
+	public String getComentarioPresidente() {
+		return comentarioPresidente;
+	}
+
+
+
+
+
+	public void setComentarioPresidente(String comentarioPresidente) {
+		this.comentarioPresidente = comentarioPresidente;
+	}
+
+
+
+
+
+	public String getEstado() {
+		return estado;
+	}
+
+
+
+
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+
+
+
+
 	public Evaluacion() {
 	}
 	
-	public Boolean getSigueEvaluando() {
-		return sigueEvaluando;
-	}
 
-
-
-	public void setSigueEvaluando(Boolean sigueEvaluando) {
-		this.sigueEvaluando = sigueEvaluando;
-	}
 
 
 
@@ -93,37 +129,6 @@ public class Evaluacion implements Serializable{
 		this.fase = fase;
 	}
 
-	public String getOpinion() {
-		return opinion;
-	}
-
-	public void setOpinion(String opinion) {
-		this.opinion = opinion;
-	}
-
-	public String getVeredicto() {
-		return veredicto;
-	}
-
-	public void setVeredicto(String veredicto) {
-		this.veredicto = veredicto;
-	}
-
-	public Boolean getEvaluado() {
-		return evaluado;
-	}
-
-	public void setEvaluado(Boolean evaluado) {
-		this.evaluado = evaluado;
-	}
-	
-	public Boolean getAbierto() {
-		return abierto;
-	}
-
-	public void setAbierto(Boolean abierto) {
-		this.abierto = abierto;
-	}
 
 	public Propuesta getPropuesta() {
 		return propuesta;
