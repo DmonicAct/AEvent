@@ -27,7 +27,7 @@ public class Persona extends Usuario implements Serializable{
 	private String sexo;
 	
 	@Column(name="edad")
-	private Integer eddad;
+	private Integer edad;
 	
 	@Column(name="fechaNacimiento")
 	private Date fechaNacimiento;
@@ -73,10 +73,10 @@ public class Persona extends Usuario implements Serializable{
 		this.sexo = sexo;
 	}
 	public Integer getEddad() {
-		return eddad;
+		return edad;
 	}
 	public void setEddad(Integer eddad) {
-		this.eddad = eddad;
+		this.edad = eddad;
 	}
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
