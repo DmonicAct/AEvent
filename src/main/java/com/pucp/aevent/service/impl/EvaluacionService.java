@@ -54,8 +54,8 @@ public class EvaluacionService implements IEvaluacionService{
 		Preferencia p = new Preferencia();
 		p.setPropuesta(propuesta);
 		p.setUsuario(evaluador);
+		p.setDescripcion("Pendiente confirmación");
 		daoPreferencia.save(p);
-		
 		return e;
 	}
 	
