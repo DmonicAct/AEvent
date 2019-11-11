@@ -24,6 +24,7 @@ import com.pucp.aevent.dao.IPropuestaDao;
 import com.pucp.aevent.entity.Evaluacion;
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Propuesta;
+import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;
@@ -250,4 +251,17 @@ public class EventoService implements IEventoService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Evento> findByPresidente(Usuario persona) {
+		return dao.findByPresidente(persona);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Evento> findByOrganizador(Usuario persona) {
+		return dao.findByOrganizador(persona);
+	}
+	
 }

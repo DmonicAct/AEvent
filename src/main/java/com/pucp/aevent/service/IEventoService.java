@@ -8,6 +8,7 @@ import com.pucp.aevent.entity.Evaluacion;
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.Propuesta;
+import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;
 
@@ -24,4 +25,7 @@ public interface IEventoService {
 	public List<Evento> findAllEventos(Persona usuario, Pageable page);
 	public Paginacion getPaginacion();
 	public Error getError();
+	
+	public List<Evento> findByPresidente(Usuario presidente);
+	public List<Evento> findByOrganizador(Usuario organizador);
 }
