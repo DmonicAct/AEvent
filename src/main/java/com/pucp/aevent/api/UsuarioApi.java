@@ -239,6 +239,32 @@ public class UsuarioApi {
 		}
 	}
 	
+	@Secured({"ROLE_ADMIN"})
+	@PostMapping(path = "/usuarios/activate/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> reactivarUsuario(@PathVariable("id") Integer id) {
+		ResponseObject response = new ResponseObject();
+		try {
+			Usuario usuario = usuarioService.findById(id);
+			usuario.setEnabled(true);
+			this.usuarioService.cambioUsuario(usuario);
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+		
+	
 	
 	//@Secured({"ROLE_ADMIN"})
 		@GetMapping(path = "/usuarios/out/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
