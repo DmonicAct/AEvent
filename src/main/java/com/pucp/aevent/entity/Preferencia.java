@@ -21,7 +21,7 @@ public class Preferencia implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idPreferencia")
-	private int id;
+	private Long id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario",referencedColumnName = "idUsuario")
@@ -36,12 +36,12 @@ public class Preferencia implements Serializable{
 	@Column(name="descripcion")
 	private String descripcion;
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

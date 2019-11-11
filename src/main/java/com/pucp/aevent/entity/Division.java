@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -41,8 +42,9 @@ public class Division implements Serializable {
     private Integer indice;
     
     @JsonProperty(access = Access.WRITE_ONLY)
-    @JoinColumn(name = "id_formulariocfp")
-    private FormularioCFP idFormulario;
+    @JoinColumn(name = "id_formulario")
+    @ManyToOne
+    private FormularioCFP formulario;
     
     //mappedBy = "idDivision",
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
@@ -84,16 +86,24 @@ public class Division implements Serializable {
     }
 
     public FormularioCFP getIdFormulario() {
-        return idFormulario;
+        return formulario;
     }
 
     public void setIdFormulario(FormularioCFP idFormulario) {
-        this.idFormulario = idFormulario;
+        this.formulario = idFormulario;
     }
 
     public List<Seccion> getSeccionList() {
         return seccionList;
     }
+
+	public FormularioCFP getFormulario() {
+		return formulario;
+	}
+
+	public void setFormulario(FormularioCFP formulario) {
+		this.formulario = formulario;
+	}
 
 	public void setSeccionList(List<Seccion> seccionList) {
         this.seccionList = seccionList;

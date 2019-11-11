@@ -66,12 +66,12 @@ INSERT INTO `lugar` (descripcion, estado) VALUES("CENTRO DE CONVENCIONES AEVENT"
 INSERT INTO `lugar` (descripcion, estado) VALUES("CENTRO DE CONVENCIONES SAN MARCOS SE DEFIENDE", 1);
 
 
-INSERT INTO `formulariocfp` (titulo) VALUES ("Formato de ponencia para charla magistral de software científico");
-INSERT INTO `formulariocfp` (titulo) VALUES ("Formato de ponencia para charla de machine learning");
-INSERT INTO `formulariocfp` (titulo) VALUES ("Formato de ponencia para charla de usabilidad de software");
+INSERT INTO `formulariocfp` (id_fase,titulo) VALUES (1,"Formato de fase de recepcion");
+INSERT INTO `formulariocfp` (id_fase,titulo) VALUES (2,"Formato de fase de evaluación");
+INSERT INTO `formulariocfp` (id_fase,titulo) VALUES (3,"Formato de fase de mejora");
 
-INSERT INTO `division` (descripcion, indice, id_formulariocfp) VALUES ('Estudios',1,1);
-INSERT INTO `division` (descripcion, indice, id_formulariocfp) VALUES ('Experiencia Laboral',1,1);
+INSERT INTO `division` (descripcion, indice, id_formulario) VALUES ('Estudios',1,1);
+INSERT INTO `division` (descripcion, indice, id_formulario) VALUES ('Experiencia Laboral',1,1);
 
 INSERT INTO `seccion`  (descripcion,cantidad_preguntas,indice,tipo_seccion, id_division) VALUES ('FORMULARIO 1',1,1,'PREGUNTA ABIERTA',1);
 INSERT INTO `seccion`  (descripcion,cantidad_preguntas,indice,tipo_seccion, id_division) VALUES ('FORMULARIO 2',1,1,'PREGUNTA ABIERTA',2);
@@ -116,10 +116,10 @@ INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion,titulo) VALUE
 INSERT INTO `documento` (nombredoc,extensiondoc,contenido,id_propuesta) VALUES ('archivo1','pdf',10,1);
 INSERT INTO `documento` (nombredoc,extensiondoc,contenido,id_propuesta) VALUES ('archivo2','pdf',10,2);
 
-INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,opinion,veredicto,evaluado) VALUES (1,2,1,'','',FALSE);
-INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,opinion,veredicto,evaluado) VALUES (1,3,1,'','',FALSE);
-INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,opinion,veredicto,evaluado) VALUES (1,5,1,'','',FALSE);
-INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,opinion,veredicto,evaluado) VALUES (2,3,1,'','',FALSE);
+INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,estado,comentario_presidente,comentario_participante) VALUES (1,2,1,'ASIGNADO','','');
+INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,estado,comentario_presidente,comentario_participante) VALUES (1,3,1,'ASIGNADO','','');
+INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,estado,comentario_presidente,comentario_participante) VALUES (1,5,1,'ASIGNADO','','');
+INSERT INTO `evaluacion` (id_propuesta,id_evaluador,id_fase,estado,comentario_presidente,comentario_participante) VALUES (2,3,1,'ASIGNADO','','');
 
 INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("2",1);
 INSERT INTO `respuesta_criterio` (desc_respuesta,criterio) VALUES ("3",2);
