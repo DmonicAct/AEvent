@@ -89,6 +89,11 @@ public class PreferenciaService implements IPreferenciaService {
 		}
 		return returnedPreferencia;
 	}
+
+	@Override
+	public boolean existsByUsuarioAndByPropuesta(Usuario usuario, Propuesta propuesta) {
+		return dao.existsByUsuarioAndPropuesta(usuario, propuesta);
+	}
 	
 /*
 	@Override
