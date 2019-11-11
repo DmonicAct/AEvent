@@ -110,12 +110,5 @@ public class Propuesta implements Serializable {
 		this.fecha_postulacion = fecha_postulacion;
 	}
 
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
 
 }
