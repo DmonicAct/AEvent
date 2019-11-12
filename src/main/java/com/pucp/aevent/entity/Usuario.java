@@ -73,6 +73,12 @@ public class Usuario implements Serializable {
 	@Column(name="eval_sin_leer")
 	private Boolean evaluacionSinLeer;
 	
+	@Column(name="evaluaciones_pendientes")
+	private int evaluacionesPendientes;
+	
+	@Column(name="postulaciones_aceptadas")
+	private int postulacionesAceptadas;
+	
 	public Boolean getEvaluacionSinLeer() {
 		return evaluacionSinLeer;
 	}
