@@ -24,7 +24,7 @@ public class RespuestaCriterio implements Serializable{
 	
 	@JsonProperty(access = Access.WRITE_ONLY)
     @JoinColumn(name = "idCriterio")
-    private Criterio criterio;
+    private Integer idCriterio;
 	
 	@Column(name="descRespuesta")
 	private String respuesta;
@@ -45,16 +45,18 @@ public class RespuestaCriterio implements Serializable{
 		this.respuesta = respuesta;
 	}
 
-	public Criterio getCriterio() {
-		return criterio;
+
+	public Integer getIdCriterio() {
+		return idCriterio;
 	}
 
-	public void setCriterio(Criterio criterio) {
-		this.criterio = criterio;
+	public void setIdCriterio(Integer idCriterio) {
+		this.idCriterio = idCriterio;
 	}
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 }

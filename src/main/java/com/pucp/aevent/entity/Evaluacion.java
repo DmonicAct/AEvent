@@ -24,17 +24,17 @@ public class Evaluacion implements Serializable{
 	@Column(name="idEvaluacion")
 	private int idEvaluacion;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@JoinColumn(name = "idEvaluador",referencedColumnName = "idUsuario")
 	private Usuario evaluador;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@JoinColumn(name = "idFase")
 	private Fase fase;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@JoinColumn(name = "idPropuesta")
 	private Propuesta propuesta;
