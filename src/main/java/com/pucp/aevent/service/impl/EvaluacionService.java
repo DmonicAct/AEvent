@@ -61,8 +61,10 @@ public class EvaluacionService implements IEvaluacionService{
 		p.setDescripcion("Pendiente confirmaci�n");
 		daoPreferencia.save(p);
 		
-		evaluador.setEvaluacionSinLeer(true);
-		daoUsuario.save(evaluador);
+		Usuario u = daoUsuario.findByIdUsuario(evaluador.getIdUsuario());
+		u.setEvaluacionSinLeer(true);
+		daoUsuario.save(u);
+				
 		return e;
 	}
 	
