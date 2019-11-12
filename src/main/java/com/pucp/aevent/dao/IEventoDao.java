@@ -1,6 +1,8 @@
 package com.pucp.aevent.dao;
 
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,4 +21,7 @@ public interface IEventoDao extends JpaRepository<Evento, Long>{
 	public Page<Evento> findByEnabled(boolean flag,Pageable page);
 
 	public Page<Evento> findAll(Usuario usuario, Pageable page);
+	
+	public List<Evento> findByPresidente(Usuario presidente);
+	public List<Evento> findByOrganizador(Usuario organizador);
 }
