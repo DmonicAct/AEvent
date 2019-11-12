@@ -107,7 +107,7 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 			}
 			List<Role> roles = new ArrayList<Role>();
 			 for(Role entry :usuario.getRoles()) 
-				    roles.add(role_dao.findById(entry.getId()).get());
+				    roles.add(role_dao.findById(entry.getIdRol()).get());
 			 
 			usuario.setRoles( roles );
 			if(usuario.getRoles().size()==0) {

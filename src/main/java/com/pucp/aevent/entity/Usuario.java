@@ -73,6 +73,12 @@ public class Usuario implements Serializable {
 	@Column(name="eval_sin_leer")
 	private Boolean evaluacionSinLeer;
 	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name="usuario_role", joinColumns= @JoinColumn(name="idUsuario"),
+	inverseJoinColumns=@JoinColumn(name="idRol"),
+	uniqueConstraints= {@UniqueConstraint(columnNames= {"idUsuario", "idRol"})})
+	private List<Role> roles;
+	
 	public Boolean getEvaluacionSinLeer() {
 		return evaluacionSinLeer;
 	}
@@ -102,12 +108,6 @@ public class Usuario implements Serializable {
 		this.modoInicioSesion = modoInicioSesion;
 	}
 
-
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name="usuario_role", joinColumns= @JoinColumn(name="idUsuario"),
-	inverseJoinColumns=@JoinColumn(name="idRol"),
-	uniqueConstraints= {@UniqueConstraint(columnNames= {"idUsuario", "idRol"})})
-	private List<Role> roles;
 
 	public int getIdUsuario() {
 		return idUsuario;
