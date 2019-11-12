@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,18 +31,15 @@ public class FormularioCFP implements Serializable{
 	private Long idFormulariocfp;
 	
 	@NotEmpty(message ="no puede estar vacio")
-	@Size(min=0, max=100, message="el tamaÃ±o tiene que estar entre 6 y 20")
+	@Size(min=0, max=100, message="el tamaño tiene que estar entre 6 y 20")
 	@Column( length = 100, name="titulo")
 	private String titulo;
 	
-	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
-	@JoinColumn(name= "id_formulario")
+	//mappedBy = "idFormulario", 
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JoinColumn(name= "id_formulariocfp")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private List<Division> divisionList = new ArrayList<>();
-	
-	@JsonProperty(access = Access.WRITE_ONLY)
-	@JoinColumn(name="id_fase")
-	private int idFase; 
+	private List<Division> divisionList = new ArrayList<>();;
 	
 	public FormularioCFP() {
     }

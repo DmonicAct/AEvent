@@ -42,15 +42,15 @@ public class Fase implements Serializable {
 	@JoinColumn(name="idEvento",referencedColumnName = "idEvento")
     private int idEvento;
     
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_formulariocfp")
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "idFormularioCFP")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private FormularioCFP formulario;
     
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_fase")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private List<Criterio> criterios  = new ArrayList<>();
+    private List<Criterio> criterios ;
 	
 
 	
