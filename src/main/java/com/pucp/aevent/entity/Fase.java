@@ -47,10 +47,10 @@ public class Fase implements Serializable {
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private FormularioCFP formulario;
     
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinColumn(name="id_fase")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private List<Criterio> criterios ;
+    private List<Criterio> criterios = new ArrayList<>();
 	
 
 	
