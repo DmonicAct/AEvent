@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.pucp.aevent.dao.IEvaluacionDao;
 import com.pucp.aevent.dao.IPreferenciaDao;
 import com.pucp.aevent.dao.IPropuestaDao;
+import com.pucp.aevent.dao.IUsuarioDao;
 import com.pucp.aevent.entity.Evaluacion;
 import com.pucp.aevent.entity.Fase;
 import com.pucp.aevent.entity.Persona;
@@ -29,6 +30,9 @@ public class EvaluacionService implements IEvaluacionService{
 	
 	@Autowired
 	IPreferenciaDao daoPreferencia;
+	
+	@Autowired
+	IUsuarioDao daoUsuario;
 	
 	private Paginacion paginacion;
 
@@ -54,8 +58,13 @@ public class EvaluacionService implements IEvaluacionService{
 		Preferencia p = new Preferencia();
 		p.setPropuesta(propuesta);
 		p.setUsuario(evaluador);
-		p.setDescripcion("Pendiente confirmación");
+		p.setDescripcion("Pendiente confirmaciï¿½n");
 		daoPreferencia.save(p);
+		
+		Usuario u = daoUsuario.findByIdUsuario(evaluador.getIdUsuario());
+		u.setEvaluacionSinLeer(true);
+		daoUsuario.save(u);
+				
 		return e;
 	}
 	

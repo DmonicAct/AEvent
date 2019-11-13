@@ -34,12 +34,15 @@ public class Role implements Serializable{
 	}
 
 
-	public Long getId() {
+
+
+
+	public Long getIdRol() {
 		return idRol;
 	}
 
 
-	public void setId(Long idRol) {
+	public void setIdRol(Long idRol) {
 		this.idRol = idRol;
 	}
 
