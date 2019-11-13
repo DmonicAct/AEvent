@@ -6,9 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Propuesta;
+import com.pucp.aevent.entity.Usuario;
 
 public interface IPropuestaDao extends JpaRepository<Propuesta, Long> {
 	//@Query("SELECT P FROM propuesta P WHERE P.id_evento = ?1")
 	public Page<Propuesta> findByEvento(Evento evento, Pageable page);
 	public Propuesta findByIdPropuesta(Integer id);
+	
+	Boolean existsByPostulanteAndEvento(Usuario postulante,Evento evento);
+	public Page<Propuesta> findByPostulante(Usuario postulante, Pageable page);
+	public Propuesta findByPostulanteAndEvento(Usuario postulante,Evento evento);
 }

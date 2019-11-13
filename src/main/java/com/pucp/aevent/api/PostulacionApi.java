@@ -13,20 +13,25 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException.BadRequest;
 import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
+import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Postulacion;
 import com.pucp.aevent.entity.Propuesta;
 import com.pucp.aevent.entity.RespuestaFormulario;
+import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.request_objects.PaginaRequest;
 import com.pucp.aevent.entity.request_objects.RespuestaFormularioxPostulacionRequest;
 import com.pucp.aevent.entity.response_objects.Estado;
 import com.pucp.aevent.entity.response_objects.ResponseObject;
+import com.pucp.aevent.service.IEventoService;
 import com.pucp.aevent.service.IPostulacionService;
 import com.pucp.aevent.service.IRespuestaFormularioService;
+import com.pucp.aevent.service.IUsuarioService;
 
 @RestController
 @RequestMapping("/api")
@@ -36,7 +41,12 @@ public class PostulacionApi {
 	
 	@Autowired
 	IRespuestaFormularioService serviceRespuesta;
-
+	
+	@Autowired
+	IEventoService serivceEvento;
+	
+	@Autowired
+	IUsuarioService serviceUsuario;
 	
 	@Secured({"ROLE_DEFAULT"})
 	@GetMapping(path = "/postulacion/{idUsuario}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -88,7 +98,7 @@ public class PostulacionApi {
 	}
 	@Secured({"ROLE_DEFAULT"})
 	@PostMapping(path = "/postulacion", produces = MediaType.APPLICATION_JSON_VALUE, consumes= MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> guardar(RespuestaFormularioxPostulacionRequest object) {
+	public ResponseEntity<ResponseObject> guardar(@RequestBody RespuestaFormularioxPostulacionRequest object) {
 		ResponseObject response = new ResponseObject();
 		try {
 			List<RespuestaFormulario> lista = object.getListaFormulario();
@@ -119,6 +129,9 @@ public class PostulacionApi {
 		}
 	}
 	
+	/*
+	 * Guardado De Formulario para fase
+	 * */
 	@Secured({"ROLE_DEFAULT"})
 	@GetMapping(path = "/postulacion/{idUsuario}/{idEvento}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> findById(@PathVariable("idUsuario")Long idUsuario,@PathVariable("idEvento")Long idEvento) {
@@ -152,11 +165,94 @@ public class PostulacionApi {
 	}
 	
 	@Secured({"ROLE_DEFAULT"})
-	@PostMapping(path = "/postulacion/propuesta", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> savePropuesta(Propuesta propuesta) {
+	@GetMapping(path = "/postulacion/propuesta/{Username}/{idEvento}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> findAllPropuesta(@PathVariable("Username")String Username,@PathVariable("idEvento")int idEvento,PaginaRequest page) {
+		ResponseObject response = new ResponseObject();
+		List<Propuesta> lista = null;
+		try {
+			Usuario usuario = this.serviceUsuario.findByUsername(Username);
+			lista = this.servicePostulacion.findAllPropuesta(usuario, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			response.setResultado(lista);
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@Secured({"ROLE_DEFAULT"})
+	@PostMapping(path = "/postulacion/propuesta/{Username}/{idEvento}", produces = MediaType.APPLICATION_JSON_VALUE, consumes= MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> savePropuesta(@PathVariable("Username")String Username,@PathVariable("idEvento")int idEvento,@RequestBody Propuesta propuesta) {
 		ResponseObject response = new ResponseObject();
 		try {
-			this.servicePostulacion.savePropuesta(propuesta);
+			Usuario usuario = this.serviceUsuario.findByUsername(Username);
+			Evento evento = this.serivceEvento.findById(idEvento);
+			propuesta.setPostulante(usuario);
+			propuesta.setEvento(evento);
+			Propuesta prop = this.servicePostulacion.savePropuesta(propuesta);
+			response.setResultado(prop);
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@Secured({"ROLE_DEFAULT"})
+	@GetMapping(path = "/propuesta/exists/{Username}/{idEvento}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> existsPropuesta(@PathVariable("Username")String Username,@PathVariable("idEvento")int idEvento) {
+		ResponseObject response = new ResponseObject();
+		try {
+			Usuario usuario = this.serviceUsuario.findByUsername(Username);
+			Boolean exists = this.servicePostulacion.existsPropuesta(usuario.getIdUsuario(), idEvento);
+			response.setResultado(exists);
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@Secured({"ROLE_DEFAULT"})
+	@GetMapping(path = "/propuesta/{Username}/{idEvento}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> existsPropuesta_object(@PathVariable("Username")String Username,@PathVariable("idEvento")int idEvento) {
+		ResponseObject response = new ResponseObject();
+		try {
+			Usuario usuario = this.serviceUsuario.findByUsername(Username);
+			Evento evento = this.serivceEvento.findById(idEvento);
+			Propuesta propuesta = null;
+			propuesta = this.servicePostulacion.findByPostulanteAndEvento(usuario, evento);
+			response.setResultado(propuesta);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {

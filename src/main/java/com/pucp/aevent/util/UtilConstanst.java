@@ -31,8 +31,10 @@ public class UtilConstanst {
 	
 	public static final String EVENTO_CANCELADO						= "EVENTO_CANCELADO";
 	//Estado Propuesta
-	public static final String PROPUESTA_ESPERA    	=	"PROPUESTA_ESPERA";	
-	public static final String PROPUESTA_APROBADA  	=	"PROPUESTA_APROBADA";	
-	public static final String PROPUESTA_OBSERVADA 	=	"PROPUESTA_OBSERVADA";	
-	public static final String PROPUESTA_CANCELADA 	=	"PROPUESTA_CANCELADA";
+	public static final String PROPUESTA_BORRADOR		=	"PROPUESTA_BORRADOR";
+	public static final String PROPUESTA_SIN_ASIGNAR	=	"PROPUESTA_SIN_ASIGNAR";	
+	public static final String PROPUESTA_ESPERA    		=	"PROPUESTA_ESPERA";	
+	public static final String PROPUESTA_APROBADA  		=	"PROPUESTA_APROBADA";	
+	public static final String PROPUESTA_OBSERVADA 		=	"PROPUESTA_OBSERVADA";	
+	public static final String PROPUESTA_CANCELADA 		=	"PROPUESTA_CANCELADA";
 }
