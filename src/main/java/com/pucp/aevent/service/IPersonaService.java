@@ -13,5 +13,5 @@ public interface IPersonaService {
 	
 	public Persona findByUsername(String username);
 	
-	public Boolean existsByDni(String dni);
+//	public Boolean existsByDni(String dni);
 }

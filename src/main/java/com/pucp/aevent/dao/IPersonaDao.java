@@ -11,8 +11,8 @@ public interface IPersonaDao  extends JpaRepository <Persona, Long>{
 	public Persona findByUsername(String username);
 	
 	public Persona findByIdUsuario(int idUsuario);
-	
-	public Boolean existsByDni(String dni);
-	
+//	
+//	public Boolean existsByDni(String dni);
+//	
 	public List<Persona> findByEnabled(Boolean enabled);
 }

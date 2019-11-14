@@ -10,17 +10,17 @@ INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_comple
 INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo,modo_inicio_sesion,fecha_creacion,eval_sin_leer) VALUES ('user_basic6','$2a$10$Fy6bJZM3fyag2OVAQcuTwuQSM1tc74dr8om6LNKe5xtJIc.i46r5y',1,'userbasic6@aevent.com', 'Gtew Blen Esperanza',0,'2019-07-12',0);
 INSERT INTO `usuario` (usuario, contrasena, usuario_activo,correo, nombre_completo,modo_inicio_sesion,fecha_creacion,eval_sin_leer) VALUES ('user_basic7','$2a$10$Fy6bJZM3fyag2OVAQcuTwuQSM1tc74dr8om6LNKe5xtJIc.i46r5y',1,'userbasic7@aevent.com', 'Opress Qwerty Trevor',0,'2019-07-12',0);
 
-INSERT INTO `persona` (apellido_mat, apellido_pat, dni, nombre, id_usuario) VALUES ( 'Doe','Towers', 43110193, 'Luis', 1);
-INSERT INTO `persona` (apellido_mat, apellido_pat, dni, nombre, id_usuario) VALUES ( 'Jhon','Diane', 51231233, 'Jean', 2);
-INSERT INTO `persona` (apellido_mat, apellido_pat, dni, nombre, id_usuario) VALUES ( 'Crux','Ophelia', 12331233, 'Patrick', 3);
-INSERT INTO `persona` (apellido_mat, apellido_pat, dni, nombre, id_usuario) VALUES ( 'Thrown','Rex', 54542525, 'Ray', 4);
-INSERT INTO `persona` (apellido_mat, apellido_pat, dni, nombre, id_usuario) VALUES ( 'Caryr','Michael', 12312333, 'Tom', 5);
-INSERT INTO `persona` (apellido_mat, apellido_pat, dni, nombre, id_usuario) VALUES ( 'Mcketon','Gen', 12311235, 'Grey', 6);
-INSERT INTO `persona` (apellido_mat, apellido_pat, dni, nombre, id_usuario) VALUES ( 'Tonic','Ten', 23442516, 'Roxxana', 7);
-INSERT INTO `persona` (apellido_mat, apellido_pat, dni, nombre, id_usuario) VALUES ( 'Appleton','Ren', 76558754, 'Tricia', 8);
-INSERT INTO `persona` (apellido_mat, apellido_pat, dni, nombre, id_usuario) VALUES ( 'Cartavio','Reo', 32441254, 'Caroline', 9);
-INSERT INTO `persona` (apellido_mat, apellido_pat, dni, nombre, id_usuario) VALUES ( 'Gtew','Blen', 45667843, 'Esperanza', 10);
-INSERT INTO `persona` (apellido_mat, apellido_pat, dni, nombre, id_usuario) VALUES ( 'Opress','Qwerty', 23441234, 'Trevor', 11);
+INSERT INTO `persona` (apellido_mat, apellido_pat, nombre, id_usuario) VALUES ( 'Doe','Towers', 'Luis', 1);
+INSERT INTO `persona` (apellido_mat, apellido_pat, nombre, id_usuario) VALUES ( 'Jhon','Diane', 'Jean', 2);
+INSERT INTO `persona` (apellido_mat, apellido_pat, nombre, id_usuario) VALUES ( 'Crux','Ophelia', 'Patrick', 3);
+INSERT INTO `persona` (apellido_mat, apellido_pat, nombre, id_usuario) VALUES ( 'Thrown','Rex', 'Ray', 4);
+INSERT INTO `persona` (apellido_mat, apellido_pat, nombre, id_usuario) VALUES ( 'Caryr','Michael', 'Tom', 5);
+INSERT INTO `persona` (apellido_mat, apellido_pat, nombre, id_usuario) VALUES ( 'Mcketon','Gen', 'Grey', 6);
+INSERT INTO `persona` (apellido_mat, apellido_pat, nombre, id_usuario) VALUES ( 'Tonic','Ten', 'Roxxana', 7);
+INSERT INTO `persona` (apellido_mat, apellido_pat, nombre, id_usuario) VALUES ( 'Appleton','Ren', 'Tricia', 8);
+INSERT INTO `persona` (apellido_mat, apellido_pat, nombre, id_usuario) VALUES ( 'Cartavio','Reo', 'Caroline', 9);
+INSERT INTO `persona` (apellido_mat, apellido_pat, nombre, id_usuario) VALUES ( 'Gtew','Blen', 'Esperanza', 10);
+INSERT INTO `persona` (apellido_mat, apellido_pat, nombre, id_usuario) VALUES ( 'Opress','Qwerty', 'Trevor', 11);
 
 INSERT INTO `role` (rol_activo,descripcion) VALUES (1,'ROLE_ADMIN');
 INSERT INTO `role` (rol_activo,descripcion) VALUES (1,'ROLE_ORGANIZER');
