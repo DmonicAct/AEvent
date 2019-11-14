@@ -165,8 +165,8 @@ public class PostulacionApi {
 	}
 	
 	@Secured({"ROLE_DEFAULT"})
-	@GetMapping(path = "/postulacion/propuesta/{Username}/{idEvento}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> findAllPropuesta(@PathVariable("Username")String Username,@PathVariable("idEvento")int idEvento,PaginaRequest page) {
+	@GetMapping(path = "/postulacion/propuesta/{Username}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> findAllPropuesta(@PathVariable("Username")String Username,PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		List<Propuesta> lista = null;
 		try {
@@ -269,4 +269,31 @@ public class PostulacionApi {
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@Secured({"ROLE_DEFAULT"})
+	@GetMapping(path = "/propuesta/{idPropuesta}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> findPropuestaById(@PathVariable("idPropuesta") Integer idPropuesta){
+		ResponseObject response = new ResponseObject();
+		try {
+			
+			Propuesta propuesta = null;
+			propuesta = this.servicePostulacion.findByIdPropuesta(idPropuesta);
+			response.setResultado(propuesta);
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 }

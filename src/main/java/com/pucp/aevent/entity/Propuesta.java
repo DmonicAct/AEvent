@@ -51,18 +51,7 @@ public class Propuesta implements Serializable {
 	
 	@Column(name = "titulo")
 	private String titulo;
-	
-	@Column(name = "descripcion")
-	private String descripcion;
-	
-	@Column(name = "cantidad_sesiones")
-	private Long cantidad_sesiones;
-	
-	@Column(name = "publico_dirigido")
-	private String publico_dirigido;
-	
-	@Column(name = "conocimiento")
-	private String conocimiento_previo;
+
 	
 	@Transient
 	private List<Persona> evaluadoresAsignados;
@@ -124,38 +113,5 @@ public class Propuesta implements Serializable {
 	public void setFecha_postulacion(Date fecha_postulacion) {
 		this.fecha_postulacion = fecha_postulacion;
 	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public Long getCantidad_sesiones() {
-		return cantidad_sesiones;
-	}
-
-	public void setCantidad_sesiones(Long cantidad_sesiones) {
-		this.cantidad_sesiones = cantidad_sesiones;
-	}
-
-	public String getPublico_dirigido() {
-		return publico_dirigido;
-	}
-
-	public void setPublico_dirigido(String publico_dirigido) {
-		this.publico_dirigido = publico_dirigido;
-	}
-
-	public String getConocimiento_previo() {
-		return conocimiento_previo;
-	}
-
-	public void setConocimiento_previo(String conocimiento_previo) {
-		this.conocimiento_previo = conocimiento_previo;
-	}
-
 	
 }

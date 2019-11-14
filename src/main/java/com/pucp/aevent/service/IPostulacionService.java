@@ -18,4 +18,5 @@ public interface IPostulacionService {
 	public Propuesta savePropuesta(Propuesta propuesta);
 	public List<Propuesta> findAllPropuesta(Usuario idUsuario,Pageable page);
 	public Propuesta findByPostulanteAndEvento(Usuario idUsuario,Evento evento);
+	public Propuesta findByIdPropuesta(Integer idPropuesta);
 }

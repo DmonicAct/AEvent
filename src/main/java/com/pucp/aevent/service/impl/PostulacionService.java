@@ -162,4 +162,17 @@ public class PostulacionService implements IPostulacionService{
 		}
 		return prop;
 	}
+
+	@Override
+	public Propuesta findByIdPropuesta(Integer idPropuesta) {
+		Propuesta prop= null;
+		try {
+			prop = this.daoPropuesta.findByIdPropuesta(idPropuesta);
+		}catch(Exception e) {
+			logger.error("Error en Postulacion Service(findByPostulante): " + e.getMessage());
+			this.error.setMensaje("Error en Postulacion Service(findByPostulante): " + e.getMessage());
+			this.error.setMensajeInterno(e.getCause().toString());
+		}
+		return prop;
+	}
 }
