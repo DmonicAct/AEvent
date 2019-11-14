@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -90,6 +91,32 @@ public class EvaluacionApi {
 			List<Evaluacion> lista = this.evservice.findAllByEvaluador(evaluador,PageRequest.of(page.getPaginaFront(), page.getRegistros()));
 			response.setResultado(lista);
 			response.setPaginacion(evservice.getPaginacion());
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+
+	@Secured({"ROLE_ORGANIZER","ROLE_ADMIN","ROLE_DEFAULT"})
+	@GetMapping(path = "/evaluaciones/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> obtenerEvaluacion( @PathVariable("id") int id) {
+		ResponseObject response = new ResponseObject();
+		try {
+			Evaluacion eva = this.evservice.findByIdEvaluacion(id);	
+				//response.setResultado();
+			response.setResultado(eva);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
