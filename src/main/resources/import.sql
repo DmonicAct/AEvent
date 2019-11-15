@@ -128,8 +128,14 @@ INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("Tema inte
 INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("5",4);
 INSERT INTO `respuesta_criterio` (desc_respuesta,id_criterio) VALUES ("Se han realizado observaciones a la propuesta, enviar datos corregidos",5);
 
-INSERT INTO `aevent`.`preferencia` (`id_preferencia`, `descripcion`, `id_propuesta`, `id_usuario`) VALUES ('1', 'Quiero Evaluar', '1', '4');
-INSERT INTO `aevent`.`preferencia` (`id_preferencia`, `descripcion`, `id_propuesta`, `id_usuario`) VALUES ('2', 'Podria Evaluar', '2', '4');
+INSERT INTO `aevent`.`preferencia` (`id_preferencia`, `descripcion`, `id_propuesta`, `id_usuario`) VALUES ('1', 'Quiero Evaluar', '1', '3');
+INSERT INTO `aevent`.`preferencia` (`id_preferencia`, `descripcion`, `id_propuesta`, `id_usuario`) VALUES ('2', 'Podria Evaluar', '2', '3');
+INSERT INTO `aevent`.`preferencia` (`id_preferencia`, `descripcion`, `id_propuesta`, `id_usuario`) VALUES ('3', 'Quiero Evaluar', '1', '5');
+INSERT INTO `aevent`.`preferencia` (`id_preferencia`, `descripcion`, `id_propuesta`, `id_usuario`) VALUES ('4', 'Podria Evaluar', '2', '5');
+INSERT INTO `aevent`.`preferencia` (`id_preferencia`, `descripcion`, `id_propuesta`, `id_usuario`) VALUES ('5', 'Quiero Evaluar', '1', '6');
+INSERT INTO `aevent`.`preferencia` (`id_preferencia`, `descripcion`, `id_propuesta`, `id_usuario`) VALUES ('6', 'Podria Evaluar', '2', '6');
+INSERT INTO `aevent`.`preferencia` (`id_preferencia`, `descripcion`, `id_propuesta`, `id_usuario`) VALUES ('7', 'Quiero Evaluar', '1', '2');
+INSERT INTO `aevent`.`preferencia` (`id_preferencia`, `descripcion`, `id_propuesta`, `id_usuario`) VALUES ('8', 'Podria Evaluar', '2', '2');
 
 ///////TRIGGERS
 
