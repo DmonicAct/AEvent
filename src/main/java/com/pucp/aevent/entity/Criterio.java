@@ -38,10 +38,8 @@ public class Criterio implements Serializable {
 	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     //private Fase fase;
 	
-    @JsonProperty(access = Access.WRITE_ONLY)
-    @JoinColumn(name = "id_fase")
-    @ManyToOne
-    private Fase idFase;
+    @Column(name="id_fase")
+    private int idFase;
 
 	public TipoCriterio getTipoCriterio() {
 		return tipoCriterio;
@@ -71,14 +69,15 @@ public class Criterio implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public Fase getIdFase() {
+	public int getIdFase() {
 		return idFase;
 	}
 
 
-	public void setIdFase(Fase idFase) {
+	public void setIdFase(int idFase) {
 		this.idFase = idFase;
 	}
+
 
 	/**
 	 * 
