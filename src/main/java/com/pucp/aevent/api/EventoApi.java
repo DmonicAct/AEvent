@@ -291,6 +291,7 @@ public class EventoApi {
 		try {
 			List<Evento> lista = this.service.findByOrganizadorAndEnabled(usuario, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
 			response.setResultado(lista);
+			response.setPaginacion(service.getPaginacion());
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
@@ -315,6 +316,7 @@ public class EventoApi {
 		try {
 			List<Evento> lista = this.service.findByOrganizadorAndNotEnabled(usuario, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
 			response.setResultado(lista);
+			response.setPaginacion(service.getPaginacion());
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
