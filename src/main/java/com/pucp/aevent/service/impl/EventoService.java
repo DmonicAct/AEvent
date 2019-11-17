@@ -283,10 +283,14 @@ public class EventoService implements IEventoService {
 	@Transactional(readOnly = true)
 	public List<Evento> findByOrganizadorAndEnabled(Persona usuario, Pageable page) {
 		Page<Evento> lista = null;
+		
+		Persona organizador = null;
+		organizador = this.daoPersona.findByUsername(usuario.getUsername());
+		
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
 		try {
-			lista = this.dao.findByOrganizadorAndEnabled(usuario, true, page);
+			lista = this.dao.findByOrganizadorAndEnabled(organizador, true, page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
@@ -297,10 +301,14 @@ public class EventoService implements IEventoService {
 	@Override
 	public List<Evento> findByOrganizadorAndNotEnabled(Persona usuario, Pageable page) {
 		Page<Evento> lista = null;
+		
+		Persona organizador = null;
+		organizador = this.daoPersona.findByUsername(usuario.getUsername());
+		
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
 		try {
-			lista = this.dao.findByOrganizadorAndEnabled(usuario, false, page);
+			lista = this.dao.findByOrganizadorAndEnabled(organizador, false, page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
