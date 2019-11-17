@@ -278,5 +278,34 @@ public class EventoService implements IEventoService {
 		}
 		return lista.getContent();
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Evento> findByOrganizadorAndEnabled(Persona usuario, Pageable page) {
+		Page<Evento> lista = null;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = this.dao.findByOrganizadorAndEnabled(usuario, true, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+
+	@Override
+	public List<Evento> findByOrganizadorAndNotEnabled(Persona usuario, Pageable page) {
+		Page<Evento> lista = null;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = this.dao.findByOrganizadorAndEnabled(usuario, false, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
 	
 }
