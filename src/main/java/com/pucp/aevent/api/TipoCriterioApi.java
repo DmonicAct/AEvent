@@ -105,7 +105,7 @@ public class TipoCriterioApi {
 	}
 	
 	@Secured({"ROLE_ADMIN"})
-	@GetMapping(path = "/tipoCriterio/activasPaginadas", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/tipocriterios/activasPaginadas", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> consultarActivasPaginadas(PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {
@@ -130,7 +130,7 @@ public class TipoCriterioApi {
 	}
 	
 	@Secured({"ROLE_ADMIN"})
-	@GetMapping(path = "/tipoCriterio/activas", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/tipocriterios/activas", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> consultarActivas(PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {
@@ -155,7 +155,7 @@ public class TipoCriterioApi {
 	}
 	
 	@Secured({"ROLE_ADMIN"})
-	@GetMapping(path = "/tipoCriterio/inactivasPaginadas", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/tipocriterios/inactivasPaginadas", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> consultarInctivasPaginadas(PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {
@@ -180,7 +180,7 @@ public class TipoCriterioApi {
 	}
 	
 	@Secured({"ROLE_ADMIN"})
-	@GetMapping(path = "/tipoCriterio/inactivas", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/tipocriterios/inactivas", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> consultarInactivas(PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {

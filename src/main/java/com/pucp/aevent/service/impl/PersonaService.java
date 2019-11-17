@@ -127,6 +127,7 @@ public class PersonaService implements IPersonaService{
 			}	
 			List<Integer> listaIDs = new ArrayList<>(ids); 
 			lista = dao.findByEnabledAndIdUsuarioNotIn(true,listaIDs, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch(Exception e) {
 			System.out.print(e.getMessage());
 		}
