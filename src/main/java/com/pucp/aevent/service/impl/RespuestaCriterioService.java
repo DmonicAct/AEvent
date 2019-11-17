@@ -17,7 +17,6 @@ public class RespuestaCriterioService implements IRespuestaCriterioService {
 	IRespuestaCriterioDao respuestaCriterioDao;
 
 	@Override
-	@Transactional(readOnly = true)
 	public List<RespuestaCriterio> findByCriterio(int id) {
 		return respuestaCriterioDao.findByIdCriterio(id);
 	}
