@@ -21,5 +21,9 @@ public class RespuestaCriterioService implements IRespuestaCriterioService {
 	public List<RespuestaCriterio> findByCriterio(int id) {
 		return respuestaCriterioDao.findByIdCriterio(id);
 	}
-	
+
+	@Override
+	public void save(RespuestaCriterio respuestaCriterio) {
+		respuestaCriterioDao.save(respuestaCriterio);
+	}
 }

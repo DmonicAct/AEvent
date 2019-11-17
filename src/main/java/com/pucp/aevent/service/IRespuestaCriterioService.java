@@ -7,4 +7,6 @@ import com.pucp.aevent.entity.RespuestaCriterio;
 public interface IRespuestaCriterioService {
 	
 	public List<RespuestaCriterio> findByCriterio(int id);
+	
+	public void save(RespuestaCriterio respuestaCriterio);
 }
