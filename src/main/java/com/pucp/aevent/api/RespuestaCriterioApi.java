@@ -56,7 +56,7 @@ public class RespuestaCriterioApi {
 	}
 	
 	@Secured({"ROLE_ORGANIZER"})
-	@PostMapping(path = "/guardarRespuestaCriterio",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/respuestaCriterio/guardar",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> guardarRespuestaCriterio( @Valid @RequestBody RespuestaCriterio respuestaCriterio) {
 		ResponseObject response = new ResponseObject();
 		try {
