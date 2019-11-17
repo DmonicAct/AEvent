@@ -102,12 +102,12 @@ public class Evento implements Serializable {
 	
 	@Column(name = "motivoFin")
 	private String motivoFin;
-	
-	public String getMotivoCancelacion() {
+
+	public String getMotivoFin() {
 		return motivoFin;
 	}
 
-	public void setMotivoCancelacion(String motivoFin) {
+	public void setMotivoFin(String motivoFin) {
 		this.motivoFin = motivoFin;
 	}
 
