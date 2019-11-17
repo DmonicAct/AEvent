@@ -1,6 +1,7 @@
 package com.pucp.aevent.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pucp.aevent.dao.IEventoDao;
 import com.pucp.aevent.dao.IPersonaDao;
+import com.pucp.aevent.dao.IUsuarioDao;
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.Usuario;
@@ -26,6 +28,9 @@ public class PersonaService implements IPersonaService{
 	
 	@Autowired
 	IEventoDao daoEvento;
+	
+	@Autowired
+	IUsuarioDao daoUsuario;
 	
 	private Paginacion paginacion;
 	
@@ -105,16 +110,23 @@ public class PersonaService implements IPersonaService{
 	@Transactional(readOnly=true)
 	public List<Persona> findAllDisponible(Integer id, Pageable page) {
 		Page<Persona> lista = null;
+		Boolean flag = false;
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
 		try {
 			Evento e = daoEvento.findByIdEvento(id);
 			List<Usuario> listaUsuarios = e.getComite();
-			List<Integer> ids = new ArrayList<Integer>();
-			for (Usuario u: listaUsuarios) 
+			HashSet<Integer> ids = new HashSet<Integer>();
+			for (Usuario u: listaUsuarios) {	
 				ids.add(u.getIdUsuario());
-				
-			lista = dao.findByEnabledAndIdUsuarioNotIn(true,ids, page);
+			}	
+			//Buscamos administradores
+			listaUsuarios = daoUsuario.findByRoles_nombreAndEnabled("ROLE_ADMIN", true);
+			for (Usuario u: listaUsuarios) {	
+				ids.add(u.getIdUsuario());
+			}	
+			List<Integer> listaIDs = new ArrayList<>(ids); 
+			lista = dao.findByEnabledAndIdUsuarioNotIn(true,listaIDs, page);
 		} catch(Exception e) {
 			System.out.print(e.getMessage());
 		}

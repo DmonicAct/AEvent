@@ -27,6 +27,9 @@ public interface IUsuarioDao extends JpaRepository <Usuario, Long>{
 	
 	public Boolean existsByUsername(String username);
 	
+	//Sirve para traer usuarios que tengan 
+	public List<Usuario> findByRoles_nombreAndEnabled(String nombre, Boolean enabled);
+	
 	/*
 	 * Query Sample
 	 * */

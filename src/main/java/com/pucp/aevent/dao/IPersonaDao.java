@@ -31,7 +31,6 @@ public interface IPersonaDao  extends JpaRepository <Persona, Long>{
 	//@Query("Select p from Persona p,Usuario u where p.idUsuario = u.idUsuario and u.username like :username% and u.enabled=1")
 	public Page<Persona> findByUsernameStartsWith(String username,Pageable page);
 	
-	
 	public Page<Persona> findByEnabledAndIdUsuarioNotIn(Boolean enabled, List<Integer> ids,Pageable page);
 	
 	public Page<Persona> findByIdUsuarioIn(List<Integer> ids,Pageable page);
