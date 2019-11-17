@@ -32,8 +32,8 @@ public class RespuestaCriterioApi {
 	IRespuestaCriterioService service;
 	
 	@Secured({"ROLE_ORGANIZER"})
-	@GetMapping(path = "/respuestaCriterio", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> consultarRespuestaCriterio(Integer id) {
+	@GetMapping(path = "/respuestaCriterio/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarRespuestaCriterio(@PathVariable("id")Integer id) {
 		ResponseObject response = new ResponseObject();
 		try {
 			List<RespuestaCriterio> respuestaCriterio = this.service.findByCriterio(id);
