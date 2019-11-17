@@ -19,10 +19,15 @@ public interface IPersonaService {
 	
 //	public Boolean existsByDni(String dni);
 	
-	public List<Persona> findByNombreLike(String nombre);
+	public List<Persona> findByNombre(String nombre);
 	
-	public List<Persona> findByUsernameLike(String username,Pageable page);
+	public List<Persona> findByUsername(String username,Pageable page);
 	
-	public List<Persona> findNombreLike(String nombre,Pageable page);
+	public List<Persona> findAllDisponible(Integer id,Pageable page);
+	
+	public List<Persona> findByNombre(String nombre,Pageable page);
+	
+	public List<Persona> findAllComite(Integer id, Pageable page);
+	
 	public Paginacion getPaginacion() ;
 }

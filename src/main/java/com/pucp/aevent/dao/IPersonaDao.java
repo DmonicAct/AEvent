@@ -21,12 +21,19 @@ public interface IPersonaDao  extends JpaRepository <Persona, Long>{
 //	public Boolean existsByDni(String dni);
 //	
 	public List<Persona> findByEnabled(Boolean enabled);
-	@Query("Select p from Persona p where p.nombre like :nombre%")
-	public List<Persona> findNombreLike(@Param("nombre")String nombre);
 	
-	@Query("Select p from Persona p,Usuario u where p.idUsuario = u.idUsuario and u.username like :username% and u.enabled=1")
-	public Page<Persona> findUsernameLike(@Param("username")String username,Pageable page);
+	//@Query("Select p from Persona p where p.nombre like :nombre%")
+	public List<Persona> findByNombreStartsWith(String nombre);
 	
-	@Query("Select p from Persona p,Usuario u where (p.nombre like :nombre% or p.appaterno like :nombre% or p.apmaterno like :nombre%) and p.idUsuario = u.idUsuario and u.enabled =1")
-	public Page<Persona> findNombreLike(@Param("nombre")String nombre,Pageable page);
+	//@Query("Select p from Persona p,Usuario u where (p.nombre like :nombre% or p.appaterno like :nombre% or p.apmaterno like :nombre%) and p.idUsuario = u.idUsuario and u.enabled =1")
+	public Page<Persona> findByNombreStartsWith(String nombre,Pageable page);
+	
+	//@Query("Select p from Persona p,Usuario u where p.idUsuario = u.idUsuario and u.username like :username% and u.enabled=1")
+	public Page<Persona> findByUsernameStartsWith(String username,Pageable page);
+	
+	
+	public Page<Persona> findByEnabledAndIdUsuarioNotIn(Boolean enabled, List<Integer> ids,Pageable page);
+	
+	public Page<Persona> findByIdUsuarioIn(List<Integer> ids,Pageable page);
+	
 }

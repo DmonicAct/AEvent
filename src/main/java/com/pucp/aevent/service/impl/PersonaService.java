@@ -1,5 +1,6 @@
 package com.pucp.aevent.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.pucp.aevent.dao.IEventoDao;
 import com.pucp.aevent.dao.IPersonaDao;
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Persona;
+import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;
 import com.pucp.aevent.service.IPersonaService;
@@ -20,6 +23,9 @@ public class PersonaService implements IPersonaService{
 	
 	@Autowired
 	IPersonaDao dao;
+	
+	@Autowired
+	IEventoDao daoEvento;
 	
 	private Paginacion paginacion;
 	
@@ -58,18 +64,20 @@ public class PersonaService implements IPersonaService{
 	}
 
 	@Override
-	public List<Persona> findByNombreLike(String nombre) {
-		return dao.findNombreLike(nombre);
+	@Transactional(readOnly=true)
+	public List<Persona> findByNombre(String nombre) {
+		return dao.findByNombreStartsWith(nombre);
 	}
 
 	@Override
-	public List<Persona> findByUsernameLike(String username,Pageable page) {
+	@Transactional(readOnly=true)
+	public List<Persona> findByNombre(String nombre, Pageable page) {
 		Page<Persona> lista = null;
 		
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
 		try {
-			lista = this.dao.findUsernameLike(username, page);
+			lista = this.dao.findByNombreStartsWith(nombre, page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
@@ -78,15 +86,56 @@ public class PersonaService implements IPersonaService{
 	}
 	
 	@Override
-	public List<Persona> findNombreLike(String nombre, Pageable page) {
+	@Transactional(readOnly=true)
+	public List<Persona> findByUsername(String username,Pageable page) {
 		Page<Persona> lista = null;
 		
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
 		try {
-			lista = this.dao.findNombreLike(nombre, page);
+			lista = this.dao.findByUsernameStartsWith(username, page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Persona> findAllDisponible(Integer id, Pageable page) {
+		Page<Persona> lista = null;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			Evento e = daoEvento.findByIdEvento(id);
+			List<Usuario> listaUsuarios = e.getComite();
+			List<Integer> ids = new ArrayList<Integer>();
+			for (Usuario u: listaUsuarios) 
+				ids.add(u.getIdUsuario());
+				
+			lista = dao.findByEnabledAndIdUsuarioNotIn(true,ids, page);
+		} catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Persona> findAllComite(Integer id, Pageable page) {
+		Page<Persona> lista = null;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			Evento e = daoEvento.findByIdEvento(id);
+			List<Usuario> listaUsuarios = e.getComite();
+			List<Integer> ids = new ArrayList<Integer>();
+			for (Usuario u: listaUsuarios) 
+				ids.add(u.getIdUsuario());
+				
+			lista = dao.findByIdUsuarioIn(ids, page);
+		} catch(Exception e) {
 			System.out.print(e.getMessage());
 		}
 		return lista.getContent();

@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException.BadRequest;
@@ -54,10 +55,10 @@ public class PersonaApi {
 	
 	
 	@GetMapping(path = "/persona/nombreLike", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> consultarPorNombreLike (String nombre) {
+	public ResponseEntity<ResponseObject> consultarPorNombre (String nombre) {
 		ResponseObject response = new ResponseObject();
 		try {
-			List<Persona> lista = this.service.findByNombreLike(nombre);
+			List<Persona> lista = this.service.findByNombre(nombre);
 			response.setResultado(lista);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
@@ -80,7 +81,7 @@ public class PersonaApi {
 	public ResponseEntity<ResponseObject> consultarPorNombrePaginado(String nombre, PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {
-			List<Persona> lista = this.service.findNombreLike(nombre, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			List<Persona> lista = this.service.findByNombre(nombre, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
 			response.setResultado(lista);
 			response.setPaginacion(this.service.getPaginacion());
 			response.setEstado(Estado.OK);
@@ -104,7 +105,55 @@ public class PersonaApi {
 	public ResponseEntity<ResponseObject> consultarPorUsernamePaginado(String username, PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {
-			List<Persona> lista = this.service.findByUsernameLike(username, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			List<Persona> lista = this.service.findByUsername(username, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			response.setResultado(lista);
+			response.setPaginacion(this.service.getPaginacion());
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping(path = "/persona/evaluadoresDisponibles/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarEvaluadoresDisponibles(@PathVariable("id")Integer id, PaginaRequest page) {
+		ResponseObject response = new ResponseObject();
+		try {
+			List<Persona> lista = this.service.findAllDisponible(id, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			response.setResultado(lista);
+			response.setPaginacion(this.service.getPaginacion());
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping(path = "/persona/comite/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarComite(@PathVariable("id")Integer id, PaginaRequest page) {
+		ResponseObject response = new ResponseObject();
+		try {
+			List<Persona> lista = this.service.findAllComite(id, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
 			response.setResultado(lista);
 			response.setPaginacion(this.service.getPaginacion());
 			response.setEstado(Estado.OK);
