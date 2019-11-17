@@ -263,5 +263,20 @@ public class EventoService implements IEventoService {
 	public List<Evento> findByOrganizador(Usuario persona) {
 		return dao.findByOrganizador(persona);
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Evento> findNotEnabled(Pageable page) {
+		Page<Evento> lista = null;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = this.dao.findByEnabled(false, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
 	
 }
