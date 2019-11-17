@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pucp.aevent.dao.ILugarDao;
+import com.pucp.aevent.entity.Categoria;
 import com.pucp.aevent.entity.Lugar;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;
@@ -63,4 +64,24 @@ public class LugarService implements ILugarService{
 		this.dao.delete(lugar);
 	}
 	
+	@Override
+	public List<Lugar> findByEnabled(Boolean enabled) {
+		return dao.findByEnabled(enabled);
+	}
+
+	@Override
+	public List<Lugar> findByEnabled(Boolean enabled, Pageable page) {
+		Page<Lugar> lista = null;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = dao.findByEnabled(enabled, page); 
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+			
+		}catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
+		
+		return lista.getContent();
+	}
 }

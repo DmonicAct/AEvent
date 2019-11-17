@@ -14,4 +14,6 @@ public interface ITipoCriterioDao extends JpaRepository <TipoCriterio, Long>{
 	public Page<TipoCriterio> findAll(Pageable pageable);
 	
 	public List<TipoCriterio> findByEnabled(Boolean enabled);
+	
+	public Page<TipoCriterio> findByEnabled(Boolean enabled,Pageable page);
 }
