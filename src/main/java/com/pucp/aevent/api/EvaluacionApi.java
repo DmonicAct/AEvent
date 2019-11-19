@@ -100,9 +100,6 @@ public class EvaluacionApi {
 			response.setPaginacion(evservice.getPaginacion());
 			response.setEstado(Estado.OK);
 			
-			Integer x = emailserv.enviarMensaje("a20143250@pucp.edu.pe", "se registro", ""+evaluador.getNombre());
-			System.out.print("\n" +x+ "\n");
-			
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
 			//response.setError(this.service.getError());
