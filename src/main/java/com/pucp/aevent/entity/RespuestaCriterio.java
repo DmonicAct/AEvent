@@ -22,7 +22,6 @@ public class RespuestaCriterio implements Serializable{
 	@Column(name="idRespuestaCriterio")
 	private Integer idRespuestaCriterio;
 	
-	@JsonProperty(access = Access.WRITE_ONLY)
     @JoinColumn(name = "idCriterio")
     private Integer idCriterio;
 	

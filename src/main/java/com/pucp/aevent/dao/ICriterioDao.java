@@ -12,4 +12,6 @@ public interface ICriterioDao  extends JpaRepository <Criterio, Long>{
 	
 	public List<Criterio> findByIdFase(Fase fase);
 	
+	public Criterio findByIdCriterio(Long id);
+
 }
