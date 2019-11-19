@@ -95,11 +95,13 @@ INSERT INTO `tipo_criterio` (descripcion, estado) VALUES ('Pregunta de selecció
 INSERT INTO `tipo_criterio` (descripcion, estado) VALUES ('Pregunta cerrada', 1);
 INSERT INTO `tipo_criterio` (descripcion, estado) VALUES ('Pregunta abierta', 1);
 
-INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Nivel de detalle de la temática",3,1);
-INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Grado de experiencia del ponente",1,1);
-INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Aspectos destacados de la propuesta",2,2);
-INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Cumple con los estándares del evento",1,4);
+INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Nivel de detalle de la temática",3,5);
+INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Grado de experiencia del ponente",1,5);
+INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Aspectos destacados de la propuesta",2,5);
+INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Cumple con los estándares del evento",1,5);
 INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Comentarios del evaluador",1,5);
+INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Criterio 4",1,5);
+INSERT INTO `criterio` (descripcion, id_fase, id_tipo_criterio) VALUES ("Criterio 5",1,5);
 
 INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Buen resumen",3);
 INSERT INTO `opcion_respuesta_criterio` (descripcion, id_criterio) VALUES ("Investigación exhaustiva",3);
