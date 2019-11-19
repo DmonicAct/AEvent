@@ -100,6 +100,21 @@ public class PreferenciaService implements IPreferenciaService {
 		dao.deleteById(id);
 		
 	}
+
+	@Override
+	public List<Preferencia> findByPropuesta(Propuesta propuesta,Pageable page) {
+		Page<Preferencia> lista = null;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = dao.findByPropuesta(propuesta, page); 
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+			
+		}catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
 	
 /*
 	@Override

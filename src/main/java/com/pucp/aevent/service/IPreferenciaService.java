@@ -19,6 +19,9 @@ public interface IPreferenciaService {
 	Error getError();
 	
 	public Preferencia findByUsuarioAndPropuesta(Usuario usuario, Propuesta propuesta);
+	
+	public List<Preferencia> findByPropuesta(Propuesta propuesta, Pageable pageable);
+	
 	public void deleteById(Long id);
 //	public List<Preferencia> findByIdUsuario(int idUsuario);
 //	public Preferencia findByUsuarioAndPropuesta(Usuario user,Propuesta prop);
