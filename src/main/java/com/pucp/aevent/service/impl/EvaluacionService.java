@@ -91,4 +91,16 @@ public class EvaluacionService implements IEvaluacionService{
 		}
 		return lista.getContent();
 	}
+
+	@Override
+	public Evaluacion findByIdEvaluacion(int idEvaluacion) {
+		Evaluacion eva = null;
+		try {
+			eva = this.daoEvaluacion.findByIdEvaluacion(idEvaluacion);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getCause());
+		}
+		return eva;
+	}
 }

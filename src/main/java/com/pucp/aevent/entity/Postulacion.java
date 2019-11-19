@@ -44,8 +44,8 @@ public class Postulacion implements Serializable{
 	private Boolean enabled;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "myDate", insertable=false)
-	private Date fechaActualizacion;
+	@Column(name = "fechaModificacion")
+	private Date fechaModificacion;
 	
 	public Long getIdPostulacion() {
 		return idPostulacion;
@@ -102,15 +102,13 @@ public class Postulacion implements Serializable{
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-	
-	public Date getFechaActualizacion() {
-		return fechaActualizacion;
-	}
 
-	public void setFechaActualizacion(Date fechaActualizacion) {
-		this.fechaActualizacion = fechaActualizacion;
+	public void setFechaModificacion(Date fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
 	}
-
+	public Date getFechaModificacion() {
+		return fechaModificacion;
+	}
 
 
 	/**

@@ -17,8 +17,6 @@ public class Persona extends Usuario implements Serializable{
 	private String appaterno;
 	@Column(length = 30, name="apellidoMat")
 	private String apmaterno;
-	@Column(unique=true,length = 10, name="dni")
-	private String dni;
 	
 	@Column(name="direccion")
 	private String direccion;
@@ -53,12 +51,6 @@ public class Persona extends Usuario implements Serializable{
 	}
 	public void setApmaterno(String apmaterno) {
 		this.apmaterno = apmaterno;
-	}
-	public String getDni() {
-		return dni;
-	}
-	public void setDni(String dni) {
-		this.dni = dni;
 	}
 	public String getDireccion() {
 		return direccion;

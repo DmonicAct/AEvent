@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 
+import com.pucp.aevent.entity.Categoria;
 import com.pucp.aevent.entity.Lugar;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;
@@ -15,4 +16,7 @@ public interface ILugarService {
 	Error getError();
 	public void save(Lugar lugar);
 	public void delete(Lugar lugar);
+	
+	public List<Lugar> findByEnabled(Boolean enabled);
+	public List<Lugar> findByEnabled(Boolean enabled, Pageable page);
 }

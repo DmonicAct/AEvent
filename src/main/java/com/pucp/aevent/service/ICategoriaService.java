@@ -20,4 +20,7 @@ public interface ICategoriaService {
 	public void save(Categoria categoria); 
 	
 	public void delete(Categoria categoria);
+	
+	public List<Categoria> findByEnabled(Boolean enabled);
+	public List<Categoria> findByEnabled(Boolean enabled, Pageable page);
 }

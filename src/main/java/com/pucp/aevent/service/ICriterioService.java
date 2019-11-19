@@ -15,4 +15,6 @@ public interface ICriterioService {
 	public List<Criterio> findByFase(Fase fase);
 	
 	public void delete(Long criterio);
+	
+	public void updateCriterio(Criterio criterio);
 }

@@ -99,8 +99,18 @@ public class Evento implements Serializable {
 	
 	@Column(name = "estado")
 	private Boolean enabled;
-
 	
+	@Column(name = "motivoFin")
+	private String motivoFin;
+
+	public String getMotivoFin() {
+		return motivoFin;
+	}
+
+	public void setMotivoFin(String motivoFin) {
+		this.motivoFin = motivoFin;
+	}
+
 	public int getIdEvento() {
 		return idEvento;
 	}

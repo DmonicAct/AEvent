@@ -18,7 +18,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
@@ -44,11 +45,17 @@ public class Propuesta implements Serializable {
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Usuario postulante;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "fecha_postulacion")
-	private Date fecha_postulacion;
+	private Date fecha_postulacion= new Date();;
+	
+	@Column(name = "fase_actual")
+	private int fase_actual;
+	
 	
 	@Column(name = "titulo")
 	private String titulo;
+
 	
 	@Transient
 	private List<Persona> evaluadoresAsignados;
@@ -111,5 +118,13 @@ public class Propuesta implements Serializable {
 		this.fecha_postulacion = fecha_postulacion;
 	}
 
+	public int getFase_actual() {
+		return fase_actual;
+	}
 
+	public void setFase_actual(int fase_actual) {
+		this.fase_actual = fase_actual;
+	}
+	
+	
 }
