@@ -11,7 +11,7 @@ import com.pucp.aevent.entity.Usuario;
 public interface IPreferenciaDao extends JpaRepository <Preferencia, Long> {
 	public Page<Preferencia> findByUsuario(Usuario user,Pageable pageable);
 	public Preferencia findByUsuarioAndPropuesta(Usuario usuario, Propuesta propuesta);
-	public Page<Preferencia> findByPropuesta(Propuesta propuesta,Pageable pageable);
+	public Page<Preferencia> findByPropuestaAndUsuarioIn(Propuesta propuesta,List<Usuario> comite,Pageable pageable);
 	public void deleteById(Long id);
 //	public List<Preferencia> findByIdUsuario(int idUsuario);
 //	public Preferencia findByUsuarioAndPropuesta(Usuario user,Propuesta prop);

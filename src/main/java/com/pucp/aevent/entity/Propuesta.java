@@ -102,14 +102,6 @@ public class Propuesta implements Serializable {
 		this.idPropuesta = idPropuesta;
 	}
 
-	public Evento getIdEvento() {
-		return evento;
-	}
-
-	public void setIdEvento(Evento evento) {
-		this.evento = evento;
-	}
-
 	public Date getFecha_postulacion() {
 		return fecha_postulacion;
 	}
