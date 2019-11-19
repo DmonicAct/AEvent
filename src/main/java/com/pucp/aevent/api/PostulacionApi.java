@@ -1,5 +1,6 @@
 package com.pucp.aevent.api;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,6 +97,8 @@ public class PostulacionApi {
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	
 	@Secured({"ROLE_DEFAULT"})
 	@PostMapping(path = "/postulacion", produces = MediaType.APPLICATION_JSON_VALUE, consumes= MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> guardar(@RequestBody RespuestaFormularioxPostulacionRequest object) {
@@ -129,6 +132,46 @@ public class PostulacionApi {
 		}
 	}
 	
+	@Secured({"ROLE_DEFAULT"})
+	@GetMapping(path = "/postulacion/all/{idPropuesta}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> obtenerPostulaciones(@PathVariable("idPropuesta")Long idPropuesta) {
+		ResponseObject response = new ResponseObject();
+		try {
+			List<RespuestaFormularioxPostulacionRequest> lista = null;
+			List<Postulacion> listaPostulacion;
+			List<RespuestaFormulario> listaRespuesta;
+			
+			
+			listaPostulacion= this.servicePostulacion.findAllByPropuesta(idPropuesta);
+		
+			lista = new ArrayList<RespuestaFormularioxPostulacionRequest>();
+			for(Postulacion element : listaPostulacion) {
+				RespuestaFormularioxPostulacionRequest e = new RespuestaFormularioxPostulacionRequest();
+				e.setPostulacion(element);
+				lista.add(e);
+			}
+			
+			for(RespuestaFormularioxPostulacionRequest element: lista) {
+				listaRespuesta = this.servicePostulacion.findAllByPostulacion(element.getPostulacion().getIdPostulacion());
+				element.setListaFormulario(listaRespuesta);
+			}
+			response.setResultado(lista);
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 	/*
 	 * Guardado De Formulario para fase
 	 * */

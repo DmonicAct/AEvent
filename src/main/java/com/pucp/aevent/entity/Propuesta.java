@@ -49,6 +49,10 @@ public class Propuesta implements Serializable {
 	@Column(name = "fecha_postulacion")
 	private Date fecha_postulacion= new Date();;
 	
+	@Column(name = "fase_actual")
+	private int fase_actual;
+	
+	
 	@Column(name = "titulo")
 	private String titulo;
 
@@ -113,5 +117,14 @@ public class Propuesta implements Serializable {
 	public void setFecha_postulacion(Date fecha_postulacion) {
 		this.fecha_postulacion = fecha_postulacion;
 	}
+
+	public int getFase_actual() {
+		return fase_actual;
+	}
+
+	public void setFase_actual(int fase_actual) {
+		this.fase_actual = fase_actual;
+	}
+	
 	
 }

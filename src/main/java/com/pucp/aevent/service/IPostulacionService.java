@@ -5,6 +5,7 @@ import java.util.List;
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Postulacion;
 import com.pucp.aevent.entity.Propuesta;
+import com.pucp.aevent.entity.RespuestaFormulario;
 import com.pucp.aevent.entity.Usuario;
 
 import org.springframework.data.domain.Pageable;
@@ -19,4 +20,6 @@ public interface IPostulacionService {
 	public List<Propuesta> findAllPropuesta(Usuario idUsuario,Pageable page);
 	public Propuesta findByPostulanteAndEvento(Usuario idUsuario,Evento evento);
 	public Propuesta findByIdPropuesta(Integer idPropuesta);
+	public List<Postulacion> findAllByPropuesta(Long idPropuesta);
+	public List<RespuestaFormulario> findAllByPostulacion(Long idPostulacion);
 }

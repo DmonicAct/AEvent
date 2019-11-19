@@ -12,10 +12,12 @@ import org.springframework.data.domain.Pageable;
 import com.pucp.aevent.dao.IEventoDao;
 import com.pucp.aevent.dao.IPostulacionDao;
 import com.pucp.aevent.dao.IPropuestaDao;
+import com.pucp.aevent.dao.IRespuestaFormularioDao;
 import com.pucp.aevent.dao.IUsuarioDao;
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Postulacion;
 import com.pucp.aevent.entity.Propuesta;
+import com.pucp.aevent.entity.RespuestaFormulario;
 import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;
@@ -26,6 +28,9 @@ public class PostulacionService implements IPostulacionService{
 	
 	@Autowired
 	IPostulacionDao dao;
+	
+	@Autowired
+	IRespuestaFormularioDao daoRespuesta;
 	
 	@Autowired
 	IPropuestaDao daoPropuesta;
@@ -174,5 +179,31 @@ public class PostulacionService implements IPostulacionService{
 			this.error.setMensajeInterno(e.getCause().toString());
 		}
 		return prop;
+	}
+
+	@Override
+	public List<Postulacion> findAllByPropuesta(Long idPropuesta) {
+		List<Postulacion> lista= null;
+		try {
+			lista = this.dao.findByIdPropuesta(idPropuesta);
+		}catch(Exception e) {
+			logger.error("Error en Postulacion Service(findByPostulante): " + e.getMessage());
+			this.error.setMensaje("Error en Postulacion Service(findByPostulante): " + e.getMessage());
+			this.error.setMensajeInterno(e.getCause().toString());
+		}
+		return lista;
+	}
+
+	@Override
+	public List<RespuestaFormulario> findAllByPostulacion(Long idPostulacion) {
+		List<RespuestaFormulario> lista= null;
+		try {
+			lista = this.daoRespuesta.findByIdPostulacion(idPostulacion);
+		}catch(Exception e) {
+			logger.error("Error en Postulacion Service(findByPostulante): " + e.getMessage());
+			this.error.setMensaje("Error en Postulacion Service(findByPostulante): " + e.getMessage());
+			this.error.setMensajeInterno(e.getCause().toString());
+		}
+		return lista;
 	}
 }
