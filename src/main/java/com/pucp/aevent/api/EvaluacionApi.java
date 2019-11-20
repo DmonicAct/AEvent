@@ -67,7 +67,7 @@ public class EvaluacionApi {
 		ResponseObject response = new ResponseObject();
 		try {
 			//evaluacion.setSigueEvaluando(false);
-			this.evservice.save(evaluacion);
+			this.evservice.delete(evaluacion);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
