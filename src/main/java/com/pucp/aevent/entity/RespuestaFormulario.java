@@ -21,12 +21,6 @@ public class RespuestaFormulario implements Serializable{
 	@Column(name="idPostulacion")
 	private Long idPostulacion;
 	
-	@Column(name="idFase")
-	private Long idFase;
-	
-	@Column(name="idEvento")
-	private Long idEvento;
-	
 	@Column(name="idDivision")
 	private Long idDivision;
 	
@@ -50,26 +44,6 @@ public class RespuestaFormulario implements Serializable{
 
 	public void setIdRespuestaFormulario(Long idRespuestaFormulario) {
 		this.idRespuestaFormulario = idRespuestaFormulario;
-	}
-
-
-	public Long getIdFase() {
-		return idFase;
-	}
-
-
-	public void setIdFase(Long idFase) {
-		this.idFase = idFase;
-	}
-
-
-	public Long getIdEvento() {
-		return idEvento;
-	}
-
-
-	public void setIdEvento(Long idEvento) {
-		this.idEvento = idEvento;
 	}
 
 

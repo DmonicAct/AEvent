@@ -7,6 +7,8 @@ import com.pucp.aevent.entity.Postulacion;
 import com.pucp.aevent.entity.Propuesta;
 import com.pucp.aevent.entity.RespuestaFormulario;
 import com.pucp.aevent.entity.Usuario;
+import com.pucp.aevent.entity.response_objects.Error;
+import com.pucp.aevent.entity.response_objects.Paginacion;
 
 import org.springframework.data.domain.Pageable;
 
@@ -22,4 +24,7 @@ public interface IPostulacionService {
 	public Propuesta findByIdPropuesta(Integer idPropuesta);
 	public List<Postulacion> findAllByPropuesta(Long idPropuesta);
 	public List<RespuestaFormulario> findAllByPostulacion(Long idPostulacion);
+	
+	Paginacion getPaginacion();
+	Error getError();
 }

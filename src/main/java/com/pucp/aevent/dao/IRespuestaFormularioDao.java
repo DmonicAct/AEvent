@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IRespuestaFormularioDao extends JpaRepository<RespuestaFormulario, Long> {
-	List<RespuestaFormulario> findByIdFaseAndIdPostulacion(Long idFase, Long idPostualacion);
 	
 	List<RespuestaFormulario> findByIdPostulacion(Long idPostulacion); 
 }

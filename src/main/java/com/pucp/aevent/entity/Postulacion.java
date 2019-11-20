@@ -22,16 +22,13 @@ public class Postulacion implements Serializable{
 	@Column(name="idPostulacion")
 	private Long idPostulacion;
 	
-	@NotEmpty(message ="no puede estar vacio")
-	@Column(unique = true, length = 60, name="idUsuario")
+	@Column(name="idUsuario")
 	private Long idUsuario;
 	
-	@NotEmpty(message ="no puede estar vacio")
-	@Column(unique = true, length = 60, name="idEvento")
+	@Column(name="idEvento")
 	private Long idEvento;
 	
-	@NotEmpty(message ="no puede estar vacio")
-	@Column(unique = true, length = 60, name="idPropuesta")
+	@Column(name="idPropuesta")
 	private Long idPropuesta;
 	
 	@Column(name="idFase")
@@ -108,6 +105,15 @@ public class Postulacion implements Serializable{
 	}
 	public Date getFechaModificacion() {
 		return fechaModificacion;
+	}
+
+
+	public Long getIdPropuesta() {
+		return idPropuesta;
+	}
+
+	public void setIdPropuesta(Long idPropuesta) {
+		this.idPropuesta = idPropuesta;
 	}
 
 

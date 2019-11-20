@@ -100,19 +100,18 @@ public class PostulacionApi {
 	
 	
 	@Secured({"ROLE_DEFAULT"})
-	@PostMapping(path = "/postulacion", produces = MediaType.APPLICATION_JSON_VALUE, consumes= MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> guardar(@RequestBody RespuestaFormularioxPostulacionRequest object) {
+	@PostMapping(path = "/postulacion/{Username}", produces = MediaType.APPLICATION_JSON_VALUE, consumes= MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> guardar(@RequestBody RespuestaFormularioxPostulacionRequest object,@PathVariable("Username")String Username) {
 		ResponseObject response = new ResponseObject();
 		try {
+			Usuario usuario = this.serviceUsuario.findByUsername(Username);
 			List<RespuestaFormulario> lista = object.getListaFormulario();
 			Postulacion postulacion = object.getPostulacion();
-			
+			postulacion.setIdUsuario(Long.parseLong(String.valueOf(usuario.getIdUsuario())));
 			this.servicePostulacion.save(postulacion);
 			if(lista!=null && lista.size()>0)
 				for(RespuestaFormulario e : lista) {
 					e.setIdPostulacion(postulacion.getIdPostulacion());
-					e.setIdEvento(postulacion.getIdEvento());
-					e.setIdFase(postulacion.getIdFase());
 					this.serviceRespuesta.save(e);
 				}
 			response.setEstado(Estado.OK);
@@ -175,37 +174,6 @@ public class PostulacionApi {
 	/*
 	 * Guardado De Formulario para fase
 	 * */
-	@Secured({"ROLE_DEFAULT"})
-	@GetMapping(path = "/postulacion/{idUsuario}/{idEvento}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> findById(@PathVariable("idUsuario")Long idUsuario,@PathVariable("idEvento")Long idEvento) {
-		ResponseObject response = new ResponseObject();
-		Map<String,Object> complexObj = new HashMap<>();
-		try {
-			Postulacion postulacion;
-			List<RespuestaFormulario> listaPreguntas;
-			postulacion = this.servicePostulacion.findById(idUsuario, idEvento);
-			complexObj.put("META_DATA", postulacion);
-			
-			listaPreguntas = this.serviceRespuesta.findByIdFaseAndIdPostulante(postulacion.getIdFase(), postulacion.getIdPostulacion());
-			complexObj.put("LISTA", listaPreguntas);
-			
-			response.setResultado(complexObj);
-			response.setEstado(Estado.OK);
-			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
-		} catch(BadRequest e) {
-			//response.setError(this.service.getError());
-			response.setEstado(Estado.ERROR);
-			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
-		} catch(InternalServerError e) {
-			//response.setError(this.service.getError());
-			response.setEstado(Estado.ERROR);
-			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		} catch(Exception e) {
-			response.setError(1, "Error Interno", e.getMessage());
-			response.setEstado(Estado.ERROR);
-			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
 	
 	@Secured({"ROLE_DEFAULT"})
 	@GetMapping(path = "/postulacion/propuesta/{Username}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -217,6 +185,7 @@ public class PostulacionApi {
 			lista = this.servicePostulacion.findAllPropuesta(usuario, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
 			response.setResultado(lista);
 			response.setEstado(Estado.OK);
+			response.setPaginacion(this.servicePostulacion.getPaginacion());
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
 			//response.setError(this.service.getError());

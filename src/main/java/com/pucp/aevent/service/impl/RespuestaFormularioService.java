@@ -43,17 +43,4 @@ public class RespuestaFormularioService implements IRespuestaFormularioService{
 		return rpta;
 	}
 
-	@Override
-	public List<RespuestaFormulario> findByIdFaseAndIdPostulante(Long idFase, Long idPostulacion) {
-		List<RespuestaFormulario> post= null;
-		try {
-			post = this.dao.findByIdFaseAndIdPostulacion(idFase, idPostulacion);
-		} catch (Exception e) {
-			logger.error("Error en Postulacion Service(findById): " + e.getMessage());
-			this.error.setMensaje("Error en Postulacion Service(findById): " + e.getMessage());
-			this.error.setMensajeInterno(e.getCause().toString());
-		}
-		return post;
-	}
-
 }

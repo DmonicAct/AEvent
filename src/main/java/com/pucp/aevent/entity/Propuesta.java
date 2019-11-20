@@ -34,7 +34,7 @@ public class Propuesta implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idPropuesta")
-	private int idPropuesta;
+	private Integer idPropuesta;
 	
 	@OneToOne
 	@JoinColumn(name = "idEvento",referencedColumnName = "idEvento")
@@ -47,10 +47,10 @@ public class Propuesta implements Serializable {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "fecha_postulacion")
-	private Date fecha_postulacion= new Date();;
+	private Date fecha_postulacion= new Date();
 	
 	@Column(name = "fase_actual")
-	private int fase_actual;
+	private Integer fase_actual;
 	
 	
 	@Column(name = "titulo")
@@ -94,14 +94,6 @@ public class Propuesta implements Serializable {
 		this.postulante = postulante;
 	}
 
-	public int getIdPropuesta() {
-		return idPropuesta;
-	}
-
-	public void setIdPropuesta(int idPropuesta) {
-		this.idPropuesta = idPropuesta;
-	}
-
 	public Evento getIdEvento() {
 		return evento;
 	}
@@ -118,11 +110,19 @@ public class Propuesta implements Serializable {
 		this.fecha_postulacion = fecha_postulacion;
 	}
 
-	public int getFase_actual() {
+	public Integer getIdPropuesta() {
+		return idPropuesta;
+	}
+
+	public void setIdPropuesta(Integer idPropuesta) {
+		this.idPropuesta = idPropuesta;
+	}
+
+	public Integer getFase_actual() {
 		return fase_actual;
 	}
 
-	public void setFase_actual(int fase_actual) {
+	public void setFase_actual(Integer fase_actual) {
 		this.fase_actual = fase_actual;
 	}
 	
