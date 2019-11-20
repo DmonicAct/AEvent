@@ -37,4 +37,9 @@ public class UtilConstanst {
 	public static final String PROPUESTA_APROBADA  		=	"PROPUESTA_APROBADA";	
 	public static final String PROPUESTA_OBSERVADA 		=	"PROPUESTA_OBSERVADA";	
 	public static final String PROPUESTA_CANCELADA 		=	"PROPUESTA_CANCELADA";
+	
+	public static final String FASE_APROBADA 			= "FASE_APROBADA";
+	public static final String FASE_ESPERA				= "FASE_ESPERA";
+	public static final String FASE_BORRADOR			= "FASE_BORRADOR";
+	public static final String FASE_OBSERVADA			= "FASE_OBSERVADA";
 }

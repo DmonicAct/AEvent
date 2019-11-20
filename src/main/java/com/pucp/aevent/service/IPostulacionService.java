@@ -25,6 +25,9 @@ public interface IPostulacionService {
 	public List<Postulacion> findAllByPropuesta(Long idPropuesta);
 	public List<RespuestaFormulario> findAllByPostulacion(Long idPostulacion);
 	
+	public Postulacion findByIdPostulacion(Long idPostulacion);
+	public Postulacion enviarPostulacion(Postulacion postulacion);
+	
 	Paginacion getPaginacion();
 	Error getError();
 }

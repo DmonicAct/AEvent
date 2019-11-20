@@ -22,6 +22,7 @@ import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;
 import com.pucp.aevent.service.IPostulacionService;
+import com.pucp.aevent.util.UtilConstanst;
 
 @Service
 public class PostulacionService implements IPostulacionService{
@@ -73,6 +74,19 @@ public class PostulacionService implements IPostulacionService{
 		} catch (Exception e) {
 			logger.error("Error en Postulacion Service(findById): " + e.getMessage());
 			this.error.setMensaje("Error en Postulacion Service(findById): " + e.getMessage());
+			this.error.setMensajeInterno(e.getCause().toString());
+		}
+		return post;
+	}
+	
+	@Override
+	public Postulacion findByIdPostulacion(Long idPostulacion) {
+		Postulacion post= null;
+		try {
+			post = this.dao.findByIdPostulacion(idPostulacion);
+		} catch (Exception e) {
+			logger.error("Error en Postulacion Service(findByIdPostulacion): " + e.getMessage());
+			this.error.setMensaje("Error en Postulacion Service(findByIdPostulacion): " + e.getMessage());
 			this.error.setMensajeInterno(e.getCause().toString());
 		}
 		return post;
@@ -205,5 +219,19 @@ public class PostulacionService implements IPostulacionService{
 			this.error.setMensajeInterno(e.getCause().toString());
 		}
 		return lista;
+	}
+
+	@Override
+	public Postulacion enviarPostulacion(Postulacion postulacion) {
+		Postulacion post = null;
+		try {
+			postulacion.setEstado(UtilConstanst.FASE_ESPERA);
+			post = this.dao.save(postulacion);
+		}catch(Exception e) {
+			logger.error("Error en Postulacion Service(enviarPostulacion): " + e.getMessage());
+			this.error.setMensaje("Error en Postulacion Service(enviarPostulacion): " + e.getMessage());
+			this.error.setMensajeInterno(e.getCause().toString());
+		}
+		return post;
 	}
 }

@@ -18,4 +18,6 @@ public interface IPostulacionDao  extends JpaRepository <Postulacion, Long>{
 	Boolean existsByIdUsuarioAndIdEvento(Long idUsuario,Long idEvento);
 	
 	List<Postulacion> findByIdPropuesta(Long idPropuesta);
+	
+	Postulacion findByIdPostulacion(Long idPostulacion);
 }
