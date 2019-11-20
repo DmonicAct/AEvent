@@ -110,6 +110,30 @@ public class PreferenciaApi {
 		}
 	}
 	
+	@GetMapping(path = "/preferencia/propuesta", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarByPropuesta(Propuesta propuesta,PaginaRequest page) {
+		ResponseObject response = new ResponseObject();
+		try {
+			List<Preferencia> resultado= this.service.findByPropuesta(propuesta, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			response.setResultado(resultado);
+			response.setPaginacion(service.getPaginacion());
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	@GetMapping(path = "/preferencia/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> eliminarPreferencia(@PathVariable("id")Long id) {
 		ResponseObject response = new ResponseObject();

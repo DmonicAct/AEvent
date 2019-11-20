@@ -94,12 +94,21 @@ public class Propuesta implements Serializable {
 		this.postulante = postulante;
 	}
 
+<<<<<<< HEAD
 	public Evento getIdEvento() {
 		return evento;
 	}
 
 	public void setIdEvento(Evento evento) {
 		this.evento = evento;
+=======
+	public int getIdPropuesta() {
+		return idPropuesta;
+	}
+
+	public void setIdPropuesta(int idPropuesta) {
+		this.idPropuesta = idPropuesta;
+>>>>>>> origin/eliot2
 	}
 
 	public Date getFecha_postulacion() {

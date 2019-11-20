@@ -54,13 +54,13 @@ public class EvaluacionService implements IEvaluacionService{
 		//e.setVeredicto("");
 		//e.setSigueEvaluando(true);
 		e = daoEvaluacion.save(e);
-		
+		/*
 		Preferencia p = new Preferencia();
 		p.setPropuesta(propuesta);
 		p.setUsuario(evaluador);
 		p.setDescripcion("Pendiente confirmaci�n");
 		daoPreferencia.save(p);
-		
+		*/
 		Usuario u = daoUsuario.findByIdUsuario(evaluador.getIdUsuario());
 		u.setEvaluacionSinLeer(true);
 		daoUsuario.save(u);
@@ -72,7 +72,8 @@ public class EvaluacionService implements IEvaluacionService{
 		daoEvaluacion.save(evaluacion);
 	}
 	
-	public void delete(Evaluacion evaluacion) {
+	public void desasignar(int id) {
+		Evaluacion evaluacion = daoEvaluacion.findByIdEvaluacion(id);
 		daoEvaluacion.delete(evaluacion);
 	}
 	

@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.pucp.aevent.dao.IEventoDao;
 import com.pucp.aevent.dao.IPersonaDao;
 import com.pucp.aevent.dao.IPreferenciaDao;
 import com.pucp.aevent.dao.IPropuestaDao;
@@ -99,6 +100,22 @@ public class PreferenciaService implements IPreferenciaService {
 	public void deleteById(Long id) {
 		dao.deleteById(id);
 		
+	}
+
+	@Override
+	public List<Preferencia> findByPropuesta(Propuesta propuesta,Pageable page) {
+		Page<Preferencia> lista = null;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			Propuesta p = daoPropuesta.findByIdPropuesta(propuesta.getIdPropuesta());
+			List<Usuario> comite = p.getEvento().getComite();
+			lista = dao.findByPropuestaAndUsuarioIn(propuesta, comite, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		}catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
 	}
 	
 /*
