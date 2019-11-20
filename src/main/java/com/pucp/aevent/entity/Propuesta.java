@@ -11,8 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -21,7 +19,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -92,23 +89,6 @@ public class Propuesta implements Serializable {
 
 	public void setPostulante(Usuario postulante) {
 		this.postulante = postulante;
-	}
-
-<<<<<<< HEAD
-	public Evento getIdEvento() {
-		return evento;
-	}
-
-	public void setIdEvento(Evento evento) {
-		this.evento = evento;
-=======
-	public int getIdPropuesta() {
-		return idPropuesta;
-	}
-
-	public void setIdPropuesta(int idPropuesta) {
-		this.idPropuesta = idPropuesta;
->>>>>>> origin/eliot2
 	}
 
 	public Date getFecha_postulacion() {
