@@ -63,5 +63,26 @@ public class CategoriaService implements ICategoriaService{
 	public void delete(Categoria categoria) {
 		this.dao.delete(categoria);
 	}
+
+	@Override
+	public List<Categoria> findByEnabled(Boolean enabled) {
+		return dao.findByEnabled(enabled);
+	}
+
+	@Override
+	public List<Categoria> findByEnabled(Boolean enabled, Pageable page) {
+		Page<Categoria> lista = null;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = dao.findByEnabled(enabled, page); 
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+			
+		}catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
+		
+		return lista.getContent();
+	}
 	
 }

@@ -60,10 +60,32 @@ public class CriterioApi {
 	@PostMapping(path = "/criterio",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> guardarCriterio( @Valid @RequestBody Criterio criterio) {
 		ResponseObject response = new ResponseObject();
-		try {
-			
+		try {			
 			this.service.save(criterio);
-			
+			//response.setResultado();
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@Secured({"ROLE_ORGANIZER"})
+	@PostMapping(path = "/criterio/update",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> updateCriterio( @Valid @RequestBody Criterio criterio) {
+		ResponseObject response = new ResponseObject();
+		try {			
+			this.service.updateCriterio(criterio);
 			//response.setResultado();
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);

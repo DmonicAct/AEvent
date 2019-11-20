@@ -47,4 +47,12 @@ public class CriterioService implements ICriterioService{
 		this.dao.deleteById(criterio);		
 	}
 
+	@Override
+	public void updateCriterio(Criterio criterio) {
+		Criterio c = this.dao.findByIdCriterio(criterio.getIdCriterio());
+		c.setDescripcion(criterio.getDescripcion());
+		this.dao.save(c);
+	}
+
+
 }

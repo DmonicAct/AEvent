@@ -37,7 +37,10 @@ public class Pregunta implements Serializable {
     @Column(name = "tipo_pregunta")
     private String tipoPregunta;
     
-    @JsonProperty(access = Access.WRITE_ONLY)
+    @Column(name = "maxCaracteres")
+    private Integer maxCaracteres;
+
+	@JsonProperty(access = Access.WRITE_ONLY)
     @JoinColumn(name = "id_seccion", referencedColumnName = "id_seccion")
     @ManyToOne
     private Seccion idSeccion;
@@ -64,6 +67,14 @@ public class Pregunta implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+    
+    public Integer getMaxCaracteres() {
+		return maxCaracteres;
+	}
+
+	public void setMaxCaracteres(Integer maxCaracteres) {
+		this.maxCaracteres = maxCaracteres;
+	}
 
     public String getTipoPregunta() {
         return tipoPregunta;
