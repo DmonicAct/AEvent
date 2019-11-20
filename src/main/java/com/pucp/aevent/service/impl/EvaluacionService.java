@@ -72,7 +72,8 @@ public class EvaluacionService implements IEvaluacionService{
 		daoEvaluacion.save(evaluacion);
 	}
 	
-	public void delete(Evaluacion evaluacion) {
+	public void desasignar(int id) {
+		Evaluacion evaluacion = daoEvaluacion.findByIdEvaluacion(id);
 		daoEvaluacion.delete(evaluacion);
 	}
 	

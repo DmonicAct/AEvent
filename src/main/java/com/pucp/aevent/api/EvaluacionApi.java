@@ -62,12 +62,12 @@ public class EvaluacionApi {
 	}
 	
 	@Secured({"ROLE_ORGANIZER","ROLE_ADMIN","ROLE_DEFAULT"})
-	@PostMapping(path = "/evaluacion/desasignar",produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> desasignarPropuesta(Evaluacion evaluacion){
+	@PostMapping(path = "/evaluacion/desasignar/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> desasignarPropuesta(@PathVariable("id") int id){
 		ResponseObject response = new ResponseObject();
 		try {
 			//evaluacion.setSigueEvaluando(false);
-			this.evservice.delete(evaluacion);
+			this.evservice.desasignar(id);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {

@@ -12,7 +12,7 @@ import com.pucp.aevent.entity.Persona;
 
 public interface IEvaluacionService {
 	public Evaluacion asignarPropuesta(Persona evaluador,Propuesta propuesta,Fase fase);
-	public void delete(Evaluacion evaluacion);
+	public void desasignar(int id);
 	public List<Evaluacion> findAllByEvaluador(Persona evaluador,Pageable page);
 	public Evaluacion findByIdEvaluacion(int idEvaluacion);
 	public void save(Evaluacion e);
