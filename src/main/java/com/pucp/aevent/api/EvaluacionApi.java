@@ -104,7 +104,7 @@ public class EvaluacionApi {
 			response.setResultado(lista);
 			response.setPaginacion(evservice.getPaginacion());
 			response.setEstado(Estado.OK);
-			
+						
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
 			//response.setError(this.service.getError());
