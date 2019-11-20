@@ -104,14 +104,18 @@ public class PostulacionApi {
 	public ResponseEntity<ResponseObject> guardar(@RequestBody RespuestaFormularioxPostulacionRequest object,@PathVariable("Username")String Username) {
 		ResponseObject response = new ResponseObject();
 		try {
-			Usuario usuario = this.serviceUsuario.findByUsername(Username);
-			List<RespuestaFormulario> lista = object.getListaFormulario();
 			Postulacion postulacion = object.getPostulacion();
-			postulacion.setIdUsuario(Long.parseLong(String.valueOf(usuario.getIdUsuario())));
+			if(postulacion.getIdUsuario()==null) {
+				Usuario usuario = this.serviceUsuario.findByUsername(Username);
+				postulacion.setIdUsuario(Long.parseLong(String.valueOf(usuario.getIdUsuario())));
+			}
+			
+			List<RespuestaFormulario> lista = object.getListaFormulario();
 			this.servicePostulacion.save(postulacion);
 			if(lista!=null && lista.size()>0)
 				for(RespuestaFormulario e : lista) {
-					e.setIdPostulacion(postulacion.getIdPostulacion());
+					if(e.getIdPostulacion()==null)
+						e.setIdPostulacion(postulacion.getIdPostulacion());
 					this.serviceRespuesta.save(e);
 				}
 			response.setEstado(Estado.OK);
