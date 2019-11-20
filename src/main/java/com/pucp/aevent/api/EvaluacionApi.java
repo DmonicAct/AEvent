@@ -62,7 +62,7 @@ public class EvaluacionApi {
 	}
 	
 	@Secured({"ROLE_ORGANIZER","ROLE_ADMIN","ROLE_DEFAULT"})
-	@PostMapping(path = "/evaluacion/desasignar/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/evaluacion/desasignar/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> desasignarPropuesta(@PathVariable("id") int id){
 		ResponseObject response = new ResponseObject();
 		try {
