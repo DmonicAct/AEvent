@@ -104,7 +104,13 @@ public class EvaluacionApi {
 			response.setResultado(lista);
 			response.setPaginacion(evservice.getPaginacion());
 			response.setEstado(Estado.OK);
-						
+			
+			emailserv.enviarMensaje("a20143250@pucp.edu.pe", "SALUDO", "<b>This text is bold</b>");
+			emailserv.enviarMensajeFormato("a20143250@pucp.edu.pe", "SALUDO", "<b>This text is bold</b>");
+			
+			emailserv.enviarMensaje("andreco_2610@hotmail.com", "SALUDO", "<b>This text is bold</b>");
+			emailserv.enviarMensajeFormato("andreco_2610@hotmail.com", "SALUDO", "<b>This text is bold</b>");
+			
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
 			//response.setError(this.service.getError());
