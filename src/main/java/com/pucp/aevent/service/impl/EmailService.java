@@ -64,13 +64,13 @@ public class EmailService implements IEmailService {
 	    	//props.put("mail.protocol", "smtp");
 	    	//props.put("mail.port", "587");
 	    	
-	    	props.put("mail.transport.protocol", "smtp");
+	    	//props.put("mail.transport.protocol", "smtp");
 	    	props.put("mail.smtp.host", "smtp.gmail.com");
 	    	props.put("mail.smtp.auth", "true");
 	        props.put("mail.smtp.starttls.enable", "true");
-	        props.put("mail.smtp.host", "smtp.gmail.com");
+	        //props.put("mail.smtp.host", "smtp.gmail.com");
 	        props.put("mail.smtp.port", "587");
-	        props.put("mail.smtp.ssl.trust", "*");
+	        //props.put("mail.smtp.ssl.trust", "*");
 	        
 	    	
 	        String user = "aeventmailing@gmail.com";
@@ -83,7 +83,7 @@ public class EmailService implements IEmailService {
                 }
 	        );
 	        message = new MimeMessage(mailSession);
-	        //msg.setFrom(new InternetAddress(from));
+	        message.setFrom(new InternetAddress(user,"Gestión de eventos AEvent"));
 	    	
 	        InternetAddress[] addresses = 
 	        		new InternetAddress[] {new InternetAddress(destinatario)};

@@ -29,6 +29,7 @@ import com.pucp.aevent.entity.request_objects.PaginaRequest;
 import com.pucp.aevent.entity.request_objects.RespuestaFormularioxPostulacionRequest;
 import com.pucp.aevent.entity.response_objects.Estado;
 import com.pucp.aevent.entity.response_objects.ResponseObject;
+import com.pucp.aevent.service.IEmailService;
 import com.pucp.aevent.service.IEventoService;
 import com.pucp.aevent.service.IPostulacionService;
 import com.pucp.aevent.service.IRespuestaFormularioService;
@@ -48,6 +49,9 @@ public class PostulacionApi {
 	
 	@Autowired
 	IUsuarioService serviceUsuario;
+	
+	@Autowired
+	IEmailService serviceEmail;
 	
 	@Secured({"ROLE_DEFAULT"})
 	@GetMapping(path = "/postulacion/{idUsuario}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -240,11 +244,25 @@ public class PostulacionApi {
 		try {
 			Usuario usuario = this.serviceUsuario.findByUsername(Username);
 			Evento evento = this.serivceEvento.findById(idEvento);
+			
+			String texto = 
+					"<p>" + 
+					"   Usted," + 
+					"   <i>"+(usuario.getNombreCompleto())+", </i>" + 
+					"   <b> se ha registrado satisfactoriamente en el evento</b>" + 
+					"   <i>"+(evento.getTitulo())+". </i>" +
+					"</p>";
+			serviceEmail.enviarMensajeFormato("a20143250@pucp.edu.pe", 
+					"Confirmación de registro de propuesta", texto);
+			
 			propuesta.setPostulante(usuario);
 			propuesta.setEvento(evento);
 			Propuesta prop = this.servicePostulacion.savePropuesta(propuesta);
 			response.setResultado(prop);
 			response.setEstado(Estado.OK);
+			
+			
+			
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
 			//response.setError(this.service.getError());
