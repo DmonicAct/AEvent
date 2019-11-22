@@ -319,5 +319,13 @@ public class EventoService implements IEventoService {
 		}
 		return lista.getContent();
 	}
+
+	@Override
+	public void updateComite(int idEvento, Usuario usuario) {
+		
+		Evento e = this.dao.findByComite(idEvento, usuario.getIdUsuario());
+		e.getComite().add(usuario);
+		this.dao.save(e);
+	}
 	
 }

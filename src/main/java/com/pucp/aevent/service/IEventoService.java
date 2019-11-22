@@ -31,4 +31,6 @@ public interface IEventoService {
 	
 	public List<Evento> findByPresidente(Usuario presidente);
 	public List<Evento> findByOrganizador(Usuario organizador);
+	
+	public void updateComite(int idEvento, Usuario usuario);
 }
