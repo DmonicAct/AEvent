@@ -21,14 +21,19 @@ import com.pucp.aevent.dao.IPreguntaDao;
 import com.pucp.aevent.dao.ISeccionDao;
 import com.pucp.aevent.dao.IFormularioCFPDao;
 import com.pucp.aevent.dao.IPropuestaDao;
+import com.pucp.aevent.entity.Division;
 import com.pucp.aevent.entity.Evaluacion;
 import com.pucp.aevent.entity.Evento;
+import com.pucp.aevent.entity.Fase;
+import com.pucp.aevent.entity.FormularioCFP;
 import com.pucp.aevent.entity.Propuesta;
 import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;
+import com.pucp.aevent.service.IDivisionService;
 import com.pucp.aevent.service.IEventoService;
+import com.pucp.aevent.service.IFormularioCFPService;
 
 @Service
 public class EventoService implements IEventoService {
@@ -41,21 +46,18 @@ public class EventoService implements IEventoService {
 
 	@Autowired
 	IFormularioCFPDao daoFormaulario;
-
-	@Autowired
-	IDivisionDao daoDivision;
-
-	@Autowired
-	ISeccionDao daoSeccion;
-
-	@Autowired
-	IPreguntaDao daoPregunta;
 	
 	@Autowired
 	IPropuestaDao daoPropuesta;
 	
 	@Autowired
 	IEvaluacionDao daoEvaluacion;
+	
+	@Autowired
+	IFormularioCFPService formularioService;
+	
+	@Autowired
+	IDivisionService divisionService;
 	
 	private Paginacion paginacion;
 
@@ -89,21 +91,6 @@ public class EventoService implements IEventoService {
 		}
 		return returnedEvento;
 	}
-
-//	@Override
-//	@Transactional(readOnly=true)
-//	public List<Evento> findAll(Pageable page) {
-//		Page<Evento> lista = null;
-//		this.paginacion = new Paginacion();
-//		this.paginacion.setPageable(page);
-//		try {
-//			lista = this.dao.findAll(page); 
-//			this.paginacion.setTotalRegistros(lista.getTotalElements());
-//		}catch(Exception e) {
-//			System.out.print(e.getMessage());
-//		}
-//		return lista.getContent();
-//	}
 
 	@Override
 	@Transactional(readOnly = true)
@@ -174,7 +161,24 @@ public class EventoService implements IEventoService {
 	@Override
 	@Transactional(readOnly = true)
 	public Evento findById(Integer id) {
-		return this.dao.findByIdEvento(id);
+		Evento evento = null;
+		try {
+			evento = this.dao.findByIdEvento(id);
+			if(evento!=null && evento.getFases()!= null && evento.getFases().size()>0)
+				for(Fase fase: evento.getFases()) {
+					if(fase.getFormulario()!=null && fase.getFormulario().getIdFormulariocfp()!=null) {
+						FormularioCFP formulario = fase.getFormulario();
+						List<Division> listaDivision = this.divisionService.findByIdFormulario(formulario.getIdFormulariocfp());
+						formulario.setDivisionList(listaDivision);
+						fase.setFormulario(formulario);
+					}
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.print(e.getMessage());
+			System.out.print(e.getCause());
+		}
+		return evento;
 	}
 	@Override
 	@Transactional(readOnly = true)

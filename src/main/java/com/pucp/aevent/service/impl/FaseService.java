@@ -8,15 +8,25 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pucp.aevent.dao.IFaseDao;
 import com.pucp.aevent.entity.Fase;
+import com.pucp.aevent.entity.FormularioCFP;
+import com.pucp.aevent.entity.Division;
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.response_objects.Error;
+import com.pucp.aevent.service.IDivisionService;
 import com.pucp.aevent.service.IFaseService;
+import com.pucp.aevent.service.IFormularioCFPService;
 
 @Service
 public class FaseService implements IFaseService{
 	
 	@Autowired
 	IFaseDao dao;
+	
+	@Autowired
+	IFormularioCFPService service;
+	
+	@Autowired
+	IDivisionService divisionService;
 	
 	private Error error;
 	@Override
@@ -32,8 +42,26 @@ public class FaseService implements IFaseService{
 
 	@Override
 	@Transactional
-	public void save(Fase fase) {
-		this.dao.save(fase);
+	public Fase save(Fase fase) {
+		Fase fase_temp = null;
+		try {
+			fase_temp = this.dao.save(fase);
+			FormularioCFP formulario = fase_temp.getFormulario();
+			if(formulario!=null) {
+				formulario.setDivisionList(fase.getFormulario().getDivisionList());
+				this.service.save(formulario);
+				if(formulario.getDivisionList()!=null) {
+					List<Division> listaDivision = this.divisionService.findByIdFormulario(formulario.getIdFormulariocfp());
+					formulario.setDivisionList(listaDivision);
+					fase_temp.setFormulario(formulario);
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e.getCause());
+			System.out.println(e.getMessage());
+		}
+		return fase_temp;
 	}
 
 	@Override

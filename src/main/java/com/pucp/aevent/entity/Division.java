@@ -4,36 +4,23 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 @Table(name = "division")
-@NamedQueries({
-    @NamedQuery(name = "Division.findAll", query = "SELECT d FROM Division d")})
 public class Division implements Serializable {
-
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_division")
-    private Integer idDivision;
+    private Long idDivision;
     @Size(max = 255)
     @Column(name = "descripcion")
     private String descripcion;
@@ -41,39 +28,24 @@ public class Division implements Serializable {
     @Column(name="indice")
     private Integer indice;
     
-    @JsonProperty(access = Access.WRITE_ONLY)
-    @JoinColumn(name = "id_formulario")
-    @ManyToOne
-    private FormularioCFP formulario;
+    @Column(name="idFormulariocfp")
+    private Long idFormulariocfp;
     
-    //mappedBy = "idDivision",
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
-    @JoinColumn(name= "id_division")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private List<Seccion> seccionList = new ArrayList<>();;
+    @Transient
+    private List<Seccion> seccionList;
 
     public Division() {
     }
     
-    public Division(Integer idDivision) {
+    public Division(Long idDivision) {
         this.idDivision = idDivision;
     }
     
-    public void addSeccion(Seccion seccion) {
-        if (seccion != null) {
-           if (this.seccionList == null) {
-        	   seccionList = new ArrayList<Seccion>();          
-           }
-           seccionList.add(seccion);
-           seccion.setDivision(this);
-        }
-     }
-    
-    public Integer getIdDivision() {
+    public Long getIdDivision() {
         return idDivision;
     }
 
-    public void setIdDivision(Integer idDivision) {
+    public void setIdDivision(Long idDivision) {
         this.idDivision = idDivision;
     }
 
@@ -84,26 +56,10 @@ public class Division implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-    public FormularioCFP getIdFormulario() {
-        return formulario;
-    }
-
-    public void setIdFormulario(FormularioCFP idFormulario) {
-        this.formulario = idFormulario;
-    }
-
+    
     public List<Seccion> getSeccionList() {
         return seccionList;
     }
-
-	public FormularioCFP getFormulario() {
-		return formulario;
-	}
-
-	public void setFormulario(FormularioCFP formulario) {
-		this.formulario = formulario;
-	}
 
 	public void setSeccionList(List<Seccion> seccionList) {
         this.seccionList = seccionList;
@@ -116,30 +72,23 @@ public class Division implements Serializable {
 	public void setIndice(Integer indice) {
 		this.indice = indice;
 	}
-	
-	@Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idDivision != null ? idDivision.hashCode() : 0);
-        return hash;
-    }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Division)) {
-            return false;
-        }
-        Division other = (Division) object;
-        if ((this.idDivision == null && other.idDivision != null) || (this.idDivision != null && !this.idDivision.equals(other.idDivision))) {
-            return false;
-        }
-        return true;
-    }
 
-    @Override
-    public String toString() {
-        return "com.grupoSCV.entidad.Division[ idDivision=" + idDivision + " ]";
-    }
-    
+	public Long getIdFormulariocfp() {
+		return idFormulariocfp;
+	}
+
+	public void setIdFormulariocfp(Long idFormulariocfp) {
+		this.idFormulariocfp = idFormulariocfp;
+	}
+
+
+	/*
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * */
+    private static final long serialVersionUID = 1L;
 }

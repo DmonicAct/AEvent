@@ -8,4 +8,6 @@ public interface IFormularioCFPService {
 	Error getError();
 	
 	public void save(FormularioCFP formularioCFP);
+	
+	public FormularioCFP findByIdFormularioCFP(Long idFormularioCFP);
 }

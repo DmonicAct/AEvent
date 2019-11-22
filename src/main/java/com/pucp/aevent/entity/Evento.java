@@ -48,14 +48,6 @@ public class Evento implements Serializable {
 
 	@Column(name = "capacidad")
 	private Integer capacidad;
-//
-//	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
-//	@JoinColumn(name="id_organizador")
-//	private Persona organizador;
-//	
-//	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
-//	@JoinColumn(name="id_presidente")
-//	private Persona presidente;
 
 	@JoinColumn(name = "idPresidente", referencedColumnName = "idUsuario")
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -10,7 +10,7 @@ public interface IFaseService {
 	Error getError();
 	public List<Fase> findAll();
 	
-	public void save(Fase fase);
+	public Fase save(Fase fase);
 	
 	public List<Fase> findByEvento(Evento evento);
 	

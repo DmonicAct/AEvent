@@ -8,4 +8,6 @@ import com.pucp.aevent.entity.Pregunta;
 
 public interface IPreguntaDao extends JpaRepository <Pregunta, Long>{
 	public List<Pregunta> findAll();
+	
+	public List<Pregunta> findByIdSeccion(Long idSeccion);
 }
