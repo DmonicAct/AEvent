@@ -44,13 +44,13 @@ public class EmailService implements IEmailService {
 		    System.out.print("\nSets hechos\n");
 		    emailSender.send(message);
 		    System.out.print("\nSe va a enviar correo\n");
-		    return 1;
 	    } catch (Exception e) {
 	    	logger.error("Error en mensajeria: enviarMensaje " + e.getMessage());
 	    	logger.error("Error en mensjeria: enviarMensaje" +e.getCause());
 	    	System.out.print(e.getMessage());
+	    	return 0;
 	    }
-	    return 0;
+	    return 1;
 	    
 	}
 	
@@ -106,8 +106,9 @@ public class EmailService implements IEmailService {
 	    	logger.error("Error en mensajeria: enviarMensaje " + e.getMessage());
 	    	logger.error("Error en mensjeria: enviarMensaje" +e.getCause());
 	    	System.out.print(e.getMessage());
+	    	return 0;
 	    }
-	    return 0;
+	    return 1;
 	    
 	}
 	

@@ -32,6 +32,7 @@ import com.pucp.aevent.service.IEventoService;
 import com.pucp.aevent.service.IPostulacionService;
 import com.pucp.aevent.service.IRespuestaFormularioService;
 import com.pucp.aevent.service.IUsuarioService;
+import com.pucp.aevent.util.UtilMessage;
 
 @RestController
 @RequestMapping("/api")
@@ -47,6 +48,9 @@ public class PostulacionApi {
 	
 	@Autowired
 	IUsuarioService serviceUsuario;
+	
+	@Autowired
+	IEmailService serviceEmail;
 	
 	
 	@Secured({"ROLE_DEFAULT"})
@@ -219,17 +223,16 @@ public class PostulacionApi {
 			/*
 				Servicio de Email Inicio
 			*/
-			String texto = 
-					"<p>" + 
-					"   Usted," + 
-					"   <i>"+(usuario.getNombreCompleto())+", </i>" + 
-					"   <b> se ha registrado satisfactoriamente en el evento</b>" + 
-					"   <i>"+(evento.getTitulo())+". </i>" +
-					"</p>";
-			serviceEmail.enviarMensajeFormato("a20143250@pucp.edu.pe", 
-					"Confirmación de registro de propuesta", texto);
-			/*
+			if(usuario.getEmail()!=null) {
+				String texto = UtilMessage.MENSAJE_PONENTE_INSCRIPCION;
+				texto.replace(UtilMessage.PARAMETRO_NOMBRECOMPLETO, usuario.getNombreCompleto());
+				texto.replace(UtilMessage.PARAMETRO_TITULOEVENTO, evento.getTitulo());
+				serviceEmail.enviarMensajeFormato(usuario.getEmail(), 
+						UtilMessage.MENSAJE_PONENTE_CONFIRMACION, texto);
+			}
 			
+			/*
+				Servicio de Email Fin
 			*/
 			response.setResultado(prop);
 			response.setEstado(Estado.OK);
