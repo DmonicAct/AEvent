@@ -27,5 +27,4 @@ public interface IEventoDao extends JpaRepository<Evento, Long>{
 	public List<Evento> findByPresidente(Usuario presidente);
 	public List<Evento> findByOrganizador(Usuario organizador);
 	
-	public Evento findByComite(int idEvento, int idUsuario);
 }
