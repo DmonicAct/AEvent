@@ -28,7 +28,9 @@ import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.request_objects.PaginaRequest;
 import com.pucp.aevent.entity.response_objects.Estado;
 import com.pucp.aevent.entity.response_objects.ResponseObject;
+import com.pucp.aevent.service.IEmailService;
 import com.pucp.aevent.service.IEvaluacionService;
+import com.pucp.aevent.service.impl.EmailService;
 
 @RestController
 @RequestMapping("/api")
@@ -36,6 +38,9 @@ public class EvaluacionApi {
 	
 	@Autowired 
 	IEvaluacionService evservice;
+	
+	@Autowired
+	IEmailService emailserv;
 	
 	@Secured({"ROLE_ORGANIZER","ROLE_ADMIN","ROLE_DEFAULT"})
 	@PostMapping(path = "/evaluacion",produces = MediaType.APPLICATION_JSON_VALUE)
@@ -45,6 +50,9 @@ public class EvaluacionApi {
 			Evaluacion e = this.evservice.asignarPropuesta(evaluador,propuesta,fase);
 			response.setResultado(e);
 			response.setEstado(Estado.OK);
+			
+			
+			
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
 			//response.setError(this.service.getError());
@@ -96,6 +104,13 @@ public class EvaluacionApi {
 			response.setResultado(lista);
 			response.setPaginacion(evservice.getPaginacion());
 			response.setEstado(Estado.OK);
+			
+			emailserv.enviarMensaje("a20143250@pucp.edu.pe", "SALUDO", "<b>This text is bold</b>");
+			emailserv.enviarMensajeFormato("a20143250@pucp.edu.pe", "SALUDO", "<b>This text is bold</b>");
+			
+			emailserv.enviarMensaje("andreco_2610@hotmail.com", "SALUDO", "<b>This text is bold</b>");
+			emailserv.enviarMensajeFormato("andreco_2610@hotmail.com", "SALUDO", "<b>This text is bold</b>");
+			
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
 			//response.setError(this.service.getError());

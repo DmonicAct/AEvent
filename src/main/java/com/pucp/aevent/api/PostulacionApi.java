@@ -27,6 +27,7 @@ import com.pucp.aevent.entity.request_objects.PaginaRequest;
 import com.pucp.aevent.entity.request_objects.RespuestaFormularioxPostulacionRequest;
 import com.pucp.aevent.entity.response_objects.Estado;
 import com.pucp.aevent.entity.response_objects.ResponseObject;
+import com.pucp.aevent.service.IEmailService;
 import com.pucp.aevent.service.IEventoService;
 import com.pucp.aevent.service.IPostulacionService;
 import com.pucp.aevent.service.IRespuestaFormularioService;
@@ -215,6 +216,21 @@ public class PostulacionApi {
 			propuesta.setPostulante(usuario);
 			propuesta.setEvento(evento);
 			Propuesta prop = this.servicePostulacion.savePropuesta(propuesta);
+			/*
+				Servicio de Email Inicio
+			*/
+			String texto = 
+					"<p>" + 
+					"   Usted," + 
+					"   <i>"+(usuario.getNombreCompleto())+", </i>" + 
+					"   <b> se ha registrado satisfactoriamente en el evento</b>" + 
+					"   <i>"+(evento.getTitulo())+". </i>" +
+					"</p>";
+			serviceEmail.enviarMensajeFormato("a20143250@pucp.edu.pe", 
+					"Confirmación de registro de propuesta", texto);
+			/*
+			
+			*/
 			response.setResultado(prop);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
