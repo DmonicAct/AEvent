@@ -42,10 +42,11 @@ public class PostulacionApi {
 	IRespuestaFormularioService serviceRespuesta;
 	
 	@Autowired
-	IEventoService serivceEvento;
+	IEventoService serviceEvento;
 	
 	@Autowired
 	IUsuarioService serviceUsuario;
+	
 	
 	@Secured({"ROLE_DEFAULT"})
 	@GetMapping(path = "/postulacion/{idUsuario}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -210,7 +211,7 @@ public class PostulacionApi {
 		ResponseObject response = new ResponseObject();
 		try {
 			Usuario usuario = this.serviceUsuario.findByUsername(Username);
-			Evento evento = this.serivceEvento.findById(idEvento);
+			Evento evento = this.serviceEvento.findById(idEvento);
 			propuesta.setPostulante(usuario);
 			propuesta.setEvento(evento);
 			Propuesta prop = this.servicePostulacion.savePropuesta(propuesta);
@@ -263,7 +264,7 @@ public class PostulacionApi {
 		ResponseObject response = new ResponseObject();
 		try {
 			Usuario usuario = this.serviceUsuario.findByUsername(Username);
-			Evento evento = this.serivceEvento.findById(idEvento);
+			Evento evento = this.serviceEvento.findById(idEvento);
 			Propuesta propuesta = null;
 			propuesta = this.servicePostulacion.findByPostulanteAndEvento(usuario, evento);
 			response.setResultado(propuesta);
@@ -292,6 +293,11 @@ public class PostulacionApi {
 			
 			Propuesta propuesta = null;
 			propuesta = this.servicePostulacion.findByIdPropuesta(idPropuesta);
+			Integer idEvento = propuesta.getEvento().getIdEvento();
+			if(idEvento!=null) {
+				Evento evento = this.serviceEvento.findById(idEvento);
+				propuesta.setEvento(evento);
+			}
 			response.setResultado(propuesta);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
