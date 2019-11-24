@@ -11,13 +11,16 @@ import com.pucp.aevent.dao.IEvaluacionDao;
 import com.pucp.aevent.dao.IPreferenciaDao;
 import com.pucp.aevent.dao.IPropuestaDao;
 import com.pucp.aevent.dao.IUsuarioDao;
+import com.pucp.aevent.entity.Division;
 import com.pucp.aevent.entity.Evaluacion;
 import com.pucp.aevent.entity.Fase;
+import com.pucp.aevent.entity.FormularioCFP;
 import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.Preferencia;
 import com.pucp.aevent.entity.Propuesta;
 import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.response_objects.Paginacion;
+import com.pucp.aevent.service.IDivisionService;
 import com.pucp.aevent.service.IEvaluacionService;
 
 @Service
@@ -33,6 +36,9 @@ public class EvaluacionService implements IEvaluacionService{
 	
 	@Autowired
 	IUsuarioDao daoUsuario;
+	
+	@Autowired
+	IDivisionService divisionService;
 	
 	private Paginacion paginacion;
 
@@ -98,6 +104,13 @@ public class EvaluacionService implements IEvaluacionService{
 		Evaluacion eva = null;
 		try {
 			eva = this.daoEvaluacion.findByIdEvaluacion(idEvaluacion);
+			Fase fase = eva.getFase();
+			if(fase!=null && (fase.getFormulario()!=null && fase.getFormulario().getIdFormulariocfp()!=null)) {
+				FormularioCFP formulario = fase.getFormulario();
+				List<Division> listaDivision = this.divisionService.findByIdFormulario(formulario.getIdFormulariocfp());
+				formulario.setDivisionList(listaDivision);
+				fase.setFormulario(formulario);
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
