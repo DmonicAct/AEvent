@@ -52,7 +52,9 @@ public class Propuesta implements Serializable {
 	
 	@Column(name = "titulo")
 	private String titulo;
-
+	
+	@Column(name = "estado")
+	private String estado;
 	
 	@Transient
 	private List<Persona> evaluadoresAsignados;

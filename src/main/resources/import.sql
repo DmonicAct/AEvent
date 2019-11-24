@@ -112,8 +112,8 @@ INSERT INTO `persona_comite` (id_evento, id_usuario) VALUES (1,5);
 INSERT INTO `persona_comite` (id_evento, id_usuario) VALUES (1,6);
 INSERT INTO `persona_comite` (id_evento, id_usuario) VALUES (1,2);
 
-INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion,titulo, fase_actual) VALUES (1,1,'2019-01-01','Desarrollo de software',1);
-INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion,titulo, fase_actual) VALUES (1,2,'2019-01-01','MPS',1);
+INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion,titulo, fase_actual, estado) VALUES (1,1,'2019-01-01','Desarrollo de software',1, "PROPUESTA_ESPERA");
+INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion,titulo, fase_actual, estado) VALUES (1,2,'2019-01-01','MPS',1, "PROPUESTA_ESPERA");
 
 INSERT INTO `documento` (nombredoc,extensiondoc,contenido,id_propuesta) VALUES ('archivo1','pdf',10,1);
 INSERT INTO `documento` (nombredoc,extensiondoc,contenido,id_propuesta) VALUES ('archivo2','pdf',10,2);
