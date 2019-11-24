@@ -49,8 +49,45 @@ public class Evaluacion implements Serializable{
 	@Column(name="estado")
 	private String estado;
 	
+	@Column(name="evaluacionGeneral")
+	private String evaluacionGeneral;
 	
+	@Column(name="nivelConfianza")
+	private String nivelConfianza;
+
 	
+	public String getEvaluacionGeneral() {
+		return evaluacionGeneral;
+	}
+
+
+
+
+
+	public void setEvaluacionGeneral(String evaluacionGeneral) {
+		this.evaluacionGeneral = evaluacionGeneral;
+	}
+
+
+
+
+
+	public String getNivelConfianza() {
+		return nivelConfianza;
+	}
+
+
+
+
+
+	public void setNivelConfianza(String nivelConfianza) {
+		this.nivelConfianza = nivelConfianza;
+	}
+
+
+
+
+
 	public String getComentarioParticipante() {
 		return comentarioParticipante;
 	}
