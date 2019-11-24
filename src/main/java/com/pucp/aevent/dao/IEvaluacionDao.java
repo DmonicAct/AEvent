@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.access.method.P;
 
 import com.pucp.aevent.entity.Evaluacion;
 import com.pucp.aevent.entity.Fase;
@@ -19,6 +20,5 @@ public interface IEvaluacionDao  extends JpaRepository <Evaluacion, Long>{
 	public Evaluacion findByEvaluadorAndPropuestaAndFase(Persona usuario,Propuesta propuesta,Fase fase);
 	public List<Evaluacion> findByPropuesta(Propuesta propuesta);
 	public void delete(Evaluacion evaluacion);
-	
 	public Evaluacion findByIdEvaluacion(int idEvaluacion);
 }

@@ -117,4 +117,15 @@ public class EvaluacionService implements IEvaluacionService{
 		}
 		return eva;
 	}
+
+	@Override
+	public List<Evaluacion> findAllByPropuesta(Propuesta propuesta) {
+		List<Evaluacion> lista = null;
+		try {
+			lista = this.daoEvaluacion.findByPropuesta(propuesta);
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista;
+	}
 }

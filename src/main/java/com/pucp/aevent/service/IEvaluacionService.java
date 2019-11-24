@@ -17,4 +17,5 @@ public interface IEvaluacionService {
 	public Evaluacion findByIdEvaluacion(int idEvaluacion);
 	public void save(Evaluacion e);
 	public Paginacion getPaginacion();
+	public List<Evaluacion> findAllByPropuesta(Propuesta propuesta);
 }
