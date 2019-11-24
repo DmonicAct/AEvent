@@ -57,6 +57,9 @@ public class PostulacionService implements IPostulacionService{
 	public Postulacion save(Postulacion postulacion) {
 		Postulacion post = null;
 		try {
+			if(postulacion.getEstado()==null || postulacion.getEstado().trim()=="") {
+				postulacion.setEstado(UtilConstanst.FASE_BORRADOR);
+			}
 			post = this.dao.save(postulacion);
 		} catch (Exception e) {
 			logger.error("Error en Postulacion Service(Save): " + e.getMessage());

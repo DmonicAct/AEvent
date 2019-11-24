@@ -220,6 +220,10 @@ public class PostulacionApi {
 			propuesta.setPostulante(usuario);
 			propuesta.setEvento(evento);
 			Propuesta prop = this.servicePostulacion.savePropuesta(propuesta);
+			
+			for(Usuario user: evento.getComite()) {
+				
+			}
 			/*
 				Servicio de Email Inicio
 			*/
@@ -342,6 +346,7 @@ public class PostulacionApi {
 		try {
 			Postulacion post = this.servicePostulacion.findByIdPostulacion(idPostulacion);
 			post = this.servicePostulacion.enviarPostulacion(post);
+			response.setResultado(post);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {

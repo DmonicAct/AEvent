@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +30,7 @@ public class Evaluacion implements Serializable{
 	@JoinColumn(name = "idEvaluador",referencedColumnName = "idUsuario")
 	private Usuario evaluador;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@JoinColumn(name = "idFase")
 	private Fase fase;
