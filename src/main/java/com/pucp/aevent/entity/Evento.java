@@ -50,12 +50,12 @@ public class Evento implements Serializable {
 	private Integer capacidad;
 
 	@JoinColumn(name = "idPresidente", referencedColumnName = "idUsuario")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Usuario presidente;
 	
 	@JoinColumn(name = "idOrganizador", referencedColumnName = "idUsuario")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Usuario organizador;
 
