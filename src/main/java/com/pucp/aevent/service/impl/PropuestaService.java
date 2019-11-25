@@ -49,15 +49,13 @@ public class PropuestaService implements IPropuestaService{
 
 	@Override
 	public List<Propuesta> findAllByEspera(int idPresidente) {
-		List<Propuesta> lista =null;
+		List<Propuesta> lista = null;
 		try {
-			lista = propuestaDao.findByEstado(UtilConstanst.PROPUESTA_ESPERA);
-			for(Propuesta p : lista) {
-				if (p.getEvento().getPresidente().getIdUsuario() != idPresidente)
-					lista.remove(p);
-			}	
-		}catch(Exception ex) {
-			System.out.print(ex.getMessage());
+			Usuario presidente = this.usuarioService.findById(idPresidente);
+			List<Evento> lista_evento = this.eventoDao.findByPresidente(presidente);
+			lista = this.propuestaDao.findByEstadoAndEventoIn(UtilConstanst.PROPUESTA_ASIGNADA, lista_evento);
+		}catch(Exception e) {
+			System.out.print(e.getMessage());
 		}
 		return lista;
 	}
@@ -69,16 +67,9 @@ public class PropuestaService implements IPropuestaService{
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
 		try {
-			//Obtencion del objeto usuario del presidente
 			Usuario presidente = this.usuarioService.findById(idPresidente);
-			//Busqueda de eventos del presidente
 			List<Evento> lista_evento = this.eventoDao.findByPresidente(presidente);
-			HashSet<Integer> ids = new HashSet<Integer>();
-			for(Evento eve: lista_evento) {
-				ids.add(eve.getIdEvento());
-			}
-			// Se envia la lista con todos los evento del presidente y se hace match con las propuestas de estos mismos eventos
-			lista = this.propuestaDao.findByEstadoAndEventoIn(UtilConstanst.PROPUESTA_ESPERA, lista_evento, page);
+			lista = this.propuestaDao.findByEstadoAndEventoIn(UtilConstanst.PROPUESTA_ASIGNADA, lista_evento, page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		}catch(Exception e) {
 			System.out.print(e.getMessage());
