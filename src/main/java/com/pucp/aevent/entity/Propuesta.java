@@ -48,8 +48,7 @@ public class Propuesta implements Serializable {
 	
 	@Column(name = "fase_actual")
 	private Integer fase_actual;
-	
-	
+		
 	@Column(name = "titulo")
 	private String titulo;
 	
