@@ -9,8 +9,8 @@ import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;
 
 public interface IPropuestaService{
-	List<Propuesta> findAllByEspera();
-	List<Propuesta> findAllByEsperaPag(Pageable page);
+	List<Propuesta> findAllByEspera(int idPresidente);
+	List<Propuesta> findAllByEsperaPag(int idPresidente, Pageable page);
 	Error getError();
 	Paginacion getPaginacion();
 }

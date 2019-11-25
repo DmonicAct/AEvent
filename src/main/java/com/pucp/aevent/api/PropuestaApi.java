@@ -29,10 +29,10 @@ public class PropuestaApi {
 	
 	@Secured({"ROLE_DEFAULT"})
 	@GetMapping(path = "/propuesta/espera", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> obtenerPropuestasEspera() {
+	public ResponseEntity<ResponseObject> obtenerPropuestasEspera(int idPresidente) {
 		ResponseObject response = new ResponseObject();
 		try {
-			List<Propuesta> lista = this.service.findAllByEspera();
+			List<Propuesta> lista = this.service.findAllByEspera(idPresidente);
 			response.setResultado(lista);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
@@ -53,10 +53,10 @@ public class PropuestaApi {
 	
 	@Secured({"ROLE_DEFAULT"})
 	@GetMapping(path = "/propuesta/esperaPag", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> obtenerPropuestasEsperaPaginado(PaginaRequest page) {
+	public ResponseEntity<ResponseObject> obtenerPropuestasEsperaPaginado(int idPresidente, PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {
-			List<Propuesta> lista = this.service.findAllByEsperaPag(PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			List<Propuesta> lista = this.service.findAllByEsperaPag(idPresidente, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
 			response.setResultado(lista);
 			response.setPaginacion(service.getPaginacion());
 			response.setEstado(Estado.OK);
