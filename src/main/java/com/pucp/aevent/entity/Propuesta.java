@@ -33,7 +33,7 @@ public class Propuesta implements Serializable {
 	@Column(name="idPropuesta")
 	private Integer idPropuesta;
 	
-	@OneToOne
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "idEvento",referencedColumnName = "idEvento")
 	private Evento evento;
 	
