@@ -54,7 +54,7 @@ public class PersonaApi {
 	}
 	
 	
-	@GetMapping(path = "/persona/nombreLike", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/personas/nombreLike", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> consultarPorNombre (String nombre) {
 		ResponseObject response = new ResponseObject();
 		try {
@@ -77,11 +77,11 @@ public class PersonaApi {
 		}
 	}
 	
-	@GetMapping(path = "/persona/nombreLikePaginado", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> consultarPorNombrePaginado(String nombre, PaginaRequest page) {
+	@GetMapping(path = "/personas/nombreLikePaginado", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarPorNombrePaginado(Integer id,String nombre, PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {
-			List<Persona> lista = this.service.findByNombre(nombre, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			List<Persona> lista = this.service.findByNombre(id,nombre, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
 			response.setResultado(lista);
 			response.setPaginacion(this.service.getPaginacion());
 			response.setEstado(Estado.OK);
@@ -101,11 +101,35 @@ public class PersonaApi {
 		}
 	}
 	
-	@GetMapping(path = "/persona/usernameLikePaginado", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> consultarPorUsernamePaginado(String username, PaginaRequest page) {
+	@GetMapping(path = "/personas/emailLikePaginado", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarPorEmailPaginado(Integer id,String email, PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {
-			List<Persona> lista = this.service.findByUsername(username, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			List<Persona> lista = this.service.findByEmail(id,email, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			response.setResultado(lista);
+			response.setPaginacion(this.service.getPaginacion());
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping(path = "/personas/usernameLikePaginado", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarPorUsernamePaginado(Integer id,String username, PaginaRequest page) {
+		ResponseObject response = new ResponseObject();
+		try {
+			List<Persona> lista = this.service.findByUsername(id,username, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
 			response.setResultado(lista);
 			response.setPaginacion(this.service.getPaginacion());
 			response.setEstado(Estado.OK);
@@ -149,7 +173,7 @@ public class PersonaApi {
 		}
 	}
 	
-	@GetMapping(path = "/persona/comite/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/personas/comite/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseObject> consultarComite(@PathVariable("id")Integer id, PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {

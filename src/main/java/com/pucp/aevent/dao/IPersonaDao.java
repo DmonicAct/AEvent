@@ -26,13 +26,18 @@ public interface IPersonaDao  extends JpaRepository <Persona, Long>{
 	public List<Persona> findByNombreStartsWith(String nombre);
 	
 	//@Query("Select p from Persona p,Usuario u where (p.nombre like :nombre% or p.appaterno like :nombre% or p.apmaterno like :nombre%) and p.idUsuario = u.idUsuario and u.enabled =1")
-	public Page<Persona> findByNombreStartsWith(String nombre,Pageable page);
+	public Page<Persona> findByNombreCompletoContaining(String nombre,Pageable page);
 	
 	//@Query("Select p from Persona p,Usuario u where p.idUsuario = u.idUsuario and u.username like :username% and u.enabled=1")
-	public Page<Persona> findByUsernameStartsWith(String username,Pageable page);
+	public Page<Persona> findByUsernameContaining(String username,Pageable page);
+	
+	public Page<Persona> findByEmailContaining(String email,Pageable page);
 	
 	public Page<Persona> findByEnabledAndIdUsuarioNotIn(Boolean enabled, List<Integer> ids,Pageable page);
 	
 	public Page<Persona> findByIdUsuarioIn(List<Integer> ids,Pageable page);
 	
+	public Page<Persona> findByIdUsuarioNotIn(List<Integer >ids, Pageable page);
+	public List<Persona> findByIdUsuarioNotIn(List<Integer >ids);
+	public List<Persona> findByIdUsuarioNotInAndRoles_nombreNotAndEnabled(List<Integer> ids,String role,boolean enabled);
 }

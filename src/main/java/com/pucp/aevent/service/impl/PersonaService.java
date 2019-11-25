@@ -76,13 +76,30 @@ public class PersonaService implements IPersonaService{
 
 	@Override
 	@Transactional(readOnly=true)
-	public List<Persona> findByNombre(String nombre, Pageable page) {
+	public List<Persona> findByNombre(Integer id,String nombre, Pageable page) {
 		Page<Persona> lista = null;
 		
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
 		try {
-			lista = this.dao.findByNombreStartsWith(nombre, page);
+			Evento e = daoEvento.findByIdEvento(id);
+			
+			List<Usuario> comite = e.getComite();
+			List<Integer> idsComite = new ArrayList<Integer>();
+			for (Usuario u: comite) {
+				idsComite.add(u.getIdUsuario());
+			}
+			
+			List<Persona> listaUsuarios= dao.findByIdUsuarioNotInAndRoles_nombreNotAndEnabled(idsComite,"ROLE_ADMIN",true);
+			
+			
+			List<Integer> ids = new ArrayList<Integer>();
+			for (Usuario u: listaUsuarios) {
+				if(u.getNombreCompleto().toLowerCase().contains(nombre.toLowerCase()))
+					ids.add(u.getIdUsuario());
+			}
+				
+			lista = dao.findByIdUsuarioIn(ids, page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
@@ -92,13 +109,31 @@ public class PersonaService implements IPersonaService{
 	
 	@Override
 	@Transactional(readOnly=true)
-	public List<Persona> findByUsername(String username,Pageable page) {
+	public List<Persona> findByUsername(Integer id,String username,Pageable page) {
 		Page<Persona> lista = null;
-		
+		boolean flagAdmin = false;
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
 		try {
-			lista = this.dao.findByUsernameStartsWith(username, page);
+			Evento e = daoEvento.findByIdEvento(id);
+			
+			List<Usuario> comite = e.getComite();
+			List<Integer> idsComite = new ArrayList<Integer>();
+			for (Usuario u: comite) {
+				idsComite.add(u.getIdUsuario());
+			}
+			
+			List<Persona> listaUsuarios= dao.findByIdUsuarioNotInAndRoles_nombreNotAndEnabled(idsComite,"ROLE_ADMIN",true);
+			//List<Persona> listaUsuarios= dao.findByIdUsuarioNotIn(idsComite);
+			
+			List<Integer> ids = new ArrayList<Integer>();
+			for (Usuario u: listaUsuarios) {
+				if(u.getUsername().toLowerCase().contains(username.toLowerCase())) {
+					ids.add(u.getIdUsuario());
+				}
+			}
+				
+			lista = dao.findByIdUsuarioIn(ids, page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
@@ -148,7 +183,40 @@ public class PersonaService implements IPersonaService{
 				ids.add(u.getIdUsuario());
 				
 			lista = dao.findByIdUsuarioIn(ids, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+
+	@Override
+	public List<Persona> findByEmail(Integer id,String email, Pageable page) {
+		Page<Persona> lista = null;
+		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			Evento e = daoEvento.findByIdEvento(id);
+			
+			List<Usuario> comite = e.getComite();
+			List<Integer> idsComite = new ArrayList<Integer>();
+			for (Usuario u: comite) {
+				idsComite.add(u.getIdUsuario());
+			}
+			
+			List<Persona> listaUsuarios= dao.findByIdUsuarioNotInAndRoles_nombreNotAndEnabled(idsComite,"ROLE_ADMIN",true);
+			
+			
+			List<Integer> ids = new ArrayList<Integer>();
+			for (Usuario u: listaUsuarios) {
+				if(u.getEmail().toLowerCase().contains(email.toLowerCase()))
+					ids.add(u.getIdUsuario());
+			}
+				
+			lista = dao.findByIdUsuarioIn(ids, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
 			System.out.print(e.getMessage());
 		}
 		return lista.getContent();
