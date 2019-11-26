@@ -6,6 +6,8 @@ public class UtilConstanst {
 	public static final Integer APP_CONFIG_TOKEN_VALIDITY_TIME = 3600;
 	public static final Integer APP_CONFIG_TOKEN_REFRESH_TIME = 3600;
 	public static final String  APP_ORIGIN_ROUTE_LOCAL = "http://localhost:4200";
+	//Origin IPV4 AWS
+	//public static final String  APP_ORIGIN_ROUTE_LOCAL = "http://18.206.239.108.nip.io:8080";
 	public static final String  APP_ORIGIN_ROUTE_DEPLOY = ""; 
 	public static final String  APP_ORIGIN_HEADERS = "Content-Type";
 	public static final String  APP_ORIGIN_HEADERS_TYPE = "Authorization";
@@ -41,6 +43,7 @@ public class UtilConstanst {
 	public static final String POSTULACION_EN_ESPERA 				= "POSTULACION_EN_ESPERA";
 	public static final String POSTULACION_APROBADA 				= "POSTULACION_APROBADA";
 	public static final String POSTULACION_RECHAZADA 				= "POSTULACION_RECHAZADA";
+	public static final String POSTULACION_BORRADOR					= "POSTULACION_BORRADOR";
 	
 	//EVALUACION 
 	public static final String EVALUACION_ASIGNADA 					= "EVALUACION_ASIGNADA";
@@ -52,5 +55,6 @@ public class UtilConstanst {
 	public static final String FASE_BORRADOR			= "FASE_BORRADOR";
 	public static final String FASE_OBSERVADA			= "FASE_OBSERVADA";
 	
-	
+	//PREFERENCIAS
+	public static final String PREFERENCIA_DEFAULT 		= "SIN DETERMINAR";
 }
