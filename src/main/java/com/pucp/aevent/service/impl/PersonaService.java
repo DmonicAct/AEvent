@@ -222,6 +222,84 @@ public class PersonaService implements IPersonaService{
 		return lista.getContent();
 	}
 	
+	
+	
+	
+	@Override
+	@Transactional(readOnly=true)
+	public List<Persona> findByNombreComite(Integer id,String nombre, Pageable page) {
+		Page<Persona> lista = null;
+		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			Evento e = daoEvento.findByIdEvento(id);
+			
+			List<Usuario> listaUsuarios= e.getComite();
+			List<Integer> ids =new ArrayList<Integer>();
+			for (Usuario u: listaUsuarios) {
+				if(u.getNombreCompleto().toLowerCase().contains(nombre.toLowerCase()))
+					ids.add(u.getIdUsuario());
+			}
+				
+			lista = dao.findByIdUsuarioIn(ids, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+	
+	@Override
+	@Transactional(readOnly=true)
+	public List<Persona> findByUsernameComite(Integer id,String username,Pageable page) {
+		Page<Persona> lista = null;
+		boolean flagAdmin = false;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			Evento e = daoEvento.findByIdEvento(id);
+			
+			List<Usuario> listaUsuarios= e.getComite();
+			List<Integer> ids =new ArrayList<Integer>();
+			for (Usuario u: listaUsuarios) {
+				if(u.getUsername().toLowerCase().contains(username.toLowerCase())) {
+					ids.add(u.getIdUsuario());
+				}
+			}
+				
+			lista = dao.findByIdUsuarioIn(ids, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+	
+	@Override
+	public List<Persona> findByEmailComite(Integer id,String email, Pageable page) {
+		Page<Persona> lista = null;
+		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			Evento e = daoEvento.findByIdEvento(id);
+			
+			List<Usuario> listaUsuarios= e.getComite();
+			List<Integer> ids =new ArrayList<Integer>();
+			for (Usuario u: listaUsuarios) {
+				if(u.getEmail().toLowerCase().contains(email.toLowerCase()))
+					ids.add(u.getIdUsuario());
+			}
+				
+			lista = dao.findByIdUsuarioIn(ids, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+	
 //	@Override
 //	@Transactional(readOnly=true)
 //	public Boolean existsByDni(String dni) {
