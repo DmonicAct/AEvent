@@ -252,7 +252,8 @@ public class PostulacionApi {
 					"   <b> se ha registrado satisfactoriamente en el evento</b>" + 
 					"   <i>"+(evento.getTitulo())+". </i>" +
 					"</p>";
-			serviceEmail.enviarMensajeFormato("a20143250@pucp.edu.pe", 
+			serviceEmail.enviarMensajeFormato(serviceUsuario.obtenerCredenciales(),
+					"a20143250@pucp.edu.pe", 
 					"Confirmación de registro de propuesta", texto);
 			
 			propuesta.setPostulante(usuario);

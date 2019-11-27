@@ -1,6 +1,7 @@
 package com.pucp.aevent.service.impl;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.BodyPart;
@@ -19,17 +20,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
+import com.pucp.aevent.entity.Correo;
 import com.pucp.aevent.service.IEmailService;
 
-@Component
-public class EmailService implements IEmailService {
+@Service
+public class EmailService implements IEmailService{
 	@Autowired
     public JavaMailSender emailSender;
 	
 	private Logger logger = LoggerFactory.getLogger(EmailService.class);
-	
 	
 	@Override
 	public Integer enviarMensaje(String destinatario, String asunto, String texto) {
@@ -56,25 +64,21 @@ public class EmailService implements IEmailService {
 	
 	
 	@Override
-	public Integer enviarMensajeFormato(String destinatario, String asunto, String texto) {
+	@Transactional
+	public Integer enviarMensajeFormato(Correo cred, String destinatario, String asunto, String texto) {
 	    try {
 	    	MimeMessage message = emailSender.createMimeMessage();
 	    	Properties props = new Properties();
 	    	
-	    	//props.put("mail.protocol", "smtp");
-	    	//props.put("mail.port", "587");
-	    	
-	    	//props.put("mail.transport.protocol", "smtp");
 	    	props.put("mail.smtp.host", "smtp.gmail.com");
 	    	props.put("mail.smtp.auth", "true");
 	        props.put("mail.smtp.starttls.enable", "true");
-	        //props.put("mail.smtp.host", "smtp.gmail.com");
 	        props.put("mail.smtp.port", "587");
-	        //props.put("mail.smtp.ssl.trust", "*");
-	        
+	        props.put("mail.smtp.debug", "true");
 	    	
-	        String user = "aeventmailing@gmail.com";
-	        String pass = "somosaevent";
+	        String user = cred.getUsername();
+	        String pass = cred.getTwosteppass();
+	        
 	        Session mailSession = Session.getInstance(props,
 	        		new javax.mail.Authenticator() {
 	                protected PasswordAuthentication getPasswordAuthentication() {
@@ -110,5 +114,4 @@ public class EmailService implements IEmailService {
 	    return 0;
 	    
 	}
-	
 }

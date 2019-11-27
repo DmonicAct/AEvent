@@ -19,9 +19,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.pucp.aevent.dao.ICorreoDao;
 import com.pucp.aevent.dao.IPersonaDao;
 import com.pucp.aevent.dao.IRolDao;
 import com.pucp.aevent.dao.IUsuarioDao;
+import com.pucp.aevent.entity.Correo;
 import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.Role;
 import com.pucp.aevent.entity.TipoEvento;
@@ -42,6 +44,9 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 	
 	@Autowired
 	IPersonaDao persona_dao;
+	
+	@Autowired
+	ICorreoDao correo_dao;
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -106,7 +111,7 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 				usuario.setPassword(null);
 			}
 			List<Role> roles = new ArrayList<Role>();
-			 for(Role entry :usuario.getRoles()) 
+			 for(Role entry :usuario.getRoles())
 				    roles.add(role_dao.findById(entry.getIdRol()).get());
 			 
 			usuario.setRoles( roles );
@@ -238,6 +243,11 @@ public class UsuarioService implements IUsuarioService,UserDetailsService{
 			System.out.print(ex.getMessage());
 		}
 		return lista;
+	}
+	
+	@Override
+	public Correo obtenerCredenciales(){
+		return correo_dao.findByIdCorreo(1);
 	}
 	
 }
