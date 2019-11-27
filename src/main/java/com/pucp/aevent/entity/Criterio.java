@@ -39,7 +39,7 @@ public class Criterio implements Serializable {
     //private Fase fase;
 	
     @Column(name="id_fase")
-    private int idFase;
+    private Long idFase;
 
 	public TipoCriterio getTipoCriterio() {
 		return tipoCriterio;
@@ -69,12 +69,12 @@ public class Criterio implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public int getIdFase() {
+	public Long getIdFase() {
 		return idFase;
 	}
 
 
-	public void setIdFase(int idFase) {
+	public void setIdFase(Long idFase) {
 		this.idFase = idFase;
 	}
 

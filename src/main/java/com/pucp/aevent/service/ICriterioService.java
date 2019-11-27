@@ -12,7 +12,7 @@ public interface ICriterioService {
 	
 	public void save(Criterio criterio);
 	
-	public List<Criterio> findByFase(Fase fase);
+	public List<Criterio> findByFase(Long idFase);
 	
 	public void delete(Long criterio);
 	

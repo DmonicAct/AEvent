@@ -33,11 +33,11 @@ public class CriterioApi {
 	ICriterioService service;
 	
 	@Secured({"ROLE_ORGANIZER","ROLE_DEFAULT"})
-	@GetMapping(path = "/criterio", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> consultarAllCriterioByFase(Fase fase) {
+	@GetMapping(path = "/criterio/{idFase}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarAllCriterioByFase(@PathVariable("idFase") Long idFase) {
 		ResponseObject response = new ResponseObject();
 		try {
-			List<Criterio> lista = this.service.findByFase(fase);
+			List<Criterio> lista = this.service.findByFase(idFase);
 			response.setResultado(lista);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
