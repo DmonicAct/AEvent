@@ -21,13 +21,19 @@ public interface IPersonaService {
 	
 	public List<Persona> findByNombre(String nombre);
 	
-	public List<Persona> findByUsername(String username,Pageable page);
+	public List<Persona> findByUsername(Integer id,String username,Pageable page);
+	
+	public List<Persona> findByEmail(Integer id,String email,Pageable page);
 	
 	public List<Persona> findAllDisponible(Integer id,Pageable page);
 	
-	public List<Persona> findByNombre(String nombre,Pageable page);
+	public List<Persona> findByNombre(Integer id,String nombre,Pageable page);
 	
 	public List<Persona> findAllComite(Integer id, Pageable page);
+	
+	public List<Persona> findByEmailComite(Integer id,String email, Pageable page);
+	public List<Persona> findByUsernameComite(Integer id,String username,Pageable page) ;
+	public List<Persona> findByNombreComite(Integer id,String nombre, Pageable page) ;
 	
 	public Paginacion getPaginacion() ;
 }
