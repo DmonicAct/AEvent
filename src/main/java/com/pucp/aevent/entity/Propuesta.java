@@ -47,7 +47,7 @@ public class Propuesta implements Serializable {
 	private Date fecha_postulacion= new Date();
 	
 	@Column(name = "fase_actual")
-	private Integer fase_actual;
+	private Long fase_actual;
 		
 	@Column(name = "titulo")
 	private String titulo;
@@ -108,12 +108,20 @@ public class Propuesta implements Serializable {
 		this.idPropuesta = idPropuesta;
 	}
 
-	public Integer getFase_actual() {
+	public Long getFase_actual() {
 		return fase_actual;
 	}
 
-	public void setFase_actual(Integer fase_actual) {
+	public void setFase_actual(Long fase_actual) {
 		this.fase_actual = fase_actual;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 	
 	

@@ -16,6 +16,7 @@ public interface IPropuestaDao extends JpaRepository<Propuesta, Long> {
 	public Page<Propuesta> findByEvento(Evento evento, Pageable page);
 	
 	public Page<Propuesta> findByEstadoAndEventoIn(String estado, List<Evento> lista, Pageable page);
+	public List<Propuesta> findByEstadoAndEventoIn(String estado, List<Evento> lista);
 	/*
 	 * 
 	 * public Page<Persona> findByEnabledAndIdUsuarioNotIn(Boolean enabled, List<Integer> ids,Pageable page);
