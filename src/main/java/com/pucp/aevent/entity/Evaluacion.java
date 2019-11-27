@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +30,7 @@ public class Evaluacion implements Serializable{
 	@JoinColumn(name = "idEvaluador",referencedColumnName = "idUsuario")
 	private Usuario evaluador;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@JoinColumn(name = "idFase")
 	private Fase fase;
@@ -48,8 +49,45 @@ public class Evaluacion implements Serializable{
 	@Column(name="estado")
 	private String estado;
 	
+	@Column(name="evaluacionGeneral")
+	private String evaluacionGeneral;
 	
+	@Column(name="nivelConfianza")
+	private String nivelConfianza;
+
 	
+	public String getEvaluacionGeneral() {
+		return evaluacionGeneral;
+	}
+
+
+
+
+
+	public void setEvaluacionGeneral(String evaluacionGeneral) {
+		this.evaluacionGeneral = evaluacionGeneral;
+	}
+
+
+
+
+
+	public String getNivelConfianza() {
+		return nivelConfianza;
+	}
+
+
+
+
+
+	public void setNivelConfianza(String nivelConfianza) {
+		this.nivelConfianza = nivelConfianza;
+	}
+
+
+
+
+
 	public String getComentarioParticipante() {
 		return comentarioParticipante;
 	}

@@ -20,6 +20,7 @@ import org.springframework.web.client.HttpServerErrorException.InternalServerErr
 
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Postulacion;
+import com.pucp.aevent.entity.Preferencia;
 import com.pucp.aevent.entity.Propuesta;
 import com.pucp.aevent.entity.RespuestaFormulario;
 import com.pucp.aevent.entity.Usuario;
@@ -30,8 +31,10 @@ import com.pucp.aevent.entity.response_objects.ResponseObject;
 import com.pucp.aevent.service.IEmailService;
 import com.pucp.aevent.service.IEventoService;
 import com.pucp.aevent.service.IPostulacionService;
+import com.pucp.aevent.service.IPreferenciaService;
 import com.pucp.aevent.service.IRespuestaFormularioService;
 import com.pucp.aevent.service.IUsuarioService;
+import com.pucp.aevent.util.UtilConstanst;
 import com.pucp.aevent.util.UtilMessage;
 
 @RestController
@@ -50,7 +53,11 @@ public class PostulacionApi {
 	IUsuarioService serviceUsuario;
 	
 	@Autowired
+	IPreferenciaService servicePreferencia;
+	
+	@Autowired
 	IEmailService serviceEmail;
+	
 	
 	
 	@Secured({"ROLE_DEFAULT"})
@@ -115,13 +122,19 @@ public class PostulacionApi {
 			}
 			
 			List<RespuestaFormulario> lista = object.getListaFormulario();
-			this.servicePostulacion.save(postulacion);
+			Postulacion post = this.servicePostulacion.save(postulacion);
 			if(lista!=null && lista.size()>0)
 				for(RespuestaFormulario e : lista) {
 					if(e.getIdPostulacion()==null)
 						e.setIdPostulacion(postulacion.getIdPostulacion());
 					this.serviceRespuesta.save(e);
 				}
+			
+			lista = this.servicePostulacion.findAllByPostulacion(post.getIdPostulacion());
+			RespuestaFormularioxPostulacionRequest resultado = new RespuestaFormularioxPostulacionRequest();
+			resultado.setListaFormulario(lista);
+			resultado.setPostulacion(post);
+			response.setResultado(resultado);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
@@ -220,6 +233,14 @@ public class PostulacionApi {
 			propuesta.setPostulante(usuario);
 			propuesta.setEvento(evento);
 			Propuesta prop = this.servicePostulacion.savePropuesta(propuesta);
+			
+			for(Usuario user: evento.getComite()) {
+				Preferencia preferencia = new Preferencia();
+				preferencia.setPropuesta(prop);
+				preferencia.setUsuario(user);
+				preferencia.setDescripcion(UtilConstanst.PREFERENCIA_DEFAULT);
+				this.servicePreferencia.save(preferencia);
+			}
 			/*
 				Servicio de Email Inicio
 			*/
@@ -342,6 +363,7 @@ public class PostulacionApi {
 		try {
 			Postulacion post = this.servicePostulacion.findByIdPostulacion(idPostulacion);
 			post = this.servicePostulacion.enviarPostulacion(post);
+			response.setResultado(post);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {

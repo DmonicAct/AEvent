@@ -10,7 +10,7 @@ import com.pucp.aevent.entity.Criterio;
 public interface ICriterioDao  extends JpaRepository <Criterio, Long>{
 	public List<Criterio> findAll();
 	
-	public List<Criterio> findByIdFase(Fase fase);
+	public List<Criterio> findByIdFase(Long idFase);
 	
 	public Criterio findByIdCriterio(Long id);
 

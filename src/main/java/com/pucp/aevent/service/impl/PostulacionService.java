@@ -57,6 +57,13 @@ public class PostulacionService implements IPostulacionService{
 	public Postulacion save(Postulacion postulacion) {
 		Postulacion post = null;
 		try {
+			if(postulacion.getEstado()==null || postulacion.getEstado().trim()=="") {
+				postulacion.setEstado(UtilConstanst.POSTULACION_BORRADOR);
+			}
+			Propuesta propuesta = this.daoPropuesta.findByIdPropuesta(Integer.valueOf(postulacion.getIdPropuesta().toString()));
+			if(propuesta.getFase_actual()==null) {
+				propuesta.setFase_actual(propuesta.getEvento().getFases().get(0).getIdFase());
+			}
 			post = this.dao.save(postulacion);
 		} catch (Exception e) {
 			logger.error("Error en Postulacion Service(Save): " + e.getMessage());
@@ -127,6 +134,9 @@ public class PostulacionService implements IPostulacionService{
 	public Propuesta savePropuesta(Propuesta propuesta) {
 		Propuesta prop= null;
 		try {
+			if(propuesta.getIdPropuesta()==null) {
+				propuesta.setEstado(UtilConstanst.PROPUESTA_SIN_ASIGNAR);
+			}
 			prop = this.daoPropuesta.save(propuesta);
 		}catch(Exception e) {
 			logger.error("Error en Postulacion Service(savePropuesta): " + e.getMessage());
@@ -225,7 +235,7 @@ public class PostulacionService implements IPostulacionService{
 	public Postulacion enviarPostulacion(Postulacion postulacion) {
 		Postulacion post = null;
 		try {
-			postulacion.setEstado(UtilConstanst.FASE_ESPERA);
+			postulacion.setEstado(UtilConstanst.POSTULACION_EN_ESPERA);
 			post = this.dao.save(postulacion);
 		}catch(Exception e) {
 			logger.error("Error en Postulacion Service(enviarPostulacion): " + e.getMessage());

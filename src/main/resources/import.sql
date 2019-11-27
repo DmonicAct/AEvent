@@ -79,10 +79,10 @@ INSERT INTO `seccion`  (descripcion,cantidad_preguntas,indice,tipo_seccion, id_d
 INSERT INTO `pregunta` (descripcion, tipo_pregunta, id_seccion) VALUES ('Explique su grado de estudios', 'PREGUNTA ABIERTA', 1);
 INSERT INTO `pregunta` (descripcion, tipo_pregunta, id_seccion) VALUES ('Detalle su labor como ponente', 'PREGUNTA ABIERTA', 2);
 
-INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado, id_presidente, id_lugar) VALUES (500, 'Charla magistral dirigida a desarrolladores de software de propósito científico','Charla magistral dirigida a desarrolladores de software de propósito científico', '2019-12-12', '2019-05-05', 3, 1,1,2,1);
-INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado, id_presidente, id_lugar) VALUES (500, 'Mama, voy a ser dotero','Charla para jóvenes emprendedores +5k MMR', '2019-12-12', '2019-05-05', 3, 2,0,2,2);
-INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado, id_presidente, id_lugar) VALUES (500, 'Marcha para que abran un Tambo en el congreso','Gran marcha nacional', '2019-12-12', '2019-05-05', 3, 3,1,2,1);
-INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado, id_presidente, id_lugar) VALUES (500, 'IoT: Próximamente tu refrigeradora tendrá cerebro','La tecnología en 2019', '2019-12-12', '2019-05-05', 3, 1,0,2,1);
+INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado,estado_evento, id_presidente, id_lugar) VALUES (500, 'Charla magistral dirigida a desarrolladores de software de propósito científico','Charla magistral dirigida a desarrolladores de software de propósito científico', '2019-12-12', '2019-05-05', 3, 1,1,'EVENTO_PRESIDENTE',2,1);
+INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado,estado_evento, id_presidente, id_lugar) VALUES (500, 'Mama, voy a ser dotero','Charla para jóvenes emprendedores +5k MMR', '2019-12-12', '2019-05-05', 3, 2,0,'EVENTO_BORRADOR',4,2);
+INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado,estado_evento, id_presidente, id_lugar) VALUES (500, 'Marcha para que abran un Tambo en el congreso','Gran marcha nacional', '2019-12-12', '2019-05-05', 3, 3,1,'EVENTO_PRESIDENTE',3,1);
+INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado,estado_evento, id_presidente, id_lugar) VALUES (500, 'IoT: Próximamente tu refrigeradora tendrá cerebro','La tecnología en 2019', '2019-12-12', '2019-05-05', 3, 1,0,'EVENTO_BORRADOR',3,1);
 
 
 INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('Fase Recepción','2019-11-10', '2019-11-05',1);
@@ -112,8 +112,9 @@ INSERT INTO `persona_comite` (id_evento, id_usuario) VALUES (1,5);
 INSERT INTO `persona_comite` (id_evento, id_usuario) VALUES (1,6);
 INSERT INTO `persona_comite` (id_evento, id_usuario) VALUES (1,2);
 
-INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion,titulo, fase_actual) VALUES (1,1,'2019-01-01','Desarrollo de software',1);
-INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion,titulo, fase_actual) VALUES (1,2,'2019-01-01','MPS',1);
+INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion,titulo, fase_actual, estado) VALUES (1,1,'2019-01-01','Desarrollo de software',1, "PROPUESTA_ESPERA");
+INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion,titulo, fase_actual, estado) VALUES (2,1,'2019-01-01','MPS',1, "PROPUESTA_ESPERA");
+INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion,titulo, fase_actual, estado) VALUES (3,1,'2019-01-01','PROPUESTA PRUEBA',1, "PROPUESTA_ESPERA");
 
 INSERT INTO `documento` (nombredoc,extensiondoc,contenido,id_propuesta) VALUES ('archivo1','pdf',10,1);
 INSERT INTO `documento` (nombredoc,extensiondoc,contenido,id_propuesta) VALUES ('archivo2','pdf',10,2);
