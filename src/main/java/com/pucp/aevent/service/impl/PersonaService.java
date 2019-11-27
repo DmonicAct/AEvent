@@ -12,9 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pucp.aevent.dao.IEventoDao;
 import com.pucp.aevent.dao.IPersonaDao;
+import com.pucp.aevent.dao.IPreferenciaDao;
+import com.pucp.aevent.dao.IPropuestaDao;
 import com.pucp.aevent.dao.IUsuarioDao;
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Persona;
+import com.pucp.aevent.entity.Preferencia;
+import com.pucp.aevent.entity.Propuesta;
 import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;
@@ -31,6 +35,12 @@ public class PersonaService implements IPersonaService{
 	
 	@Autowired
 	IUsuarioDao daoUsuario;
+	
+	@Autowired
+	IPropuestaDao daoPropuesta;
+	
+	@Autowired
+	IPreferenciaDao daoPreferencia;
 	
 	private Paginacion paginacion;
 	
@@ -300,6 +310,211 @@ public class PersonaService implements IPersonaService{
 		return lista.getContent();
 	}
 	
+	@Override
+	@Transactional(readOnly=true)
+	public List<Persona> findByNombreEvaluadoresAsignados(Integer id,String nombre, Pageable page) {
+		Page<Persona> lista = null;
+		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			Propuesta p  = daoPropuesta.findByIdPropuesta(id);;
+			
+			List<Persona> listaUsuarios= p.getEvaluadoresAsignados();
+			List<Integer> ids =new ArrayList<Integer>();
+			for (Usuario u: listaUsuarios) {
+				if(u.getNombreCompleto().toLowerCase().contains(nombre.toLowerCase()))
+					ids.add(u.getIdUsuario());
+			}
+				
+			lista = dao.findByIdUsuarioIn(ids, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+	
+	@Override
+	@Transactional(readOnly=true)
+	public List<Persona> findByUsernameEvaluadoresAsignados(Integer id,String username,Pageable page) {
+		Page<Persona> lista = null;
+		boolean flagAdmin = false;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			Propuesta p  = daoPropuesta.findByIdPropuesta(id);;
+			
+			List<Persona> listaUsuarios= p.getEvaluadoresAsignados();
+			List<Integer> ids =new ArrayList<Integer>();
+			for (Usuario u: listaUsuarios) {
+				if(u.getUsername().toLowerCase().contains(username.toLowerCase())) {
+					ids.add(u.getIdUsuario());
+				}
+			}
+				
+			lista = dao.findByIdUsuarioIn(ids, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+	
+	@Override
+	public List<Persona> findByEmailEvaluadoresAsignados(Integer id,String email, Pageable page) {
+		Page<Persona> lista = null;
+		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			Propuesta p  = daoPropuesta.findByIdPropuesta(id);;
+			System.out.println(p.getTitulo());
+			List<Persona> listaUsuarios= p.getEvaluadoresAsignados();
+			System.out.println(listaUsuarios.get(0).getEmail());
+			List<Integer> ids =new ArrayList<Integer>();
+			for (Usuario u: listaUsuarios) {
+				if(u.getEmail().toLowerCase().contains(email.toLowerCase()))
+					ids.add(u.getIdUsuario());
+			}
+				
+			lista = dao.findByIdUsuarioIn(ids, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+	
+	@Override
+	@Transactional(readOnly=true)
+	public List<Persona> findByNombreEvaluadoresDisponibles(Integer id,String nombre, Pageable page) {
+		Page<Persona> lista = null;
+		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			Propuesta p  = daoPropuesta.findByIdPropuesta(id);;
+			
+			List<Persona> evaluadores = p.getEvaluadoresAsignados();
+			List<Integer> idsEvaluadores = new ArrayList<Integer>();
+			for (Usuario u: evaluadores) {
+				idsEvaluadores.add(u.getIdUsuario());
+			}
+			
+			List<Persona> listaUsuarios= dao.findByIdUsuarioNotInAndRoles_nombreNotAndEnabled(idsEvaluadores,"ROLE_ADMIN",true);
+			
+			List<Integer> ids =new ArrayList<Integer>();
+			for (Usuario u: listaUsuarios) {
+				if(u.getNombreCompleto().toLowerCase().contains(nombre.toLowerCase()))
+					ids.add(u.getIdUsuario());
+			}
+				
+			lista = dao.findByIdUsuarioIn(ids, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+	
+	@Override
+	@Transactional(readOnly=true)
+	public List<Persona> findByUsernameEvaluadoresDisponibles(Integer id,String username,Pageable page) {
+		Page<Persona> lista = null;
+		boolean flagAdmin = false;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			Propuesta p  = daoPropuesta.findByIdPropuesta(id);;
+			
+			List<Persona> evaluadores = p.getEvaluadoresAsignados();
+			List<Integer> idsEvaluadores = new ArrayList<Integer>();
+			for (Usuario u: evaluadores) {
+				idsEvaluadores.add(u.getIdUsuario());
+			}
+			
+			List<Persona> listaUsuarios= dao.findByIdUsuarioNotInAndRoles_nombreNotAndEnabled(idsEvaluadores,"ROLE_ADMIN",true);
+			
+			List<Integer> ids =new ArrayList<Integer>();
+			for (Usuario u: listaUsuarios) {
+				if(u.getUsername().toLowerCase().contains(username.toLowerCase())) {
+					ids.add(u.getIdUsuario());
+				}
+			}
+				
+			lista = dao.findByIdUsuarioIn(ids, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+	
+	@Override
+	public List<Persona> findByEmailEvaluadoresDisponibles(Integer id,String email, Pageable page) {
+		Page<Persona> lista = null;
+		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			Propuesta p  = daoPropuesta.findByIdPropuesta(id);;
+			
+			List<Persona> evaluadores = p.getEvaluadoresAsignados();
+			List<Integer> idsEvaluadores = new ArrayList<Integer>();
+			for (Usuario u: evaluadores) {
+				idsEvaluadores.add(u.getIdUsuario());
+			}
+			
+			List<Persona> listaUsuarios= dao.findByIdUsuarioNotInAndRoles_nombreNotAndEnabled(idsEvaluadores,"ROLE_ADMIN",true);
+			
+			
+			List<Integer> ids = new ArrayList<Integer>();
+			for (Usuario u: listaUsuarios) {
+				if(u.getEmail().toLowerCase().contains(email.toLowerCase()))
+					ids.add(u.getIdUsuario());
+			}
+				
+			lista = dao.findByIdUsuarioIn(ids, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+	
+	@Override
+	public List<Persona> findByPreferenciaEvaluadoresDisponibles(Integer id,String preferencia, Pageable page) {
+		Page<Persona> lista = null;
+		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			Propuesta p  = daoPropuesta.findByIdPropuesta(id);;
+			
+			List<Persona> evaluadores = p.getEvaluadoresAsignados();
+			List<Integer> idsEvaluadores = new ArrayList<Integer>();
+			for (Usuario u: evaluadores) {
+				idsEvaluadores.add(u.getIdUsuario());
+			}
+			
+			List<Persona> listaUsuarios= dao.findByIdUsuarioNotInAndRoles_nombreNotAndEnabled(idsEvaluadores,"ROLE_ADMIN",true);
+			
+			
+			List<Integer> ids = new ArrayList<Integer>();
+			for (Usuario u: listaUsuarios) {
+				Preferencia pref = daoPreferencia.findByUsuarioAndPropuesta(u, p);
+				if(pref.getDescripcion().toLowerCase().contains(preferencia.toLowerCase()))
+					ids.add(u.getIdUsuario());
+			}
+				
+			lista = dao.findByIdUsuarioIn(ids, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
 //	@Override
 //	@Transactional(readOnly=true)
 //	public Boolean existsByDni(String dni) {
