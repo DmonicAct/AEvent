@@ -52,8 +52,8 @@ public class Fase implements Serializable {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<Criterio> criterios = new ArrayList<>();
 	
-
-	
+	@Column(name ="fase_guardada")
+	private Boolean fase_guardada;
 
 	public int getIdEvento() {
 		return idEvento;
@@ -122,6 +122,18 @@ public class Fase implements Serializable {
 
 	public void setCriterios(List<Criterio> criterios) {
 		this.criterios = criterios;
+	}
+
+
+
+
+
+	public Boolean getFase_guardada() {
+		return fase_guardada;
+	}
+
+	public void setFase_guardada(Boolean fase_guardada) {
+		this.fase_guardada = fase_guardada;
 	}
 
 

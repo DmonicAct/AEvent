@@ -27,10 +27,11 @@ public class UtilConstanst {
 	
 	//EVENTO
 	public static final String EVENTO_FASE_BORRADOR					= "EVENTO_BORRADOR";
-	public static final String EVENTO_FASE_PRESIDENTE  				= "EVENTO_PRESIDENTE";
-	public static final String EVENTO_FASE_SELECCION_PONENCIA 		= "EVENTO_SELECCION";
-	public static final String EVENTO_FASE_INICIO 					= "EVENTO_INICIO";	
+	public static final String EVENTO_POR_APROBACION  				= "EVENTO_POR_APROBACION";
+	public static final String EVENTO_LANZAMIENTO 					= "EVENTO_LANZAMIENTO";
+	public static final String EVENTO_FINALIZADO 					= "EVENTO_FINALIZADO";	
 	public static final String EVENTO_CANCELADO						= "EVENTO_CANCELADO";
+
 	
 	//PROPUESTA 
 	public static final String PROPUESTA_SIN_ASIGNAR 				= "PROPUESTA_SIN_ASIGNAR";
