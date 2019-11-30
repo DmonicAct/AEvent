@@ -84,4 +84,21 @@ public class LugarService implements ILugarService{
 		
 		return lista.getContent();
 	}
+
+	@Override
+	public List<Lugar> findByDescripcionContainingAndEnabled(String descripcion, boolean enabled, Pageable page) {
+
+		Page<Lugar> lista = null;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = dao.findByDescripcionContainingAndEnabled(descripcion, enabled,page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+			
+		}catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
+		
+		return lista.getContent();
+	}
 }

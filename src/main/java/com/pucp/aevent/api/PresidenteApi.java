@@ -1,41 +1,36 @@
 package com.pucp.aevent.api;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException.BadRequest;
 import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
-import com.pucp.aevent.entity.Evento;
-import com.pucp.aevent.entity.Persona;
-import com.pucp.aevent.entity.Propuesta;
-import com.pucp.aevent.entity.request_objects.PaginaRequest;
+import com.pucp.aevent.entity.request_objects.PostulacionPropuestaRequest;
 import com.pucp.aevent.entity.response_objects.Estado;
 import com.pucp.aevent.entity.response_objects.ResponseObject;
-import com.pucp.aevent.service.IPropuestaService;
+import com.pucp.aevent.service.IPresidenteService;
 
 @RestController
 @RequestMapping("/api")
-public class PropuestaApi {
+public class PresidenteApi {
 
 	@Autowired
-	IPropuestaService service;
+	IPresidenteService service;
 	
-	@Secured({"ROLE_DEFAULT"})
-	@GetMapping(path = "/propuesta/espera", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> obtenerPropuestasEspera(int idPresidente) {
+	@Secured({"ROLE_ORGANIZER","ROLE_DEFAULT"})
+	@GetMapping(path = "/presidente/revisiones", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarRevisionesPendientes(int idPresidente) {
 		ResponseObject response = new ResponseObject();
 		try {
-			List<Propuesta> lista = this.service.findAllByEspera(idPresidente);
-			response.setResultado(lista);
+			PostulacionPropuestaRequest pp = this.service.obtenerPostulacionesEnEsperaYPropuestas(idPresidente);
+			response.setResultado(pp);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
@@ -53,14 +48,13 @@ public class PropuestaApi {
 		}
 	}
 	
-	@Secured({"ROLE_DEFAULT"})
-	@GetMapping(path = "/propuesta/esperaPag", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> obtenerPropuestasEsperaPaginado(int idPresidente, PaginaRequest page) {
+	@Secured({"ROLE_ORGANIZER","ROLE_DEFAULT"})
+	@PostMapping(path = "/presidente/aprobar", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> aprobarPostulacion(Long idPostulacion) {
 		ResponseObject response = new ResponseObject();
 		try {
-			List<Propuesta> lista = this.service.findAllByEsperaPag(idPresidente, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
-			response.setResultado(lista);
-			response.setPaginacion(service.getPaginacion());
+			this.service.AprobarPostulacion(idPostulacion);
+			//response.setResultado(pp);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
@@ -78,40 +72,13 @@ public class PropuestaApi {
 		}
 	}
 	
-	@Secured({"ROLE_DEFAULT"})
-	@GetMapping(path = "/propuesta/filtroPostulante", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> obtenerPropuestasByPostulantePaginado(Persona postulante,Evento evento, PaginaRequest page) {
+	@Secured({"ROLE_ORGANIZER","ROLE_DEFAULT"})
+	@PostMapping(path = "/presidente/desaprobar", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> desaprobarPostulacion(Long idPostulacion) {
 		ResponseObject response = new ResponseObject();
 		try {
-			List<Propuesta> lista = this.service.findByPostulanteAndEvento(postulante, evento,PageRequest.of(page.getPaginaFront(), page.getRegistros()));
-			response.setResultado(lista);
-			response.setPaginacion(service.getPaginacion());
-			response.setEstado(Estado.OK);
-			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
-		} catch(BadRequest e) {
-			//response.setError(this.service.getError());
-			response.setEstado(Estado.ERROR);
-			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
-		} catch(InternalServerError e) {
-			//response.setError(this.service.getError());
-			response.setEstado(Estado.ERROR);
-			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		} catch(Exception e) {
-			response.setError(1, "Error Interno", e.getMessage());
-			response.setEstado(Estado.ERROR);
-			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-	
-	
-	@Secured({"ROLE_DEFAULT"})
-	@GetMapping(path = "/propuesta/filtroTitulo", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> obtenerPropuestasByTituloPaginado(String titulo, Evento evento, PaginaRequest page) {
-		ResponseObject response = new ResponseObject();
-		try {
-			List<Propuesta> lista = this.service.findByTituloAndEvento(titulo, evento,PageRequest.of(page.getPaginaFront(), page.getRegistros()));
-			response.setResultado(lista);
-			response.setPaginacion(service.getPaginacion());
+			this.service.DesaprobarPostulacion(idPostulacion);
+			//response.setResultado(pp);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {

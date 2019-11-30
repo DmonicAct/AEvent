@@ -201,4 +201,29 @@ public class LugarApi {
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@Secured({"ROLE_ADMIN"})
+	@GetMapping(path = "/lugar/filtroNombre", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarFiltradoNombre(String descripcion,boolean enabled,PaginaRequest page) {
+		ResponseObject response = new ResponseObject();
+		try {
+			List<Lugar> lista = this.lugarService.findByDescripcionContainingAndEnabled(descripcion, enabled, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			response.setResultado(lista);
+			response.setPaginacion(lugarService.getPaginacion());
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

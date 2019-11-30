@@ -1,5 +1,6 @@
 package com.pucp.aevent.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,10 +11,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.pucp.aevent.dao.IEvaluacionDao;
 import com.pucp.aevent.dao.IEventoDao;
 import com.pucp.aevent.dao.IPersonaDao;
 import com.pucp.aevent.dao.IPreferenciaDao;
 import com.pucp.aevent.dao.IPropuestaDao;
+import com.pucp.aevent.entity.Evaluacion;
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.Preferencia;
@@ -28,6 +31,12 @@ import com.pucp.aevent.service.IPreferenciaService;
 public class PreferenciaService implements IPreferenciaService {
 	@Autowired
 	IPersonaDao daoPersona;
+	
+	@Autowired
+	IEvaluacionDao daoEvaluacion;
+	
+	@Autowired
+	IEventoDao daoEvento;
 	
 	@Autowired
 	IPropuestaDao daoPropuesta;
@@ -113,6 +122,98 @@ public class PreferenciaService implements IPreferenciaService {
 			lista = dao.findByPropuestaAndUsuarioIn(propuesta, comite, page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		}catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+	
+	@Override
+	@Transactional(readOnly=true)
+	public List<Preferencia> findByNombreEvaluadoresDisponibles(Integer idEvento,Integer idPropuesta,String nombre, Pageable page) {
+		Page<Preferencia> lista = null;
+		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			Propuesta p  = daoPropuesta.findByIdPropuesta(idPropuesta);
+			List<Evaluacion> evaluaciones = daoEvaluacion.findByPropuesta(p);
+			
+			Evento e = daoEvento.findByIdEvento(idEvento);
+			List<Usuario> comite = e.getComite();
+			
+			
+			
+			
+			List<Usuario> usuarios = new ArrayList<Usuario>();
+			for (Usuario u2: comite) {
+				if(u2.getNombreCompleto().toLowerCase().contains(nombre.toLowerCase()))
+					usuarios.add(u2);
+			}
+				
+			lista = dao.findByPropuestaAndUsuarioIn(p, usuarios, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+	
+	@Override
+	@Transactional(readOnly=true)
+	public List<Preferencia> findByUsernameEvaluadoresDisponibles(Integer idEvento,Integer idPropuesta,String username,Pageable page) {
+		Page<Preferencia> lista = null;
+		boolean flagAdmin = false;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			Propuesta p  = daoPropuesta.findByIdPropuesta(idPropuesta);
+			List<Evaluacion> evaluaciones = daoEvaluacion.findByPropuesta(p);
+			
+			Evento e = daoEvento.findByIdEvento(idEvento);
+			List<Usuario> comite = e.getComite();
+			
+			
+			
+			
+			List<Usuario> usuarios = new ArrayList<Usuario>();
+			for (Usuario u2: comite) {
+				if(u2.getUsername().toLowerCase().contains(username.toLowerCase()))
+					usuarios.add(u2);
+			}
+				
+			lista = dao.findByPropuestaAndUsuarioIn(p, usuarios, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+	
+	@Override
+	public List<Preferencia> findByEmailEvaluadoresDisponibles(Integer idEvento,Integer idPropuesta,String email, Pageable page) {
+		Page<Preferencia> lista = null;
+		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			Propuesta p  = daoPropuesta.findByIdPropuesta(idPropuesta);
+			List<Evaluacion> evaluaciones = daoEvaluacion.findByPropuesta(p);
+			
+			Evento e = daoEvento.findByIdEvento(idEvento);
+			List<Usuario> comite = e.getComite();
+			
+			
+			
+			
+			List<Usuario> usuarios = new ArrayList<Usuario>();
+			for (Usuario u2: comite) {
+				if(u2.getEmail().toLowerCase().contains(email.toLowerCase()))
+					usuarios.add(u2);
+			}
+				
+			lista = dao.findByPropuestaAndUsuarioIn(p, usuarios, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
 			System.out.print(e.getMessage());
 		}
 		return lista.getContent();

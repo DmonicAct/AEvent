@@ -3,6 +3,7 @@ package com.pucp.aevent.service.impl;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,12 +11,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.pucp.aevent.dao.IEvaluacionDao;
 import com.pucp.aevent.dao.IEventoDao;
 import com.pucp.aevent.dao.IPersonaDao;
 import com.pucp.aevent.dao.IPreferenciaDao;
 import com.pucp.aevent.dao.IPropuestaDao;
 import com.pucp.aevent.dao.IUsuarioDao;
+import com.pucp.aevent.entity.Evaluacion;
 import com.pucp.aevent.entity.Evento;
+import com.pucp.aevent.entity.Lugar;
 import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.Preferencia;
 import com.pucp.aevent.entity.Propuesta;
@@ -41,6 +45,9 @@ public class PersonaService implements IPersonaService{
 	
 	@Autowired
 	IPreferenciaDao daoPreferencia;
+	
+	@Autowired
+	IEvaluacionDao daoEvaluacion;
 	
 	private Paginacion paginacion;
 	
@@ -318,15 +325,21 @@ public class PersonaService implements IPersonaService{
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
 		try {
-			Propuesta p  = daoPropuesta.findByIdPropuesta(id);;
 			
-			List<Persona> listaUsuarios= p.getEvaluadoresAsignados();
+			Propuesta p  = daoPropuesta.findByIdPropuesta(id);
+			List<Evaluacion> evaluaciones = daoEvaluacion.findByPropuesta(p);
+			List<Persona> evaluadores = new ArrayList<Persona>();
+			for (Evaluacion e : evaluaciones) {
+				evaluadores.add(dao.findByIdUsuario(e.getEvaluador().getIdUsuario()));
+			}
+			System.out.println(evaluadores.get(0).getNombreCompleto());
+			
 			List<Integer> ids =new ArrayList<Integer>();
-			for (Usuario u: listaUsuarios) {
+			for (Usuario u: evaluadores) {
 				if(u.getNombreCompleto().toLowerCase().contains(nombre.toLowerCase()))
 					ids.add(u.getIdUsuario());
 			}
-				
+			System.out.println(ids.toString());	
 			lista = dao.findByIdUsuarioIn(ids, page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch (Exception e) {
@@ -343,15 +356,21 @@ public class PersonaService implements IPersonaService{
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
 		try {
-			Propuesta p  = daoPropuesta.findByIdPropuesta(id);;
 			
-			List<Persona> listaUsuarios= p.getEvaluadoresAsignados();
+			Propuesta p  = daoPropuesta.findByIdPropuesta(id);
+			List<Evaluacion> evaluaciones = daoEvaluacion.findByPropuesta(p);
+			List<Persona> evaluadores = new ArrayList<Persona>();
+			for (Evaluacion e : evaluaciones) {
+				evaluadores.add(dao.findByIdUsuario(e.getEvaluador().getIdUsuario()));
+			}
+			System.out.println(evaluadores.get(0).getUsername());
 			List<Integer> ids =new ArrayList<Integer>();
-			for (Usuario u: listaUsuarios) {
+			for (Usuario u: evaluadores) {
 				if(u.getUsername().toLowerCase().contains(username.toLowerCase())) {
 					ids.add(u.getIdUsuario());
 				}
 			}
+			System.out.println(ids.toString());	
 				
 			lista = dao.findByIdUsuarioIn(ids, page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
@@ -368,15 +387,20 @@ public class PersonaService implements IPersonaService{
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
 		try {
-			Propuesta p  = daoPropuesta.findByIdPropuesta(id);;
-			System.out.println(p.getTitulo());
-			List<Persona> listaUsuarios= p.getEvaluadoresAsignados();
-			System.out.println(listaUsuarios.get(0).getEmail());
+			
+			Propuesta p  = daoPropuesta.findByIdPropuesta(id);
+			List<Evaluacion> evaluaciones = daoEvaluacion.findByPropuesta(p);
+			List<Persona> evaluadores = new ArrayList<Persona>();
+			for (Evaluacion e : evaluaciones) {
+				evaluadores.add(dao.findByIdUsuario(e.getEvaluador().getIdUsuario()));
+			}
+			System.out.println(evaluadores.get(0).getEmail());
 			List<Integer> ids =new ArrayList<Integer>();
-			for (Usuario u: listaUsuarios) {
+			for (Usuario u: evaluadores) {
 				if(u.getEmail().toLowerCase().contains(email.toLowerCase()))
 					ids.add(u.getIdUsuario());
 			}
+			System.out.println(ids.toString());	
 				
 			lista = dao.findByIdUsuarioIn(ids, page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
@@ -394,9 +418,13 @@ public class PersonaService implements IPersonaService{
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
 		try {
-			Propuesta p  = daoPropuesta.findByIdPropuesta(id);;
+			Propuesta p  = daoPropuesta.findByIdPropuesta(id);
+			List<Evaluacion> evaluaciones = daoEvaluacion.findByPropuesta(p);
+			List<Persona> evaluadores = new ArrayList<Persona>();
+			for (Evaluacion e : evaluaciones) {
+				evaluadores.add(dao.findByIdUsuario(e.getEvaluador().getIdUsuario()));
+			}
 			
-			List<Persona> evaluadores = p.getEvaluadoresAsignados();
 			List<Integer> idsEvaluadores = new ArrayList<Integer>();
 			for (Usuario u: evaluadores) {
 				idsEvaluadores.add(u.getIdUsuario());
@@ -405,9 +433,9 @@ public class PersonaService implements IPersonaService{
 			List<Persona> listaUsuarios= dao.findByIdUsuarioNotInAndRoles_nombreNotAndEnabled(idsEvaluadores,"ROLE_ADMIN",true);
 			
 			List<Integer> ids =new ArrayList<Integer>();
-			for (Usuario u: listaUsuarios) {
-				if(u.getNombreCompleto().toLowerCase().contains(nombre.toLowerCase()))
-					ids.add(u.getIdUsuario());
+			for (Usuario u2: listaUsuarios) {
+				if(u2.getNombreCompleto().toLowerCase().contains(nombre.toLowerCase()))
+					ids.add(u2.getIdUsuario());
 			}
 				
 			lista = dao.findByIdUsuarioIn(ids, page);
@@ -426,9 +454,13 @@ public class PersonaService implements IPersonaService{
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
 		try {
-			Propuesta p  = daoPropuesta.findByIdPropuesta(id);;
+			Propuesta p  = daoPropuesta.findByIdPropuesta(id);
+			List<Evaluacion> evaluaciones = daoEvaluacion.findByPropuesta(p);
+			List<Persona> evaluadores = new ArrayList<Persona>();
+			for (Evaluacion e : evaluaciones) {
+				evaluadores.add(dao.findByIdUsuario(e.getEvaluador().getIdUsuario()));
+			}
 			
-			List<Persona> evaluadores = p.getEvaluadoresAsignados();
 			List<Integer> idsEvaluadores = new ArrayList<Integer>();
 			for (Usuario u: evaluadores) {
 				idsEvaluadores.add(u.getIdUsuario());
@@ -437,9 +469,9 @@ public class PersonaService implements IPersonaService{
 			List<Persona> listaUsuarios= dao.findByIdUsuarioNotInAndRoles_nombreNotAndEnabled(idsEvaluadores,"ROLE_ADMIN",true);
 			
 			List<Integer> ids =new ArrayList<Integer>();
-			for (Usuario u: listaUsuarios) {
-				if(u.getUsername().toLowerCase().contains(username.toLowerCase())) {
-					ids.add(u.getIdUsuario());
+			for (Usuario u2: listaUsuarios) {
+				if(u2.getUsername().toLowerCase().contains(username.toLowerCase())) {
+					ids.add(u2.getIdUsuario());
 				}
 			}
 				
@@ -458,9 +490,13 @@ public class PersonaService implements IPersonaService{
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
 		try {
-			Propuesta p  = daoPropuesta.findByIdPropuesta(id);;
+			Propuesta p  = daoPropuesta.findByIdPropuesta(id);
+			List<Evaluacion> evaluaciones = daoEvaluacion.findByPropuesta(p);
+			List<Persona> evaluadores = new ArrayList<Persona>();
+			for (Evaluacion e : evaluaciones) {
+				evaluadores.add(dao.findByIdUsuario(e.getEvaluador().getIdUsuario()));
+			}
 			
-			List<Persona> evaluadores = p.getEvaluadoresAsignados();
 			List<Integer> idsEvaluadores = new ArrayList<Integer>();
 			for (Usuario u: evaluadores) {
 				idsEvaluadores.add(u.getIdUsuario());
@@ -470,9 +506,9 @@ public class PersonaService implements IPersonaService{
 			
 			
 			List<Integer> ids = new ArrayList<Integer>();
-			for (Usuario u: listaUsuarios) {
-				if(u.getEmail().toLowerCase().contains(email.toLowerCase()))
-					ids.add(u.getIdUsuario());
+			for (Usuario u2: listaUsuarios) {
+				if(u2.getEmail().toLowerCase().contains(email.toLowerCase()))
+					ids.add(u2.getIdUsuario());
 			}
 				
 			lista = dao.findByIdUsuarioIn(ids, page);
@@ -490,9 +526,13 @@ public class PersonaService implements IPersonaService{
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
 		try {
-			Propuesta p  = daoPropuesta.findByIdPropuesta(id);;
+			Propuesta p  = daoPropuesta.findByIdPropuesta(id);
+			List<Evaluacion> evaluaciones = daoEvaluacion.findByPropuesta(p);
+			List<Persona> evaluadores = new ArrayList<Persona>();
+			for (Evaluacion e : evaluaciones) {
+				evaluadores.add(dao.findByIdUsuario(e.getEvaluador().getIdUsuario()));
+			}
 			
-			List<Persona> evaluadores = p.getEvaluadoresAsignados();
 			List<Integer> idsEvaluadores = new ArrayList<Integer>();
 			for (Usuario u: evaluadores) {
 				idsEvaluadores.add(u.getIdUsuario());
@@ -502,10 +542,10 @@ public class PersonaService implements IPersonaService{
 			
 			
 			List<Integer> ids = new ArrayList<Integer>();
-			for (Usuario u: listaUsuarios) {
-				Preferencia pref = daoPreferencia.findByUsuarioAndPropuesta(u, p);
+			for (Usuario u2: listaUsuarios) {
+				Preferencia pref = daoPreferencia.findByUsuarioAndPropuesta(u2, p);
 				if(pref.getDescripcion().toLowerCase().contains(preferencia.toLowerCase()))
-					ids.add(u.getIdUsuario());
+					ids.add(u2.getIdUsuario());
 			}
 				
 			lista = dao.findByIdUsuarioIn(ids, page);
@@ -520,5 +560,53 @@ public class PersonaService implements IPersonaService{
 //	public Boolean existsByDni(String dni) {
 //		return this.dao.existsByDni(dni);
 //	}
+
+	@Override
+	public List<Persona> findByNombreCompletoContainingAndEnabled(String nombre, boolean enabled, Pageable page) {
+		Page<Persona> lista = null;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = dao.findByNombreCompletoContainingAndEnabled(nombre, enabled,page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+			
+		}catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
+		
+		return lista.getContent();
+	}
+
+	@Override
+	public List<Persona> findByEmailContainingAndEnabled(String email, boolean enabled, Pageable page) {
+		Page<Persona> lista = null;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = dao.findByEmailContainingAndEnabled(email, enabled,page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+			
+		}catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
+		
+		return lista.getContent();
+	}
+
+	@Override
+	public List<Persona> findByUsernameContainingAndEnabled(String username, boolean enabled, Pageable page) {
+		Page<Persona> lista = null;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = dao.findByUsernameContainingAndEnabled(username, enabled,page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+			
+		}catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
+		
+		return lista.getContent();
+	}
 
 }

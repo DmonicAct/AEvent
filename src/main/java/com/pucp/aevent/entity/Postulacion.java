@@ -39,7 +39,7 @@ public class Postulacion implements Serializable{
 	
 	@Column(name="estado")
 	private Boolean enabled;
-	
+	 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "fechaModificacion")
 	private Date fechaModificacion;

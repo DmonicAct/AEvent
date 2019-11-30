@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pucp.aevent.dao.ICategoriaDao;
 import com.pucp.aevent.entity.Categoria;
+import com.pucp.aevent.entity.Lugar;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;
 import com.pucp.aevent.service.ICategoriaService;
@@ -76,6 +77,22 @@ public class CategoriaService implements ICategoriaService{
 		this.paginacion.setPageable(page);
 		try {
 			lista = dao.findByEnabled(enabled, page); 
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+			
+		}catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
+		
+		return lista.getContent();
+	}
+
+	@Override
+	public List<Categoria> findByDescripcionContainingAndEnabled(String descripcion, boolean enabled, Pageable page) {
+		Page<Categoria> lista = null;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = dao.findByDescripcionContainingAndEnabled(descripcion, enabled,page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 			
 		}catch(Exception e) {

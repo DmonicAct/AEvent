@@ -30,7 +30,11 @@ public interface IPropuestaDao extends JpaRepository<Propuesta, Long> {
 	public Page<Propuesta> findByPostulante(Usuario postulante, Pageable page);
 	public Propuesta findByPostulanteAndEvento(Usuario postulante,Evento evento);
 	
+	public Page<Propuesta> findByPostulanteAndEvento(Usuario postulante, Evento evento,Pageable page);
+	public Page<Propuesta> findByTituloAndEvento(String titulo, Evento evento,Pageable page);
 	
 	public List<Propuesta> findByEstado(String estado);
 	public Page<Propuesta> findByEstado(String estado,Pageable page);
+	
+	public List<Propuesta> findByIdPropuestaIn(List<Integer> lista);
 }

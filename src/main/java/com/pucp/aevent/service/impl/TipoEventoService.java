@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.pucp.aevent.dao.ITipoEventoDao;
 import com.pucp.aevent.entity.Categoria;
+import com.pucp.aevent.entity.Lugar;
 import com.pucp.aevent.entity.TipoEvento;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Nivel;
@@ -101,6 +102,22 @@ public class TipoEventoService implements ITipoEventoService{
 		this.paginacion.setPageable(page);
 		try {
 			lista = dao.findByEnabled(enabled, page); 
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+			
+		}catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
+		
+		return lista.getContent();
+	}
+
+	@Override
+	public List<TipoEvento> findByNombreContainingAndEnabled(String nombre, boolean enabled, Pageable page) {
+		Page<TipoEvento> lista = null;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = dao.findByNombreContainingAndEnabled(nombre, enabled,page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 			
 		}catch(Exception e) {

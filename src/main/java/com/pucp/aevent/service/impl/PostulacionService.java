@@ -9,12 +9,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.pucp.aevent.dao.IEvaluacionDao;
 import com.pucp.aevent.dao.IEventoDao;
 import com.pucp.aevent.dao.IPostulacionDao;
 import com.pucp.aevent.dao.IPropuestaDao;
 import com.pucp.aevent.dao.IRespuestaFormularioDao;
 import com.pucp.aevent.dao.IUsuarioDao;
+import com.pucp.aevent.entity.Evaluacion;
 import com.pucp.aevent.entity.Evento;
+import com.pucp.aevent.entity.Fase;
+import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.Postulacion;
 import com.pucp.aevent.entity.Propuesta;
 import com.pucp.aevent.entity.RespuestaFormulario;
@@ -42,6 +46,9 @@ public class PostulacionService implements IPostulacionService{
 	@Autowired
 	IUsuarioDao daoUsuario;
 	
+	@Autowired
+	IEvaluacionDao daoEvaluacion;
+	
 	private Paginacion paginacion;
 	public Paginacion getPaginacion() {
 		return this.paginacion;
@@ -66,6 +73,32 @@ public class PostulacionService implements IPostulacionService{
 			}
 			this.daoPropuesta.save(propuesta);
 			post = this.dao.save(postulacion);
+			
+			//VERIFICAR FASE DE POSTULACION PARA GENERAR NUEVAS EVALUACIONES AUTOMATICAMENTE
+			Evento e = this.daoEvento.findByIdEvento(postulacion.getIdEvento().intValue());
+			List<Fase> fasesEvento = e.getFases();
+			Long primeraFase = (fasesEvento.get(0)).getIdFase();
+			if(primeraFase!=postulacion.getIdFase()) { //SI ESTA EN LA PRIMERA FASE NO SE HACE NADA, SO SOLO SE VALIDA ....
+				//SI ESTA EN UNA FASE POSTERIOR SE GENERAN NUEVAS EVALUACIONES DE LA FASE SIGUIENTE
+				List<Persona> evaluadores = propuesta.getEvaluadoresAsignados();
+				for(Persona p: evaluadores) {
+					//PARA CADA EVALUADOR SE GENERA UNA NUEVA EVALUACION CONTENIENDO A LA SIGUIENTE FASE
+					Evaluacion eval = new Evaluacion();
+					eval.setEvaluador(p);
+					eval.setPropuesta(propuesta);
+					Long faseActual = postulacion.getIdFase();
+					int position=-1;
+					for (int i = 0; i < fasesEvento.size(); i++) {
+					    if (fasesEvento.get(i).getIdFase() == faseActual) {
+					        position = i;
+					        break;
+					    }
+					}
+					eval.setFase(fasesEvento.get(position+1));
+					eval.setEstado(UtilConstanst.EVALUACION_ASIGNADA);
+					this.daoEvaluacion.save(eval);
+				}
+			}
 		} catch (Exception e) {
 			logger.error("Error en Postulacion Service(Save): " + e.getMessage());
 			this.error.setMensaje("Error en Postulacion Service(Save): " + e.getMessage());
