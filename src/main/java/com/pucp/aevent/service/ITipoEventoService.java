@@ -2,6 +2,7 @@ package com.pucp.aevent.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.pucp.aevent.entity.Categoria;
@@ -20,4 +21,7 @@ public interface ITipoEventoService {
 	
 	public List<TipoEvento> findByEnabled(Boolean enabled);
 	public List<TipoEvento> findByEnabled(Boolean enabled, Pageable page);
+	
+	
+	public List<TipoEvento> findByNombreContainingAndEnabled(String nombre,boolean enabled,Pageable page);
 }

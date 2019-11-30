@@ -76,4 +76,36 @@ public class PropuestaService implements IPropuestaService{
 		}
 		return lista.getContent();
 	}
+
+	@Override
+	public List<Propuesta> findByPostulanteAndEvento(Usuario postulante, Evento evento, Pageable page) {
+		
+		Page<Propuesta> lista = null;
+		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = propuestaDao.findByPostulanteAndEvento(postulante, evento, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		}catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+		
+	}
+
+	@Override
+	public List<Propuesta> findByTituloAndEvento(String titulo, Evento evento, Pageable page) {
+		Page<Propuesta> lista = null;
+		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = propuestaDao.findByTituloAndEvento(titulo, evento, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		}catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
 }
