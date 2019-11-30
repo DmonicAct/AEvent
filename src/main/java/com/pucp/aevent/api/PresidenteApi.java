@@ -50,10 +50,10 @@ public class PresidenteApi {
 	
 	@Secured({"ROLE_ORGANIZER","ROLE_DEFAULT"})
 	@PostMapping(path = "/presidente/aprobar", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> aprobarPostulacion(Long idPostulacion) {
+	public ResponseEntity<ResponseObject> aprobarPostulacion(int idPostulacion) {
 		ResponseObject response = new ResponseObject();
 		try {
-			this.service.AprobarPostulacion(idPostulacion);
+			this.service.AprobarPostulacion(Long.valueOf(idPostulacion));
 			//response.setResultado(pp);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
@@ -74,10 +74,10 @@ public class PresidenteApi {
 	
 	@Secured({"ROLE_ORGANIZER","ROLE_DEFAULT"})
 	@PostMapping(path = "/presidente/desaprobar", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> desaprobarPostulacion(Long idPostulacion) {
+	public ResponseEntity<ResponseObject> desaprobarPostulacion(int idPostulacion) {
 		ResponseObject response = new ResponseObject();
 		try {
-			this.service.DesaprobarPostulacion(idPostulacion);
+			this.service.DesaprobarPostulacion(Long.valueOf(idPostulacion));
 			//response.setResultado(pp);
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
