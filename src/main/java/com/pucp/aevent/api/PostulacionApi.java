@@ -129,7 +129,6 @@ public class PostulacionApi {
 						e.setIdPostulacion(postulacion.getIdPostulacion());
 					this.serviceRespuesta.save(e);
 				}
-			
 			lista = this.servicePostulacion.findAllByPostulacion(post.getIdPostulacion());
 			RespuestaFormularioxPostulacionRequest resultado = new RespuestaFormularioxPostulacionRequest();
 			resultado.setListaFormulario(lista);
