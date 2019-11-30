@@ -65,25 +65,10 @@ INSERT INTO `lugar` (descripcion, estado) VALUES("AUDITORIO DE DERECHO - PUCP", 
 INSERT INTO `lugar` (descripcion, estado) VALUES("CENTRO DE CONVENCIONES AEVENT", 1);
 INSERT INTO `lugar` (descripcion, estado) VALUES("CENTRO DE CONVENCIONES SAN MARCOS SE DEFIENDE", 1);
 
-
-INSERT INTO `formulariocfp` (id_fase,titulo) VALUES (1,"Formato de fase de recepcion");
-INSERT INTO `formulariocfp` (id_fase,titulo) VALUES (2,"Formato de fase de evaluación");
-INSERT INTO `formulariocfp` (id_fase,titulo) VALUES (3,"Formato de fase de mejora");
-
-INSERT INTO `division` (descripcion, indice, id_formulario) VALUES ('Estudios',1,1);
-INSERT INTO `division` (descripcion, indice, id_formulario) VALUES ('Experiencia Laboral',1,1);
-
-INSERT INTO `seccion`  (descripcion,cantidad_preguntas,indice,tipo_seccion, id_division) VALUES ('FORMULARIO 1',1,1,'PREGUNTA ABIERTA',1);
-INSERT INTO `seccion`  (descripcion,cantidad_preguntas,indice,tipo_seccion, id_division) VALUES ('FORMULARIO 2',1,1,'PREGUNTA ABIERTA',2);
-
-INSERT INTO `pregunta` (descripcion, tipo_pregunta, id_seccion) VALUES ('Explique su grado de estudios', 'PREGUNTA ABIERTA', 1);
-INSERT INTO `pregunta` (descripcion, tipo_pregunta, id_seccion) VALUES ('Detalle su labor como ponente', 'PREGUNTA ABIERTA', 2);
-
-INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado,estado_evento, id_presidente, id_lugar) VALUES (500, 'Charla magistral dirigida a desarrolladores de software de propósito científico','Charla magistral dirigida a desarrolladores de software de propósito científico', '2019-12-12', '2019-05-05', 3, 1,1,'EVENTO_POR_APROBACION',2,1);
-INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado,estado_evento, id_presidente, id_lugar) VALUES (500, 'Mama, voy a ser dotero','Charla para jóvenes emprendedores +5k MMR', '2019-12-12', '2019-05-05', 3, 2,0,'EVENTO_LANZAMIENTO',4,2);
-INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado,estado_evento, id_presidente, id_lugar) VALUES (500, 'Marcha para que abran un Tambo en el congreso','Gran marcha nacional', '2019-12-12', '2019-05-05', 3, 3,1,'EVENTO_LANZAMIENTO',3,1);
-INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado,estado_evento, id_presidente, id_lugar) VALUES (500, 'IoT: Próximamente tu refrigeradora tendrá cerebro','La tecnología en 2019', '2019-12-12', '2019-05-05', 3, 1,0,'EVENTO_POR_APROBACION',3,1);
-
+INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado,estado_evento, id_presidente, id_lugar) VALUES (500, 'Charla magistral dirigida a desarrolladores de software de propósito científico','Charla magistral dirigida a desarrolladores de software de propósito científico', '2019-12-12', '2019-05-05', 3, 1,1,'EVENTO_PRESIDENTE',2,1);
+INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado,estado_evento, id_presidente, id_lugar) VALUES (500, 'Mama, voy a ser dotero','Charla para jóvenes emprendedores +5k MMR', '2019-12-12', '2019-05-05', 3, 2,0,'EVENTO_BORRADOR',4,2);
+INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado,estado_evento, id_presidente, id_lugar) VALUES (500, 'Marcha para que abran un Tambo en el congreso','Gran marcha nacional', '2019-12-12', '2019-05-05', 3, 3,1,'EVENTO_PRESIDENTE',3,1);
+INSERT INTO `evento` ( capacidad,titulo, descripcion, fecha_fin, fecha_inicio, id_organizador, id_tipo_evento,estado,estado_evento, id_presidente, id_lugar) VALUES (500, 'IoT: Próximamente tu refrigeradora tendrá cerebro','La tecnología en 2019', '2019-12-12', '2019-05-05', 3, 1,0,'EVENTO_BORRADOR',3,1);
 
 INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('Fase Recepción','2019-11-10', '2019-11-05',1);
 INSERT INTO `fase` (descripcion, fecha_fin, fecha_inicial, id_evento) VALUES ('Fase Evaluación','2019-11-15', '2019-11-10',1);
