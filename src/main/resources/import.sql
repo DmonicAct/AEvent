@@ -113,8 +113,8 @@ INSERT INTO `persona_comite` (id_evento, id_usuario) VALUES (1,6);
 INSERT INTO `persona_comite` (id_evento, id_usuario) VALUES (1,2);
 
 INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion,titulo, fase_actual, estado) VALUES (1,1,'2019-01-01','Desarrollo de software',1, "PROPUESTA_ESPERA");
-INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion,titulo, fase_actual, estado) VALUES (2,1,'2019-01-01','MPS',1, "PROPUESTA_ESPERA");
-INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion,titulo, fase_actual, estado) VALUES (3,1,'2019-01-01','PROPUESTA PRUEBA',1, "PROPUESTA_ESPERA");
+INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion,titulo, fase_actual, estado) VALUES (1,1,'2019-01-01','MPS',1, "PROPUESTA_ESPERA");
+INSERT INTO `propuesta` (id_evento,id_postulante,fecha_postulacion,titulo, fase_actual, estado) VALUES (1,1,'2019-01-01','PROPUESTA PRUEBA',1, "PROPUESTA_ESPERA");
 
 INSERT INTO `documento` (nombredoc,extensiondoc,contenido,id_propuesta) VALUES ('archivo1','pdf',10,1);
 INSERT INTO `documento` (nombredoc,extensiondoc,contenido,id_propuesta) VALUES ('archivo2','pdf',10,2);
@@ -139,6 +139,11 @@ INSERT INTO `aevent`.`preferencia` (`id_preferencia`, `descripcion`, `id_propues
 INSERT INTO `aevent`.`preferencia` (`id_preferencia`, `descripcion`, `id_propuesta`, `id_usuario`) VALUES ('6', 'Podria Evaluar', '2', '6');
 INSERT INTO `aevent`.`preferencia` (`id_preferencia`, `descripcion`, `id_propuesta`, `id_usuario`) VALUES ('7', 'Quiero Evaluar', '1', '2');
 INSERT INTO `aevent`.`preferencia` (`id_preferencia`, `descripcion`, `id_propuesta`, `id_usuario`) VALUES ('8', 'Podria Evaluar', '2', '2');
+
+INSERT INTO `aevent`.`postulacion` (id_postulacion,estado_postulacion, id_evento, id_propuesta) VALUES (1, 'POSTULACION_EN_ESPERA', 1, 1);
+INSERT INTO `aevent`.`postulacion` (id_postulacion,estado_postulacion, id_evento, id_propuesta) VALUES (2, 'POSTULACION_EN_ESPERA', 1, 2);
+INSERT INTO `aevent`.`postulacion` (id_postulacion,estado_postulacion, id_evento, id_propuesta) VALUES (3, 'POSTULACION_EN_ESPERA', 1, 3);
+
 
 ///////TRIGGERS
 
