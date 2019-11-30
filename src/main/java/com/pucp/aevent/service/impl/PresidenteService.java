@@ -14,6 +14,7 @@ import com.pucp.aevent.dao.IPostulacionDao;
 import com.pucp.aevent.dao.IPropuestaDao;
 import com.pucp.aevent.dao.IUsuarioDao;
 import com.pucp.aevent.entity.Evento;
+import com.pucp.aevent.entity.Fase;
 import com.pucp.aevent.entity.Postulacion;
 import com.pucp.aevent.entity.Propuesta;
 import com.pucp.aevent.entity.Usuario;
@@ -36,6 +37,7 @@ public class PresidenteService implements IPresidenteService {
 	
 	@Autowired
 	IEventoDao eventoDao;
+
 
 	@Override
 	public PostulacionPropuestaRequest obtenerPostulacionesEnEsperaYPropuestas(int idPresidente) {
@@ -62,6 +64,60 @@ public class PresidenteService implements IPresidenteService {
 			System.out.print(e.getMessage());
 		}
 		return pp;
+	}
+
+	@Override
+	public void DesaprobarPostulacion(Long idPostulacion) {
+		try {
+			Postulacion postulacion = this.postulacionDao.findByIdPostulacion(idPostulacion);
+			//RECHAZO POSTULACION
+			postulacion.setEstado(UtilConstanst.POSTULACION_RECHAZADA);
+			postulacionDao.save(postulacion);
+			Propuesta propuesta = this.propuestaDao.findByIdPropuesta(postulacion.getIdPropuesta().intValue());
+			//RECHAZO PROPUESTA
+			propuesta.setEstado(UtilConstanst.PROPUESTA_RECHAZADA);
+			propuestaDao.save(propuesta);
+		}catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
+	}
+
+	@Override
+	public void AprobarPostulacion(Long idPostulacion) {
+		try {
+			//OBTENGO POSTULACION
+			Postulacion postulacion = this.postulacionDao.findByIdPostulacion(idPostulacion);
+			//OBTENGO PROPUESTA
+			Propuesta propuesta = this.propuestaDao.findByIdPropuesta(postulacion.getIdPropuesta().intValue());
+			//ACEPTO POSTULACION
+			postulacion.setEstado(UtilConstanst.POSTULACION_APROBADA);
+			postulacionDao.save(postulacion);
+			//AVANZAR LA FASE 
+			Evento e = this.eventoDao.findByIdEvento(postulacion.getIdEvento().intValue());
+			List<Fase> fasesEvento = e.getFases();
+			Long ultFase = (fasesEvento.get(fasesEvento.size()-1)).getIdFase();
+			//AVANZO FASE ACTUAL DE PROPUESTA Y DE POSTULACION
+			if(ultFase == postulacion.getIdFase()) {
+				//ULTIMA FASE APRUEBA PROPUESTA
+				propuesta.setEstado(UtilConstanst.PROPUESTA_APROBADA);
+			} else {
+				//SI NO ES LA ULTIMA FASE AVANZO FASE ACTUAL
+				Long faseActual = postulacion.getIdFase();
+				int position=-1;
+				for (int i = 0; i < fasesEvento.size(); i++) {
+				    if (fasesEvento.get(i).getIdFase() == faseActual) {
+				        position = i;
+				        break;
+				    }
+				}
+				propuesta.setFase_actual(fasesEvento.get(position+1).getIdFase());
+				postulacion.setIdFase(fasesEvento.get(position+1).getIdFase());
+			}
+			this.propuestaDao.save(propuesta);
+			this.postulacionDao.save(postulacion);
+		}catch(Exception e) {
+			System.out.print(e.getMessage());
+		}
 	}
 	
 	
