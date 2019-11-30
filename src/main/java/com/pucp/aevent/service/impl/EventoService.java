@@ -34,6 +34,7 @@ import com.pucp.aevent.entity.response_objects.Paginacion;
 import com.pucp.aevent.service.IDivisionService;
 import com.pucp.aevent.service.IEventoService;
 import com.pucp.aevent.service.IFormularioCFPService;
+import com.pucp.aevent.util.UtilConstanst;
 
 @Service
 public class EventoService implements IEventoService {
@@ -79,12 +80,14 @@ public class EventoService implements IEventoService {
 		Evento returnedEvento = null;
 		Persona participante = null;
 		try {
+			if (evento.getIdEvento() == 0)
+				evento.setEstadoEvento(UtilConstanst.EVENTO_FASE_BORRADOR);
 			participante = this.daoPersona.findByUsername(evento.getOrganizador().getUsername());
 			evento.setOrganizador(participante);
-
-			participante = this.daoPersona.findByUsername(evento.getPresidente().getUsername());
-			evento.setPresidente(participante);
-			
+			if(evento.getPresidente() != null) {
+				participante = this.daoPersona.findByUsername(evento.getPresidente().getUsername());
+				evento.setPresidente(participante);
+			}
 			returnedEvento = this.dao.save(evento);
 		} catch (Exception ex) {
 			logger.error("Error en el sistema: " + ex.getCause());
@@ -182,12 +185,12 @@ public class EventoService implements IEventoService {
 	}
 	@Override
 	@Transactional(readOnly = true)
-	public List<Evento> findEnabled(Pageable page) {
+	public List<Evento> findEnabledPostular(Pageable page) {
 		Page<Evento> lista = null;
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
 		try {
-			lista = this.dao.findByEnabled(true, page);
+			lista = this.dao.findByEnabledAndEstadoEvento(true, UtilConstanst.EVENTO_LANZAMIENTO, page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch (Exception e) {
 			System.out.print(e.getMessage());

@@ -21,4 +21,5 @@ public interface IEvaluacionDao  extends JpaRepository <Evaluacion, Long>{
 	public List<Evaluacion> findByPropuesta(Propuesta propuesta);
 	public void delete(Evaluacion evaluacion);
 	public Evaluacion findByIdEvaluacion(int idEvaluacion);
+	public List<Evaluacion> findAllByPropuestaAndEstado(Propuesta propuesta, String estado);
 }
