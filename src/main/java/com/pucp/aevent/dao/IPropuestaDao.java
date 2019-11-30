@@ -35,4 +35,6 @@ public interface IPropuestaDao extends JpaRepository<Propuesta, Long> {
 	
 	public List<Propuesta> findByEstado(String estado);
 	public Page<Propuesta> findByEstado(String estado,Pageable page);
+	
+	public List<Propuesta> findByIdPropuestaIn(List<Integer> lista);
 }
