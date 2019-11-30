@@ -137,11 +137,11 @@ public class EventoApi {
 	
 	@Secured({"ROLE_ORGANIZER","ROLE_DEFAULT"})
 	@GetMapping(path = "/evento/all", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> consultarAllEventosEnabled(PaginaRequest page) {
+	public ResponseEntity<ResponseObject> consultarAllEventosPostular(PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {
 			List<Evento> lista;			
-			lista = this.service.findEnabled(PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			lista = this.service.findEnabledPostular(PageRequest.of(page.getPaginaFront(), page.getRegistros()));
 			response.setResultado(lista);
 			response.setPaginacion(service.getPaginacion());
 			response.setEstado(Estado.OK);
@@ -214,7 +214,7 @@ public class EventoApi {
 	
 	@Secured({"ROLE_ORGANIZER","ROLE_ADMIN","ROLE_DEFAULT"})
 	@GetMapping(path = "/evento/evaluaciones/evaluador", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> consultarEvaluacionesAsigndas(Persona persona,PaginaRequest page) {
+	public ResponseEntity<ResponseObject> consultarEvaluacionesAsignadas(Persona persona,PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {
 			List<Evaluacion> lista = this.service.findAllOfEvaluador(persona,PageRequest.of(page.getPaginaFront(), page.getRegistros()));

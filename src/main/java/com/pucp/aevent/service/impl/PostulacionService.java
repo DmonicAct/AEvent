@@ -64,6 +64,7 @@ public class PostulacionService implements IPostulacionService{
 			if(propuesta.getFase_actual()==null) {
 				propuesta.setFase_actual(propuesta.getEvento().getFases().get(0).getIdFase());
 			}
+			this.daoPropuesta.save(propuesta);
 			post = this.dao.save(postulacion);
 		} catch (Exception e) {
 			logger.error("Error en Postulacion Service(Save): " + e.getMessage());

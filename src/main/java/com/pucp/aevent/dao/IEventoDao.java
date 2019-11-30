@@ -18,7 +18,9 @@ public interface IEventoDao extends JpaRepository<Evento, Long>{
 	
 	public Page<Evento> findByComite(Usuario evaluador, Pageable page);
 	
-	public Page<Evento> findByEnabled(boolean flag,Pageable page);
+	public Page<Evento> findByEnabledAndEstadoEvento(boolean flag, String estado, Pageable page);
+	
+	public Page<Evento> findByEnabled(boolean flag, Pageable page);
 	
 	public Page<Evento> findByOrganizadorAndEnabled(Usuario organizador,boolean flag, Pageable page);
 

@@ -50,9 +50,6 @@ public class EvaluacionApi {
 			Evaluacion e = this.evservice.asignarPropuesta(evaluador,propuesta,fase);
 			response.setResultado(e);
 			response.setEstado(Estado.OK);
-			
-			
-			
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {
 			//response.setError(this.service.getError());
@@ -155,7 +152,7 @@ public class EvaluacionApi {
 	
 	@Secured({"ROLE_ORGANIZER"})
 	@PostMapping(path = "/evaluaciones/guardar",consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> guardarEvaluaciones( @Valid @RequestBody Evaluacion evaluacion) {
+	public ResponseEntity<ResponseObject> guardarEvaluacion( @Valid @RequestBody Evaluacion evaluacion) {
 		ResponseObject response = new ResponseObject();
 		try {
 			this.evservice.save(evaluacion);

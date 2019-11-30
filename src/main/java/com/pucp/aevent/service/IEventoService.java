@@ -19,7 +19,7 @@ public interface IEventoService {
 	public Evento findById(Integer id);
 	public List<Evento> findAllByPresidente(Persona usuario, Pageable page);
 	public List<Evento> findAllByComite(Persona usuario, Pageable page);
-	public List<Evento> findEnabled(Pageable page);
+	public List<Evento> findEnabledPostular(Pageable page);
 	public List<Evento> findNotEnabled(Pageable page);
 	public List<Evento> findByOrganizadorAndEnabled(Persona usuario, Pageable page);
 	public List<Evento> findByOrganizadorAndNotEnabled(Persona usuario, Pageable page);

@@ -20,4 +20,6 @@ public interface IPostulacionDao  extends JpaRepository <Postulacion, Long>{
 	List<Postulacion> findByIdPropuesta(Long idPropuesta);
 	
 	Postulacion findByIdPostulacion(Long idPostulacion);
+	
+	Postulacion findByIdPropuestaAndIdFase(Long idPropuesta, Long idFase);
 }
