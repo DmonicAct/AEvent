@@ -80,6 +80,8 @@ public class EventoService implements IEventoService {
 		Evento returnedEvento = null;
 		Persona participante = null;
 		try {
+			if (evento.getIdEvento() == 0)
+				evento.setEstadoEvento(UtilConstanst.EVENTO_FASE_BORRADOR);
 			participante = this.daoPersona.findByUsername(evento.getOrganizador().getUsername());
 			evento.setOrganizador(participante);
 			if(evento.getPresidente() != null) {
