@@ -22,4 +22,5 @@ public interface ICategoriaDao extends JpaRepository <Categoria, Long>{
 	
 	public Page<Categoria> findByDescripcionContainingAndEnabled(String descripcion,boolean enabled,Pageable page);
 
+	public List<Categoria> findByDescripcionContaining(String descripcion);
 }

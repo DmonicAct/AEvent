@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.pucp.aevent.dao.ICategoriaDao;
 import com.pucp.aevent.dao.IDivisionDao;
 import com.pucp.aevent.dao.IEvaluacionDao;
 import com.pucp.aevent.dao.IEventoDao;
@@ -21,6 +22,7 @@ import com.pucp.aevent.dao.IPreguntaDao;
 import com.pucp.aevent.dao.ISeccionDao;
 import com.pucp.aevent.dao.IFormularioCFPDao;
 import com.pucp.aevent.dao.IPropuestaDao;
+import com.pucp.aevent.entity.Categoria;
 import com.pucp.aevent.entity.Division;
 import com.pucp.aevent.entity.Evaluacion;
 import com.pucp.aevent.entity.Evento;
@@ -31,6 +33,7 @@ import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.response_objects.Error;
 import com.pucp.aevent.entity.response_objects.Paginacion;
+import com.pucp.aevent.service.ICategoriaService;
 import com.pucp.aevent.service.IDivisionService;
 import com.pucp.aevent.service.IEventoService;
 import com.pucp.aevent.service.IFormularioCFPService;
@@ -59,6 +62,9 @@ public class EventoService implements IEventoService {
 	
 	@Autowired
 	IDivisionService divisionService;
+	
+	@Autowired
+	ICategoriaDao daoCategoria;
 	
 	private Paginacion paginacion;
 
@@ -316,6 +322,88 @@ public class EventoService implements IEventoService {
 		this.paginacion.setPageable(page);
 		try {
 			lista = this.dao.findByOrganizadorAndEnabled(organizador, false, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+
+	@Override
+	public List<Evento> findByEnabledAndTituloContains(boolean flag,String username_orga, String titulo, Pageable page) {
+		Page<Evento> lista = null;
+		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+
+		Persona organizador = null;
+		organizador = this.daoPersona.findByUsername(username_orga);
+		
+		try {
+			lista = this.dao.findByEnabledAndOrganizadorAndTituloContains(flag,organizador, titulo, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+
+	@Override
+	public List<Evento> findByEnabledAndCategoriasIn(boolean flag,String username_orga, String descripcion, Pageable page) {
+		Page<Evento> lista = null;
+		
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			Persona organizador = null;
+			organizador = this.daoPersona.findByUsername(username_orga);
+			List<Categoria> lista_cat = this.daoCategoria.findByDescripcionContaining(descripcion);
+			
+			if(lista_cat.size()==0) return null;
+			
+			lista = this.dao.findByEnabledAndOrganizadorAndCategoriasIn(flag,organizador, lista_cat, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+
+	@Override
+	public List<Evento> findByEnabledAndPresidente(boolean flag,String username_orga, String username_pres, Pageable page) {
+		Page<Evento> lista = null;
+		
+		Persona organizador = null;
+		organizador = this.daoPersona.findByUsername(username_orga);
+		
+		Persona presidente = null;
+		presidente = this.daoPersona.findByUsername(username_pres);
+		
+		if(presidente==null) {
+			return null;
+		}
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = this.dao.findByEnabledAndOrganizadorAndPresidente(flag,organizador,presidente, page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
+	}
+
+	@Override
+	public List<Evento> findByMotivoFin(String motivo,String username_orga, Pageable page) {
+	Page<Evento> lista = null;
+		
+		Persona organizador = null;
+		organizador = this.daoPersona.findByUsername(username_orga);
+	
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = this.dao.findByMotivoFinAndOrganizador(motivo,organizador, page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch (Exception e) {
 			System.out.print(e.getMessage());

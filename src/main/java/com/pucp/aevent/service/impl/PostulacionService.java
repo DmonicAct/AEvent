@@ -269,7 +269,7 @@ public class PostulacionService implements IPostulacionService{
 	public Postulacion enviarPostulacion(Postulacion postulacion) {
 		Postulacion post = null;
 		try {
-			postulacion.setEstado(UtilConstanst.POSTULACION_EN_ESPERA);
+			postulacion.setEstado(UtilConstanst.POSTULACION_EN_CURSO);
 			post = this.dao.save(postulacion);
 		}catch(Exception e) {
 			logger.error("Error en Postulacion Service(enviarPostulacion): " + e.getMessage());
