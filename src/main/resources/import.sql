@@ -129,6 +129,8 @@ INSERT INTO `aevent`.`postulacion` (id_postulacion,estado_postulacion, id_evento
 INSERT INTO `aevent`.`postulacion` (id_postulacion,estado_postulacion, id_evento, id_propuesta, id_fase) VALUES (2, 'POSTULACION_EN_ESPERA', 1, 2, 1);
 INSERT INTO `aevent`.`postulacion` (id_postulacion,estado_postulacion, id_evento, id_propuesta, id_fase) VALUES (3, 'POSTULACION_EN_ESPERA', 1, 3, 1);
 
+INSERT INTO `email` (direccion,pass) VALUES ("aeventmailing@gmail.com","amuaawbbmtsidmho");
+
 ///////TRIGGERS
 
 CREATE TRIGGER `UPDATE_PASSWORD` BEFORE UPDATE ON `usuario` FOR EACH ROW BEGIN DECLARE PASSWORD_OLD VARCHAR(60); SELECT CONTRASENA INTO PASSWORD_OLD  FROM usuario US WHERE NEW.ID_USUARIO=US.ID_USUARIO; IF NEW.CONTRASENA IS NULL OR NEW.CONTRASENA = "" THEN SET NEW.CONTRASENA = PASSWORD_OLD; END IF; END;
