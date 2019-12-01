@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.pucp.aevent.entity.Persona;
 import com.pucp.aevent.entity.Usuario;
 
 public interface IUsuarioDao extends JpaRepository <Usuario, Long>{
@@ -30,8 +29,6 @@ public interface IUsuarioDao extends JpaRepository <Usuario, Long>{
 	
 	//Sirve para traer usuarios que tengan 
 	public List<Usuario> findByRoles_nombreAndEnabled(String nombre, Boolean enabled);
-	
-	public List<Persona> findByIdUsuarioIn(List<Integer> usuarios);
 	
 	/*
 	 * Query Sample

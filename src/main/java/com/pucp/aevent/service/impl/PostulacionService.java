@@ -1,6 +1,5 @@
 package com.pucp.aevent.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -50,7 +49,6 @@ public class PostulacionService implements IPostulacionService{
 	@Autowired
 	IEvaluacionDao daoEvaluacion;
 	
-	
 	private Paginacion paginacion;
 	public Paginacion getPaginacion() {
 		return this.paginacion;
@@ -81,12 +79,7 @@ public class PostulacionService implements IPostulacionService{
 			Long primeraFase = (fasesEvento.get(0)).getIdFase();
 			if(primeraFase!=postulacion.getIdFase()) { //SI ESTA EN LA PRIMERA FASE NO SE HACE NADA, SO SOLO SE VALIDA ....
 				//SI ESTA EN UNA FASE POSTERIOR SE GENERAN NUEVAS EVALUACIONES DE LA FASE SIGUIENTE
-				List<Evaluacion> evaluaciones = this.daoEvaluacion.findByPropuesta(propuesta);
-				List<Integer> listaIds = new ArrayList<Integer>();
-				for(Evaluacion ev: evaluaciones) {
-					listaIds.add(ev.getEvaluador().getIdUsuario());
-				}
-				List<Persona> evaluadores = this.daoUsuario.findByIdUsuarioIn(listaIds);
+				List<Persona> evaluadores = propuesta.getEvaluadoresAsignados();
 				for(Persona p: evaluadores) {
 					//PARA CADA EVALUADOR SE GENERA UNA NUEVA EVALUACION CONTENIENDO A LA SIGUIENTE FASE
 					Evaluacion eval = new Evaluacion();
