@@ -70,13 +70,12 @@ public class EvaluacionService implements IEvaluacionService{
 		//e.setVeredicto("");
 		//e.setSigueEvaluando(true);
 		e = daoEvaluacion.save(e);
-		/*
-		Preferencia p = new Preferencia();
-		p.setPropuesta(propuesta);
-		p.setUsuario(evaluador);
-		p.setDescripcion("Pendiente confirmaci�n");
-		daoPreferencia.save(p);
-		*/
+		
+		//CAMBIAR ESTADO DE PROPUESTA A ASIGNADA
+		Propuesta p = this.daoPropuesta.findByIdPropuesta(propuesta.getIdPropuesta());
+		p.setEstado(UtilConstanst.PROPUESTA_ASIGNADA);
+		this.daoPropuesta.save(p);
+		
 		Usuario u = daoUsuario.findByIdUsuario(evaluador.getIdUsuario());
 		u.setEvaluacionSinLeer(true);
 		daoUsuario.save(u);
