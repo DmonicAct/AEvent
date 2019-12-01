@@ -243,13 +243,13 @@ public class PostulacionApi {
 			/*
 				Servicio de Email Inicio
 			*/
-			if(usuario.getEmail()!=null) {
+			/*if(usuario.getEmail()!=null) {
 				String texto = UtilMessage.MENSAJE_PONENTE_INSCRIPCION;
 				texto.replace(UtilMessage.PARAMETRO_NOMBRECOMPLETO, usuario.getNombreCompleto());
 				texto.replace(UtilMessage.PARAMETRO_TITULOEVENTO, evento.getTitulo());
 				serviceEmail.enviarMensajeFormato(usuario.getEmail(), 
 						UtilMessage.MENSAJE_PONENTE_CONFIRMACION, texto);
-			}
+			}/*
 			
 			/*
 				Servicio de Email Fin

@@ -1,5 +1,6 @@
 package com.pucp.aevent.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -75,30 +76,37 @@ public class PostulacionService implements IPostulacionService{
 			post = this.dao.save(postulacion);
 			
 			
-//			Evento e = this.daoEvento.findByIdEvento(postulacion.getIdEvento().intValue());
-//			List<Fase> fasesEvento = e.getFases();
-//			Long primeraFase = (fasesEvento.get(0)).getIdFase();
-//			if(primeraFase!=postulacion.getIdFase()) { 
-//			
-//				List<Persona> evaluadores = propuesta.getEvaluadoresAsignados();
-//				for(Persona p: evaluadores) {
-//					
-//					Evaluacion eval = new Evaluacion();
-//					eval.setEvaluador(p);
-//					eval.setPropuesta(propuesta);
-//					Long faseActual = postulacion.getIdFase();
-//					int position=-1;
-//					for (int i = 0; i < fasesEvento.size(); i++) {
-//					    if (fasesEvento.get(i).getIdFase() == faseActual) {
-//					        position = i;
-//					        break;
-//					    }
-//					}
-//					eval.setFase(fasesEvento.get(position+1));
-//					eval.setEstado(UtilConstanst.EVALUACION_ASIGNADA);
-//					this.daoEvaluacion.save(eval);
-//				}
-//			}
+			//VERIFICAR FASE DE POSTULACION PARA GENERAR NUEVAS EVALUACIONES AUTOMATICAMENTE
+			Evento e = this.daoEvento.findByIdEvento(postulacion.getIdEvento().intValue());
+			List<Fase> fasesEvento = e.getFases();
+			Long primeraFase = (fasesEvento.get(0)).getIdFase();
+			if(primeraFase!=postulacion.getIdFase()) { //SI ESTA EN LA PRIMERA FASE NO SE HACE NADA, SO SOLO SE VALIDA ....
+				//SI ESTA EN UNA FASE POSTERIOR SE GENERAN NUEVAS EVALUACIONES DE LA FASE SIGUIENTE
+				List<Evaluacion> evaluaciones = this.daoEvaluacion.findByPropuesta(propuesta);
+				List<Integer> listaIds = new ArrayList<Integer>();
+				for(Evaluacion ev: evaluaciones) {
+					listaIds.add(ev.getEvaluador().getIdUsuario());
+				}
+				List<Usuario> evaluadores = this.daoUsuario.findByIdUsuarioIn(listaIds);
+				for(Usuario p: evaluadores) {
+					//PARA CADA EVALUADOR SE GENERA UNA NUEVA EVALUACION CONTENIENDO A LA SIGUIENTE FASE
+					Evaluacion eval = new Evaluacion();
+					eval.setEvaluador(p);
+					eval.setPropuesta(propuesta);
+					Long faseActual = postulacion.getIdFase();
+					//Long ultFase = (fasesEvento.get(fasesEvento.size()-1)).getIdFase();
+					int position=-1;
+					for (int i = 0; i < fasesEvento.size(); i++) {
+					    if (fasesEvento.get(i).getIdFase() == faseActual) {
+					        position = i;
+					        break;
+					    }
+					}
+					eval.setFase(fasesEvento.get(position));
+					eval.setEstado(UtilConstanst.EVALUACION_ASIGNADA);
+					this.daoEvaluacion.save(eval);
+				}
+			}
 		} catch (Exception e) {
 			logger.error("Error en Postulacion Service(Save): " + e.getMessage());
 			this.error.setMensaje("Error en Postulacion Service(Save): " + e.getMessage());

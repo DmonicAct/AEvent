@@ -111,10 +111,10 @@ public class PresidenteService implements IPresidenteService {
 				    }
 				}
 				propuesta.setFase_actual(fasesEvento.get(position+1).getIdFase());
-				postulacion.setIdFase(fasesEvento.get(position+1).getIdFase());
+				//postulacion.setIdFase(fasesEvento.get(position+1).getIdFase());
 			}
 			this.propuestaDao.save(propuesta);
-			this.postulacionDao.save(postulacion);
+			//this.postulacionDao.save(postulacion);
 		}catch(Exception e) {
 			System.out.print(e.getMessage());
 		}
