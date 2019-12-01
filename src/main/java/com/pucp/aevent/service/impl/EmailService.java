@@ -21,6 +21,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
+import com.pucp.aevent.dao.IEmailDao;
+import com.pucp.aevent.entity.Email;
 import com.pucp.aevent.service.IEmailService;
 
 @Component
@@ -30,6 +32,8 @@ public class EmailService implements IEmailService {
 	
 	private Logger logger = LoggerFactory.getLogger(EmailService.class);
 	
+	@Autowired
+	public IEmailDao emailDao;
 	
 	@Override
 	public Integer enviarMensaje(String destinatario, String asunto, String texto) {
@@ -60,21 +64,15 @@ public class EmailService implements IEmailService {
 	    try {
 	    	MimeMessage message = emailSender.createMimeMessage();
 	    	Properties props = new Properties();
-	    	
-	    	//props.put("mail.protocol", "smtp");
-	    	//props.put("mail.port", "587");
-	    	
-	    	//props.put("mail.transport.protocol", "smtp");
 	    	props.put("mail.smtp.host", "smtp.gmail.com");
 	    	props.put("mail.smtp.auth", "true");
 	        props.put("mail.smtp.starttls.enable", "true");
-	        //props.put("mail.smtp.host", "smtp.gmail.com");
 	        props.put("mail.smtp.port", "587");
-	        //props.put("mail.smtp.ssl.trust", "*");
-	        
 	    	
-	        String user = "aeventmailing@gmail.com";
-	        String pass = "somosaevent";
+	        Email e = emailDao.findByIdEmail(1);
+	        
+	        String user = e.getDireccion();
+	        String pass = e.getPass();
 	        Session mailSession = Session.getInstance(props,
 	        		new javax.mail.Authenticator() {
 	                protected PasswordAuthentication getPasswordAuthentication() {
@@ -110,6 +108,11 @@ public class EmailService implements IEmailService {
 	    }
 	    return 1;
 	    
+	}
+	
+	@Override
+	public Email pick() {
+		return emailDao.findByIdEmail(1);
 	}
 	
 }
