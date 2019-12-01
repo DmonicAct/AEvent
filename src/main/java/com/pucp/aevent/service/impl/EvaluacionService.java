@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.pucp.aevent.dao.IEvaluacionDao;
+import com.pucp.aevent.dao.IFaseDao;
+import com.pucp.aevent.dao.IPostulacionDao;
 import com.pucp.aevent.dao.IPreferenciaDao;
 import com.pucp.aevent.dao.IPropuestaDao;
 import com.pucp.aevent.dao.IUsuarioDao;
@@ -16,12 +18,14 @@ import com.pucp.aevent.entity.Evaluacion;
 import com.pucp.aevent.entity.Fase;
 import com.pucp.aevent.entity.FormularioCFP;
 import com.pucp.aevent.entity.Persona;
+import com.pucp.aevent.entity.Postulacion;
 import com.pucp.aevent.entity.Preferencia;
 import com.pucp.aevent.entity.Propuesta;
 import com.pucp.aevent.entity.Usuario;
 import com.pucp.aevent.entity.response_objects.Paginacion;
 import com.pucp.aevent.service.IDivisionService;
 import com.pucp.aevent.service.IEvaluacionService;
+import com.pucp.aevent.util.UtilConstanst;
 
 @Service
 public class EvaluacionService implements IEvaluacionService{
@@ -39,6 +43,12 @@ public class EvaluacionService implements IEvaluacionService{
 	
 	@Autowired
 	IDivisionService divisionService;
+	
+	@Autowired
+	IPostulacionDao daoPostulacion;
+	
+	@Autowired
+	IFaseDao daoFase;
 	
 	private Paginacion paginacion;
 
@@ -75,7 +85,20 @@ public class EvaluacionService implements IEvaluacionService{
 	}
 	
 	public void save(Evaluacion evaluacion) {
+		evaluacion.setEstado(UtilConstanst.EVALUACION_CORREGIDA);
 		daoEvaluacion.save(evaluacion);
+		
+		Propuesta prop = evaluacion.getPropuesta();
+		prop = this.daoPropuesta.findByIdPropuesta(prop.getIdPropuesta());
+		List<Evaluacion> lstEval = this.daoEvaluacion.findAllByPropuestaAndEstado(prop, UtilConstanst.EVALUACION_ASIGNADA);
+		//Si esta vacio significa que ya todas las evaluaciones fueron evaluadas
+		//Por lo que, se debe de cambiar el estado a "EN_ESPERA" para que el presidente lo califique
+		if (lstEval.isEmpty()) {
+			Long faseActual = prop.getFase_actual();
+			Postulacion postulacion = this.daoPostulacion.findByIdPropuestaAndIdFase(prop.getIdPropuesta().longValue(), faseActual);
+			postulacion.setEstado(UtilConstanst.POSTULACION_EN_ESPERA);
+			this.daoPostulacion.save(postulacion);
+		}			
 	}
 	
 	public void desasignar(int id) {

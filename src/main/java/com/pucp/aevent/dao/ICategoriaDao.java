@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.pucp.aevent.entity.Categoria;
+import com.pucp.aevent.entity.Persona;
 
 
 public interface ICategoriaDao extends JpaRepository <Categoria, Long>{
@@ -19,4 +20,7 @@ public interface ICategoriaDao extends JpaRepository <Categoria, Long>{
 	
 	public Page<Categoria> findByEnabled(Boolean enabled, Pageable page);
 	
+	public Page<Categoria> findByDescripcionContainingAndEnabled(String descripcion,boolean enabled,Pageable page);
+
+	public List<Categoria> findByDescripcionContaining(String descripcion);
 }

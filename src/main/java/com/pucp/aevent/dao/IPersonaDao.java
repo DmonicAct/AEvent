@@ -40,4 +40,8 @@ public interface IPersonaDao  extends JpaRepository <Persona, Long>{
 	public Page<Persona> findByIdUsuarioNotIn(List<Integer >ids, Pageable page);
 	public List<Persona> findByIdUsuarioNotIn(List<Integer >ids);
 	public List<Persona> findByIdUsuarioNotInAndRoles_nombreNotAndEnabled(List<Integer> ids,String role,boolean enabled);
+	
+	public Page<Persona> findByNombreCompletoContainingAndEnabled(String nombre,boolean enabled,Pageable page);
+	public Page<Persona> findByEmailContainingAndEnabled(String email,boolean enabled,Pageable page);
+	public Page<Persona> findByUsernameContainingAndEnabled(String username,boolean enabled,Pageable page);
 }

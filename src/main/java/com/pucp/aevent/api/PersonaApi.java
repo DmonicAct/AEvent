@@ -17,6 +17,7 @@ import org.springframework.web.client.HttpServerErrorException.InternalServerErr
 
 import com.pucp.aevent.entity.Evento;
 import com.pucp.aevent.entity.Persona;
+import com.pucp.aevent.entity.TipoEvento;
 import com.pucp.aevent.entity.request_objects.PaginaRequest;
 import com.pucp.aevent.entity.response_objects.Estado;
 import com.pucp.aevent.entity.response_objects.ResponseObject;
@@ -422,6 +423,83 @@ public class PersonaApi {
 			List<Persona> lista = this.service.findByPreferenciaEvaluadoresDisponibles(id,username, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
 			response.setResultado(lista);
 			response.setPaginacion(this.service.getPaginacion());
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	
+	
+	@Secured({"ROLE_ADMIN"})
+	@GetMapping(path = "/personas/filtroNombre", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarFiltradoNombre(String nombre,boolean enabled,PaginaRequest page) {
+		ResponseObject response = new ResponseObject();
+		try {
+			List<Persona> lista = this.service.findByNombreCompletoContainingAndEnabled(nombre, enabled, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			response.setResultado(lista);
+			response.setPaginacion(service.getPaginacion());
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@Secured({"ROLE_ADMIN"})
+	@GetMapping(path = "/personas/filtroEmail", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarFiltradoEmail(String email,boolean enabled,PaginaRequest page) {
+		ResponseObject response = new ResponseObject();
+		try {
+			List<Persona> lista = this.service.findByEmailContainingAndEnabled(email, enabled, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			response.setResultado(lista);
+			response.setPaginacion(service.getPaginacion());
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@Secured({"ROLE_ADMIN"})
+	@GetMapping(path = "/personas/filtroUsername", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarFiltradoUsername(String username,boolean enabled,PaginaRequest page) {
+		ResponseObject response = new ResponseObject();
+		try {
+			List<Persona> lista = this.service.findByUsernameContainingAndEnabled(username, enabled, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			response.setResultado(lista);
+			response.setPaginacion(service.getPaginacion());
 			response.setEstado(Estado.OK);
 			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
 		} catch(BadRequest e) {

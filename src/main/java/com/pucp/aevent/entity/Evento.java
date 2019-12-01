@@ -87,7 +87,7 @@ public class Evento implements Serializable {
 	private List<Fase> fases=new ArrayList<>();	
 
 	@Column(name="estado_evento")
-	private String estado_evento;
+	private String estadoEvento;
 	
 	@Column(name = "estado")
 	private Boolean enabled;
@@ -151,6 +151,14 @@ public class Evento implements Serializable {
 		this.capacidad = capacidad;
 	}
 
+	public String getEstadoEvento() {
+		return estadoEvento;
+	}
+
+	public void setEstadoEvento(String estadoEvento) {
+		this.estadoEvento = estadoEvento;
+	}
+
 	public Usuario getOrganizador() {
 		return organizador;
 	}
@@ -206,14 +214,6 @@ public class Evento implements Serializable {
 
 	public void setFases(List<Fase> fases) {
 		this.fases = fases;
-	}
-	
-	public String getEstado_evento() {
-		return estado_evento;
-	}
-
-	public void setEstado_evento(String estado_evento) {
-		this.estado_evento = estado_evento;
 	}
 
 	public Boolean getEnabled() {

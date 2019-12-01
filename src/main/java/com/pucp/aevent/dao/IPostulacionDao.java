@@ -25,4 +25,6 @@ public interface IPostulacionDao  extends JpaRepository <Postulacion, Long>{
 	List<Postulacion> findByEstado(String estado);
 	
 	List<Postulacion> findByEstadoAndIdEventoIn(String estado, List<Long> lista);
+
+	Postulacion findByIdPropuestaAndIdFase(Long idPropuesta, Long idFase);
 }

@@ -2,6 +2,7 @@ package com.pucp.aevent.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.pucp.aevent.entity.Categoria;
@@ -21,4 +22,7 @@ public interface ITipoCriterioService {
 
 	public List<TipoCriterio> findByEnabled(Boolean enabled);
 	public List<TipoCriterio> findByEnabled(Boolean enabled, Pageable page);
+	
+	
+	public List<TipoCriterio> findByDescripcionContainingAndEnabled(String descripcion,boolean enabled,Pageable page);
 }

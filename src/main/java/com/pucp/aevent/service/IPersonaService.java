@@ -44,5 +44,11 @@ public interface IPersonaService {
 	public List<Persona> findByUsernameEvaluadoresDisponibles(Integer id,String username,Pageable page) ;
 	public List<Persona> findByNombreEvaluadoresDisponibles(Integer id,String nombre, Pageable page) ;
 	public List<Persona> findByPreferenciaEvaluadoresDisponibles(Integer id,String preferencia, Pageable page);
+	
+	
+	public List<Persona> findByNombreCompletoContainingAndEnabled(String nombre,boolean enabled,Pageable page);
+	public List<Persona> findByEmailContainingAndEnabled(String email,boolean enabled,Pageable page);
+	public List<Persona> findByUsernameContainingAndEnabled(String username,boolean enabled,Pageable page);
+	
 	public Paginacion getPaginacion() ;
 }

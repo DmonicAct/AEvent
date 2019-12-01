@@ -137,11 +137,11 @@ public class EventoApi {
 	
 	@Secured({"ROLE_ORGANIZER","ROLE_DEFAULT"})
 	@GetMapping(path = "/evento/all", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> consultarAllEventosEnabled(PaginaRequest page) {
+	public ResponseEntity<ResponseObject> consultarAllEventosPostular(PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {
 			List<Evento> lista;			
-			lista = this.service.findEnabled(PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			lista = this.service.findEnabledPostular(PageRequest.of(page.getPaginaFront(), page.getRegistros()));
 			response.setResultado(lista);
 			response.setPaginacion(service.getPaginacion());
 			response.setEstado(Estado.OK);
@@ -214,7 +214,7 @@ public class EventoApi {
 	
 	@Secured({"ROLE_ORGANIZER","ROLE_ADMIN","ROLE_DEFAULT"})
 	@GetMapping(path = "/evento/evaluaciones/evaluador", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> consultarEvaluacionesAsigndas(Persona persona,PaginaRequest page) {
+	public ResponseEntity<ResponseObject> consultarEvaluacionesAsignadas(Persona persona,PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {
 			List<Evaluacion> lista = this.service.findAllOfEvaluador(persona,PageRequest.of(page.getPaginaFront(), page.getRegistros()));
@@ -316,6 +316,61 @@ public class EventoApi {
 		ResponseObject response = new ResponseObject();
 		try {
 			List<Evento> lista = this.service.findByOrganizadorAndNotEnabled(usuario, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			response.setResultado(lista);
+			response.setPaginacion(service.getPaginacion());
+			response.setEstado(Estado.OK);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.OK);
+		} catch(BadRequest e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.BAD_REQUEST);
+		} catch(InternalServerError e) {
+			//response.setError(this.service.getError());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(Exception e) {
+			response.setError(1, "Error Interno", e.getMessage());
+			response.setEstado(Estado.ERROR);
+			return new ResponseEntity<ResponseObject>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	
+	
+	@Secured({"ROLE_ORGANIZER"})
+	@GetMapping(path = "/evento/organizador/{flag}/{orgaUsername}/{tipo}/{search}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseObject> consultarFiltroOrganizador(
+			@PathVariable("flag") String flag,
+			@PathVariable("orgaUsername") String orgaUsername,
+			@PathVariable("tipo") String tipo,
+			@PathVariable("search") String search,PaginaRequest page) {
+		ResponseObject response = new ResponseObject();
+		try {
+			List<Evento> lista = null;
+			
+			Boolean flag_bool=null;
+			if(flag=="ACTIVO")
+				flag_bool=true;
+			if(flag=="INACTIVO")
+				flag_bool=false;
+			switch(tipo) {
+				case "Título":{
+					lista = this.service.findByEnabledAndTituloContains(flag_bool, orgaUsername, search, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+					break;
+				}
+				case "Tipo":{
+					lista = this.service.findByEnabledAndCategoriasIn(flag_bool, orgaUsername, search, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+					break;
+				}
+				case "Presidente":{
+					lista = this.service.findByEnabledAndPresidente(flag_bool, orgaUsername, search, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+					break;
+				}
+				case "Motivo":{
+					lista = this.service.findByMotivoFin(search, orgaUsername, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+				}
+			}
+			
 			response.setResultado(lista);
 			response.setPaginacion(service.getPaginacion());
 			response.setEstado(Estado.OK);
