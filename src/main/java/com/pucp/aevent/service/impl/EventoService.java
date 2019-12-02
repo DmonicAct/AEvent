@@ -434,7 +434,7 @@ public class EventoService implements IEventoService {
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
 		try {
-			lista = this.dao.findByEstadoEvento(UtilConstanst.EVENTO_LANZAMIENTO,page);
+			lista = this.dao.findByEnabledAndEstadoEvento(true, UtilConstanst.EVENTO_LANZAMIENTO,page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
