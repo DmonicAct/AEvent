@@ -33,7 +33,7 @@ public interface IEventoDao extends JpaRepository<Evento, Long>{
 	
 	public Page<Evento> findByEnabledAndEstadoEvento(Boolean enabled, String estado, Pageable page);
 	
-	public Page<Evento> findByEnabledAndEstadoEventoIn(Boolean enabled, List<String> estado, Pageable page);
+	public Page<Evento> findByEnabledAndPresidenteAndEstadoEventoIn(Boolean enabled, Usuario presidente, List<String> estado, Pageable page);
 	
 	/*
 	 * 

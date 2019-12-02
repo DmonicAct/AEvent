@@ -392,10 +392,10 @@ public class EventoApi {
 	
 	@Secured({"ROLE_ORGANIZER"})
 	@GetMapping(path = "/evento/porAprobacionYLanzamiento", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseObject> consultarEventoPorAprobacion(PaginaRequest page) {
+	public ResponseEntity<ResponseObject> consultarEventoPorAprobacion(String username, PaginaRequest page) {
 		ResponseObject response = new ResponseObject();
 		try {
-			List<Evento> lista= this.service.findByEstadoPorAprobacionOLanzamiento(PageRequest.of(page.getPaginaFront(), page.getRegistros()));
+			List<Evento> lista= this.service.findByEstadoPorAprobacionOLanzamiento(username, PageRequest.of(page.getPaginaFront(), page.getRegistros()));
 			response.setPaginacion(service.getPaginacion());
 			response.setResultado(lista);
 			response.setEstado(Estado.OK);
