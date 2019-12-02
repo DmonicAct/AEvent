@@ -33,7 +33,7 @@ public interface IEventoService {
 	
 	public List<Evento> findByPresidente(Usuario presidente);
 	public List<Evento> findByOrganizador(Usuario organizador);
-	public List<Evento> findByEstadoPorAprobacion(Pageable page);
+	public List<Evento> findByEstadoPorAprobacionOLanzamiento(Pageable page);
 	
 	
 	public List<Evento> findByEnabledAndTituloContains(boolean flag,String organizador, String titulo,Pageable page);
