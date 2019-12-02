@@ -227,19 +227,20 @@ public class PostulacionApi {
 	public ResponseEntity<ResponseObject> savePropuesta(@PathVariable("Username")String Username,@PathVariable("idEvento")int idEvento,@RequestBody Propuesta propuesta) {
 		ResponseObject response = new ResponseObject();
 		try {
+			Integer idPropuesta=propuesta.getIdPropuesta();
 			Usuario usuario = this.serviceUsuario.findByUsername(Username);
 			Evento evento = this.serviceEvento.findById(idEvento);
 			propuesta.setPostulante(usuario);
 			propuesta.setEvento(evento);
 			Propuesta prop = this.servicePostulacion.savePropuesta(propuesta);
-			
-			for(Usuario user: evento.getComite()) {
-				Preferencia preferencia = new Preferencia();
-				preferencia.setPropuesta(prop);
-				preferencia.setUsuario(user);
-				preferencia.setDescripcion(UtilConstanst.PREFERENCIA_DEFAULT);
-				this.servicePreferencia.save(preferencia);
-			}
+			if(idPropuesta==null || idPropuesta==0)
+				for(Usuario user: evento.getComite()) {
+					Preferencia preferencia = new Preferencia();
+					preferencia.setPropuesta(prop);
+					preferencia.setUsuario(user);
+					preferencia.setDescripcion(UtilConstanst.PREFERENCIA_DEFAULT);
+					this.servicePreferencia.save(preferencia);
+				}
 			/*
 				Servicio de Email Inicio
 			*/
