@@ -430,13 +430,12 @@ public class EventoService implements IEventoService {
 	}
 
 	@Override
-	public List<Evento> findByEstadoLanzamiento(String username, Pageable page) {
+	public List<Evento> findByEstadoLanzamiento(Pageable page) {
 		Page<Evento> lista = null;
 		this.paginacion = new Paginacion();
 		this.paginacion.setPageable(page);
 		try {
-			Persona presidente = this.daoPersona.findByUsername(username);
-			lista = this.dao.findByEnabledAndPresidenteAndEstadoEvento(true, presidente, UtilConstanst.EVENTO_LANZAMIENTO, page);
+			lista = this.dao.findByEnabledAndEstadoEvento(true, UtilConstanst.EVENTO_LANZAMIENTO,page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
