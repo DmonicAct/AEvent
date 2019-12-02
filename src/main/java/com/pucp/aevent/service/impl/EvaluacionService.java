@@ -50,6 +50,7 @@ public class EvaluacionService implements IEvaluacionService{
 	@Autowired
 	IFaseDao daoFase;
 	
+	
 	private Paginacion paginacion;
 
 	public Paginacion getPaginacion() {
@@ -145,6 +146,15 @@ public class EvaluacionService implements IEvaluacionService{
 		List<Evaluacion> lista = null;
 		try {
 			lista = this.daoEvaluacion.findByPropuesta(propuesta);
+			for(Evaluacion eva: lista){
+				Fase fase = eva.getFase();
+				if(fase!=null && (fase.getFormulario()!=null && fase.getFormulario().getIdFormulariocfp()!=null)) {
+					FormularioCFP formulario = fase.getFormulario();
+					List<Division> listaDivision = this.divisionService.findByIdFormulario(formulario.getIdFormulariocfp());
+					formulario.setDivisionList(listaDivision);
+					fase.setFormulario(formulario);
+				}
+			}
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
 		}
