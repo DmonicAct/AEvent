@@ -426,5 +426,19 @@ public class EventoService implements IEventoService {
 			System.out.print(e.getMessage());
 		}
 		return lista.getContent();
+	}
+
+	@Override
+	public List<Evento> findByEstadoLanzamiento(Pageable page) {
+		Page<Evento> lista = null;
+		this.paginacion = new Paginacion();
+		this.paginacion.setPageable(page);
+		try {
+			lista = this.dao.findByEstadoEvento(UtilConstanst.EVENTO_LANZAMIENTO,page);
+			this.paginacion.setTotalRegistros(lista.getTotalElements());
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return lista.getContent();
 	}	
 }
