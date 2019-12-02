@@ -420,7 +420,7 @@ public class EventoService implements IEventoService {
 			List<String> listaEstados = new ArrayList<String>();
 			listaEstados.add(UtilConstanst.EVENTO_LANZAMIENTO);
 			listaEstados.add(UtilConstanst.EVENTO_POR_APROBACION);
-			lista = this.dao.findByEstadoEventoIn(listaEstados, page);
+			lista = this.dao.findByEnabledAndEstadoEventoIn(true, listaEstados, page);
 			this.paginacion.setTotalRegistros(lista.getTotalElements());
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
