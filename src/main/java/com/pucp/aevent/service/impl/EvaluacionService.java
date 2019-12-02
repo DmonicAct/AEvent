@@ -63,7 +63,7 @@ public class EvaluacionService implements IEvaluacionService{
 		//e.setAbierto(true);
 		e.setComentarioParticipante("");
 		e.setComentarioPresidente("");
-		e.setEstado("ASIGNADO");
+		e.setEstado("EVALUACION_ASIGNADA");
 		e.setEvaluador(evaluador);
 		e.setFase(fase);
 		e.setPropuesta(propuesta);
