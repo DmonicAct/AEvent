@@ -40,6 +40,9 @@ public class Postulacion implements Serializable{
 	@Column(name="estado")
 	private Boolean enabled;
 	 
+	@Column(name="direccion_archivo")
+	private String direccion_archivo;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "fechaModificacion")
 	private Date fechaModificacion;
@@ -115,6 +118,17 @@ public class Postulacion implements Serializable{
 	public void setIdPropuesta(Long idPropuesta) {
 		this.idPropuesta = idPropuesta;
 	}
+	
+
+	public String getDireccion_archivo() {
+		return direccion_archivo;
+	}
+
+	public void setDireccion_archivo(String direccion_archivo) {
+		this.direccion_archivo = direccion_archivo;
+	}
+
+
 
 
 	/**
