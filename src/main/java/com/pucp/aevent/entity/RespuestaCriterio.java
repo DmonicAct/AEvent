@@ -25,11 +25,22 @@ public class RespuestaCriterio implements Serializable{
 	@Column(name="idEvaluador")
 	private Integer idEvaluador;
 	
+	@Column(name="idPostulante")
+	private Integer idPostulante;
+	
     @JoinColumn(name = "idCriterio")
     private Integer idCriterio;
 	
 	@Column(name="descRespuesta")
 	private String respuesta;
+
+	public Integer getIdPostulante() {
+		return idPostulante;
+	}
+
+	public void setIdPostulante(Integer idPostulante) {
+		this.idPostulante = idPostulante;
+	}
 
 	public Integer getIdRespuestaCriterio() {
 		return idRespuestaCriterio;
