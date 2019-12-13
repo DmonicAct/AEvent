@@ -8,5 +8,7 @@ public interface IRespuestaCriterioService {
 	
 	public List<RespuestaCriterio> findByCriterio(int id);
 	
-	public void save(RespuestaCriterio respuestaCriterio);
+	public RespuestaCriterio save(RespuestaCriterio respuestaCriterio);
+	
+	public List<RespuestaCriterio> findByIdEvaluador(int idEvaluador, int idCriterio);
 }

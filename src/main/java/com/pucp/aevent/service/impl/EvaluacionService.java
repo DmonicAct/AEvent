@@ -93,7 +93,7 @@ public class EvaluacionService implements IEvaluacionService{
 		List<Evaluacion> lstEval = this.daoEvaluacion.findAllByPropuestaAndEstado(prop, UtilConstanst.EVALUACION_ASIGNADA);
 		//Si esta vacio significa que ya todas las evaluaciones fueron evaluadas
 		//Por lo que, se debe de cambiar el estado a "EN_ESPERA" para que el presidente lo califique
-		if (lstEval.isEmpty()) {
+		if (lstEval.isEmpty() || lstEval.size()==0) {
 			Long faseActual = prop.getFase_actual();
 			Postulacion postulacion = this.daoPostulacion.findByIdPropuestaAndIdFase(prop.getIdPropuesta().longValue(), faseActual);
 			postulacion.setEstado(UtilConstanst.POSTULACION_EN_ESPERA);

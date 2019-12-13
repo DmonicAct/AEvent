@@ -29,26 +29,17 @@ public class Documento implements Serializable{
 	@Column(length=5, name="extensiondoc")
 	private String extensiondoc;
 	
-	@Column(name="contenido")
-	private byte[] contenido;
+	@Column(name="direccion")
+	private String direccion;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="idPropuesta")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private Propuesta propuesta;
+	@Column(name="idPropietario")
+	private Integer idPropietario;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="idFase")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private Fase fase;
+	@Column(name="idPostulacion")
+	private Integer idPostulacion;
 	
-	public Fase getFase() {
-		return fase;
-	}
-
-	public void setFase(Fase fase) {
-		this.fase = fase;
-	}
+	@Column(name="documento_disponible")
+	private Boolean enabled;
 
 	public int getIdDocumento() {
 		return idDocumento;
@@ -82,27 +73,45 @@ public class Documento implements Serializable{
 
 
 
-	public byte[] getContenido() {
-		return contenido;
+
+
+
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public Integer getIdPropietario() {
+		return idPropietario;
+	}
+
+	public void setIdPropietario(Integer idPropietario) {
+		this.idPropietario = idPropietario;
+	}
+
+	public Integer getIdPostulacion() {
+		return idPostulacion;
+	}
+
+	public void setIdPostulacion(Integer idPostulacion) {
+		this.idPostulacion = idPostulacion;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 
 
 
-	public void setContenido(byte[] contenido) {
-		this.contenido = contenido;
-	}
 
-
-
-	public Propuesta getPropuesta() {
-		return propuesta;
-	}
-
-
-
-	public void setPropuesta(Propuesta propuesta) {
-		this.propuesta = propuesta;
-	}
 
 
 

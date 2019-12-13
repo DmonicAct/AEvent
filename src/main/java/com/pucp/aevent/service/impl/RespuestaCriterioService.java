@@ -22,7 +22,12 @@ public class RespuestaCriterioService implements IRespuestaCriterioService {
 	}
 
 	@Override
-	public void save(RespuestaCriterio respuestaCriterio) {
-		respuestaCriterioDao.save(respuestaCriterio);
+	public RespuestaCriterio save(RespuestaCriterio respuestaCriterio) {
+		return respuestaCriterioDao.save(respuestaCriterio);
+	}
+
+	@Override
+	public List<RespuestaCriterio> findByIdEvaluador(int idEvaluador, int idCriterio) {
+		return respuestaCriterioDao.findByIdCriterioAndIdEvaluador(idCriterio, idEvaluador);
 	}
 }

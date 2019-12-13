@@ -22,6 +22,9 @@ public class RespuestaCriterio implements Serializable{
 	@Column(name="idRespuestaCriterio")
 	private Integer idRespuestaCriterio;
 	
+	@Column(name="idEvaluador")
+	private Integer idEvaluador;
+	
     @JoinColumn(name = "idCriterio")
     private Integer idCriterio;
 	
@@ -53,6 +56,14 @@ public class RespuestaCriterio implements Serializable{
 		this.idCriterio = idCriterio;
 	}
 	
+	public Integer getIdEvaluador() {
+		return idEvaluador;
+	}
+
+	public void setIdEvaluador(Integer idEvaluador) {
+		this.idEvaluador = idEvaluador;
+	}
+
 	/**
 	 * 
 	 */
